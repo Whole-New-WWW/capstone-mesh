@@ -39,3 +39,5 @@ react-native run-android // react-native run-ios
 ```
 
 This React Native Firebase starter is built with Firebase Web SDK, which makes it compatible with both Expo CLI and React Native CLI.
+
+*****
