@@ -2,14 +2,14 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   grid: {
-    display: 'flex',
+    flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
     padding: 10
   },
   dashIcon: {
     padding: 10,
-    alignItems: 'center',
+    alignItems: 'center'
   },
   dashImg: {
     maxWidth: 50,
