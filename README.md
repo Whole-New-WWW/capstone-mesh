@@ -1,6 +1,6 @@
 # React Native Firebase
 
-Capstone by Yilla, Maxiel, Josephine, 
+Capstone by Yilla, Maxiel, Josephine,
 
 This is a React Native Firebase Starter Project with login, registration, persisted login, database reads and writes. You can use this project as boilerplate for bootstrapping any new React Native app that uses Firebase as its backend.
 
@@ -40,4 +40,6 @@ react-native run-android // react-native run-ios
 
 This React Native Firebase starter is built with Firebase Web SDK, which makes it compatible with both Expo CLI and React Native CLI.
 
-*****
+---
+
+Free icons from <a href="https://www.flaticon.com/">Flaticon</a>.
