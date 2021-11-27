@@ -9,7 +9,13 @@ export default StyleSheet.create({
   },
   dashIcon: {
     padding: 10,
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: '#ffffff',
+    borderRadius: 25,
+    width: 150,
+    height: 150,
+    margin: 10,
+    justifyContent: 'center'
   },
   dashImg: {
     maxWidth: 50,
