@@ -5,7 +5,8 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     flexWrap: 'wrap',
-    padding: 10
+    alignContent: 'center',
+    justifyContent: 'center'
   },
   dashIcon: {
     padding: 10,
@@ -18,7 +19,8 @@ export default StyleSheet.create({
     justifyContent: 'center'
   },
   dashImg: {
-    maxWidth: 50,
-    maxHeight: 50
+    width: 35,
+    height: 35,
+    margin: 15
   }
 })
