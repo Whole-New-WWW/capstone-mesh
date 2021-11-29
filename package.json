@@ -11,6 +11,7 @@
     "@react-native-community/masked-view": "0.1.6",
     "@react-navigation/native": "^5.4.0",
     "@react-navigation/stack": "^5.3.7",
+    "axios": "^0.24.0",
     "@unimodules/core": "^5.1.2",
     "@unimodules/react-native-adapter": "^6.3.9",
     "base-64": "^0.1.0",
