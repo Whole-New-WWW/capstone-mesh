@@ -2,15 +2,22 @@ import styles from "./styles";
 import { firebase } from "../../firebase/config";
 import React, { useEffect, useState } from "react";
 import { View, Image, Linking, TouchableOpacity, Text } from "react-native";
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+import Map from "./Map"
+// import { TouchableOpacity } from "react-native-elements";
+
+const Stack = createStackNavigator();
 
 export default function Dashboard(props) {
+  console.log('testing props', props)
   return (
     <>
       <Text>Welcome home, {props.fullName}</Text>
       <View style={styles.grid}>
         <TouchableOpacity
           style={styles.dashIcon}
-          onPress={() => Linking.openURL("http://google.com")}
+          onPress={() => props.navigation.navigate('Map')}
         >
           <Text>Map</Text>
           <Image

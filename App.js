@@ -1,3 +1,14 @@
+import 'react-native-gesture-handler';
+import React, { useEffect, useState } from 'react'
+import { firebase } from './src/firebase/config'
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
+import { LoginScreen, HomeScreen, RegistrationScreen, Dashboard } from './src/screens'
+import Map from './src/screens/Dashboard/Map'
+import {decode, encode} from 'base-64'
+if (!global.btoa) {  global.btoa = encode }
+if (!global.atob) { global.atob = decode }
+
 import "react-native-gesture-handler";
 import React, { useEffect, useState } from "react";
 import { firebase } from "./src/firebase/config";
@@ -61,6 +72,8 @@ export default function App() {
             <Stack.Screen name="Home">
               {(props) => <Dashboard {...props} extraData={user} />}
             </Stack.Screen>
+            <Stack.Screen name="Map" component={Map} />
+            {/* <Stack.Screen name="Dashboard" component={Dashboard} {...props} /> */}
           </>
         ) : (
           <>

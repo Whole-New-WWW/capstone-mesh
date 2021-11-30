@@ -43,7 +43,7 @@ This React Native Firebase starter is built with Firebase Web SDK, which makes i
 ## Crime API:
 
 https://data.cityofnewyork.us/Public-Safety/NYC-crime/qb7u-rbmr
-https://data.cityofnewyork.us/Public-Safety/NYC-crime/qb7u-rbmr/data
 
+https://data.cityofnewyork.us/Public-Safety/NYC-crime/qb7u-rbmr/data
 
 Free icons from <a href="https://www.flaticon.com/">Flaticon</a>.
