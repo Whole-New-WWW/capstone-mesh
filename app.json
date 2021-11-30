@@ -22,7 +22,11 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "Project.Mesh",
+      "config": {
+        "googleMapsApiKey": "AIzaSyDpSBACR8eeqYjsNMAjD04yTeEoxMVKU38"
+      }
     },
     "description": "Built by the team behind https://www.instamobile.io https://www.iosapptemplates.com https://www.instaflutter.com and https://www.instakotlin.com",
     "githubUrl": "https://github.com/instamobile/react-native-firebase"
