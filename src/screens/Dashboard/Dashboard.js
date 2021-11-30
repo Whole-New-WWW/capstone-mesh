@@ -2,7 +2,6 @@ import styles from "./styles";
 import { firebase } from "../../firebase/config";
 import React, { useEffect, useState } from "react";
 import { View, Image, Linking, TouchableOpacity, Text } from "react-native";
-// import { TouchableOpacity } from "react-native-elements";
 
 export default function Dashboard(props) {
   return (
