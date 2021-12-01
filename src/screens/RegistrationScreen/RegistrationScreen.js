@@ -36,7 +36,7 @@ export default function RegistrationScreen(props) {
           .doc(uid)
           .set(data)
           .then(() => {
-            props.navigation.navigate("Home", { user: data });
+            props.navigation.navigate("Dashboard", { data });
           })
           .catch((error) => {
             alert('Error!');
@@ -103,7 +103,7 @@ export default function RegistrationScreen(props) {
         </TouchableOpacity>
         <View style={styles.footerView}>
           <Text style={styles.footerText}>
-            Already got an account?{" "}
+            Already got an account?
             <Text onPress={onFooterLinkPress} style={styles.footerLink}>
               Log in
             </Text>
