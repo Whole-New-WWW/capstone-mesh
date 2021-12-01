@@ -9,9 +9,10 @@ import { createStackNavigator } from '@react-navigation/stack'
 const Stack = createStackNavigator();
 
 export default function Dashboard(props) {
+  console.log(props)
   return (
     <>
-      <Text>Welcome home, {props.fullName}</Text>
+      <Text>Welcome home, {props.firstName}</Text>
       <View style={styles.grid}>
         <TouchableOpacity
           style={styles.dashIcon}
