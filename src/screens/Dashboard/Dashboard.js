@@ -4,13 +4,11 @@ import React, { useEffect, useState } from "react";
 import { View, Image, Linking, TouchableOpacity, Text } from "react-native";
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-import Map from "./Map"
-// import { TouchableOpacity } from "react-native-elements";
+// import Map from "./Map"
 
 const Stack = createStackNavigator();
 
 export default function Dashboard(props) {
-  console.log('testing props', props)
   return (
     <>
       <Text>Welcome home, {props.fullName}</Text>
