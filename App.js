@@ -5,6 +5,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { LoginScreen, RegistrationScreen, Dashboard } from "./src/screens";
 import Map from "./src/screens/Dashboard/Map";
+import User from "./src/nav/User";
+import Guest from "./src/nav/Guest";
 import { decode, encode } from "base-64";
 if (!global.btoa) {
   global.btoa = encode;
@@ -47,28 +49,7 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Registration" component={RegistrationScreen} />
-        <Stack.Screen name="Home">
-          {(props) => <Dashboard {...props} />}
-        </Stack.Screen>
-        <Stack.Screen name="Map" component={Map} />
-
-        {/* {!user ? (
-          <>
-            <Stack.Screen name="Login" component={LoginScreen} />
-            <Stack.Screen name="Registration" component={RegistrationScreen} />
-          </>
-        ) : (
-          <>
-            <Stack.Screen name="Home">
-              {(props) => <Dashboard {...props} />}
-            </Stack.Screen>
-            <Stack.Screen name="Map" component={Map} />
-          </>
-        )} */}
-      </Stack.Navigator>
+      {user ? <User /> : <Guest />}
     </NavigationContainer>
   );
 }
