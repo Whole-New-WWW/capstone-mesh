@@ -7,7 +7,7 @@ export default function Map() {
   return (
     <View style={styles.container}>
       <MapView
-        style={{height: '50%', width: '100%'}} 
+        style={{height: '100%', width: '100%'}} 
         provider={PROVIDER_GOOGLE} //import the provider google
         showsUserLocation={true} //allows to see your current location displayed on the map
       />

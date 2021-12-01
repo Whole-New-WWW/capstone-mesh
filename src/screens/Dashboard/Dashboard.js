@@ -10,7 +10,7 @@ import Map from "./Map"
 const Stack = createStackNavigator();
 
 export default function Dashboard(props) {
-  console.log('testing props', props)
+  //console.log('testing props', props)
   return (
     <>
       <Text>Welcome home, {props.fullName}</Text>
