@@ -8,6 +8,10 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@emotion/native": "^11.0.0",
+    "@emotion/react": "^11.7.0",
+    "@expo-google-fonts/manrope": "^0.2.0",
+    "@expo-google-fonts/nanum-myeongjo": "^0.2.0",
     "@react-native-community/masked-view": "0.1.6",
     "@react-navigation/native": "^5.4.0",
     "@react-navigation/stack": "^5.3.7",
