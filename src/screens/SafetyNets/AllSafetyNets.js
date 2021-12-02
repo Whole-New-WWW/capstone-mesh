@@ -20,11 +20,35 @@ const Stack = createStackNavigator();
 export default function AllSafetyNets(props) {
   return (
     <>
-      <Text>Safety Nets</Text>
-      <Image
-        style={}
-        source={require("../../../assets/icons/friends.png")}
-      />
+      <KeyboardAwareScrollView>
+        <Text style={styles.title}>Safety Nets</Text>
+        <Image
+          style={styles.friendsIcon}
+          source={require("../../../assets/icons/friends.png")}
+        />
+        <View>
+          <TouchableOpacity 
+            style={styles.button}
+          >
+            <Text>Dance Team</Text>
+          </TouchableOpacity>
+          <TouchableOpacity 
+            style={styles.button}
+          >
+            <Text>Roomies</Text>
+          </TouchableOpacity>
+          <TouchableOpacity 
+            style={styles.button}
+          >
+            <Text>Study Group</Text>
+          </TouchableOpacity>
+          <TouchableOpacity 
+            style={styles.button}
+          >
+            <Text>Create New Safety Net</Text>
+          </TouchableOpacity>
+        </View>
+      </KeyboardAwareScrollView>
     </>
   )
 }
