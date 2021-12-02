@@ -4,7 +4,6 @@ import { firebase } from './src/firebase/config'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { LoginScreen, HomeScreen, RegistrationScreen, Dashboard} from './src/screens';
-import AllSafetyNets from './src/screens/SafetyNets/AllSafetyNets';
 import Map from './src/screens/Dashboard/Map'
 import {decode, encode} from 'base-64'
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -43,8 +42,10 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer>
-      {user ? <User /> : <Guest />}
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        {user ? <User /> : <Guest />}
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
