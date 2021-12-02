@@ -19,6 +19,7 @@ export default function Map(props) {
   );
 }
 
+//styling below:
 const styles = StyleSheet.create({
   container: {
     flex: 1,
