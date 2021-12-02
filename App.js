@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { firebase } from './src/firebase/config'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-import { LoginScreen, HomeScreen, RegistrationScreen, Dashboard } from './src/screens'
+import { LoginScreen, HomeScreen, RegistrationScreen, Dashboard} from './src/screens';
+import AllSafetyNets from './src/screens/SafetyNets/AllSafetyNets';
 import Map from './src/screens/Dashboard/Map'
 import {decode, encode} from 'base-64'
 if (!global.btoa) {  global.btoa = encode }
@@ -47,6 +48,9 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen name="Home">
           {(props) => <Dashboard {...props} extraData={user} />}
+        </Stack.Screen>
+        <Stack.Screen name="All-Safety-Nets">
+          {(props) => <AllSafetyNets />}
         </Stack.Screen>
         {/* {user ? (
           <>

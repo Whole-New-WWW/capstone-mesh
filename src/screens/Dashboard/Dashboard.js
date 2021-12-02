@@ -27,9 +27,9 @@ export default function Dashboard(props) {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.dashIcon}
-          onPress={() => Linking.openURL("http://google.com")}
+          onPress={() => props.navigation.navigate('All-Safety-Nets')}
         >
-          <Text>Safety Net</Text>
+          <Text>Safety Nets</Text>
           <Image
             style={styles.dashImg}
             source={require("../../../assets/icons/friends.png")}
