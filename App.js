@@ -4,6 +4,7 @@ import { firebase } from './src/firebase/config'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { LoginScreen, HomeScreen, RegistrationScreen, Dashboard} from './src/screens';
+import  User from './src/nav/User';
 import Map from './src/screens/Dashboard/Map'
 import {decode, encode} from 'base-64'
 import { SafeAreaProvider } from 'react-native-safe-area-context';
