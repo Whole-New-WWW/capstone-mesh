@@ -19,8 +19,8 @@ export default function Dashboard(props) {
           <DashText>Map</DashText>
           <Icon source={require("../../../assets/icons/map.png")} />
         </DashButton>
-        <DashButton onPress={() => props.navigation.navigate("Map")}>
-          <DashText>Safety Net</DashText>
+        <DashButton onPress={() => props.navigation.navigate('All-Safety-Nets')}>
+          <DashText>Safety Nets</DashText>
           <Icon source={require("../../../assets/icons/friends.png")} />
         </DashButton>
         <DashButton onPress={() => Linking.openURL("http://google.com")}>
