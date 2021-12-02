@@ -15,6 +15,9 @@ export default StyleSheet.create({
     paddingLeft: 110,
     paddingRight: 20,
     borderRadius: 22,
+    shadowOffset: { height: .5, width: .5 },
+    shadowOpacity: .5,
+    shadowRadius: .5,
   },
   safetyNetList :{
     justifyContent: 'center',
@@ -30,6 +33,9 @@ export default StyleSheet.create({
     borderWidth: 1,
     margin: 8,
     borderRadius: 22,
+    shadowOffset: { height: .5, width: .5 },
+    shadowOpacity: 1,
+    shadowRadius: 1,
   },
   friendsImage: {
     resizeMode: 'center',
@@ -43,4 +49,10 @@ export default StyleSheet.create({
     marginBottom: 40,
     overflow: 'hidden'
   },
+  addNetIcon: {
+    marginRight: 30,  
+  },
+  remNetIcon: {
+
+  }
 });

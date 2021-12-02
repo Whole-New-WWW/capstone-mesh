@@ -19,10 +19,10 @@ import { firebase } from '../../firebase/config';
   // Import SafeAreaProvider from 'react-native-safe-area-context'
     // Wrap entire app inside of this
     // This step is required by react native elements
-  // import Icon component from react-native-vector-icons/the name of the icon set you would like to access
+  // import Icon component from react-native-elements or react-native-vector-icons/the name of the icon set you would like to access
     //react native vector icons are included in react native elements library 
   // A full list of the icon sets can be viewed here: https://reactnativeelements.com/docs/icon
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import {Icon} from 'react-native-elements';
 
 // declare variable Stack to create an instance of a stack navigator
 const Stack = createStackNavigator();
@@ -64,23 +64,30 @@ export default function AllSafetyNets(props) {
                 key={safetyNet.id}
               >
                 <Text>{safetyNet.name}</Text>
+                {/* adjust icon styling and include reverse to make icon a button */}
                 <Icon 
-                  name='highlight-off'
+                  raised
+                  name='clear'
+                  type='material-icons'
                   color='#14213D'
-                  size={25}
+                  size={15}
+                  style={styles.remNetIcon}
                 >
-            </Icon>
+                </Icon>
               </TouchableOpacity>
             )
           })}
           <TouchableOpacity 
             style={styles.addNetButton}
           >
-            <Icon 
-              name='add-circle-outline'
+            <Icon
+              raised
+              reverse
+              name='add'
+              type='material-icons'
               color='#14213D'
-              size={25}
-              style={{marginRight: 30}}
+              size={15}
+              style={styles.addNetIcon}
             >
             </Icon>
             <Text>Add New Safety Net</Text>
