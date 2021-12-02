@@ -1,40 +1,46 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
-  button: {
-    height: 50,
-    width: 300,
-    backgroundColor: '#efefef',
-    margin: 15,
-    alignContent: 'center',
-    borderRadius: 10,
+  safetyNetContainer : {
     backgroundColor: '#ffffff'
   },
+  clickNetButton: {
+    flexDirection: 'row',
+    height: 60,
+    width: 300,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#efefef',
+    margin: 8,
+    paddingLeft: 110,
+    paddingRight: 20,
+    borderRadius: 22,
+  },
   safetyNetList :{
-    flexDirection: 'column',
     justifyContent: 'center',
+    alignItems: 'center',
   },
   addNetButton :{
+    flexDirection: 'row',
+    height: 60,
+    width: 300,
+    justifyContent: 'center',
+    alignItems: 'center',
     borderColor: "#14213D",
     borderWidth: 1,
-    margin: 15,
-    textAlign: 'center',
-    borderRadius: 25,
+    margin: 8,
+    borderRadius: 22,
   },
-  title: {
-    alignSelf: 'center',
-    marginTop: 20,
-  },
-  friendsIcon: {
+  friendsImage: {
     resizeMode: 'center',
-    width: 175,
-    height: 175,
-    borderRadius: 175,
+    width: 150,
+    height: 150,
+    borderRadius: 150,
     borderWidth: 4,
     borderColor: "#fca311",
     alignSelf: 'center',
-    marginTop: 30,
-    marginBottom: 15,
+    marginTop: 40,
+    marginBottom: 40,
     overflow: 'hidden'
   },
 });

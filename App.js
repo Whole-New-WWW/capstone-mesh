@@ -7,6 +7,7 @@ import { LoginScreen, HomeScreen, RegistrationScreen, Dashboard} from './src/scr
 import AllSafetyNets from './src/screens/SafetyNets/AllSafetyNets';
 import Map from './src/screens/Dashboard/Map'
 import {decode, encode} from 'base-64'
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 if (!global.btoa) {  global.btoa = encode }
 if (!global.atob) { global.atob = decode }
 
@@ -44,28 +45,30 @@ export default function App() {
   // }
 
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Home">
-          {(props) => <Dashboard {...props} extraData={user} />}
-        </Stack.Screen>
-        <Stack.Screen name="All-Safety-Nets">
-          {(props) => <AllSafetyNets />}
-        </Stack.Screen>
-        {/* {user ? (
-          <>
-            <Stack.Screen name="Home">
-              {(props) => <Dashboard {...props} extraData={user} />}
-            </Stack.Screen>
-            <Stack.Screen name="Map" component={Map} />
-          </>
-        ) : (
-          <>
-            <Stack.Screen name="Login" component={LoginScreen} />
-            <Stack.Screen name="Registration" component={RegistrationScreen} />
-          </>
-        )} */}
-      </Stack.Navigator>
-    </NavigationContainer>
+    <SafeAreaProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Home">
+            {(props) => <Dashboard {...props} extraData={user} />}
+          </Stack.Screen>
+          <Stack.Screen name="All-Safety-Nets">
+            {(props) => <AllSafetyNets />}
+          </Stack.Screen>
+          {/* {user ? (
+            <>
+              <Stack.Screen name="Home">
+                {(props) => <Dashboard {...props} extraData={user} />}
+              </Stack.Screen>
+              <Stack.Screen name="Map" component={Map} />
+            </>
+          ) : (
+            <>
+              <Stack.Screen name="Login" component={LoginScreen} />
+              <Stack.Screen name="Registration" component={RegistrationScreen} />
+            </>
+          )} */}
+        </Stack.Navigator>
+      </NavigationContainer>
+    </SafeAreaProvider>
   );
 }
