@@ -1,7 +1,16 @@
 import React, { useState } from "react";
-import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import styles from "./styles";
+import {
+  Title,
+  Text,
+  DashContainer,
+  FooterView,
+  TextInput,
+  Logo,
+  Button,
+  ButtonText,
+  FooterLink,
+} from "../../../styles";
 import { firebase } from "../../firebase/config";
 
 // Firebase Auth
@@ -17,58 +26,55 @@ export default function LoginScreen({ navigation }) {
 
   const onLoginPress = () => {
     try {
-      auth.signInWithEmailAndPassword(email, password)
-      navigation.navigate("Dashboard")
+      if (email && password) {
+        auth.signInWithEmailAndPassword(email, password);
+        navigation.navigate("Dashboard");
+      } else {
+        alert("Please fill in your information!");
+      }
     } catch (e) {
-      alert(e)
+      alert(e);
     }
-  //   auth
-  //     .signInWithEmailAndPassword(email, password)
-  //     .then((response) => {
-  //       const uid = response.user.uid;
-  //       const usersRef = firebase.firestore().collection("users");
-  //       usersRef
-  //         .doc(uid)
-  //         .get()
-  //         .then((firestoreDocument) => {
-  //           if (!firestoreDocument.exists) {
-  //             alert("User does not exist anymore.");
-  //             return;
-  //           }
-  //           const userData = firestoreDocument.data();
-  //           navigation.navigate("Dashboard", { userData });
-  //         })
-  //         .catch((error) => {
-  //           alert(error);
-  //         });
-  //     })
-  //     .catch((error) => {
-  //       alert(error);
-  //     });
+    // auth
+    //   .signInWithEmailAndPassword(email, password)
+    //   .then((response) => {
+    //     const uid = response.user.uid;
+    //     const usersRef = firebase.firestore().collection("users");
+    //     usersRef
+    //       .doc(uid)
+    //       .get()
+    //       .then((firestoreDocument) => {
+    //         if (!firestoreDocument.exists) {
+    //           alert("User does not exist anymore.");
+    //           return;
+    //         }
+    //         navigation.navigate("Dashboard");
+    //       })
+    //       .catch((error) => {
+    //         alert(error);
+    //       });
+    //   })
+    //   .catch((error) => {
+    //     alert(error);
+    //   });
   };
 
   return (
-    <View style={styles.container}>
+    <DashContainer>
       <KeyboardAwareScrollView
-        style={{ flex: 1, width: "100%" }}
+        style={{ flex: 1, width: "100%", marginTop: 25 }}
         keyboardShouldPersistTaps="always"
       >
-        <Image
-          style={styles.logo}
-          source={require("../../../assets/icon.png")}
-        />
+        <Title>Log In</Title>
+        <Logo source={require("../../../assets/globe-logo.png")} />
         <TextInput
-          style={styles.input}
           placeholder="E-mail"
-          placeholderTextColor="#aaaaaa"
           onChangeText={(text) => setEmail(text)}
           value={email}
           underlineColorAndroid="transparent"
           autoCapitalize="none"
         />
         <TextInput
-          style={styles.input}
-          placeholderTextColor="#aaaaaa"
           secureTextEntry
           placeholder="Password"
           onChangeText={(text) => setPassword(text)}
@@ -76,18 +82,16 @@ export default function LoginScreen({ navigation }) {
           underlineColorAndroid="transparent"
           autoCapitalize="none"
         />
-        <TouchableOpacity style={styles.button} onPress={() => onLoginPress()}>
-          <Text style={styles.buttonTitle}>Log in</Text>
-        </TouchableOpacity>
-        <View style={styles.footerView}>
-          <Text style={styles.footerText}>
+        <Button onPress={() => onLoginPress()}>
+          <ButtonText>Log In</ButtonText>
+        </Button>
+        <FooterView>
+          <Text>
             Don't have an account?{" "}
-            <Text onPress={onFooterLinkPress} style={styles.footerLink}>
-              Sign up
-            </Text>
+            <FooterLink onPress={onFooterLinkPress}>Sign up</FooterLink>
           </Text>
-        </View>
+        </FooterView>
       </KeyboardAwareScrollView>
-    </View>
+    </DashContainer>
   );
 }

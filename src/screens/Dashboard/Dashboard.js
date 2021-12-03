@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Linking } from "react-native";
 import {
   Title,
@@ -15,12 +15,20 @@ import { AuthContext } from "../../nav/Auth";
 export default function Dashboard(props) {
   let [user] = useState(AuthContext);
   user = user._currentValue.user;
-  console.log('DASHBOARD >>>>', user)
+  console.log("DASHBOARD >>>>", user);
+
+  const title = () => {
+    if (user) {
+      return `Welcome home, ${user.firstName}`;
+    } else {
+      return `Welcome home`;
+    }
+  };
 
   return (
     <>
       <DashContainer>
-        <Title>Welcome home{user.firstName ? `, ${user.firstName}` : '!'}</Title>
+        <Title>{title()}</Title>
         <Grid>
           <DashButton onPress={() => props.navigation.navigate("Map")}>
             <DashText>Map</DashText>

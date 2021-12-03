@@ -20,7 +20,6 @@ const auth = firebase.auth();
 export default function UserState() {
   const [loading, setLoading] = useState(true);
   const { user, setUser } = useContext(AuthContext);
-  console.log('USERSTATE', user)
 
   useEffect(() => {
     const usersRef = firebase.firestore().collection("users");
@@ -59,11 +58,9 @@ export default function UserState() {
 
   if (loading) {
     return <></>;
+  } else {
+    return (
+      <NavigationContainer>{user ? <User /> : <Guest />}</NavigationContainer>
+    );
   }
-
-  return (
-    <NavigationContainer>
-      {user ? <User /> : <Guest />}
-    </NavigationContainer>
-  );
 }
