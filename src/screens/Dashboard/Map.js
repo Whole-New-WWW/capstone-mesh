@@ -13,6 +13,7 @@ export default function Map(props) {
         style={{ height: "100%", width: "100%" }}
         provider={PROVIDER_GOOGLE} //import the google provider
         showsUserLocation //={true} //allows to see your current location displayed on the map
+        showsMyLocationButton
         initialRegion={{
                    latitude: 37.78825,
                    longitude: -122.4324,
