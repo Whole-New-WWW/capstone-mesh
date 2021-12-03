@@ -1,9 +1,19 @@
 import * as React from "react";
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
+// import Geolocation from '@react-native-community/geolocation'
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Dimensions } from "react-native";
 import { Container } from "../../../styles";
 import Header from '../../nav/Header';
+import { Alert } from "react-native";
+
+//placeholder until we are able to get the users current location
+const region = {
+  latitude: 37.78825,
+  longitude: -122.4324,
+  latitudeDelta: 0.10,
+  longitudeDelta: 0.04
+}
 
 export default function Map(props) {
   return (
@@ -12,18 +22,38 @@ export default function Map(props) {
       <MapView
         style={{ height: "100%", width: "100%" }}
         provider={PROVIDER_GOOGLE} //import the google provider
+        // ref={map => this._map = map} //might need to change name here, associated with the geolocation
         showsUserLocation //={true} //allows to see your current location displayed on the map
         showsMyLocationButton
-        initialRegion={{
-                   latitude: 37.78825,
-                   longitude: -122.4324,
-                   latitudeDelta: 0.0922,
-                   longitudeDelta: 0.0421}}
+        initialRegion={region}
       />
       <StatusBar style="auto" />
     </Container>
   );
 }
+//react-native-permissions insert below
+
+
+//below gets the users current location
+// const locateCurrentPosition = () => {
+//   Geolocation.getCurrentPosition(
+//     position => {
+//       //to view an object as a string 
+//       console.log(JSON.stringify(position));
+
+//       let initialPosition = {
+//         latitude: position.coords.latitude,
+//         longitude: position.coords.longitude,
+//         latitudeDelta: 0.0922,
+//         longitudeDelta: 0.0421
+//       }
+
+//       this.setState({initialPosition});
+//     },
+//     error => Alert.alert(error.message),
+//     {enableHighAccuracy: true, timeout: 10000, maximumAge: 1000 }
+//   )
+// }
 
 //styling below:
 const styles = StyleSheet.create({
