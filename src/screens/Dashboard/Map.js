@@ -6,6 +6,7 @@ import { StyleSheet, Dimensions } from "react-native";
 import { Container } from "../../../styles";
 import Header from '../../nav/Header';
 import { Alert } from "react-native";
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
 //placeholder until we are able to get the users current location
 const region = {
@@ -22,46 +23,31 @@ const region = {
   // longitudeDelta: 0.04
 }
 
-//test points for heatmap:
-// points = [
-//   { latitude: 40.7828, longitude: -74.0065, weight: 1 },
-//   { latitude: 41.7121, longitude: -74.0042, weight: 1 },
-//   { latitude: 40.7102, longitude: -75.0060, weight: 1 },
-//   { latitude: 40.7123, longitude: -74.0052, weight: 1 },
-//   { latitude: 40.7032, longitude: -74.0042, weight: 1 },
-//   { latitude: 40.7198, longitude: -74.0024, weight: 1 },
-//   { latitude: 41.7223, longitude: -74.0053, weight: 1 },
-//   { latitude: 40.7181, longitude: -74.0042, weight: 1 },
-//   { latitude: 40.7124, longitude: -74.0023, weight: 1 },
-//   { latitude: 40.7648, longitude: -74.0012, weight: 1 },
-//   { latitude: 41.7128, longitude: -74.0027, weight: 1 },
-// ]
-
 export default function Map(props) {
   return (
     <Container>
       <Header {...props} />
       <MapView
-        style={{ height: "100%", width: "100%" }}
+        style={{ height: "80%", width: "100%" }}
         provider={PROVIDER_GOOGLE} //import the google provider
         // ref={map => this._map = map} //might need to change name here, associated with the geolocation
         showsUserLocation //={true} //allows to see your current location displayed on the map
         showsMyLocationButton
         initialRegion={region}
-        placeholder={'Search'}
+        //placeholder={'Search'}
         placeholderTextColor={'#666'}
-        // <Heatmap
-        //     points={this.points}
-        //     radius={40}
-        //     opacity={1}
-        //     gradient={{
-        //       colors: ["black", "purple", "red", "orange", "white"],
-        //       startPoints: Platform.OS === 'ios' ? [0.01, 0.04, 0.1, 0.45, 0.5] :
-        //         [0.1, 0.25, 0.5, 0.75, 1],
-        //       colorMapSize: 2000
-        //     }}
-        // >
-        // </Heatmap>
+      />
+      
+      <GooglePlacesAutocomplete 
+      placeholder='Search'
+      onPress={(data, details = null) => {
+        // 'details' is provided when fetchDetails = true
+        console.log(data, details);
+      }}
+      query={{
+        key: 'AIzaSyDpSBACR8eeqYjsNMAjD04yTeEoxMVKU38',
+        language: 'en',
+      }}
       />
       <StatusBar style="auto" />
     </Container>

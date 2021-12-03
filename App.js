@@ -5,6 +5,11 @@ import { NavigationContainer } from "@react-navigation/native";
 import User from "./src/nav/User";
 import Guest from "./src/nav/Guest";
 import { decode, encode } from "base-64";
+import { Clipboard } from 'react-native'
+
+// HACK: Prevent "Expo pasted from CoreSimulator" notification from spamming continuously
+Clipboard.setString('')
+
 
 if (!global.btoa) {
   global.btoa = encode;
