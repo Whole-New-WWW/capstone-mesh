@@ -11,7 +11,7 @@ export default function Map(props) {
     <Container>
       <Header {...props} />
       <MapView
-        style={{ height: "81.5%", width: "100%" }}
+        style={{ height: "82.5%", width: "100%" }}
         provider={PROVIDER_GOOGLE} //import the provider google
         showsUserLocation={true} //allows to see your current location displayed on the map
       />

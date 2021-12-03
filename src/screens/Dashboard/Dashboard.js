@@ -1,5 +1,6 @@
 import React from "react";
-import { Linking } from "react-native";
+import { firebase } from "../../firebase/config";
+import { Linking, Text } from "react-native";
 import {
   Title,
   Grid,
@@ -7,15 +8,17 @@ import {
   DashButton,
   DashContainer,
   DashText,
-  SOS,
+  SOS
 } from "../../../styles";
 import Footer from "../../nav/Footer";
 
 export default function Dashboard(props) {
+  console.log("in the dashboard", props);
+
   return (
     <>
       <DashContainer>
-        <Title>Welcome home, {props.firstName}</Title>
+        <Title>Welcome home</Title>
         <Grid>
           <DashButton onPress={() => props.navigation.navigate("Map")}>
             <DashText>Map</DashText>

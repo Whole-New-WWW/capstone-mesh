@@ -2,9 +2,12 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import Dashboard from "../screens/Dashboard/Dashboard";
 import Map from "../screens/Dashboard/Map";
+import LoginScreen from "../screens/LoginScreen/LoginScreen";
+import RegistrationScreen from "../screens/RegistrationScreen/RegistrationScreen";
 const Stack = createStackNavigator();
 
-export default function AuthStack() {
+export default function User(props) {
+  console.log(props)
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -13,11 +16,25 @@ export default function AuthStack() {
           headerShown: false,
         }}
       >
-        {(props) => <Dashboard {...props} />}
+        {(navigation) => <Dashboard {...navigation} />}
       </Stack.Screen>
       <Stack.Screen
         name="Map"
         component={Map}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Registration"
+        component={RegistrationScreen}
         options={{
           headerShown: false,
         }}

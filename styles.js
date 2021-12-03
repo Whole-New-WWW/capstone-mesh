@@ -20,13 +20,14 @@ export const Container = styled.SafeAreaView`
   background-color: #fff;
 `;
 
-export const Button = styled.TouchableOpacity`
+export const Button = styled.Button`
   padding: 10px 15px 10px 15px;
   background-color: ${navy};
   border-radius: 25px;
   color: #fff;
   align-items: center;
 `
+
 export const TopBar = styled.View`
   display: flex;
   flex-direction: row;
@@ -39,8 +40,8 @@ export const TopBar = styled.View`
 `;
 
 export const NavIcon = styled.Image`
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
 `;
 
 export const BottomBar = styled.View`
@@ -58,6 +59,14 @@ export const FooterIcon = styled.TouchableOpacity`
   padding: 15px;
   background-color: ${lavender};
   border-radius: 100px;
+  color: #fff;
+  align-items: center;
+`
+
+export const NavButton = styled.TouchableOpacity`
+  padding: 10px 15px 10px 15px;
+  background-color: ${navy};
+  border-radius: 25px;
   color: #fff;
   align-items: center;
 `

@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import styles from "./styles";
 import { firebase } from "../../firebase/config";
+import { AuthContext } from "../../nav/Auth";
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { user, setUser } = useContext(AuthContext);
 
   const onFooterLinkPress = () => {
     navigation.navigate("Registration");
@@ -27,8 +29,9 @@ export default function LoginScreen({ navigation }) {
               alert("User does not exist anymore.");
               return;
             }
-            const user = firestoreDocument.data();
-            navigation.navigate("Dashboard", { user });
+            const userData = firestoreDocument.data();
+            setUser(userData)
+            navigation.navigate("Dashboard", { user: userData });
           })
           .catch((error) => {
             alert(error);

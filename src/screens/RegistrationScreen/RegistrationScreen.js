@@ -36,7 +36,7 @@ export default function RegistrationScreen(props) {
           .doc(uid)
           .set(data)
           .then(() => {
-            props.navigation.navigate("Dashboard", { data });
+            props.navigation.navigate("Dashboard", { user: data });
           })
           .catch((error) => {
             alert('Error!');
