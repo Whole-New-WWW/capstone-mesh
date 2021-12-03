@@ -1,13 +1,4 @@
 import styled, { css } from "@emotion/native";
-import {
-  View,
-  Image,
-  Linking,
-  TouchableOpacity,
-  Text,
-  SafeAreaView,
-  ImageBackground
-} from "react-native";
 
 // Branded Fonts
 import Manrope from './assets/fonts/Manrope-Regular.ttf';
@@ -22,11 +13,6 @@ export const Colors = {
   teal: "#586F7C"
 };
 const { lavender, yellow, navy, light, teal } = Colors;
-
-export const DashContainer = styled.SafeAreaView`
-  flex: 1;
-  background-color: ${light};
-`;
 
 // Shared Components
 export const Container = styled.SafeAreaView`
@@ -57,7 +43,23 @@ export const TopIcon = styled.Image`
   height: 25px;
 `;
 
+export const BottomBar = styled.View`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid ${lavender};
+  padding: 15px 25px 25px 25px;
+`;
+
 // Dashboard Screen
+export const DashContainer = styled.SafeAreaView`
+  flex: 1;
+  background-color: ${light};
+`;
+
 export const Grid = styled.View`
   flex: 1;
   flex-direction: row;
@@ -101,7 +103,7 @@ export const Title = styled.Text`
   font-size: 18px;
   color: ${navy};
   text-align: center;
-  top: 8%;
+  top: 5%;
 `;
 
 export const DashText = styled.Text`

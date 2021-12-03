@@ -41,10 +41,7 @@ export default function App() {
   if (loading) {
     return <></>;
   }
-
   return (
-    <NavigationContainer>
-      {user ? <User /> : <Guest />}
-    </NavigationContainer>
+    <NavigationContainer>{user ? <User /> : <Guest />}</NavigationContainer>
   );
 }

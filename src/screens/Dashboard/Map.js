@@ -4,17 +4,19 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Dimensions } from "react-native";
 import { Container } from "../../../styles";
 import Header from '../../nav/Header';
+import Footer from "../../nav/Footer";
 
 export default function Map(props) {
   return (
     <Container>
       <Header {...props} />
       <MapView
-        style={{ height: "100%", width: "100%" }}
+        style={{ height: "83%", width: "100%" }}
         provider={PROVIDER_GOOGLE} //import the provider google
         showsUserLocation={true} //allows to see your current location displayed on the map
       />
       <StatusBar style="auto" />
+            <Footer {...props} />
     </Container>
   );
 }
