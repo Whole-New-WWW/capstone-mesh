@@ -1,27 +1,24 @@
 import React from "react";
-import { Button, BottomBar, Title, TopIcon } from "../../styles";
+import { BottomBar, NavIcon, FooterIcon } from "../../styles";
 
 export default function Header(props) {
   return (
     <BottomBar>
-      <Button
-        style={{ backgroundColor: "transparent" }}
+      <FooterIcon
         onPress={() => props.navigation.navigate("Dashboard")}
       >
-        <TopIcon source={require("../../assets/icons/home.png")} />
-      </Button>
-      <Button
-        style={{ backgroundColor: "transparent" }}
+        <NavIcon source={require("../../assets/icons/home.png")} />
+      </FooterIcon>
+      <FooterIcon
         onPress={() => props.navigation.navigate("Map")}
       >
-        <TopIcon source={require("../../assets/icons/alert.png")} />
-      </Button>
-      <Button
-        style={{ backgroundColor: "transparent" }}
+        <NavIcon source={require("../../assets/icons/alert.png")} />
+      </FooterIcon>
+      <FooterIcon
         onPress={() => props.navigation.navigate("Map")}
       >
-        <TopIcon source={require("../../assets/icons/map.png")} />
-      </Button>
+        <NavIcon source={require("../../assets/icons/map.png")} />
+      </FooterIcon>
     </BottomBar>
   );
 }

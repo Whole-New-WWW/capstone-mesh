@@ -38,7 +38,7 @@ export const TopBar = styled.View`
   max-height: 80px;
 `;
 
-export const TopIcon = styled.Image`
+export const NavIcon = styled.Image`
   width: 25px;
   height: 25px;
 `;
@@ -47,12 +47,20 @@ export const BottomBar = styled.View`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   background-color: #fff;
   border: 1px solid ${lavender};
   padding: 15px 25px 25px 25px;
 `;
+
+export const FooterIcon = styled.TouchableOpacity`
+  padding: 15px;
+  background-color: ${lavender};
+  border-radius: 100px;
+  color: #fff;
+  align-items: center;
+`
 
 // Dashboard Screen
 export const DashContainer = styled.SafeAreaView`
