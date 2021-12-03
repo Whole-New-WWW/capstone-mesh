@@ -1,10 +1,9 @@
 import React, { useState, createContext } from "react";
-
 export const AuthContext = createContext({});
 
-export default function Auth({ children }) {
+export const Auth = ({ children }) => {
   const [user, setUser] = useState(null);
-  console.log('in auth.js', children)
+  console.log('AUTH CONTEXT', user)
   return (
     // Provider is used for providing value to the context object
     <AuthContext.Provider value={{ user, setUser }}>

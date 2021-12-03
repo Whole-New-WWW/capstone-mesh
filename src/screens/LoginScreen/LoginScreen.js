@@ -1,45 +1,50 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import styles from "./styles";
 import { firebase } from "../../firebase/config";
-import { AuthContext } from "../../nav/Auth";
+
+// Firebase Auth
+const auth = firebase.auth();
 
 export default function LoginScreen({ navigation }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { user, setUser } = useContext(AuthContext);
 
   const onFooterLinkPress = () => {
     navigation.navigate("Registration");
   };
 
   const onLoginPress = () => {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then((response) => {
-        const uid = response.user.uid;
-        const usersRef = firebase.firestore().collection("users");
-        usersRef
-          .doc(uid)
-          .get()
-          .then((firestoreDocument) => {
-            if (!firestoreDocument.exists) {
-              alert("User does not exist anymore.");
-              return;
-            }
-            const userData = firestoreDocument.data();
-            setUser(userData)
-            navigation.navigate("Dashboard", { user: userData });
-          })
-          .catch((error) => {
-            alert(error);
-          });
-      })
-      .catch((error) => {
-        alert(error);
-      });
+    try {
+      auth.signInWithEmailAndPassword(email, password)
+      navigation.navigate("Dashboard")
+    } catch (e) {
+      alert(e)
+    }
+  //   auth
+  //     .signInWithEmailAndPassword(email, password)
+  //     .then((response) => {
+  //       const uid = response.user.uid;
+  //       const usersRef = firebase.firestore().collection("users");
+  //       usersRef
+  //         .doc(uid)
+  //         .get()
+  //         .then((firestoreDocument) => {
+  //           if (!firestoreDocument.exists) {
+  //             alert("User does not exist anymore.");
+  //             return;
+  //           }
+  //           const userData = firestoreDocument.data();
+  //           navigation.navigate("Dashboard", { userData });
+  //         })
+  //         .catch((error) => {
+  //           alert(error);
+  //         });
+  //     })
+  //     .catch((error) => {
+  //       alert(error);
+  //     });
   };
 
   return (

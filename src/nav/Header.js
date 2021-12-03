@@ -2,12 +2,13 @@ import React from "react";
 import { NavButton, TopBar, Title, NavIcon } from "../../styles";
 import { firebase } from "../firebase/config";
 
-export default function Header(props) {
+const auth = firebase.auth();
 
-    const logOut = async () => {
+export default function Header(props) {
+  const logOut = async () => {
     try {
-      await firebase.auth().signOut();
-      props.navigation.navigate("Login")
+      await auth.signOut();
+      props.navigation.navigate("Login");
     } catch (error) {
       console.log(error);
     }
@@ -30,10 +31,7 @@ export default function Header(props) {
       </NavButton> */}
 
       {/* temporary logout  */}
-      <NavButton
-        style={{ backgroundColor: "transparent" }}
-        onPress={logOut}
-      >
+      <NavButton style={{ backgroundColor: "transparent" }} onPress={logOut}>
         <NavIcon source={require("../../assets/icons/account.png")} />
       </NavButton>
     </TopBar>

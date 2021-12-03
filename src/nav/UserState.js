@@ -14,15 +14,17 @@ if (!global.atob) {
   global.atob = decode;
 }
 
+// Firebase Auth
+const auth = firebase.auth();
+
 export default function UserState() {
   const [loading, setLoading] = useState(true);
   const { user, setUser } = useContext(AuthContext);
-
-  console.log('in the userstate', user)
+  console.log('USERSTATE', user)
 
   useEffect(() => {
     const usersRef = firebase.firestore().collection("users");
-    firebase.auth().onAuthStateChanged((user) => {
+    auth.onAuthStateChanged((user) => {
       if (user) {
         usersRef
           .doc(user.uid)
@@ -41,9 +43,24 @@ export default function UserState() {
     });
   }, []);
 
+  // useEffect(() => {
+  //   // onAuthStateChanged returns an unsubscriber
+  //   const logged = auth.onAuthStateChanged(async (authUser) => {
+  //     try {
+  //       await (authUser ? setUser(authUser) : setUser(null));
+  //       setLoading(false);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   });
+  //   // unsubscribe auth listener on unmount
+  //   return logged;
+  // }, []);
+
   if (loading) {
     return <></>;
   }
+
   return (
     <NavigationContainer>
       {user ? <User /> : <Guest />}

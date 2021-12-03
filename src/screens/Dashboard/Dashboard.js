@@ -1,6 +1,5 @@
-import React from "react";
-import { firebase } from "../../firebase/config";
-import { Linking, Text } from "react-native";
+import React, { useState } from "react";
+import { Linking } from "react-native";
 import {
   Title,
   Grid,
@@ -8,17 +7,20 @@ import {
   DashButton,
   DashContainer,
   DashText,
-  SOS
+  SOS,
 } from "../../../styles";
 import Footer from "../../nav/Footer";
+import { AuthContext } from "../../nav/Auth";
 
 export default function Dashboard(props) {
-  console.log("in the dashboard", props);
+  let [user] = useState(AuthContext);
+  user = user._currentValue.user;
+  console.log('DASHBOARD >>>>', user)
 
   return (
     <>
       <DashContainer>
-        <Title>Welcome home</Title>
+        <Title>Welcome home{user.firstName ? `, ${user.firstName}` : '!'}</Title>
         <Grid>
           <DashButton onPress={() => props.navigation.navigate("Map")}>
             <DashText>Map</DashText>

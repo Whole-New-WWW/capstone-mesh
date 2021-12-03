@@ -1,7 +1,7 @@
 import React from "react";
 import { BottomBar, NavIcon, FooterIcon, NavButton } from "../../styles";
 
-export default function Header(props) {
+export default function Footer(props) {
   return (
     <BottomBar>
       <NavButton
