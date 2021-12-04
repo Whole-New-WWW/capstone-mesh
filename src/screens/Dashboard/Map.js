@@ -1,7 +1,6 @@
 import * as React from "react";
 import * as Location from 'expo-location' //using expo to get the location of user
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
-// import Geolocation from '@react-native-community/geolocation'
 import { Marker } from "react-native-maps"
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Dimensions, Text, View } from "react-native";
@@ -12,12 +11,6 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 
 //placeholder until we are able to get the users current location
 // const region = {
-//   // //new york lat and long:
-//   // latitude: 40.7143,
-//   // longitude: -74.0042,
-//   // latitudeDelta: 0.09,
-//   // longitudeDelta: 0.035
-
 //   //default from expo:
 //   latitude: 37.78825,
 //   longitude: -122.4324,
@@ -26,11 +19,11 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 // }
 
 //new code:
-//export default function Map() {
-const Map = () => {
+const Map = (props) => {
     const [location, setLocation] = React.useState(null)
+    const [initialRegion, setInitialRegion] = React.useState(null)
     const [error, setError] = React.useState(null)
-  
+    console.log('this is a map from the viewer')
     //fetches user location latitude and longitude and then pass to coordinate prop of Marker component
     React.useEffect(() => {
       (async () =>{
@@ -39,22 +32,45 @@ const Map = () => {
           setError('Permission to access location was denied');
           return;
         }
-        const locate = await Location.getLastKnownPositionAsync({}); //gets the user most recent location, faster than getCurrentPositionAsync
-        setLocation(locate.coords)
+        const locate = await Location.getCurrentPositionAsync({}); //gets the user most recent location, faster than getCurrentPositionAsync getLastKnownPositionAsync
+        
+        //sets the initial lat and long coordinates
+        setInitialRegion({
+          latitude: locate.coords.latitude,
+          longitude: locate.coords.longitude,
+          latitudeDelta: 0.09,
+          longitudeDelta: 0.03
+        })
+
+        setLocation({
+          latitude: locate.coords.latitude,
+          longitude: locate.coords.longitude,
+        })
+
+
+        console.log('in locate', locate.coords)
       })()
     }, []);
 
     return (
       <View>
+        <Container>
+        <Header {...props} />
       {/* <Text style={styles.heading}>Current Location</Text> */}
-      <MapView style={styles.map} zoomEnabled={true}>
-        {location ? (
-          <Marker coordinate={location} title="My Current location">
+      {location ? 
+      <MapView initialRegion={initialRegion} 
+                provider={PROVIDER_GOOGLE} 
+                style={styles.map} 
+                zoomEnabled={true}>
+
+          <Marker coordinate={location} 
+                  title="My Current location">
            </Marker> 
-        ):
-          <Text>{error}</Text>
-        }
+
       </MapView>
+      :<Text>loading coords</Text>
+      }
+      </Container>
     </View>
   );
 };

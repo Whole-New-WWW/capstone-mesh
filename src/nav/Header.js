@@ -3,7 +3,7 @@ import { Button, TopBar, Title, TopIcon } from "../../styles";
 
 export default function Header(props) {
   return (
-    <TopBar>
+    <TopBar style={{height: 200}}>
       <Button
         style={{ backgroundColor: "transparent" }}
         onPress={() => props.navigation.goBack()}
