@@ -38,11 +38,11 @@ export default function Dashboard(props) {
             <DashText>Safety Net</DashText>
             <Icon source={require("../../../assets/icons/friends.png")} />
           </DashButton>
-          <DashButton onPress={() => Linking.openURL("http://google.com")}>
+          {/* <DashButton onPress={() => Linking.openURL("http://google.com")}>
             <DashText>Reports</DashText>
             <Icon source={require("../../../assets/icons/reports.png")} />
-          </DashButton>
-          <DashButton onPress={() => Linking.openURL("http://google.com")}>
+          </DashButton> */}
+          <DashButton onPress={() => props.navigation.navigate("Comments")}>
             <DashText>Submit a Report</DashText>
             <Icon source={require("../../../assets/icons/addreport.png")} />
           </DashButton>

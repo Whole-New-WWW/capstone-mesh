@@ -18,6 +18,7 @@ const { lavender, yellow, navy, light, teal } = Colors;
 export const Container = styled.SafeAreaView`
   flex: 1;
   background-color: #fff;
+  padding: 15px;
 `;
 
 export const Button = styled.TouchableOpacity`
@@ -26,13 +27,13 @@ export const Button = styled.TouchableOpacity`
   border-radius: 25px;
   color: #fff;
   align-items: center;
-  margin: 5px 30px 0 30px;
+  margin: 5px 30px 15px 30px;
 `;
 
 export const ButtonText = styled.Text`
   color: #fff;
   font-weight: bold;
-`
+`;
 
 export const TopBar = styled.View`
   display: flex;
@@ -81,8 +82,7 @@ export const Title = styled.Text`
   font-size: 18px;
   color: ${navy};
   text-align: center;
-  top: 5%;
-  margin-bottom: 25px;
+  margin: 25px;
 `;
 
 export const TextInput = styled.TextInput`
@@ -95,6 +95,17 @@ export const TextInput = styled.TextInput`
   color: ${navy};
 `;
 
+export const FormBox = styled.View`
+  flex: 1;
+  align-items: center;
+  border-radius: 5px;
+  background-color: ${light};
+  border: 1px solid ${lavender};
+  margin: 10px 30px 10px 30px;
+  padding-top: 15px;
+  color: ${navy};
+`;
+
 // Login + Sign Up
 
 export const Logo = styled.Image`
@@ -103,24 +114,32 @@ export const Logo = styled.Image`
   width: 120px;
   align-self: center;
   margin: 30px;
-`
+`;
 
 export const FooterView = styled.View`
   flex: 1;
   align-items: center;
   margin-top: 20px;
-`
+`;
 export const Text = styled.Text`
   font-size: 14px;
   color: ${navy};
-`
+  margin: 0 30px 2px 30px;
+`;
 
 export const FooterLink = styled.Text`
   font-size: 14px;
   font-weight: bold;
-`
+`;
 
 // Dashboard Screen
+export const HeaderTitle = styled.Text`
+  font-size: 18px;
+  color: ${navy};
+  text-align: center;
+  top: 5%;
+`;
+
 export const DashContainer = styled.SafeAreaView`
   flex: 1;
   background-color: ${light};

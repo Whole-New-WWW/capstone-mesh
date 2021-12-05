@@ -1,5 +1,5 @@
 import React from "react";
-import { NavButton, TopBar, Title, NavIcon } from "../../styles";
+import { NavButton, TopBar, HeaderTitle, NavIcon } from "../../styles";
 import { firebase } from "../firebase/config";
 
 const auth = firebase.auth();
@@ -22,7 +22,7 @@ export default function Header(props) {
       >
         <NavIcon source={require("../../assets/icons/previous.png")} />
       </NavButton>
-      <Title>{props.route.name}</Title>
+      <HeaderTitle>{props.route.name}</HeaderTitle>
       {/* <NavButton
         style={{ backgroundColor: "transparent" }}
         onPress={() => props.navigation.navigate("Dashboard")}

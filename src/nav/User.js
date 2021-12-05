@@ -4,6 +4,9 @@ import Dashboard from "../screens/Dashboard/Dashboard";
 import Map from "../screens/Dashboard/Map";
 import LoginScreen from "../screens/LoginScreen/LoginScreen";
 import RegistrationScreen from "../screens/RegistrationScreen/RegistrationScreen";
+import { Type } from "../screens/Reports/Type";
+import { Time } from "../screens/Reports/Time";
+import { Comments } from "../screens/Reports/Comments";
 const Stack = createStackNavigator();
 
 export default function User() {
@@ -20,6 +23,27 @@ export default function User() {
       <Stack.Screen
         name="Map"
         component={Map}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Type"
+        component={Type}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Time"
+        component={Time}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Comments"
+        component={Comments}
         options={{
           headerShown: false,
         }}
