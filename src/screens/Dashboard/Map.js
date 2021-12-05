@@ -23,7 +23,7 @@ const Map = (props) => {
     const [location, setLocation] = React.useState(null)
     const [initialRegion, setInitialRegion] = React.useState(null)
     const [error, setError] = React.useState(null)
-    console.log('this is a map from the viewer')
+    
     //fetches user location latitude and longitude and then pass to coordinate prop of Marker component
     React.useEffect(() => {
       (async () =>{
@@ -79,7 +79,6 @@ const Map = (props) => {
         />
         
 
-      {/* <Text style={styles.heading}>Current Location</Text> */}
       {location ? 
       <MapView initialRegion={initialRegion} 
                 provider={PROVIDER_GOOGLE} 
@@ -103,7 +102,7 @@ export default Map;
 
 
 
-
+//previous code:
 // export default function Map(props) {
 //   return (
 //     <Container>
@@ -137,8 +136,6 @@ export default Map;
 //     </Container>
 //   );
 // }
-// //react-native-permissions insert below
-
 
 
 
