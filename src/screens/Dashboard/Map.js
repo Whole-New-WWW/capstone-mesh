@@ -47,18 +47,37 @@ const Map = (props) => {
           longitude: locate.coords.longitude,
         })
 
-
         console.log('in locate', locate.coords)
       })()
     }, []);
 
     return (
       <View>
-        <Container>
+        {/* <Container> */}
         <Header {...props} />
 
+        <GooglePlacesAutocomplete
         
-
+        placeholder="Where to?"
+        query={{
+          key: 'AIzaSyDpSBACR8eeqYjsNMAjD04yTeEoxMVKU38',
+          language: 'en', // language of the results
+        }}
+        //Use details to get the coordinates of places using place_id 
+        onPress={(data, details) => {
+          
+          console.log(data)
+          console.log('DETAILS to get place_ID', details)
+          
+          }}
+        onFail={(error) => console.error(error)}
+        requestUrl={{
+          url:
+            'https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api',
+          useOnPlatform: 'web',
+        }} // this in only required for use on the web. See https://git.io/JflFv more for details.
+        />
+        
 
       {/* <Text style={styles.heading}>Current Location</Text> */}
       {location ? 
@@ -75,21 +94,8 @@ const Map = (props) => {
       :<Text>loading coords</Text>
       }
 
-      <GooglePlacesAutocomplete
-        placeholder="Where to?"
-        query={{
-          key: 'AIzaSyDpSBACR8eeqYjsNMAjD04yTeEoxMVKU38',
-          language: 'en', // language of the results
-        }}
-        onPress={(data, details = null) => console.log(data)}
-        onFail={(error) => console.error(error)}
-        requestUrl={{
-          url:
-            'https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api',
-          useOnPlatform: 'web',
-        }} // this in only required for use on the web. See https://git.io/JflFv more for details.
-      />
-      </Container>
+      
+      {/* </Container> */}
     </View>
   );
 };
@@ -139,14 +145,16 @@ export default Map;
 //styling below:
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+    position: "absolute",
   },
   map: {
     //height: "80%", width: "100%" 
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height,
+    zIndex: -1,
+    
   },
 });
