@@ -7,13 +7,13 @@ import { StyleSheet, Dimensions, Text, View } from "react-native";
 import { Container } from "../../../styles";
 import Header from '../../nav/Header';
 import { Alert } from "react-native";
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'; //to get search bar to autopopulate
 
 
-//new code:
 const Map = (props) => {
     const [location, setLocation] = React.useState(null)
     const [initialRegion, setInitialRegion] = React.useState(null)
+
     const [error, setError] = React.useState(null)
     
     //fetches user location latitude and longitude and then pass to coordinate prop of Marker component
@@ -33,7 +33,7 @@ const Map = (props) => {
           latitudeDelta: 0.09,
           longitudeDelta: 0.03
         })
-
+        //locates the current user coordinates
         setLocation({
           latitude: locate.coords.latitude,
           longitude: locate.coords.longitude,
@@ -60,8 +60,16 @@ const Map = (props) => {
           
           console.log(data)
           console.log('DETAILS to get place_ID', details)
+
+          //this gets the coordinates of the searched location 
+          console.log('SEARCHED geometry coordinates', details.geometry.location)
+
+          //want to add the new searched state here
+          //the component will be dependent on this state, then render a new marker
           
           }}
+        //fetchDetails to true to get the geometry of the location
+        fetchDetails={true}
         onFail={(error) => console.error(error)}
         requestUrl={{
           url:
@@ -85,13 +93,31 @@ const Map = (props) => {
       :<Text>loading coords</Text>
       }
 
-      
       {/* </Container> */}
     </View>
   );
 };
 export default Map;
 
+//// ON line 90-92 add dthe searched location:  is searchedLocation? marker reset map zoom to the new marker
+
+
+//styling below:
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#fff",
+    alignItems: "center",
+    justifyContent: "center",
+    position: "absolute",
+  },
+  map: {
+    //height: "80%", width: "100%" 
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height,
+    zIndex: -1,
+    
+  },
+});
 
 
 //previous code:
@@ -128,27 +154,6 @@ export default Map;
 //     </Container>
 //   );
 // }
-
-
-
-//styling below:
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-    position: "absolute",
-  },
-  map: {
-    //height: "80%", width: "100%" 
-    width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
-    zIndex: -1,
-    
-  },
-});
-
-
 
 
 //placeholder until we are able to get the users current location
