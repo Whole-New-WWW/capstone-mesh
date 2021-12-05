@@ -56,6 +56,10 @@ const Map = (props) => {
       <View>
         <Container>
         <Header {...props} />
+
+        
+
+
       {/* <Text style={styles.heading}>Current Location</Text> */}
       {location ? 
       <MapView initialRegion={initialRegion} 
@@ -65,11 +69,26 @@ const Map = (props) => {
 
           <Marker coordinate={location} 
                   title="My Current location">
-           </Marker> 
+          </Marker> 
 
       </MapView>
       :<Text>loading coords</Text>
       }
+
+      <GooglePlacesAutocomplete
+        placeholder="Where to?"
+        query={{
+          key: 'AIzaSyDpSBACR8eeqYjsNMAjD04yTeEoxMVKU38',
+          language: 'en', // language of the results
+        }}
+        onPress={(data, details = null) => console.log(data)}
+        onFail={(error) => console.error(error)}
+        requestUrl={{
+          url:
+            'https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api',
+          useOnPlatform: 'web',
+        }} // this in only required for use on the web. See https://git.io/JflFv more for details.
+      />
       </Container>
     </View>
   );
@@ -83,6 +102,7 @@ export default Map;
 //   return (
 //     <Container>
 //       <Header {...props} />
+
 //       <GooglePlacesAutocomplete 
 //       placeholder='Search'
 //       onPress={(data, details = null) => {
@@ -114,26 +134,7 @@ export default Map;
 // //react-native-permissions insert below
 
 
-// //below gets the users current location
-// // const locateCurrentPosition = () => {
-// //   Geolocation.getCurrentPosition(
-// //     position => {
-// //       //to view an object as a string 
-// //       console.log(JSON.stringify(position));
 
-// //       let initialPosition = {
-// //         latitude: position.coords.latitude,
-// //         longitude: position.coords.longitude,
-// //         latitudeDelta: 0.0922,
-// //         longitudeDelta: 0.0421
-// //       }
-
-// //       this.setState({initialPosition});
-// //     },
-// //     error => Alert.alert(error.message),
-// //     {enableHighAccuracy: true, timeout: 10000, maximumAge: 1000 }
-// //   )
-// // }
 
 //styling below:
 const styles = StyleSheet.create({
@@ -144,6 +145,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   map: {
+    //height: "80%", width: "100%" 
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height,
   },
