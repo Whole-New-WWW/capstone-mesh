@@ -9,14 +9,6 @@ import Header from '../../nav/Header';
 import { Alert } from "react-native";
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 
-//placeholder until we are able to get the users current location
-// const region = {
-//   //default from expo:
-//   latitude: 37.78825,
-//   longitude: -122.4324,
-//   latitudeDelta: 0.10,
-//   longitudeDelta: 0.04
-// }
 
 //new code:
 const Map = (props) => {
@@ -155,3 +147,15 @@ const styles = StyleSheet.create({
     
   },
 });
+
+
+
+
+//placeholder until we are able to get the users current location
+// const region = {
+//   //default from expo:
+//   latitude: 37.78825,
+//   longitude: -122.4324,
+//   latitudeDelta: 0.10,
+//   longitudeDelta: 0.04
+// }
