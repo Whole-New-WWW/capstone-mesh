@@ -14,6 +14,9 @@ const Map = (props) => {
     const [location, setLocation] = React.useState(null)
     const [initialRegion, setInitialRegion] = React.useState(null)
 
+    //create another state variable to store the search coordinates
+    //const [searchedPlace, setSearchedPlace] = React.useState(null)
+
     const [error, setError] = React.useState(null)
     
     //fetches user location latitude and longitude and then pass to coordinate prop of Marker component
@@ -30,6 +33,7 @@ const Map = (props) => {
         setInitialRegion({
           latitude: locate.coords.latitude,
           longitude: locate.coords.longitude,
+          //zoom details:
           latitudeDelta: 0.09,
           longitudeDelta: 0.03
         })
