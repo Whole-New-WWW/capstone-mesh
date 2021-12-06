@@ -144,7 +144,6 @@ export const FooterView = styled.View`
 `;
 
 export const Text = styled.Text`
-  font-size: 14px;
   color: ${navy};
   margin: 0 30px 2px 30px;
 `;

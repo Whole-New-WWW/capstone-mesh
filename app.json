@@ -2,25 +2,21 @@
   "expo": {
     "name": "React Native Firebase",
     "slug": "react-native-firebase",
-    "platforms": [
-      "ios",
-      "android",
-      "web"
-    ],
+    "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/globe-logo.png",
     "splash": {
       "image": "./assets/globe-logo.png",
       "resizeMode": "contain",
+      "paddingLeft": 50,
+      "paddingRight": 50,
       "backgroundColor": "#ffffff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "Project.Mesh",

@@ -15,7 +15,6 @@ import { AuthContext } from "../../nav/Auth";
 export default function Dashboard(props) {
   let [user] = useState(AuthContext);
   user = user._currentValue.user;
-  console.log("DASHBOARD >>>>", user);
 
   const title = () => {
     if (user) {
