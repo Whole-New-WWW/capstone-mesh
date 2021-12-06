@@ -55,7 +55,7 @@ const Map = (props) => {
           longitude: details.geometry.location,
         })
         console.log('AFTER setSearch', details.geometry.location)
-        
+
       })()
     }, []);
 
@@ -77,7 +77,7 @@ const Map = (props) => {
           console.log('DETAILS to get place_ID', details)
 
           //this gets the coordinates of the searched location 
-          console.log('SEARCHED geometry coordinates', details.geometry.location)
+          console.log('SEARCHED geometry coordinates using fetchDetails', details.geometry.location)
 
           //NEW want to add the new searched state here
           //the component will be dependent on this state, then render a new marker
