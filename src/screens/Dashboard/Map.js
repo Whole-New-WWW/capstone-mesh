@@ -8,19 +8,24 @@ import { Container } from "../../../styles";
 import Header from '../../nav/Header';
 import { Alert } from "react-native";
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'; //to get search bar to autopopulate
+import MapViewDirections from 'react-native-maps-directions'; //to connect the two markers to get directions (origin and destination)
 
+//used hooks useState and useEffect
+//useState: allows you to add state to functional components. Using the useState hook inside a function component, you can create a piece of state without switching to class components
+//useEffect: you tell React that your component needs to do something after render. React remembers the function passed as (useEffect)
 
 const Map = (props) => {
     const [location, setLocation] = React.useState(null)
     const [initialRegion, setInitialRegion] = React.useState(null)
 
-    //create another state variable to store the search coordinates
-    //const [searchedPlace, setSearchedPlace] = React.useState(null)
+    //NEW create another state variable to store the search coordinates
+    const [searchedPlace, setSearchedPlace] = React.useState(null)
 
     const [error, setError] = React.useState(null)
     
     //fetches user location latitude and longitude and then pass to coordinate prop of Marker component
     React.useEffect(() => {
+      //async function used to get request permission of users location while getting their current position
       (async () =>{
         let { status } = await Location.requestPermissionsAsync(); //Asks the user to grant permissions for location
         if(status != 'granted'){
@@ -33,17 +38,24 @@ const Map = (props) => {
         setInitialRegion({
           latitude: locate.coords.latitude,
           longitude: locate.coords.longitude,
-          //zoom details:
           latitudeDelta: 0.09,
           longitudeDelta: 0.03
         })
-        //locates the current user coordinates
+        //gets the current user coordinates
         setLocation({
           latitude: locate.coords.latitude,
           longitude: locate.coords.longitude,
         })
-
         console.log('in locate', locate.coords)
+
+        //NEW gets the search coordinates
+        //comes from the GooglePlacesAutocomplete details and enabled fetchDetails (true) to get the coordinates
+        setSearch({
+          latitude: details.geometry.location,
+          longitude: details.geometry.location,
+        })
+        console.log('AFTER setSearch', details.geometry.location)
+        
       })()
     }, []);
 
@@ -53,24 +65,24 @@ const Map = (props) => {
         <Header {...props} />
 
         <GooglePlacesAutocomplete
-        
         placeholder="Where to?"
         query={{
           key: 'AIzaSyDpSBACR8eeqYjsNMAjD04yTeEoxMVKU38',
-          language: 'en', // language of the results
+          language: 'en', // language english
         }}
         //Use details to get the coordinates of places using place_id 
         onPress={(data, details) => {
           
-          console.log(data)
+          //console.log(data)
           console.log('DETAILS to get place_ID', details)
 
           //this gets the coordinates of the searched location 
           console.log('SEARCHED geometry coordinates', details.geometry.location)
 
-          //want to add the new searched state here
+          //NEW want to add the new searched state here
           //the component will be dependent on this state, then render a new marker
-          
+          //not sure?
+
           }}
         //fetchDetails to true to get the geometry of the location
         fetchDetails={true}
@@ -82,8 +94,8 @@ const Map = (props) => {
         }} // this in only required for use on the web. See https://git.io/JflFv more for details.
         />
         
-
-      {location ? 
+      {/* searchedPlace ? */}
+      {location ?
       <MapView initialRegion={initialRegion} 
                 provider={PROVIDER_GOOGLE} 
                 style={styles.map} 
@@ -93,10 +105,21 @@ const Map = (props) => {
                   title="My Current location">
           </Marker> 
 
+          {/* <Marker coordinate={searchedPlace} 
+                  title="Desired Location">
+          </Marker>  */}
+
+          {/* <MapViewDirections
+            origin={location}
+            destination={searchedPlace}
+            apikey={PROVIDER_GOOGLE}
+            strokeWidth={2}
+            strokeColor="red"
+          /> */}
+
       </MapView>
       :<Text>loading coords</Text>
       }
-
       {/* </Container> */}
     </View>
   );
@@ -122,6 +145,9 @@ const styles = StyleSheet.create({
     
   },
 });
+
+
+
 
 
 //previous code:
