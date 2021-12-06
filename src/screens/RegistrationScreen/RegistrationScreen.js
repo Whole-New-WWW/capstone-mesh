@@ -1,11 +1,24 @@
 import React, { useState } from "react";
-import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import styles from "./styles";
 import { firebase } from "../../firebase/config";
 
-export default function RegistrationScreen(props) {
-  const [firstName, setFirstName] = useState("");
+import {
+  Title,
+  Text,
+  DashContainer,
+  FooterView,
+  TextInput,
+  Logo,
+  Button,
+  ButtonText,
+  FooterLink,
+} from "../../../styles";
+
+// Firebase Auth
+const auth = firebase.auth();
+
+export default function RegistrationScreen({ navigation }) {
+  const [fullName, setfullName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -20,16 +33,15 @@ export default function RegistrationScreen(props) {
       return;
     }
 
-    firebase
-      .auth()
+    auth
       .createUserWithEmailAndPassword(email, password)
       .then((response) => {
         const uid = response.user.uid;
         const data = {
           id: uid,
           email,
-          firstName,
-          password
+          fullName,
+          password,
         };
         const usersRef = firebase.firestore().collection("users");
         usersRef
@@ -39,7 +51,7 @@ export default function RegistrationScreen(props) {
             props.navigation.navigate("Dashboard", { data });
           })
           .catch((error) => {
-            alert('Error!');
+            alert("Error!");
           });
       })
       .catch((error) => {
@@ -48,68 +60,53 @@ export default function RegistrationScreen(props) {
   };
 
   return (
-    <View style={styles.container}>
+    <DashContainer>
       <KeyboardAwareScrollView
-        style={{ flex: 1, width: "100%" }}
+        style={{ flex: 1, width: "100%", marginTop: 25 }}
         keyboardShouldPersistTaps="always"
       >
-        <Image
-          style={styles.logo}
-          source={require("../../../assets/icon.png")}
-        />
+        <Title>Create an Account</Title>
+        <Logo source={require("../../../assets/globe-logo.png")} />
         <TextInput
-          style={styles.input}
           placeholder="First Name"
-          placeholderTextColor="#aaaaaa"
-          onChangeText={(text) => setFirstName(text)}
-          value={firstName}
-          underlineColorAndroid="transparent"
+          onChangeText={(text) => setfullName(text)}
+          value={fullName}
           autoCapitalize="none"
         />
         <TextInput
-          style={styles.input}
           placeholder="E-mail"
-          placeholderTextColor="#aaaaaa"
           onChangeText={(text) => setEmail(text)}
           value={email}
-          underlineColorAndroid="transparent"
           autoCapitalize="none"
         />
         <TextInput
-          style={styles.input}
-          placeholderTextColor="#aaaaaa"
           secureTextEntry
           placeholder="Password"
           onChangeText={(text) => setPassword(text)}
           value={password}
-          underlineColorAndroid="transparent"
           autoCapitalize="none"
         />
         <TextInput
-          style={styles.input}
-          placeholderTextColor="#aaaaaa"
           secureTextEntry
           placeholder="Confirm Password"
           onChangeText={(text) => setConfirmPassword(text)}
           value={confirmPassword}
-          underlineColorAndroid="transparent"
           autoCapitalize="none"
         />
-        <TouchableOpacity
-          style={styles.button}
+        <Button
           onPress={() => onRegisterPress()}
         >
-          <Text style={styles.buttonTitle}>Create account</Text>
-        </TouchableOpacity>
-        <View style={styles.footerView}>
-          <Text style={styles.footerText}>
-            Already got an account?
-            <Text onPress={onFooterLinkPress} style={styles.footerLink}>
+          <ButtonText>Register</ButtonText>
+        </Button>
+        <FooterView>
+          <Text>
+            Already have an account?{' '}
+            <FooterLink onPress={onFooterLinkPress}>
               Log in
-            </Text>
+            </FooterLink>
           </Text>
-        </View>
+        </FooterView>
       </KeyboardAwareScrollView>
-    </View>
+    </DashContainer>
   );
 }

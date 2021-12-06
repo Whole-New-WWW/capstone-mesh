@@ -6,6 +6,8 @@ import User from "./src/nav/User";
 import Guest from "./src/nav/Guest";
 import { decode, encode } from "base-64";
 import { Clipboard } from 'react-native'
+import { Auth } from "./src/nav/Auth";
+import UserState from "./src/nav/UserState";
 
 // HACK: Prevent "Expo pasted from CoreSimulator" notification from spamming continuously
 Clipboard.setString('')
@@ -19,37 +21,9 @@ if (!global.atob) {
 }
 
 export default function App() {
-  const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const usersRef = firebase.firestore().collection("users");
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        usersRef
-          .doc(user.uid)
-          .get()
-          .then((document) => {
-            const userData = document.data();
-            setLoading(false);
-            setUser(userData);
-          })
-          .catch((error) => {
-            setLoading(false);
-          });
-      } else {
-        setLoading(false);
-      }
-    });
-  }, []);
-
-  if (loading) {
-    return <></>;
-  }
-
   return (
-    <NavigationContainer>
-      {user ? <User /> : <Guest />}
-    </NavigationContainer>
+    <Auth>
+      <UserState />
+    </Auth>
   );
 }

@@ -155,6 +155,22 @@ const Map = (props) => {
       }
       {/* </Container> */}
     </View>
+
+import Header from "../../nav/Header";
+import Footer from "../../nav/Footer";
+
+export default function Map(props) {
+  return (
+    <Container>
+      <Header {...props} />
+      <MapView
+        style={{ height: "82.5%", width: "100%" }}
+        provider={PROVIDER_GOOGLE} //import the provider google
+        showsUserLocation={true} //allows to see your current location displayed on the map
+      />
+      <StatusBar style="auto" />
+      <Footer {...props} />
+    </Container>
   );
 };
 export default Map;
