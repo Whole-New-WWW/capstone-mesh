@@ -15,12 +15,15 @@ export const Colors = {
 const { lavender, yellow, navy, light, teal } = Colors;
 
 // Shared Components
+
+// For Map, Reports, Safety Nets screens (the white background)
 export const Container = styled.SafeAreaView`
   flex: 1;
   background-color: #fff;
   padding: 15px;
 `;
 
+// The navy button
 export const Button = styled.TouchableOpacity`
   padding: 10px 15px 10px 15px;
   background-color: ${navy};
@@ -30,11 +33,13 @@ export const Button = styled.TouchableOpacity`
   margin: 5px 30px 15px 30px;
 `;
 
+// The white text inside Button
 export const ButtonText = styled.Text`
   color: #fff;
   font-weight: bold;
 `;
 
+// The flex container in the Header
 export const TopBar = styled.View`
   display: flex;
   flex-direction: row;
@@ -46,11 +51,13 @@ export const TopBar = styled.View`
   max-height: 80px;
 `;
 
+// The tiny icons in the Header and Footer
 export const NavIcon = styled.Image`
   width: 20px;
   height: 20px;
 `;
 
+// The container in Footer
 export const BottomBar = styled.View`
   display: flex;
   flex-direction: row;
@@ -62,6 +69,7 @@ export const BottomBar = styled.View`
   padding: 15px 25px 25px 25px;
 `;
 
+// The container holding Next and Back buttons
 export const ReportBar = styled.View`
   display: flex;
   flex-direction: row;
@@ -69,6 +77,7 @@ export const ReportBar = styled.View`
   justify-content: space-between;
 `;
 
+// The purple circle background for SOS
 export const FooterIcon = styled.TouchableOpacity`
   padding: 15px;
   background-color: ${lavender};
@@ -77,6 +86,7 @@ export const FooterIcon = styled.TouchableOpacity`
   align-items: center;
 `;
 
+// The Container for the Nav Buttons without the Purple Highlight
 export const NavButton = styled.TouchableOpacity`
   padding: 10px 15px 10px 15px;
   background-color: ${navy};
@@ -85,6 +95,7 @@ export const NavButton = styled.TouchableOpacity`
   align-items: center;
 `;
 
+// Title for each screen
 export const Title = styled.Text`
   font-size: 18px;
   color: ${navy};
@@ -92,6 +103,7 @@ export const Title = styled.Text`
   margin: 25px;
 `;
 
+// The Form Fields
 export const TextInput = styled.TextInput`
   height: 48px;
   border-radius: 5px;
@@ -102,6 +114,7 @@ export const TextInput = styled.TextInput`
   color: ${navy};
 `;
 
+// A Container holding form fields (specifically for Reports)
 export const FormBox = styled.View`
   flex: 1;
   align-items: center;
@@ -123,11 +136,13 @@ export const Logo = styled.Image`
   margin: 30px;
 `;
 
+// Footer for the Login & Sign Up Screens (the Have an Account?)
 export const FooterView = styled.View`
   flex: 1;
   align-items: center;
   margin-top: 20px;
 `;
+
 export const Text = styled.Text`
   font-size: 14px;
   color: ${navy};
@@ -147,11 +162,13 @@ export const HeaderTitle = styled.Text`
   top: 5%;
 `;
 
+// The container with the light lavender
 export const DashContainer = styled.SafeAreaView`
   flex: 1;
   background-color: ${light};
 `;
 
+// The grid for the Dashboard Buttons
 export const Grid = styled.View`
   flex: 1;
   flex-direction: row;
@@ -160,6 +177,7 @@ export const Grid = styled.View`
   justify-content: center;
 `;
 
+// Dashboard Button Icons
 export const Icon = styled.Image`
   width: 40px;
   height: 40px;
@@ -178,6 +196,7 @@ export const DashButton = styled.TouchableOpacity`
   box-shadow: 1px 1px 2px ${lavender};
 `;
 
+// Special Dashboard button for SOS
 export const SOS = styled.TouchableOpacity`
   padding: 10px;
   align-items: center;
@@ -191,6 +210,7 @@ export const SOS = styled.TouchableOpacity`
   color: #fff;
 `;
 
+// The Text inside the Dashboard Icons
 export const DashText = styled.Text`
   font-size: 14px;
   text-align: center;
