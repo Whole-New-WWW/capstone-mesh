@@ -216,3 +216,11 @@ export const DashText = styled.Text`
   text-align: center;
   margin: 5px;
 `;
+
+// Container for button list in safety nets
+export const ButtonListContainer = styled.SafeAreaView`
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+`;
+
