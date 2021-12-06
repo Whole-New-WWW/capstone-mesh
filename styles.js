@@ -224,3 +224,15 @@ export const ButtonListContainer = styled.SafeAreaView`
   margin-top: 30px;
 `;
 
+// Button with lavender background in safety nets view
+export const FlexRowButton = styled.TouchableOpacity`
+  height: 60px;
+  width: 300px;
+  justify-content: center;
+  align-items: center;
+  background-color: ${light};
+  margin: 8px;
+  border-radius: 22px;
+  box-shadow: 0.5px 0.5 px;
+`;
+
