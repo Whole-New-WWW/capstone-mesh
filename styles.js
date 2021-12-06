@@ -236,3 +236,17 @@ export const FlexRowButton = styled.TouchableOpacity`
   box-shadow: 0.5px 0.5 px;
 `;
 
+// Circular image in safety nets components
+export const CircularImage = styled.Image`
+  width: 150px;
+  height: 150px;
+  border-radius: 150px;
+  border-width: 4px;
+  border-color: ${yellow};
+  align-self: center;
+  margin-top: 60px;
+  margin-bottom: 20px;
+  overflow: hidden;
+`;
+
+
