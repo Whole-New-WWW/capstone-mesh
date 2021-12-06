@@ -14,9 +14,14 @@ import { useRef } from 'react' //allows to access DOM element
 //used hooks useState and useEffect
 //useState: allows you to add state to functional components. Using the useState hook inside a function component, you can create a piece of state without switching to class components
 //useEffect: you tell React that your component needs to do something after render. React remembers the function passed as (useEffect)
+
+//will change the placement of the api key when closer to deployment
 const API_KEY = 'AIzaSyDpSBACR8eeqYjsNMAjD04yTeEoxMVKU38'
+
 const Map = (props) => {
     const mapRef = useRef(null); //allows us to access a DOM element imperatively (document object Model = DOM)
+    
+    //state variables
     const [location, setLocation] = React.useState(null)
     const [initialRegion, setInitialRegion] = React.useState(null)
 
@@ -209,12 +214,3 @@ const styles = StyleSheet.create({
 //   );
 // }
 
-
-//placeholder until we are able to get the users current location
-// const region = {
-//   //default from expo:
-//   latitude: 37.78825,
-//   longitude: -122.4324,
-//   latitudeDelta: 0.10,
-//   longitudeDelta: 0.04
-// }
