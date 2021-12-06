@@ -263,10 +263,12 @@ export const AddButton = styled.TouchableOpacity`
   box-shadow: 0.5px 0.5px;
 `;
 
+// Small icon used in buttons in safety nets components 
 export const SmallIcon = styled.Image`
   height: 20px;
 `;
 
+// Button used to render safety net member names in single safety net view
 export const FlexColumnButton = styled.TouchableOpacity`
   height: 60px;
   width: 150px;
@@ -275,5 +277,19 @@ export const FlexColumnButton = styled.TouchableOpacity`
   background-color: ${light};
   margin: 8px;
   border-radius: 22px;
+  box-shadow: 0.5px 0.5px;
+`;
+
+// Button used for adding contacts in single safety net view
+export const SmallAddButton = styled.TouchableOpacity`
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;    
+  height: 60px;
+  width: 150px;
+  border-color: ${navy}
+  margin: 8px;
+  border-radius: 22px;
+  border-width: 1px;
   box-shadow: 0.5px 0.5px;
 `;
