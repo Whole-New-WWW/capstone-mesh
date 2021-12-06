@@ -62,6 +62,13 @@ export const BottomBar = styled.View`
   padding: 15px 25px 25px 25px;
 `;
 
+export const ReportBar = styled.View`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+`;
+
 export const FooterIcon = styled.TouchableOpacity`
   padding: 15px;
   background-color: ${lavender};

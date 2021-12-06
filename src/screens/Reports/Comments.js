@@ -12,7 +12,6 @@ import {
 import Header from "../../nav/Header";
 import Footer from "../../nav/Footer";
 import { firebase } from "../../firebase/config";
-import { doc, setDoc } from "firebase/firestore";
 
 // Color imports
 const { light, lavender, navy } = Colors;
@@ -20,6 +19,8 @@ const { light, lavender, navy } = Colors;
 export const Comments = (props) => {
   props.route.name = `Incident Report`;
   const [comments, setComments] = useState("");
+
+  console.log('COMMENTS >>>')
 
   const onSubmit = () => {
     try {
@@ -32,8 +33,6 @@ export const Comments = (props) => {
       alert(e);
     }
   };
-
-  console.log("COMMENTS >>>");
 
   return (
     <>

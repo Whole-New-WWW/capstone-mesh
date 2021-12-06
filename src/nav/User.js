@@ -20,6 +20,7 @@ export default function User() {
       >
         {(props) => <Dashboard {...props} />}
       </Stack.Screen>
+
       <Stack.Screen
         name="Map"
         component={Map}
@@ -27,6 +28,8 @@ export default function User() {
           headerShown: false,
         }}
       />
+
+      {/* Report Screen */}
       <Stack.Screen
         name="Type"
         component={Type}
@@ -48,6 +51,8 @@ export default function User() {
           headerShown: false,
         }}
       />
+
+      {/* Login/Signup */}
       <Stack.Screen
         name="Login"
         component={LoginScreen}

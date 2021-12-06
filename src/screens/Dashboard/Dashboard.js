@@ -31,6 +31,10 @@ export default function Dashboard(props) {
         <Title>{title()}</Title>
         <Grid>
           <DashButton onPress={() => props.navigation.navigate("Map")}>
+            <DashText>Account</DashText>
+            <Icon source={require("../../../assets/icons/account.png")} />
+          </DashButton>
+          <DashButton onPress={() => props.navigation.navigate("Map")}>
             <DashText>Map</DashText>
             <Icon source={require("../../../assets/icons/map.png")} />
           </DashButton>
@@ -38,17 +42,9 @@ export default function Dashboard(props) {
             <DashText>Safety Net</DashText>
             <Icon source={require("../../../assets/icons/friends.png")} />
           </DashButton>
-          {/* <DashButton onPress={() => Linking.openURL("http://google.com")}>
-            <DashText>Reports</DashText>
-            <Icon source={require("../../../assets/icons/reports.png")} />
-          </DashButton> */}
-          <DashButton onPress={() => props.navigation.navigate("Comments")}>
+          <DashButton onPress={() => props.navigation.navigate("Time")}>
             <DashText>Submit a Report</DashText>
             <Icon source={require("../../../assets/icons/addreport.png")} />
-          </DashButton>
-          <DashButton onPress={() => Linking.openURL("http://google.com")}>
-            <DashText>Past Routes</DashText>
-            <Icon source={require("../../../assets/icons/history.png")} />
           </DashButton>
           <SOS onPress={() => Linking.openURL("http://google.com")}>
             <DashText>SOS</DashText>
