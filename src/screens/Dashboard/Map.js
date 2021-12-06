@@ -92,7 +92,8 @@ const Map = (props) => {
           setSearchedPlace(searchLocation)
           console.log('AFTER setSearch', searchLocation)
           
-          const padding_value = 50;
+          //map styling for both markers to appear
+          const padding_value = 70;
           mapRef.current.fitToCoordinates(
             [searchLocation, initialLocation],
             {
@@ -108,7 +109,7 @@ const Map = (props) => {
           )
           console.log('Made it past fit to coordinates')
 
-0          }}
+          }}
         //fetchDetails to true to get the geometry of the location
         fetchDetails={true}
         onFail={(error) => console.error(error)}
@@ -129,7 +130,7 @@ const Map = (props) => {
                 zoomEnabled={true}>
 
           <Marker coordinate={location} 
-                  title="My Current location">
+                  title="Current location">
           </Marker> 
         {
           searchedPlace ?
@@ -157,8 +158,6 @@ const Map = (props) => {
   );
 };
 export default Map;
-
-//// ON line 90-92 add dthe searched location:  is searchedLocation? marker reset map zoom to the new marker
 
 
 //styling below:
