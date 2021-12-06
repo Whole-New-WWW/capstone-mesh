@@ -40,7 +40,7 @@ const Map = (props) => {
         setInitialRegion({
           latitude: locate.coords.latitude,
           longitude: locate.coords.longitude,
-          latitudeDelta: 0.09,
+          latitudeDelta: 0.10,
           longitudeDelta: 0.03
         })
         //gets the current user coordinates
