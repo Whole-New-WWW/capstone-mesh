@@ -217,6 +217,19 @@ export const DashText = styled.Text`
   margin: 5px;
 `;
 
+// Circular image in safety nets components
+export const CircularImage = styled.Image`
+  width: 150px;
+  height: 150px;
+  border-radius: 150px;
+  border-width: 4px;
+  border-color: ${yellow};
+  align-self: center;
+  margin-top: 60px;
+  margin-bottom: 20px;
+  overflow: hidden;
+`;
+
 // Container for button list in safety nets
 export const ButtonListContainer = styled.SafeAreaView`
   justify-content: center;
@@ -236,17 +249,18 @@ export const FlexRowButton = styled.TouchableOpacity`
   box-shadow: 0.5px 0.5 px;
 `;
 
-// Circular image in safety nets components
-export const CircularImage = styled.Image`
-  width: 150px;
-  height: 150px;
-  border-radius: 150px;
-  border-width: 4px;
-  border-color: ${yellow};
-  align-self: center;
-  margin-top: 60px;
-  margin-bottom: 20px;
-  overflow: hidden;
+// Add safety net button in single safety net view 
+export const AddButton = styled.TouchableOpacity`
+  flex-direction: row;
+  height: 60px;
+  width: 300px;
+  justify-content: center;
+  align-items: center;
+  border-color: ${navy};
+  border-width: 1px;
+  margin: 8px;
+  border-radius: 22px;
+  box-shadow: 0.5px 0.5px;
 `;
 
 
