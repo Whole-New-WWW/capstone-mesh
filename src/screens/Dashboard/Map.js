@@ -41,7 +41,7 @@ const Map = (props) => {
           latitude: locate.coords.latitude,
           longitude: locate.coords.longitude,
           latitudeDelta: 0.10,
-          longitudeDelta: 0.03
+          longitudeDelta: 0.04
         })
         //gets the current user coordinates
         setLocation({
@@ -89,7 +89,7 @@ const Map = (props) => {
           console.log('AFTER setSearch', searchLocation)
           
           //map styling for both markers to appear
-          const padding_value = 70;
+          const padding_value = 80;
           mapRef.current.fitToCoordinates(
             [searchLocation, initialLocation],
             {
