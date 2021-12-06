@@ -20,7 +20,7 @@ const Map = (props) => {
     const [location, setLocation] = React.useState(null)
     const [initialRegion, setInitialRegion] = React.useState(null)
 
-    //NEW create another state variable to store the search coordinates
+    //created another state variable to store the search coordinates
     const [searchedPlace, setSearchedPlace] = React.useState(null)
 
     const [error, setError] = React.useState(null)
@@ -73,11 +73,7 @@ const Map = (props) => {
           //this gets the coordinates of the searched location 
           console.log('SEARCHED geometry coordinates using fetchDetails', details.geometry.location)
 
-          //NEW want to add the new searched state here
-          //the component will be dependent on this state, then render a new marker
-          //not sure?
-
-          //NEW gets the search coordinates
+          //gets the search coordinates
           //comes from the GooglePlacesAutocomplete details and enabled fetchDetails (true) to get the coordinates
           const searchLocation = {
             latitude: details.geometry.location.lat,
@@ -120,7 +116,6 @@ const Map = (props) => {
         }} // this in only required for use on the web. See https://git.io/JflFv more for details.
         />
         
-      
       {location ?
       <MapView 
                 ref={mapRef}
@@ -169,7 +164,6 @@ const styles = StyleSheet.create({
     position: "absolute",
   },
   map: {
-    //height: "80%", width: "100%" 
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height,
     zIndex: -1,
