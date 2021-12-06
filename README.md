@@ -1,6 +1,6 @@
 # React Native Firebase
 
-Capstone by Yilla, Maxiel, Josephine, Claudia
+Capstone by Claudia, Josephine, Maxiel and Yilla
 
 ## Getting Started
 
