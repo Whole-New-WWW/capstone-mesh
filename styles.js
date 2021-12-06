@@ -263,4 +263,17 @@ export const AddButton = styled.TouchableOpacity`
   box-shadow: 0.5px 0.5px;
 `;
 
+export const SmallIcon = styled.Image`
+  height: 20px;
+`;
 
+export const FlexColumnButton = styled.TouchableOpacity`
+  height: 60px;
+  width: 150px;
+  justify-content: center;
+  align-items: center;
+  background-color: ${light};
+  margin: 8px;
+  border-radius: 22px;
+  box-shadow: 0.5px 0.5px;
+`;
