@@ -15,6 +15,8 @@ export default function Header(props) {
   };
 
   return (
+    <TopBar style={{height: 200}}>
+      <Button
     <TopBar>
       <NavButton
         style={{ backgroundColor: "transparent" }}
