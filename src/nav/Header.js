@@ -15,9 +15,7 @@ export default function Header(props) {
   };
 
   return (
-    <TopBar style={{height: 200}}>
-      <Button
-    <TopBar>
+    <TopBar style={{ height: 200 }}>
       <NavButton
         style={{ backgroundColor: "transparent" }}
         onPress={() => props.navigation.goBack()}
