@@ -28,3 +28,40 @@ const safetyNets = [
     contacts: [{ id: 1, name: "Jamie" }, { id: 2, name: "Julian" }, { id: 3, name: "Jackie" }],
   },
 ];
+
+export default function SafetyNets(props) {
+  return (
+    <Container>
+      <Header {...props}/>
+      <CircularImage source={require('../../../assets/icons/friends.png')}/>
+      {!safetyNets && !safetyNets.length ? (
+        <Container>
+          <Title>
+            You have no Safety Nets! Add some below!
+          </Title>
+        </Container>
+      ) : (
+        <ButtonListContainer>
+          {safetyNets.map(safetyNet => {
+            return (
+              <FlexRowButton 
+                key={safetyNet.id} 
+                onPress={() => props.navigation.navigate("Safety Net", {safetyNet: safetyNet})}
+              >
+                <DashText>
+                  {safetyNet.name}
+                </DashText>
+              </FlexRowButton>
+            )
+          })}
+          <AddButton>
+            <SmallIcon source={require('../../../assets/icons/plus.png')}/>
+            <DashText>
+              Add New Safety Net
+            </DashText>
+          </AddButton>
+        </ButtonListContainer>
+      )}
+    </Container>
+  )
+}
