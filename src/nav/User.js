@@ -5,6 +5,7 @@ import Map from "../screens/Dashboard/Map";
 import LoginScreen from "../screens/LoginScreen/LoginScreen";
 import RegistrationScreen from "../screens/RegistrationScreen/RegistrationScreen";
 import SafetyNets from '../screens/SafetyNets/SafetyNets';
+import SingleSafetyNet from "../screens/SafetyNets/SingleSafetyNet";
 import { Type } from "../screens/Reports/Type";
 import { Time } from "../screens/Reports/Time";
 import { Comments } from "../screens/Reports/Comments";
@@ -73,6 +74,13 @@ export default function User() {
       <Stack.Screen
         name="Safety Nets"
         component={SafetyNets}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Safety Net"
+        component={SingleSafetyNet}
         options={{
           headerShown: false,
         }}
