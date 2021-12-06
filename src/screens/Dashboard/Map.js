@@ -9,7 +9,7 @@ import Header from '../../nav/Header';
 import { Alert } from "react-native";
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'; //to get search bar to autopopulate
 import MapViewDirections from 'react-native-maps-directions'; //to connect the two markers to get directions (origin and destination)
-import { useRef } from 'react'
+import { useRef } from 'react' //allows to access DOM element
 
 //used hooks useState and useEffect
 //useState: allows you to add state to functional components. Using the useState hook inside a function component, you can create a piece of state without switching to class components
@@ -167,7 +167,6 @@ const styles = StyleSheet.create({
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height,
     zIndex: -1,
-    
   },
 });
 
