@@ -246,7 +246,7 @@ export const FlexRowButton = styled.TouchableOpacity`
   background-color: ${light};
   margin: 8px;
   border-radius: 22px;
-  box-shadow: 0.5px 0.5 px;
+  box-shadow: 0.5px 0.5px;
 `;
 
 // Add safety net button in single safety net view 
