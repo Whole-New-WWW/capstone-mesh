@@ -29,13 +29,14 @@ export default function CrimeData() {
       {isLoading ? <ActivityIndicator /> : (
         <>
         {data.map((crime, index) => (
-        <Marker
-          key={index}
-          // Number() used to address error initially being thrown re: invalid type "string" passed into coordinate
-          coordinate={{latitude: Number(crime.latitude), longitude: Number(crime.longitude)}}
-          title={crime.law_cat_cd}
-          description={crime.pd_desc}
-        />
+          <Marker
+            key={index}
+            // Number() used to address error initially being thrown re: invalid type "string" passed into coordinate
+            coordinate={{latitude: Number(crime.latitude), longitude: Number(crime.longitude)}}
+            title={crime.law_cat_cd}
+            description={crime.pd_desc}
+            image={require('../../../assets/icons/crimeMarker.png')}
+          />
         ))}
         </>
       )}
