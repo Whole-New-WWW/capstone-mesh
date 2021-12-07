@@ -11,17 +11,20 @@ import { Alert } from "react-native";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete"; //to get search bar to autopopulate
 import MapViewDirections from "react-native-maps-directions"; //to connect the two markers to get directions (origin and destination)
 import { useRef } from "react"; //allows to access DOM element
+
 //used hooks useState and useEffect
 //useState: allows you to add state to functional components. Using the useState hook inside a function component, you can create a piece of state without switching to class components
 //useEffect: you tell React that your component needs to do something after render. React remembers the function passed as (useEffect)
+
 //will change the placement of the api key when closer to deployment
 const API_KEY = "AIzaSyDpSBACR8eeqYjsNMAjD04yTeEoxMVKU38";
+
 const Map = (props) => {
   const mapRef = useRef(null); //allows us to access a DOM element imperatively (document object Model = DOM)
+
   //state variables
   const [location, setLocation] = React.useState(null);
   const [initialRegion, setInitialRegion] = React.useState(null);
-  //created another state variable to store the search coordinates
   const [searchedPlace, setSearchedPlace] = React.useState(null);
   const [error, setError] = React.useState(null);
   //fetches user location latitude and longitude and then pass to coordinate prop of Marker component
@@ -110,7 +113,7 @@ const Map = (props) => {
             style={styles.map}
             zoomEnabled={true}
           >
-            <Marker coordinate={location} title="Current location"></Marker>
+            <Marker coordinate={location} title="Current Location"></Marker>
             {searchedPlace ? (
               <Marker
                 coordinate={searchedPlace}
@@ -122,8 +125,8 @@ const Map = (props) => {
                 origin={location}
                 destination={searchedPlace}
                 apikey={API_KEY}
-                strokeWidth={2}
-                strokeColor="red"
+                strokeWidth={3}
+                strokeColor="blue"
               />
             ) : null}
           </MapView>
