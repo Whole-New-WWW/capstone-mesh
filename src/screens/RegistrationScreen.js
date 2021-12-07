@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { firebase } from "../../firebase/config";
+import { firebase } from "../firebase/config";
 
 import {
   Title,
   Text,
   DashContainer,
   FooterView,
-  TextInput,
+  LoginInput,
   Logo,
   Button,
   ButtonText,
   FooterLink,
-} from "../../../styles";
+} from "../../styles";
 
 // Firebase Auth
 const auth = firebase.auth();
@@ -66,27 +66,27 @@ export default function RegistrationScreen({ navigation }) {
         keyboardShouldPersistTaps="always"
       >
         <Title>Create an Account</Title>
-        <Logo source={require("../../../assets/globe-logo.png")} />
-        <TextInput
+        <Logo source={require("../../assets/globe-logo.png")} />
+        <LoginInput
           placeholder="First Name"
           onChangeText={(text) => setfullName(text)}
           value={fullName}
           autoCapitalize="none"
         />
-        <TextInput
+        <LoginInput
           placeholder="E-mail"
           onChangeText={(text) => setEmail(text)}
           value={email}
           autoCapitalize="none"
         />
-        <TextInput
+        <LoginInput
           secureTextEntry
           placeholder="Password"
           onChangeText={(text) => setPassword(text)}
           value={password}
           autoCapitalize="none"
         />
-        <TextInput
+        <LoginInput
           secureTextEntry
           placeholder="Confirm Password"
           onChangeText={(text) => setConfirmPassword(text)}

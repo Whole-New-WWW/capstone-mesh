@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import {
   Title,
   Grid,
@@ -26,7 +26,7 @@ export default function Dashboard(props) {
       <DashContainer>
         <Title>{title()}</Title>
         <Grid>
-          <DashButton onPress={() => props.navigation.navigate('Map')}>
+          <DashButton onPress={() => props.navigation.navigate('Account')}>
             <DashText>Account</DashText>
             <Icon source={require('../../../assets/icons/account.png')} />
           </DashButton>

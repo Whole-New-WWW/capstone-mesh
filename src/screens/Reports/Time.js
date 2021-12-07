@@ -27,8 +27,6 @@ export const Time = (props) => {
     }
   };
 
-  console.log('TIME >>>', time, date)
-
   return (
     <>
       <Container>

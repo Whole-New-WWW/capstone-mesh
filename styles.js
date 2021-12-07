@@ -101,11 +101,34 @@ export const Title = styled.Text`
   color: ${navy};
   text-align: center;
   margin: 25px;
-  top: 5%;
+  top: 2%;
+`;
+
+export const Details = styled.Text`
+  font-size: 15px;
+  color: ${navy};
+  text-align: center;
+  margin: 10px 30px 10px 30px;
+  background-color: ${light};
+  border: 1px solid ${lavender};
+  padding: 10px;
+  border-radius: 10px;
 `;
 
 // The Form Fields
 export const TextInput = styled.TextInput`
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  background-color: ${light};
+  border: 1px solid ${lavender};
+  margin: 10px 30px 10px 30px;
+  padding: 15px;
+  color: ${navy};
+`;
+
+// The Log In Fields
+export const LoginInput = styled.TextInput`
   height: 48px;
   border-radius: 5px;
   overflow: hidden;

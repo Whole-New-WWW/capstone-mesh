@@ -16,8 +16,6 @@ export default function SOSButton(props) {
 
   let nets = user.safety_nets
 
-  console.log('SOS >>>', user)
-
   useEffect(() => {
     ;(async () => {
       let { status } = await requestForegroundPermissionsAsync() //Asks the user to grant permissions for location
