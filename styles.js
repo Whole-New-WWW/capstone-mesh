@@ -101,6 +101,7 @@ export const Title = styled.Text`
   color: ${navy};
   text-align: center;
   margin: 25px;
+  top: 5%;
 `;
 
 // The Form Fields

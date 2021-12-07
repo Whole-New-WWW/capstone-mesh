@@ -9,7 +9,7 @@ import {
   SOS,
 } from '../../../styles'
 import Footer from '../../nav/Footer'
-import SOSButton from './SOS';
+import SOSButton from './SOS'
 import { AuthContext } from '../../nav/Auth'
 
 export default function Dashboard(props) {
@@ -17,11 +17,8 @@ export default function Dashboard(props) {
   user = user._currentValue.user
 
   const title = () => {
-    if (user) {
-      return `Welcome home, ${user.firstName}`
-    } else {
-      return `Welcome home`
-    }
+    if (user) return `Welcome home, ${user.firstName}`
+    else return `Welcome home`
   }
 
   return (
@@ -37,7 +34,7 @@ export default function Dashboard(props) {
             <DashText>Map</DashText>
             <Icon source={require('../../../assets/icons/map.png')} />
           </DashButton>
-          <DashButton onPress={() => props.navigation.navigate("Safety Nets")}>
+          <DashButton onPress={() => props.navigation.navigate('Safety Nets')}>
             <DashText>Safety Net</DashText>
             <Icon source={require('../../../assets/icons/friends.png')} />
           </DashButton>
