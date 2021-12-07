@@ -21,8 +21,6 @@ export default function CrimeData() {
   }, []); 
   // empty array tells useEffect to only run once
 
-  console.log('HERE IS THE CRIME DATA', data);
-
   return (
     <>
     {/* map over crime data and render marker for each point */}

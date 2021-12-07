@@ -11,7 +11,7 @@ export default function CrimeHeatMap() {
     function fetchCrimeData() {
       getManhattanCrimeData().then(crimeStats => {
         setData(crimeStats);
-        // setLoading(false);
+        setLoading(false);
       })
     }
     fetchCrimeData();
@@ -32,8 +32,6 @@ export default function CrimeHeatMap() {
     startPoints: [0, .125, .45, 1],
     colorMapSize: 256
   }
-
-  console.log('HERE ARE THE POINTS', points);
 
   return(
     <Heatmap
