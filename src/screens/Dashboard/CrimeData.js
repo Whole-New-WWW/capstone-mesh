@@ -4,10 +4,10 @@ import { getManhattanCrimeData } from '../../../api';
 import { Marker } from 'react-native-maps';
 
 export default function CrimeData() {
-  const [isLoading, setLoading] = useState(true);
-  // initial render will have data and setData = []
+  const [loading, setLoading] = useState(true);
+  // initial render will have data = []
   const [data, setData] = useState([]);
-  // Similar to component did mount
+  // Performs side effect - Similar to component did mount 
   useEffect(() => {
     // await crime data from axios request in api file
     function fetchCrimeData() {
@@ -18,15 +18,13 @@ export default function CrimeData() {
       })
     }
     fetchCrimeData();
-  }, []) 
+  }, []); 
   // empty array tells useEffect to only run once
-
-  console.log('HERE IS THE CRIME DATA', data);
 
   return (
     <>
     {/* map over crime data and render marker for each point */}
-      {isLoading ? <ActivityIndicator /> : (
+      {loading ? <ActivityIndicator /> : (
         <>
         {data.map((crime, index) => (
           <Marker
