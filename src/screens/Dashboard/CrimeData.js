@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { ActivityIndicator } from 'react-native';
 import { getManhattanCrimeData } from '../../../api';
 import { Marker } from 'react-native-maps';
 
 export default function CrimeData() {
+  const [isLoading, setLoading] = useState(true);
   // initial render will have data and setData = []
   const [data, setData] = useState([]);
   // Similar to component did mount
@@ -12,6 +14,7 @@ export default function CrimeData() {
       getManhattanCrimeData().then(crimeStats => {
         // set state for data
         setData(crimeStats);
+        setLoading(false);
       })
     }
     fetchCrimeData();
@@ -23,7 +26,9 @@ export default function CrimeData() {
   return (
     <>
     {/* map over crime data and render marker for each point */}
-      {data.map((crime, index) => (
+      {isLoading ? <ActivityIndicator /> : (
+        <>
+        {data.map((crime, index) => (
         <Marker
           key={index}
           // Number() used to address error initially being thrown re: invalid type "string" passed into coordinate
@@ -31,7 +36,9 @@ export default function CrimeData() {
           title={crime.law_cat_cd}
           description={crime.pd_desc}
         />
-      ))}
+        ))}
+        </>
+      )}
     </>
   )
 }
