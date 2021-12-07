@@ -3,7 +3,7 @@ import * as Location from "expo-location"; //using expo to get the location of u
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import { Marker } from "react-native-maps";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Dimensions, Button, Text, View } from "react-native";
+import { StyleSheet, Dimensions, TouchableOpacity, Button, Text, View } from "react-native";
 import { Container } from "../../../styles";
 import Header from "../../nav/Header";
 import Footer from "../../nav/Footer";
@@ -11,6 +11,7 @@ import { Alert } from "react-native";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete"; //to get search bar to autopopulate
 import MapViewDirections from "react-native-maps-directions"; //to connect the two markers to get directions (origin and destination)
 import { useRef } from "react"; //allows to access DOM element
+import { useState } from "react";
 
 //used hooks useState and useEffect
 //useState: allows you to add state to functional components. Using the useState hook inside a function component, you can create a piece of state without switching to class components
@@ -54,10 +55,16 @@ const Map = (props) => {
     })();
   }, []);
 
+ 
+
   return (
     <View>
       <Container>
         <Header {...props} />
+        <TouchableOpacity style={[styles.confirmButton]}>
+
+        </TouchableOpacity>  
+
         <GooglePlacesAutocomplete
           style={{ position: "absolute" }}
           placeholder="Where to?"
@@ -156,6 +163,13 @@ const styles = StyleSheet.create({
     height: Dimensions.get("window").height,
     zIndex: -1,
   },
+  confirmButton: {
+    zIndex:10,
+    width:200,
+    height:70,
+    borderRadius:100,
+    backgroundColor:"#2D3953"
+  }
 });
 
 
