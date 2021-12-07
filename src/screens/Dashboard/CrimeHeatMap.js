@@ -11,6 +11,7 @@ export default function CrimeHeatMap() {
   // Performs side effect - Similar to component did mount 
   useEffect(() => {
     // await crime data from axios request in api file
+    // Consider implementing caching to avoid querying API frequently
     function fetchCrimeData() {
       getManhattanCrimeData().then(crimeStats => {
         // set state for data
@@ -29,14 +30,14 @@ export default function CrimeHeatMap() {
         latitude: Number(crime.latitude), 
         longitude: Number(crime.longitude),
         // weight is optional prop
-        weight: 1
+        weight: .25
       }
     )
   })
   // Heatmap component takes gradient prop
   let gradient = {
     colors: ['purple', 'red', 'blue', 'gray'],
-    startPoints: [0, .125, .45, 1],
+    startPoints: [0, .125, .45, .6],
     colorMapSize: 256
   }
   // Return Heatmap component with props passed in
@@ -46,7 +47,7 @@ export default function CrimeHeatMap() {
         <Heatmap
           points={points}
           // These are optional props
-          radius={5}
+          radius={1}
           opacity={0.7}
           gradient={gradient}
         />
