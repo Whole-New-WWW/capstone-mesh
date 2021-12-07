@@ -125,8 +125,8 @@ const Map = (props) => {
                 origin={location}
                 destination={searchedPlace}
                 apikey={API_KEY}
-                strokeWidth={3}
-                strokeColor="blue"
+                strokeWidth={4}
+                strokeColor="purple"
               />
             ) : null}
           </MapView>
