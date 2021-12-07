@@ -18,7 +18,7 @@ export default function CrimeData() {
       })
     }
     fetchCrimeData();
-  }, []) 
+  }, []); 
   // empty array tells useEffect to only run once
 
   console.log('HERE IS THE CRIME DATA', data);
