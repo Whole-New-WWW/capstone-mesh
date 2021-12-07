@@ -46,7 +46,7 @@ export default function SafetyNets(props) {
             return (
               <FlexRowButton 
                 key={safetyNet.id} 
-                onPress={() => props.navigation.navigate("Safety Net", {safetyNet: safetyNet})}
+                onPress={() => props.navigation.navigate("Safety Net", {safetyNet})}
               >
                 <DashText>
                   {safetyNet.name}

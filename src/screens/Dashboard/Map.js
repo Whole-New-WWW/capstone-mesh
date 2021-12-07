@@ -11,6 +11,7 @@ import { Alert } from "react-native";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete"; //to get search bar to autopopulate
 import MapViewDirections from "react-native-maps-directions"; //to connect the two markers to get directions (origin and destination)
 import { useRef } from "react"; //allows to access DOM element
+import CrimeData from "./CrimeData";
 //used hooks useState and useEffect
 //useState: allows you to add state to functional components. Using the useState hook inside a function component, you can create a piece of state without switching to class components
 //useEffect: you tell React that your component needs to do something after render. React remembers the function passed as (useEffect)
@@ -117,6 +118,7 @@ const Map = (props) => {
                 title="Desired Location"
               ></Marker>
             ) : null}
+            <CrimeData />
             {location && searchedPlace ? (
               <MapViewDirections
                 origin={location}
