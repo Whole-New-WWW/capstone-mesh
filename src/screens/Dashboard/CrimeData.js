@@ -24,6 +24,7 @@ export default function CrimeData() {
   return (
     <>
     {/* map over crime data and render marker for each point */}
+    {/* Determine which crimes occurred on the streets of nyc, not inside someone's home for example */}
       {loading ? <ActivityIndicator /> : (
         <>
         {data.map((crime, index) => (
@@ -31,8 +32,11 @@ export default function CrimeData() {
             key={index}
             // Number() used to address error initially being thrown re: invalid type "string" passed into coordinate
             coordinate={{latitude: Number(crime.latitude), longitude: Number(crime.longitude)}}
+            // Reconsider what titles we use/ what data is displayed. Can be triggering for users
             title={crime.law_cat_cd}
             description={crime.pd_desc}
+            // Documentation says that adding a custom image may not allow the images to render properly on different devices
+            // Consider writing functionality that renders different icon based on crime type to avoid describing the crimes
             image={require('../../../assets/icons/crimeMarker.png')}
           />
         ))}

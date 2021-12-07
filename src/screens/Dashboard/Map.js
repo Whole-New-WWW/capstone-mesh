@@ -119,6 +119,7 @@ const Map = (props) => {
                 title="Desired Location"
               ></Marker>
             ) : null}
+            {/* Change heat map/crime data display based on level of zoom */}
               <CrimeHeatMap />
               <CrimeData />
             {location && searchedPlace ? (
