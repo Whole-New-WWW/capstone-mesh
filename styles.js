@@ -220,13 +220,10 @@ export const DashText = styled.Text`
 export const CircularImage = styled.Image`
   width: 150px;
   height: 150px;
-  border-radius: 150px;
-  border-width: 4px;
-  border-color: ${yellow};
+  border-radius: 100px;
+  border: 4px ${yellow};
+  margin: 60px 0 20px 0;
   align-self: center;
-  margin-top: 60px;
-  margin-bottom: 20px;
-  overflow: hidden;
 `;
 
 // Container for button list in safety nets
@@ -248,7 +245,7 @@ export const FlexRowButton = styled.TouchableOpacity`
   box-shadow: 0.5px 0.5px;
 `;
 
-// Add safety net button in single safety net view 
+// Add safety net button in single safety net view
 export const AddButton = styled.TouchableOpacity`
   flex-direction: row;
   height: 60px;
@@ -262,7 +259,7 @@ export const AddButton = styled.TouchableOpacity`
   box-shadow: 0.5px 0.5px;
 `;
 
-// Small icon used in buttons in safety nets components 
+// Small icon used in buttons in safety nets components
 export const SmallIcon = styled.Image`
   height: 20px;
 `;
@@ -283,7 +280,7 @@ export const FlexColumnButton = styled.TouchableOpacity`
 export const SmallAddButton = styled.TouchableOpacity`
   flex-direction: row;
   justify-content: center;
-  align-items: center;    
+  align-items: center;
   height: 60px;
   width: 150px;
   border-color: ${navy}
