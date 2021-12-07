@@ -6,9 +6,10 @@ import {
   getCurrentPositionAsync,
 } from 'expo-location' //using expo to get the location of user
 
+import * as Brightness from 'expo-brightness'
+
 export default function SOSButton(props) {
   const [location, setLocation] = useState(null)
-  // const [initialRegion, setInitialRegion] = useState(null)
 
   useEffect(() => {
     ;(async () => {
@@ -25,9 +26,24 @@ export default function SOSButton(props) {
     })()
   }, [])
 
+  // useEffect(() => {
+  //   ;(async () => {
+  //     const { status } = await Brightness.requestPermissionsAsync()
+  //     if (status === 'granted') {
+  //       Brightness.setSystemBrightnessAsync(0.1)
+  //       console.log('SYSTEM BRIGHTNESS')
+  //     }
+  //   })()
+  // }, [])
+
   // onPress handler to save location
   const onSOS = async () => {
     try {
+      const { status } = await Brightness.requestPermissionsAsync()
+      if (status === 'granted') {
+        Brightness.setSystemBrightnessAsync(0.1)
+        console.log('SYSTEM BRIGHTNESS')
+      }
       console.log('GRABBING LOCATION', location)
     } catch (e) {
       alert(e)
