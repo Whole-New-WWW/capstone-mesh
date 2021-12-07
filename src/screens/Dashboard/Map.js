@@ -3,7 +3,7 @@ import * as Location from "expo-location"; //using expo to get the location of u
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import { Marker } from "react-native-maps";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Dimensions, Text, View } from "react-native";
+import { StyleSheet, Dimensions, Button, Text, View } from "react-native";
 import { Container } from "../../../styles";
 import Header from "../../nav/Header";
 import Footer from "../../nav/Footer";
@@ -20,13 +20,14 @@ import { useRef } from "react"; //allows to access DOM element
 const API_KEY = "AIzaSyDpSBACR8eeqYjsNMAjD04yTeEoxMVKU38";
 
 const Map = (props) => {
-  const mapRef = useRef(null); //allows us to access a DOM element imperatively (document object Model = DOM)
+  const mapRef = useRef(null); //allows us to access a document object Model (DOM) element imperatively
 
   //state variables
   const [location, setLocation] = React.useState(null);
   const [initialRegion, setInitialRegion] = React.useState(null);
   const [searchedPlace, setSearchedPlace] = React.useState(null);
   const [error, setError] = React.useState(null);
+  
   //fetches user location latitude and longitude and then pass to coordinate prop of Marker component
   React.useEffect(() => {
     //async function used to get request permission of users location while getting their current position
@@ -52,6 +53,7 @@ const Map = (props) => {
       console.log("in locate", locate.coords);
     })();
   }, []);
+
   return (
     <View>
       <Container>
@@ -84,6 +86,7 @@ const Map = (props) => {
             };
             setSearchedPlace(searchLocation);
             console.log("AFTER setSearch", searchLocation);
+
             //map styling for both markers to appear
             const padding_value = 80;
             mapRef.current.fitToCoordinates([searchLocation, initialLocation], {
@@ -97,6 +100,7 @@ const Map = (props) => {
             });
             console.log("Made it past fit to coordinates");
           }}
+
           //fetchDetails to true to get the geometry of the location
           fetchDetails={true}
           onFail={(error) => console.error(error)}
@@ -153,3 +157,6 @@ const styles = StyleSheet.create({
     zIndex: -1,
   },
 });
+
+
+
