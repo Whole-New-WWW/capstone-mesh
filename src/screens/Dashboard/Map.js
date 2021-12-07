@@ -28,7 +28,7 @@ const Map = (props) => {
   React.useEffect(() => {
     //async function used to get request permission of users location while getting their current position
     (async () => {
-      let { status } = await Location.requestPermissionsAsync(); //Asks the user to grant permissions for location
+      let { status } = await Location.requestForegroundPermissionsAsync(); //Asks the user to grant permissions for location
       if (status != "granted") {
         setError("Permission to access location was denied");
         return;
