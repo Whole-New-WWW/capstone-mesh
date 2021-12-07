@@ -61,10 +61,6 @@ const Map = (props) => {
     <View>
       <Container>
         <Header {...props} />
-        <TouchableOpacity style={[styles.confirmButton]}>
-
-        </TouchableOpacity>  
-
         <GooglePlacesAutocomplete
           style={{ position: "absolute" }}
           placeholder="Where to?"
@@ -116,6 +112,8 @@ const Map = (props) => {
             useOnPlatform: "web",
           }} // this in only required for use on the web. See https://git.io/JflFv more for details.
         />
+        
+
         {location ? (
           <MapView
             ref={mapRef}
@@ -144,6 +142,14 @@ const Map = (props) => {
         ) : (
           <Text>loading coords</Text>
         )}
+
+        <TouchableOpacity style={[styles.localCrimes]}>
+        
+        </TouchableOpacity> 
+        <TouchableOpacity style={[styles.confirmButton]}>
+        
+        </TouchableOpacity>
+
         {/* <Footer {...props} /> */}
       </Container>
     </View>
@@ -160,15 +166,22 @@ const styles = StyleSheet.create({
   },
   map: {
     width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
+    height: 650,
     zIndex: -1,
   },
+  localCrimes: {
+    zIndex:-1,
+    width:100,
+    height:50,
+    borderRadius:50,
+    backgroundColor:"#14213D"
+  },
   confirmButton: {
-    zIndex:10,
-    width:200,
-    height:70,
-    borderRadius:100,
-    backgroundColor:"#2D3953"
+    zIndex:-1,
+    width:100,
+    height:50,
+    borderRadius:50,
+    backgroundColor:"#14213D"
   }
 });
 
