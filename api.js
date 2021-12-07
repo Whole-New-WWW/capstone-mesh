@@ -12,7 +12,6 @@ export function getManhattanCrimeData() {
   return axios
     .request(options)
     .then(function (response) {
-      console.log('HERE IS THE RESPONSE DATA', response.data)
       return response.data;
     })
     .catch(function (error) {
