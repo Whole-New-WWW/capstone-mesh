@@ -2,8 +2,8 @@ import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import Dashboard from '../screens/Dashboard/Dashboard'
 import Map from '../screens/Dashboard/Map'
-import { Account } from '../screens/Account/Account'
-import { Edit } from '../screens/Account/Edit'
+import Account from '../screens/Account/Account'
+import Edit from '../screens/Account/Edit'
 import LoginScreen from '../screens/LoginScreen'
 import RegistrationScreen from '../screens/RegistrationScreen'
 import SafetyNets from '../screens/SafetyNets/SafetyNets'
@@ -19,12 +19,11 @@ export function User(props) {
     <Stack.Navigator>
       <Stack.Screen
         name="Dashboard"
+        component={Dashboard}
         options={{
           headerShown: false,
         }}
-      >
-        {(props) => <Dashboard {...props} />}
-      </Stack.Screen>
+      />
 
       <Stack.Screen
         name="Map"
@@ -33,6 +32,8 @@ export function User(props) {
           headerShown: false,
         }}
       />
+
+      {/* Account Screens */}
 
       <Stack.Screen
         name="Account"

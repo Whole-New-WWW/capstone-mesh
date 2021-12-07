@@ -10,7 +10,7 @@ import Header from '../../nav/Header'
 import Footer from '../../nav/Footer'
 import { AuthContext } from '../../nav/Auth'
 
-export const Edit = (props) => {
+export default function Edit(props) {
   const [user] = useState(AuthContext)
   const [name, setName] = useState(null)
   const [email, setEmail] = useState(null)

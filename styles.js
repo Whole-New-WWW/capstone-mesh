@@ -75,6 +75,7 @@ export const ReportBar = styled.View`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin-top: 15px;
 `;
 
 // The purple circle background for SOS
