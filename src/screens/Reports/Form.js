@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import {
-  Text,
   Container,
   Title,
   Button,
@@ -9,7 +8,6 @@ import {
   FormBox,
   LoginInput,
   ReportBar,
-  FooterLink,
 } from '../../../styles'
 import { View } from 'react-native'
 import Header from '../../nav/Header'
@@ -20,7 +18,7 @@ import MultiSelect from 'react-native-multiple-select'
 import { AuthContext } from '../../nav/Auth'
 
 // Color imports
-const { light, lavender, navy } = Colors
+const { navy } = Colors
 
 const items = [
   // name key is must. It is to show the text in front

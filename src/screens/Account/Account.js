@@ -8,6 +8,7 @@ import {
   Details,
   ReportBar,
 } from '../../../styles'
+import { ScrollView } from 'react-native'
 import Header from '../../nav/Header'
 import Footer from '../../nav/Footer'
 import { AuthContext } from '../../nav/Auth'
@@ -19,8 +20,9 @@ export default function Account(props) {
   props.route.name = `Your Profile`
   let [user] = useState(AuthContext)
   user = user._currentValue.user
+  let sos = user.sos
 
-  console.log('ACCOUNT', props)
+  console.log('SOS', sos)
 
   const onEdit = () => {
     try {
@@ -50,6 +52,17 @@ export default function Account(props) {
         <Details>{user.email}</Details>
         <Text>Mobile</Text>
         <Details>{user.mobile ? user.mobile : 'No mobile #'}</Details>
+        <Text>SOS History</Text>
+        <ScrollView>{sos.map((entry) => (
+          <Details>
+            <Text key={sos.id}>
+              Date: {entry.date}
+              {'\n'}
+              Location: <Text>{entry.location}</Text>
+            </Text>
+          </Details>
+        ))}
+        </ScrollView>
         <ReportBar>
           <Button onPress={() => logOut()}>
             <ButtonText>Log Out</ButtonText>

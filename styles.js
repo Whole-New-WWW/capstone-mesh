@@ -108,7 +108,6 @@ export const Title = styled.Text`
 export const Details = styled.Text`
   font-size: 15px;
   color: ${navy};
-  text-align: center;
   margin: 10px 30px 10px 30px;
   background-color: ${light};
   border: 1px solid ${lavender};
