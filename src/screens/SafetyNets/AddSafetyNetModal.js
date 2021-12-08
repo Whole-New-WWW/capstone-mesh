@@ -9,7 +9,8 @@ export default function AddSafetyNetModal() {
         transparent={false}
         visible={visible}
         onRequestClose={() => {
-          Alert.alert('Your safety net has been saved')
+          Alert.alert('Your safety net has been saved');
+          
         }}
       />
     </>
