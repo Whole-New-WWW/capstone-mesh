@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
-import { Heatmap } from 'react-native-maps';
+import MapView, { Heatmap, PROVIDER_GOOGLE } from 'react-native-maps';
 import { getManhattanCrimeData } from '../../../api';
 
 export default function CrimeHeatMap() {
@@ -37,7 +37,7 @@ export default function CrimeHeatMap() {
   // Heatmap component takes gradient prop
   let gradient = {
     colors: ['purple', 'red', 'blue', 'gray'],
-    startPoints: [0, .125, .45, .6],
+    startPoints: [0.01, 0.04, 0.1, 0.45],
     colorMapSize: 256
   }
   // Return Heatmap component with props passed in
@@ -47,9 +47,10 @@ export default function CrimeHeatMap() {
         <Heatmap
           points={points}
           // These are optional props
-          radius={1}
+          radius={40}
           opacity={0.7}
           gradient={gradient}
+          heatmapMode={"POINTS_DENSITY"}
         />
       )}
     </>

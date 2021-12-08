@@ -121,7 +121,7 @@ const Map = (props) => {
             ) : null}
             {/* Change heat map/crime data display based on level of zoom */}
               <CrimeHeatMap />
-              <CrimeData />
+              {/*<CrimeData />*/}
             {location && searchedPlace ? (
               <MapViewDirections
                 origin={location}
