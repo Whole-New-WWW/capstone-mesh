@@ -17,6 +17,7 @@ import Footer from '../../nav/Footer'
 import { firebase } from '../../firebase/config'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import MultiSelect from 'react-native-multiple-select'
+import { AuthContext } from '../../nav/Auth'
 
 // Color imports
 const { light, lavender, navy } = Colors
@@ -28,19 +29,21 @@ const items = [
   { id: 2, name: 'Hate Crime' },
   { id: 3, name: 'Stalking' },
   { id: 4, name: 'Assault' },
-  { id: 5, name: 'Sexual Assault' }
+  { id: 5, name: 'Sexual Assault' },
 ]
 
 export const Comments = (props) => {
   props.route.name = `Incident Report`
-  // const [user] = useState(AuthContext)
+  let [user] = useState(AuthContext)
+  user = user._currentValue.user
+
   const [comments, setComments] = useState('')
   const [date, setDate] = useState(new Date(1598051730000))
   const [mode, setMode] = useState('date')
   const [show, setShow] = useState(false)
   const [selectedItems, setSelectedItems] = useState([])
 
-  console.log('COMMENTS >>>', comments, date, selectedItems)
+  console.log('WHAT USER', user)
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date
@@ -78,8 +81,13 @@ export const Comments = (props) => {
       incidentsRef.add({
         date,
         comments,
-        type: selectedItems
+        type: selectedItems,
       })
+      const usersRef = firebase.firestore().collection('users')
+      usersRef.doc(user.id).update({
+        incidents: { date, comments, type: selectedItems },
+      })
+
       props.navigation.navigate('Dashboard')
     } catch (e) {
       alert(e)
@@ -109,7 +117,14 @@ export const Comments = (props) => {
               display="spinner"
               onChange={onChange}
             />
-            <View style={{padding: 10, backgroundColor: `${navy}`}}><ButtonText style={{textAlign: 'center'}} onPress={() => setShow(false)}>Done</ButtonText></View>
+            <View style={{ padding: 10, backgroundColor: `${navy}` }}>
+              <ButtonText
+                style={{ textAlign: 'center' }}
+                onPress={() => setShow(false)}
+              >
+                Done
+              </ButtonText>
+            </View>
           </>
         )}
 
@@ -121,16 +136,12 @@ export const Comments = (props) => {
           onSelectedItemsChange={onSelectedItemsChange}
           selectedItems={selectedItems}
           selectText="What kind of incident occurred?"
-          searchInputPlaceholderText="Search Items..."
-          onChangeInput={(text) => console.log(text)}
-          tagRemoveIconColor="#CCC"
-          tagBorderColor="#CCC"
-          tagTextColor="#CCC"
+          searchInputPlaceholderText="Search"
+          tagRemoveIconColor={navy}
           selectedItemTextColor={navy}
           selectedItemIconColor={navy}
-          itemTextColor="#000"
           displayKey="name"
-          searchInputStyle={{ color: light }}
+          searchInputStyle={{ color: navy }}
           submitButtonColor={navy}
           submitButtonText="Submit"
         />
