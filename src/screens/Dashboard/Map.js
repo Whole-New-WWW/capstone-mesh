@@ -80,16 +80,19 @@ const Map = (props) => {
         }
         )
         console.log('DISTANCE IS...', distance) 
-        //if distance is less than this ...alert
-        if (distance <= 10) 
-        {
-          return "user has made it to destination" // send push notification to user & send push notification to safety net
-        } else {
-          return "user is still not there" // send push notification to safety net
+
+        //if distance is less than this ...notification
+          if (distance <= 20) //in meters
+          {
+            console.log("user is close to destination") // send push notification to safety net
+          } else if (distance <= 10) {
+            console.log("user arrived to destination") // send push notification to safety net and user to confirm
+          } else {
+            console.log('user is still on the way to destination') 
+          }
         }
-      }
       )
-    }
+  }
   //--------------------------------------
 
   return (
