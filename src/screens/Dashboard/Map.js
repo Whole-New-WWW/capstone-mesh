@@ -3,7 +3,7 @@ import * as Location from "expo-location"; //using expo to get the location of u
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import { Marker } from "react-native-maps";
 import { StatusBar } from "expo-status-bar";
-import NotificationPopup from 'react-native-push-notification-popup'; //push notifications 
+// import NotificationPopup from 'react-native-push-notification-popup'; //push notifications
 import { StyleSheet, Dimensions, Picker, TouchableOpacity, Button, Text, View } from "react-native";
 import ToggleSwitch from 'toggle-switch-react-native'
 import { Container } from "../../../styles";
@@ -35,7 +35,7 @@ const Map = (props) => {
   const [initialRegion, setInitialRegion] = React.useState(null);
   const [searchedPlace, setSearchedPlace] = React.useState(null);
   const [error, setError] = React.useState(null);
-  
+
   //fetches user location latitude and longitude and then pass to coordinate prop of Marker component
   React.useEffect(() => {
     //async function used to get request permission of users location while getting their current position
@@ -64,7 +64,7 @@ const Map = (props) => {
 
   //------------------------------
   //Watch Position: Triggers Location.watchPositionAsync once On My Way button is clicked
-  
+
   const watch = () => {
       console.log('PRESSED WATCH')
       Location.watchPositionAsync({
@@ -75,7 +75,7 @@ const Map = (props) => {
         console.log(current)
         console.log('IN WATCH')
 
-       //calculating the users distance from the searched place 
+       //calculating the users distance from the searched place
        const distance = getDistance(
           {
           latitude: current.coords.latitude,
@@ -86,14 +86,14 @@ const Map = (props) => {
           longitude: searchedPlace.longitude
         }
         )
-        console.log('CALCULATED DISTANCE IS...', distance) 
+        console.log('CALCULATED DISTANCE IS...', distance)
 
         //if distance is less than...send notification
           if (distance <= ARRIVED) //in meters
           {
             console.log("User has ARRIVED to destination") // send push notification to safety net and user to confirm
           } else {
-            console.log('User is still on the way to destination') 
+            console.log('User is still on the way to destination')
           }
         }
       )
@@ -104,7 +104,7 @@ const Map = (props) => {
     <View >
       <Container >
         <Header {...props} />
-       
+
         <GooglePlacesAutocomplete
           style={{ position: "absolute" }}
           placeholder="Where to?"
@@ -156,7 +156,7 @@ const Map = (props) => {
             useOnPlatform: "web",
           }} // this in only required for use on the web. See https://git.io/JflFv more for details.
         />
-        
+
         {location ? (
           <MapView
             ref={mapRef}
@@ -188,22 +188,22 @@ const Map = (props) => {
         ) : (
           <Text>loading coords</Text>
         )}
-        
+
 
         <View style={{flexDirection:"row"}} >
-          <TouchableOpacity 
-          style={[styles.localCrimes, styles.center]} 
-          onPress={()=>console.log("pressed to view NY data")} 
+          <TouchableOpacity
+          style={[styles.localCrimes, styles.center]}
+          onPress={()=>console.log("pressed to view NY data")}
           >
             <Text style={[styles.text]}>
               View Incidents
             </Text>
-          </TouchableOpacity> 
+          </TouchableOpacity>
 
           <TouchableOpacity style={[styles.confirmButton, styles.center]} onPress={watch} disabled={searchedPlace ? false : true}>
             <Text style={[styles.text]}>
               On My Way
-            </Text>  
+            </Text>
           </TouchableOpacity>
         </View>
 
