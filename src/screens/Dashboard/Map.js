@@ -19,6 +19,9 @@ import { getDistance } from 'geolib'; //calculates the distance
 
 //will change the placement of the api key when closer to deployment
 const API_KEY = "AIzaSyDpSBACR8eeqYjsNMAjD04yTeEoxMVKU38";
+const CLOSE = 50;
+const ARRIVED = 20;
+
 
 const Map = (props) => {
   const mapRef = useRef(null); //allows us to access a document object Model (DOM) element imperatively
@@ -82,11 +85,11 @@ const Map = (props) => {
         console.log('DISTANCE IS...', distance) 
 
         //if distance is less than this ...notification
-          if (distance <= 20) //in meters
+          if (distance <= CLOSE) //in meters
           {
-            console.log("user is close to destination") // send push notification to safety net
-          } else if (distance <= 10) {
-            console.log("user arrived to destination") // send push notification to safety net and user to confirm
+            console.log("user is CLOSE to destination") // send push notification to safety net
+          } else if (distance <= ARRIVED) {
+            console.log("user has ARRIVED to destination") // send push notification to safety net and user to confirm
           } else {
             console.log('user is still on the way to destination') 
           }
@@ -188,7 +191,7 @@ const Map = (props) => {
           onPress={()=>console.log("pressed to view NY data")} 
           >
             <Text style={[styles.text]}>
-              View NYPD Incidents
+              View Incidents
             </Text>
           </TouchableOpacity> 
 
@@ -232,10 +235,9 @@ const styles = StyleSheet.create({
     height:45,
     borderRadius:50,
     backgroundColor:"#FCA311",
-    
   },
   text: {
-    fontSize: 18,
+    fontSize: 16,
     color:"#FFFFFF",
     //fontFamily:"Manrope"
   },
