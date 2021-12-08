@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import Header from '../../nav/Header';
 import Footer from '../../nav/Footer';
-import AddSafetyNetModal from './AddSafetyNetModal';
-import { Alert, Modal} from "react-native";
+
 import {
   Container,
   DashText,
@@ -18,7 +17,6 @@ import {
 export default function SingleSafetyNet(props) {
   const { safetyNet } = props.route.params;
   const contacts = safetyNet.users;
-  const [modalDisplayed, setModalDisplayed] = useState(false);
 
   return (
     <>
@@ -40,9 +38,7 @@ export default function SingleSafetyNet(props) {
               </FlexColumnButton>
             )
           })}
-          <SmallAddButton
-            onPress={() => setModalDisplayed(true)}
-          >
+          <SmallAddButton>
             <SmallIcon source={require('../../../assets/icons/plus.png')}/> 
             <DashText>
               Add Contact
