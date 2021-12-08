@@ -3,6 +3,7 @@ import * as Location from "expo-location"; //using expo to get the location of u
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import { Marker } from "react-native-maps";
 import { StatusBar } from "expo-status-bar";
+import NotificationPopup from 'react-native-push-notification-popup'; //push notifications 
 import { StyleSheet, Dimensions, Picker, TouchableOpacity, Button, Text, View } from "react-native";
 import ToggleSwitch from 'toggle-switch-react-native'
 import { Container } from "../../../styles";
@@ -12,7 +13,8 @@ import { Alert } from "react-native";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete"; //to get search bar to autopopulate
 import MapViewDirections from "react-native-maps-directions"; //to connect the two markers to get directions (origin and destination)
 import { useRef } from "react"; //allows to access DOM element
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getDistance } from 'geolib';
 
 //used hooks useState and useEffect
 //useState: allows you to add state to functional components. Using the useState hook inside a function component, you can create a piece of state without switching to class components
@@ -56,7 +58,37 @@ const Map = (props) => {
     })();
   }, []);
 
- 
+  //------------------------------
+  //Watch Position: Triggers Location.watchPositionAsync once button is confirmed to start tracking
+  
+  const watch = () => {
+      console.log('PRESSED WATCH')
+      Location.watchPositionAsync({
+        accuracy: 5,
+        distanceInterval: 3, //meters
+        // timeInterval: 10000 //milliseconds
+      }, (current) => {
+        console.log(current)
+        console.log('IN the WATCH')
+
+       const distance = getDistance(
+          {
+          latitude: current.coords.latitude,
+          longitude: current.coords.longitude
+        },
+        {
+          latitude: searchedPlace.latitude,
+          longitude: searchedPlace.longitude
+        }
+        )
+        console.log('this is distance', distance) 
+        //if distance is less than this ...alert
+      }
+      )
+    }
+
+  //--------------------------------------
+
 
   return (
     <View >
@@ -159,13 +191,16 @@ const Map = (props) => {
         
 
         <View style={{flexDirection:"row"}} >
-          <TouchableOpacity style={[styles.localCrimes, styles.center]} onPress={()=>console.log("pressed local crimes")}>
+          <TouchableOpacity 
+          style={[styles.localCrimes, styles.center]} 
+          onPress={()=>console.log("pressed to view NY data")} 
+          >
             <Text style={[styles.text]}>
               View NYPD Incidents
             </Text>
           </TouchableOpacity> 
 
-          <TouchableOpacity style={[styles.confirmButton, styles.center]} onPress={()=>console.log("pressed on my way")}>
+          <TouchableOpacity style={[styles.confirmButton, styles.center]} onPress={watch} disabled={searchedPlace ? false : true}>
             <Text style={[styles.text]}>
               On My Way
             </Text>  
@@ -210,7 +245,7 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 18,
     color:"#FFFFFF",
-    // fontFamily:"Manrope"
+    //fontFamily:"Manrope"
   },
   center: {
     justifyContent:"center",
