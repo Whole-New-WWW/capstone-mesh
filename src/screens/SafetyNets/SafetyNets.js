@@ -33,7 +33,7 @@ export default function SafetyNets(props) {
   return (
     <Container>
       <Header {...props}/>
-      <CircularImage source={require('../../../assets/icons/friends.png')}/>
+      <CircularImage source={require('../../../assets/icons/friends.png')} />
       {!safetyNets && !safetyNets.length ? (
         <Container>
           <Title>
@@ -44,9 +44,9 @@ export default function SafetyNets(props) {
         <ButtonListContainer>
           {safetyNets.map(safetyNet => {
             return (
-              <FlexRowButton 
-                key={safetyNet.id} 
-                onPress={() => props.navigation.navigate("Safety Net", {safetyNet})}
+              <FlexRowButton
+                key={safetyNet.id}
+                onPress={() => props.navigation.navigate("Safety Net", {safetyNet: safetyNet})}
               >
                 <DashText>
                   {safetyNet.name}

@@ -75,6 +75,7 @@ export const ReportBar = styled.View`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin-top: 15px;
 `;
 
 // The purple circle background for SOS
@@ -101,10 +102,41 @@ export const Title = styled.Text`
   color: ${navy};
   text-align: center;
   margin: 25px;
+  top: 2%;
 `;
 
-// The Form Fields
-export const TextInput = styled.TextInput`
+// The Form Boxes in Account + Reports
+export const Details = styled.View`
+  margin: 10px 30px 10px 30px;
+  background-color: ${light};
+  border: 1px solid ${lavender};
+  border-radius: 5px;
+`;
+
+// Titles for the Forms
+export const FormTitle = styled.Text`
+  padding: 10px 30px 10px 30px;
+  font-weight: bold;
+  color: ${navy}
+`;
+
+// To contain react-native community elements
+export const ModalBox = styled.View`
+  border-radius: 5px;
+  background-color: ${light};
+  border: 1px solid ${lavender};
+  margin: 10px 30px 10px 30px;
+  padding: 10px 10px 0 10px;
+  color: ${navy};
+`;
+
+export const DetailText = styled.Text`
+  padding: 10px;
+`;
+
+
+// The Log In Fields
+export const LoginInput = styled.TextInput`
   height: 48px;
   border-radius: 5px;
   overflow: hidden;
@@ -112,6 +144,18 @@ export const TextInput = styled.TextInput`
   margin: 10px 30px 10px 30px;
   padding-left: 16px;
   color: ${navy};
+`;
+
+// The Form Fields
+export const TextInput = styled.TextInput`
+  display: flex;
+  align-items: center;
+  background-color: ${light};
+  border: 1px solid ${lavender};
+  margin: 10px 30px 10px 30px;
+  padding: 15px;
+  color: ${navy};
+  border-radius: 5px;
 `;
 
 // A Container holding form fields (specifically for Reports)
@@ -144,7 +188,6 @@ export const FooterView = styled.View`
 `;
 
 export const Text = styled.Text`
-  font-size: 14px;
   color: ${navy};
   margin: 0 30px 2px 30px;
 `;
@@ -152,6 +195,7 @@ export const Text = styled.Text`
 export const FooterLink = styled.Text`
   font-size: 14px;
   font-weight: bold;
+  text-align: center;
 `;
 
 // Dashboard Screen
@@ -221,13 +265,10 @@ export const DashText = styled.Text`
 export const CircularImage = styled.Image`
   width: 150px;
   height: 150px;
-  border-radius: 150px;
-  border-width: 4px;
-  border-color: ${yellow};
+  border-radius: 100px;
+  border: 4px ${yellow};
+  margin: 60px 0 20px 0;
   align-self: center;
-  margin-top: 60px;
-  margin-bottom: 20px;
-  overflow: hidden;
 `;
 
 // Container for button list in safety nets
@@ -249,7 +290,7 @@ export const FlexRowButton = styled.TouchableOpacity`
   box-shadow: 0.5px 0.5px;
 `;
 
-// Add safety net button in single safety net view 
+// Add safety net button in single safety net view
 export const AddButton = styled.TouchableOpacity`
   flex-direction: row;
   height: 60px;
@@ -263,7 +304,7 @@ export const AddButton = styled.TouchableOpacity`
   box-shadow: 0.5px 0.5px;
 `;
 
-// Small icon used in buttons in safety nets components 
+// Small icon used in buttons in safety nets components
 export const SmallIcon = styled.Image`
   height: 20px;
 `;
@@ -284,7 +325,7 @@ export const FlexColumnButton = styled.TouchableOpacity`
 export const SmallAddButton = styled.TouchableOpacity`
   flex-direction: row;
   justify-content: center;
-  align-items: center;    
+  align-items: center;
   height: 60px;
   width: 150px;
   border-color: ${navy}

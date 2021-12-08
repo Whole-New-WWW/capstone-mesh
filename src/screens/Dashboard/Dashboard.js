@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { Linking } from "react-native";
+import React, { useState } from 'react'
 import {
   Title,
   Grid,
@@ -8,51 +7,48 @@ import {
   DashContainer,
   DashText,
   SOS,
-} from "../../../styles";
-import Footer from "../../nav/Footer";
-import { AuthContext } from "../../nav/Auth";
+} from '../../../styles'
+import Footer from '../../nav/Footer'
+import SOSButton from './SOS'
+import { AuthContext } from '../../nav/Auth'
 
 export default function Dashboard(props) {
-  let [user] = useState(AuthContext);
-  user = user._currentValue.user;
-  console.log("DASHBOARD >>>>", user);
+  const [loading, setLoading] = useState(true) // maybe add this to mediate the second-long wait time
+  let [user] = useState(AuthContext)
+  user = user._currentValue.user
 
   const title = () => {
-    if (user) {
-      return `Welcome home, ${user.firstName}`;
-    } else {
-      return `Welcome home`;
-    }
-  };
+    if (user) return `Welcome home, ${user.name}`
+    else return `Welcome home`
+  }
+
+  console.log('DASHBOARD >>>', props)
 
   return (
     <>
       <DashContainer>
         <Title>{title()}</Title>
         <Grid>
-          <DashButton onPress={() => props.navigation.navigate("Map")}>
+          <DashButton onPress={() => props.navigation.navigate('Edit Account')}>
             <DashText>Account</DashText>
-            <Icon source={require("../../../assets/icons/account.png")} />
+            <Icon source={require('../../../assets/icons/account.png')} />
           </DashButton>
-          <DashButton onPress={() => props.navigation.navigate("Map")}>
+          <DashButton onPress={() => props.navigation.navigate('Map')}>
             <DashText>Map</DashText>
-            <Icon source={require("../../../assets/icons/map.png")} />
+            <Icon source={require('../../../assets/icons/map.png')} />
           </DashButton>
-          <DashButton onPress={() => props.navigation.navigate("Safety Nets")}>
+          <DashButton onPress={() => props.navigation.navigate('Safety Nets')}>
             <DashText>Safety Net</DashText>
-            <Icon source={require("../../../assets/icons/friends.png")} />
+            <Icon source={require('../../../assets/icons/friends.png')} />
           </DashButton>
-          <DashButton onPress={() => props.navigation.navigate("Time")}>
+          <DashButton onPress={() => props.navigation.navigate('Form')}>
             <DashText>Submit a Report</DashText>
-            <Icon source={require("../../../assets/icons/addreport.png")} />
+            <Icon source={require('../../../assets/icons/addreport.png')} />
           </DashButton>
-          <SOS onPress={() => Linking.openURL("http://google.com")}>
-            <DashText>SOS</DashText>
-            <Icon source={require("../../../assets/icons/alert.png")} />
-          </SOS>
+          <SOSButton {...props} />
         </Grid>
       </DashContainer>
       <Footer {...props} />
     </>
-  );
+  )
 }
