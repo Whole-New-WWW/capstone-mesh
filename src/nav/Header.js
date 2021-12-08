@@ -3,6 +3,7 @@ import { NavButton, TopBar, HeaderTitle, NavIcon } from "../../styles";
 import { useNavigation } from '@react-navigation/native';
 
 export default function Header(props) {
+  console.log('HEADER >>>', props)
   return (
     <TopBar style={{ height: 200 }}>
       <NavButton

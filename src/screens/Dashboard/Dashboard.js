@@ -11,21 +11,18 @@ import {
 import Footer from '../../nav/Footer'
 import SOSButton from './SOS'
 import { AuthContext } from '../../nav/Auth'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-const Tab = createBottomTabNavigator();
 
 export default function Dashboard(props) {
   const [loading, setLoading] = useState(true) // maybe add this to mediate the second-long wait time
   let [user] = useState(AuthContext)
   user = user._currentValue.user
 
-  console.log('DASHBOARD >>>', user)
-
   const title = () => {
     if (user) return `Welcome home, ${user.firstName}`
     else return `Welcome home`
   }
+
+  console.log('DASHBOARD >>>', props)
 
   return (
     <>

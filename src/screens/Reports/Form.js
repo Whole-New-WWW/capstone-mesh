@@ -22,7 +22,6 @@ import { AuthContext } from '../../nav/Auth'
 // Color imports
 const { light, lavender, navy } = Colors
 
-// Dummy Data for the MutiSelect
 const items = [
   // name key is must. It is to show the text in front
   { id: 1, name: 'Robbery' },
@@ -81,17 +80,22 @@ export const Form = (props) => {
         comments,
         type: selectedItems,
       })
-      const usersRef = firebase.firestore().collection('users')
-      usersRef.doc(user.id).update({
-        incidents: { date, comments, type: selectedItems }
+      const usersRef = firebase.firestore().collection('users').doc(user.id)
+      usersRef.update({
+        incidents: firebase.firestore.FieldValue.arrayUnion({
+          date,
+          comments,
+          type: selectedItems,
+        }),
       })
-      // currently updates firestore with all incidents reported, but user document only keeps the most recent incident report
 
       props.navigation.navigate('Dashboard')
     } catch (e) {
       alert(e)
     }
   }
+
+  console.log('FORM.JS>>>', props)
 
   return (
     <>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Icon, DashText, SOS } from '../../../styles'
 import { AuthContext } from '../../nav/Auth'
+import { firebase } from '../../firebase/config'
 
 import {
   requestForegroundPermissionsAsync,
@@ -13,6 +14,16 @@ export default function SOSButton(props) {
   let [user] = useState(AuthContext)
   user = user._currentValue.user
   const [location, setLocation] = useState(null)
+
+  // date formatting
+  const D = new Date().getDate()
+  const M = new Date().getMonth()
+  const Y = new Date().getFullYear()
+  const H = new Date().getHours()
+  const MM = new Date().getMinutes()
+  const date = `${M}/${D}/${Y} at ${H}:${MM}`
+
+  console.log('LOCATION', location)
 
   useEffect(() => {
     ;(async () => {
@@ -32,17 +43,28 @@ export default function SOSButton(props) {
   // onPress handler to save location
   const onSOS = async () => {
     try {
+      // grants brightness permission to dim screen
       const { status } = await Brightness.requestPermissionsAsync()
       if (status === 'granted') {
         Brightness.setSystemBrightnessAsync(0.1)
       }
       console.log('COORDS >> ', location)
 
+      // saves your coordinates and date of SOS trigger
+      const usersRef = firebase.firestore().collection('users').doc(user.id)
+      usersRef.update({
+        sos: firebase.firestore.FieldValue.arrayUnion({
+          location: `${location.latitude},${location.longitude}`,
+          date
+        }),
+      })
+
+      // texts your safety net
       const isAvailable = await SMS.isAvailableAsync()
       if (isAvailable) {
         const { result } = await SMS.sendSMSAsync(
-          ['3473356165'],
-          `SOS button triggered. Here is my location: http://maps.google.com/?q=${location.latitude},${location.longitude}`
+          ['3472637146'],
+          `SOS button triggered. Here is my location: http://maps.google.com/?q=${location.latitude},${location.longitude}`,
         )
       } else {
         alert('Error in sending.')

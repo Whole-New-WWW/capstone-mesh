@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 
 export default function Footer(props) {
   const navigation = useNavigation();
-  // console.log('FOOTER', navigation)
+  console.log('FOOTER >>>', props)
 
   return (
     <BottomBar>
@@ -20,7 +20,7 @@ export default function Footer(props) {
       </FooterIcon>
       <NavButton
         style={{ backgroundColor: "transparent" }}
-        onPress={() => navigation.navigate("Map")}
+        onPress={() => navigation.navigate("Safety Nets")}
       >
         <NavIcon source={require("../../assets/icons/map.png")} />
       </NavButton>

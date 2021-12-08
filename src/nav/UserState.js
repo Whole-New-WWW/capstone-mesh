@@ -31,6 +31,7 @@ export default function UserState() {
             const userData = document.data()
             setLoading(false)
             setUser(userData)
+            return () => console.log('unmounting')
           })
           .catch((error) => {
             setLoading(false)
