@@ -14,8 +14,6 @@ export default function SOSButton(props) {
   user = user._currentValue.user
   const [location, setLocation] = useState(null)
 
-  let nets = user.safety_nets
-
   useEffect(() => {
     ;(async () => {
       let { status } = await requestForegroundPermissionsAsync() //Asks the user to grant permissions for location
@@ -33,13 +31,10 @@ export default function SOSButton(props) {
 
   // onPress handler to save location
   const onSOS = async () => {
-    let nets = user.safety_nets;
-    console.log('NETS >>', nets.length)
     try {
       const { status } = await Brightness.requestPermissionsAsync()
       if (status === 'granted') {
         Brightness.setSystemBrightnessAsync(0.1)
-        console.log('SYSTEM BRIGHTNESS')
       }
       console.log('COORDS >> ', location)
 
@@ -47,7 +42,7 @@ export default function SOSButton(props) {
       if (isAvailable) {
         const { result } = await SMS.sendSMSAsync(
           ['3473356165'],
-          `I triggered an SOS button. Here is my location: ${location.latitude}, ${location.longitude}`
+          `SOS button triggered. Here is my location: http://maps.google.com/?q=${location.latitude},${location.longitude}`
         )
       } else {
         alert('Error in sending.')

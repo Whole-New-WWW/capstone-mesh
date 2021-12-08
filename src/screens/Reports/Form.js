@@ -32,7 +32,7 @@ const items = [
   { id: 5, name: 'Sexual Assault' },
 ]
 
-export const Comments = (props) => {
+export const Form = (props) => {
   props.route.name = `Incident Report`
   let [user] = useState(AuthContext)
   user = user._currentValue.user
@@ -42,8 +42,6 @@ export const Comments = (props) => {
   const [mode, setMode] = useState('date')
   const [show, setShow] = useState(false)
   const [selectedItems, setSelectedItems] = useState([])
-
-  console.log('WHAT USER', user)
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date
@@ -85,8 +83,9 @@ export const Comments = (props) => {
       })
       const usersRef = firebase.firestore().collection('users')
       usersRef.doc(user.id).update({
-        incidents: { date, comments, type: selectedItems },
+        incidents: { date, comments, type: selectedItems }
       })
+      // currently updates firestore with all incidents reported, but user document only keeps the most recent incident report
 
       props.navigation.navigate('Dashboard')
     } catch (e) {

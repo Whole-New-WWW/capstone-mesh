@@ -44,7 +44,7 @@ export default function Dashboard(props) {
             <DashText>Safety Net</DashText>
             <Icon source={require('../../../assets/icons/friends.png')} />
           </DashButton>
-          <DashButton onPress={() => props.navigation.navigate('Comments')}>
+          <DashButton onPress={() => props.navigation.navigate('Form')}>
             <DashText>Submit a Report</DashText>
             <Icon source={require('../../../assets/icons/addreport.png')} />
           </DashButton>

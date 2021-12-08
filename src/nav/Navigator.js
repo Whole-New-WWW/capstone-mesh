@@ -8,9 +8,7 @@ import LoginScreen from '../screens/LoginScreen'
 import RegistrationScreen from '../screens/RegistrationScreen'
 import SafetyNets from '../screens/SafetyNets/SafetyNets'
 import SingleSafetyNet from '../screens/SafetyNets/SingleSafetyNet'
-import { Type } from '../screens/Reports/Type'
-import { Time } from '../screens/Reports/Time'
-import { Comments } from '../screens/Reports/Comments'
+import { Form } from '../screens/Reports/Form'
 
 const Stack = createStackNavigator()
 
@@ -39,17 +37,10 @@ export function User() {
         name="Edit Account"
         component={Edit}
       />
+
       <Stack.Screen
-        name="Type"
-        component={Type}
-      />
-      <Stack.Screen
-        name="Time"
-        component={Time}
-      />
-      <Stack.Screen
-        name="Comments"
-        component={Comments}
+        name="Form"
+        component={Form}
       />
 
       {/* Safety Nets */}
