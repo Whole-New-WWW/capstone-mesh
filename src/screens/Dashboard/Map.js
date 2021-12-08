@@ -16,9 +16,6 @@ import { useRef } from "react"; //allows to access DOM element
 import { useEffect, useState } from "react";
 import { getDistance } from 'geolib'; //calculates the distance
 
-//used hooks useState and useEffect
-//useState: allows you to add state to functional components. Using the useState hook inside a function component, you can create a piece of state without switching to class components
-//useEffect: you tell React that your component needs to do something after render. React remembers the function passed as (useEffect)
 
 //will change the placement of the api key when closer to deployment
 const API_KEY = "AIzaSyDpSBACR8eeqYjsNMAjD04yTeEoxMVKU38";
@@ -71,6 +68,7 @@ const Map = (props) => {
         console.log(current)
         console.log('IN the WATCH')
 
+       //calculating the users distance from the searched place 
        const distance = getDistance(
           {
           latitude: current.coords.latitude,
@@ -83,6 +81,12 @@ const Map = (props) => {
         )
         console.log('DISTANCE IS...', distance) 
         //if distance is less than this ...alert
+        if (distance <= 10) 
+        {
+          return "user has made it to destination" // send push notification to user & send push notification to safety net
+        } else {
+          return "user is still not there" // send push notification to safety net
+        }
       }
       )
     }
