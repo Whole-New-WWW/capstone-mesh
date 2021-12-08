@@ -143,7 +143,7 @@ const Map = (props) => {
           <Text>loading coords</Text>
         )}
 
-        <TouchableOpacity style={[styles.localCrimes, styles.center]}>
+        <TouchableOpacity style={[styles.localCrimes, styles.center]} onPress={()=>console.log("pressed local crimes")}>
           <Text style={[styles.text]}>
             Local Crimes 
           </Text>
@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
   confirmButton: {
     zIndex:-1,
     width:165,
-    height:50,
+    height:45,
     borderRadius:50,
     backgroundColor:"#14213D",
     
