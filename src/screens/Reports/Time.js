@@ -1,42 +1,39 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 import {
   Container,
   Title,
   Button,
   ButtonText,
-  Colors,
   TextInput,
   ReportBar,
-} from "../../../styles";
-import Header from "../../nav/Header";
-import Footer from "../../nav/Footer";
-
-// Color imports
-const { light, lavender, navy } = Colors;
+  Text,
+} from '../../../styles'
+import Header from '../../nav/Header'
+import Footer from '../../nav/Footer'
 
 export const Time = (props) => {
-  props.route.name = `Incident Report`;
-  const [time, setTime] = useState("");
-  const [date, setDate] = useState("");
+  props.route.name = `Incident Report`
+  const [time, setTime] = useState('')
+  const [date, setDate] = useState('')
 
   const onNext = () => {
-    try {
-      props.navigation.navigate('Comments', { time: time });
-    } catch (e) {
-      alert(e);
-    }
-  };
+    props.navigation.navigate('Comments', { date, time })
+  }
+
+  //route.params to pass information
+
+  console.log('TIME.JS >>>', { date, time })
 
   return (
     <>
       <Container>
         <Header {...props} />
         <Title>Date and Time</Title>
+        <Text>Time</Text>
         <TextInput
           style={{
             height: 50,
-            width: "85%",
-            backgroundColor: `${light}`,
+            width: '85%',
           }}
           placeholder="Time"
           onChangeText={(text) => setTime(text)}
@@ -44,11 +41,11 @@ export const Time = (props) => {
           underlineColorAndroid="transparent"
           autoCapitalize="none"
         />
+        <Text>Date</Text>
         <TextInput
           style={{
             height: 50,
-            width: "85%",
-            backgroundColor: `${light}`,
+            width: '85%',
           }}
           placeholder="Date"
           onChangeText={(text) => setDate(text)}
@@ -67,5 +64,5 @@ export const Time = (props) => {
       </Container>
       <Footer {...props} />
     </>
-  );
-};
+  )
+}

@@ -15,22 +15,17 @@ import { Comments } from '../screens/Reports/Comments'
 const Stack = createStackNavigator()
 
 export function User(props) {
+  console.log('IN THE USER STACK')
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen
         name="Dashboard"
         component={Dashboard}
-        options={{
-          headerShown: false,
-        }}
       />
 
       <Stack.Screen
         name="Map"
         component={Map}
-        options={{
-          headerShown: false,
-        }}
       />
 
       {/* Account Screens */}
@@ -38,93 +33,59 @@ export function User(props) {
       <Stack.Screen
         name="Account"
         component={Account}
-        options={{
-          headerShown: false,
-        }}
       />
 
       <Stack.Screen
         name="Edit Account"
         component={Edit}
-        options={{
-          headerShown: false,
-        }}
       />
-
-      {/* Report Screen */}
       <Stack.Screen
         name="Type"
         component={Type}
-        options={{
-          headerShown: false,
-        }}
       />
       <Stack.Screen
         name="Time"
         component={Time}
-        options={{
-          headerShown: false,
-        }}
       />
       <Stack.Screen
         name="Comments"
         component={Comments}
-        options={{
-          headerShown: false,
-        }}
       />
 
       {/* Safety Nets */}
       <Stack.Screen
         name="Safety Nets"
         component={SafetyNets}
-        options={{
-          headerShown: false,
-        }}
       />
       <Stack.Screen
         name="Safety Net"
         component={SingleSafetyNet}
-        options={{
-          headerShown: false,
-        }}
       />
 
       {/* Login + SignUp */}
       <Stack.Screen
         name="Login"
         component={LoginScreen}
-        options={{
-          headerShown: false,
-        }}
       />
       <Stack.Screen
         name="Registration"
         component={RegistrationScreen}
-        options={{
-          headerShown: false,
-        }}
       />
     </Stack.Navigator>
   )
 }
 
 export function Guest() {
+  console.log('IN THE GUEST STACK')
   return (
-    <Stack.Navigator>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen
         name="Login"
         component={LoginScreen}
-        options={{
-          headerShown: false,
-        }}
       />
       <Stack.Screen
         name="Registration"
         component={RegistrationScreen}
-        options={{
-          headerShown: false,
-        }}
       />
     </Stack.Navigator>
   )

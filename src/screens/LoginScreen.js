@@ -24,18 +24,6 @@ export default function LoginScreen({ navigation }) {
     navigation.navigate('Registration')
   }
 
-  // const onLoginPress = () => {
-  //   try {
-  //     if (email && password) {
-  //       auth.signInWithEmailAndPassword(email, password);
-  //       navigation.navigate("Dashboard");
-  //     } else {
-  //       alert("Please fill in your information!");
-  //     }
-  //   } catch (e) {
-  //     alert(e);
-  //   }
-  // };
   const onLoginPress = () => {
     firebase
       .auth()

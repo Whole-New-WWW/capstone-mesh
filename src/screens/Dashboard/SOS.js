@@ -47,7 +47,7 @@ export default function SOSButton(props) {
       if (isAvailable) {
         const { result } = await SMS.sendSMSAsync(
           ['3473356165'],
-          `I triggered an SOS button. Here is my location: ${location}`
+          `I triggered an SOS button. Here is my location: ${location.latitude}, ${location.longitude}`
         )
       } else {
         alert('Error in sending.')
@@ -56,6 +56,7 @@ export default function SOSButton(props) {
       alert(e)
     }
   }
+  // maybe we need to use a firebase.get() for the safety nets to find the mobile numbers and input them as the mobile numbers in sendSMSAsync()? reads will be higher but not a big jump
 
   return (
     <>

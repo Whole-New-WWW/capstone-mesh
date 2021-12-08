@@ -1,5 +1,5 @@
-import 'react-native-gesture-handler'
 import React, { useEffect, useState, useContext } from 'react'
+import 'react-native-gesture-handler'
 import { firebase } from '../firebase/config'
 import { NavigationContainer } from '@react-navigation/native'
 import { AuthContext } from './Auth'
@@ -22,7 +22,7 @@ export default function UserState() {
 
   useEffect(() => {
     const usersRef = firebase.firestore().collection('users')
-    auth.onAuthStateChanged((user) => {
+    auth.onAuthStateChanged((user) => { // rerender the screen when the auth changes
       if (user) {
         usersRef
           .doc(user.uid)
@@ -39,10 +39,11 @@ export default function UserState() {
         setLoading(false)
       }
     })
+    return () => console.log('unmounting'); // cleanup useEffect memory leak
   }, [])
 
   if (loading) {
-    return <></>
+    return <></> // add a spinner
   }
   return (
     <NavigationContainer>

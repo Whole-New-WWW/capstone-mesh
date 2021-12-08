@@ -13,8 +13,11 @@ import SOSButton from './SOS'
 import { AuthContext } from '../../nav/Auth'
 
 export default function Dashboard(props) {
+  const [loading, setLoading] = useState(true) // maybe add this to mediate the second-long wait time
   let [user] = useState(AuthContext)
   user = user._currentValue.user
+
+  console.log('DASHBOARD >>>', user)
 
   const title = () => {
     if (user) return `Welcome home, ${user.firstName}`
@@ -38,7 +41,7 @@ export default function Dashboard(props) {
             <DashText>Safety Net</DashText>
             <Icon source={require('../../../assets/icons/friends.png')} />
           </DashButton>
-          <DashButton onPress={() => props.navigation.navigate('Time')}>
+          <DashButton onPress={() => props.navigation.navigate('Comments')}>
             <DashText>Submit a Report</DashText>
             <Icon source={require('../../../assets/icons/addreport.png')} />
           </DashButton>

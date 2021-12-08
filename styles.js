@@ -120,7 +120,6 @@ export const Details = styled.Text`
 export const TextInput = styled.TextInput`
   display: flex;
   align-items: center;
-  border-radius: 5px;
   background-color: ${light};
   border: 1px solid ${lavender};
   margin: 10px 30px 10px 30px;

@@ -1,5 +1,6 @@
 import React from "react";
 import { BottomBar, NavIcon, FooterIcon, NavButton } from "../../styles";
+import SOSButton from '../screens/Dashboard/SOS'
 
 export default function Footer(props) {
   return (
@@ -10,7 +11,7 @@ export default function Footer(props) {
       >
         <NavIcon source={require("../../assets/icons/home.png")} />
       </NavButton>
-      <FooterIcon onPress={() => props.navigation.navigate("Map")}>
+      <FooterIcon onPress={() => props.navigation.navigate("SOS")}>
         <NavIcon source={require("../../assets/icons/alert.png")} />
       </FooterIcon>
       <NavButton
