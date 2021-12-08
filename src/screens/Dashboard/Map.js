@@ -4,6 +4,7 @@ import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import { Marker } from "react-native-maps";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Dimensions, Picker, TouchableOpacity, Button, Text, View } from "react-native";
+import ToggleSwitch from 'toggle-switch-react-native'
 import { Container } from "../../../styles";
 import Header from "../../nav/Header";
 import Footer from "../../nav/Footer";
@@ -59,17 +60,21 @@ const Map = (props) => {
 
   return (
     <View >
-      
       <Container >
         <Header {...props} />
         
-          {/* <TouchableOpacity style={[styles.localCrimes, styles.center]} onPress={()=>console.log("pressed local crimes")}>
-            <Text style={[styles.text]}>
-              Local Crimes View 
-            </Text>
-          </TouchableOpacity>  */}
+        {/* <ToggleSwitch
+            isOn={false}
+            onColor="green"
+            offColor="white"
+            label="Example label"
+            labelStyle={{ color: "black", fontWeight: "900" }}
+            size="large"
+            onToggle={isOn => console.log("changed to : ", isOn)}
+          /> */}
        
         <GooglePlacesAutocomplete
+        
           style={{ position: "absolute" }}
           placeholder="Where to?"
           query={{
@@ -120,18 +125,8 @@ const Map = (props) => {
             useOnPlatform: "web",
           }} // this in only required for use on the web. See https://git.io/JflFv more for details.
         />
-        {/* drop down  */}
-        {/* <View style={styles.container}>
-          <Picker
-            //selectedValue={selectedValue}
-            style={{ height: 50, width: 150 }}
-            //onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-          >
-            <Picker.Item label="View NYPD Incidents" value="NYPD" />
-            <Picker.Item label="MESH Incidents" value="MESH" />
-          </Picker>
-        </View> */}
-      
+        
+        
 
         {location ? (
           <MapView
@@ -161,6 +156,8 @@ const Map = (props) => {
         ) : (
           <Text>loading coords</Text>
         )}
+        
+
         <View style={{flexDirection:"row"}} >
           <TouchableOpacity style={[styles.localCrimes, styles.center]} onPress={()=>console.log("pressed local crimes")}>
             <Text style={[styles.text]}>
@@ -192,7 +189,7 @@ const styles = StyleSheet.create({
   },
   map: {
     width: Dimensions.get("window").width,
-    height: 650,
+    height: 630,
     zIndex: -1,
   },
   localCrimes: {
