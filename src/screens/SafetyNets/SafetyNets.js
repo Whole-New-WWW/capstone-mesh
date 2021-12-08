@@ -3,7 +3,7 @@ import Header from '../../nav/Header';
 import Footer from '../../nav/Footer';
 import { Alert, Modal} from "react-native";
 import { firebase } from '../../firebase/config';
-
+import { useEffect } from 'react';
 import {
   Container,
   ButtonListContainer,
@@ -40,27 +40,41 @@ import {
 // ];
 
 export default function SafetyNets(props) {
-  const { user } = props.route.params;
-  const safetyNets = user.safety_nets;
-
+  // const { user } = props.route.params;
+  // const safetyNets = user.safety_nets;
+  const [user, setUser] = useState({});
+  const [safetyNet, setSafetyNet] = useState({});
+  const [safetyNets, setSafetyNets] = useState([])
   const [modalDisplayed, setModalDisplayed] = useState(false);
+  
+  useEffect(() => {
+    setUser()
+    
+  }, [user])
   
   async function onSubmit() {
     try {
       const updateSafetyNetRef = await firebase.firestore().collection('users').doc(user.id);
       updateSafetyNetRef.update({
-        safety_nets: firebase.firestore.FieldValue.arrayUnion()
+        safety_nets: firebase.firestore.FieldValue.arrayUnion({name: safetyNet})
       });
-      
+      setSafetyNets(user.safety_nets)
     }catch(error) {
     console.log('Problem accessing safety net!', error)
     }
   }
 
+  function onclick() {
+    setModalDisplayed(!modalDisplayed);
+    onSubmit();
+  }
+
+  console.log('HERE ARE THE PROPS', props);
+
   return (
     <>
       <Container>
-        {console.log('HERE ARE THE PROPS', props.route.params)}
+        {/* {console.log('HERE ARE THE PROPS', props.route.params)} */}
         <Header {...props}/>
         <CircularImage source={require('../../../assets/icons/friends.png')}/>
         {!safetyNets && !safetyNets.length ? (
@@ -85,16 +99,17 @@ export default function SafetyNets(props) {
                   style={{
                     height: 20,
                     width: "90%",
-                    backgroundColor: "transparent",
+                    // backgroundColor: "transparent",
                   }}
+                  onChangeText={(text) => {setSafetyNet(text)}}
                   placeholder="Safety Net Name"
-                  // value={string}
+                  value={safetyNet}
                   keyboardType='default'
                 >
                 </TextInput>
               </FormBox>
               <Button
-                onPress={() => setModalDisplayed(!modalDisplayed)}
+                onPress={() => onclick()}
               >
                 <ButtonText>
                   Save Safety Net
