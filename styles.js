@@ -105,6 +105,7 @@ export const Title = styled.Text`
   top: 2%;
 `;
 
+// The Form Boxes in Account + Reports
 export const Details = styled.View`
   margin: 10px 30px 10px 30px;
   background-color: ${light};
@@ -112,9 +113,27 @@ export const Details = styled.View`
   border-radius: 5px;
 `;
 
+// Titles for the Forms
+export const FormTitle = styled.Text`
+  padding: 10px 30px 10px 30px;
+  font-weight: bold;
+  color: ${navy}
+`;
+
+// To contain react-native community elements
+export const ModalBox = styled.View`
+  border-radius: 5px;
+  background-color: ${light};
+  border: 1px solid ${lavender};
+  margin: 10px 30px 10px 30px;
+  padding: 10px 10px 0 10px;
+  color: ${navy};
+`;
+
 export const DetailText = styled.Text`
   padding: 10px;
 `;
+
 
 // The Log In Fields
 export const LoginInput = styled.TextInput`

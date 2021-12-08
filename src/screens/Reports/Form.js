@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
 import {
   Container,
-  Title,
+  Text,
   Button,
   ButtonText,
   Colors,
   FormBox,
   LoginInput,
   ReportBar,
-  TextInput
+  TextInput,
+  FormTitle,
+  ModalBox
 } from '../../../styles'
 import { View } from 'react-native'
 import Header from '../../nav/Header'
@@ -101,7 +103,7 @@ export const Form = (props) => {
     <>
       <Container>
         <Header {...props} />
-        <Title>Date and Time</Title>
+        <FormTitle>Date and Time</FormTitle>
         <ReportBar>
           <Button onPress={showDatepicker}>
             <ButtonText>Choose Date</ButtonText>
@@ -111,7 +113,7 @@ export const Form = (props) => {
           </Button>
         </ReportBar>
         {show && (
-          <>
+          <ModalBox>
             <DateTimePicker
               testID="dateTimePicker"
               value={date}
@@ -128,11 +130,11 @@ export const Form = (props) => {
                 Done
               </ButtonText>
             </View>
-          </>
+          </ModalBox>
         )}
 
-        <Title>Type of Incident</Title>
-        <MultiSelect
+        <FormTitle>Type of Incident</FormTitle>
+        <ModalBox style={{backgroundColor: 'white'}}><MultiSelect
           hideTags
           items={items}
           uniqueKey="name"
@@ -147,18 +149,18 @@ export const Form = (props) => {
           searchInputStyle={{ color: navy }}
           submitButtonColor={navy}
           submitButtonText="Submit"
-        />
+        /></ModalBox>
 
-        <Title>Location</Title>
+        <FormTitle>Location</FormTitle>
         <TextInput
-          placeholder="Location"
+          placeholder="Forgot? Check your SOS history in Account"
           onChangeText={(text) => setLocation(text)}
           value={location}
           underlineColorAndroid="transparent"
           autoCapitalize="none"
         />
 
-        <Title>Additional Comments</Title>
+        <FormTitle>Additional Comments</FormTitle>
         <FormBox>
           <LoginInput
             style={{
