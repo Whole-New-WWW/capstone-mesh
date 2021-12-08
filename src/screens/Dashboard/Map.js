@@ -59,6 +59,7 @@ const Map = (props) => {
 
   return (
     <View>
+      
       <Container>
         <Header {...props} />
         <GooglePlacesAutocomplete
@@ -112,7 +113,7 @@ const Map = (props) => {
             useOnPlatform: "web",
           }} // this in only required for use on the web. See https://git.io/JflFv more for details.
         />
-        
+      
 
         {location ? (
           <MapView
@@ -142,19 +143,19 @@ const Map = (props) => {
         ) : (
           <Text>loading coords</Text>
         )}
+        <View style={{flexDirection:"row"}} >
+          <TouchableOpacity style={[styles.localCrimes, styles.center]} onPress={()=>console.log("pressed local crimes")}>
+            <Text style={[styles.text]}>
+              Local Crimes View 
+            </Text>
+          </TouchableOpacity> 
 
-        <TouchableOpacity style={[styles.localCrimes, styles.center]} onPress={()=>console.log("pressed local crimes")}>
-          <Text style={[styles.text]}>
-            Local Crimes 
-          </Text>
-        </TouchableOpacity> 
-
-        <TouchableOpacity style={[styles.confirmButton, styles.center]}>
-          <Text style={[styles.text]}>
-            Lets go!
-          </Text>  
-        </TouchableOpacity>
-
+          <TouchableOpacity style={[styles.confirmButton, styles.center]} onPress={()=>console.log("pressed on my way")}>
+            <Text style={[styles.text]}>
+              On My Way!
+            </Text>  
+          </TouchableOpacity>
+        </View>
         {/* <Footer {...props} /> */}
       </Container>
     </View>
@@ -177,21 +178,21 @@ const styles = StyleSheet.create({
   },
   localCrimes: {
     zIndex:-1,
-    width:165,
-    height:50,
+    width:195,
+    height:45,
     borderRadius:50,
     backgroundColor:"#14213D",
   },
   confirmButton: {
     zIndex:-1,
-    width:165,
+    width:195,
     height:45,
     borderRadius:50,
-    backgroundColor:"#14213D",
+    backgroundColor:"#FCA311",
     
   },
   text: {
-    fontSize: 20,
+    fontSize: 18,
     color:"#FFFFFF",
     // fontFamily:"Manrope"
   },
