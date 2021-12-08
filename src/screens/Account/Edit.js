@@ -4,26 +4,31 @@ import {
   Title,
   Button,
   ButtonText,
-  TextInput
+  TextInput,
 } from '../../../styles'
 import Header from '../../nav/Header'
 import Footer from '../../nav/Footer'
 import { AuthContext } from '../../nav/Auth'
+import { firebase } from '../../firebase/config'
 
 export default function Edit(props) {
-  const [user] = useState(AuthContext)
-  const [name, setName] = useState(null)
-  const [email, setEmail] = useState(null)
-  const [password, setPassword] = useState(null)
-  const [mobile, setMobile] = useState(null)
+  let [user] = useState(AuthContext)
+  user = user._currentValue.user
+  const [name, setName] = useState([user.firstName])
+  const [email, setEmail] = useState([user.email])
+  const [password, setPassword] = useState([user.password])
+  const [mobile, setMobile] = useState([user.mobile])
+
+  // console.log('EDIT >>> ', user)
 
   props.route.name = `Account Settings`
 
   const onSubmit = () => {
     try {
-      const usersRef = firebase.firestore().collection('users')
-      // const
-      // props.navigation.navigate('Dashboard')
+      const usersRef = firebase.firestore().collection('users').doc(user.id)
+      usersRef.update({ email: email, firstName: name, mobile: mobile })
+      alert('Successfully saved!')
+      // props.navigation.navigate('Account', { name, email, mobile })
     } catch (e) {
       alert(e)
     }
@@ -34,34 +39,34 @@ export default function Edit(props) {
       <Container>
         <Header {...props} />
         <Title>Edit Your Information</Title>
-          <TextInput
-            placeholder="Email"
-            onChangeText={(text) => setEmail(text)}
-            value={email}
-            underlineColorAndroid="transparent"
-            autoCapitalize="none"
-          />
-          <TextInput
-            placeholder="Name"
-            onChangeText={(text) => setName(text)}
-            value={name}
-            underlineColorAndroid="transparent"
-            autoCapitalize="none"
-          />
-          <TextInput
-            placeholder="Mobile"
-            onChangeText={(text) => setMobile(text)}
-            value={mobile}
-            underlineColorAndroid="transparent"
-            autoCapitalize="none"
-          />
-          <TextInput
-            placeholder="Password"
-            onChangeText={(text) => setPassword(text)}
-            value={password}
-            underlineColorAndroid="transparent"
-            autoCapitalize="none"
-          />
+        <TextInput
+          placeholder={user.email}
+          onChangeText={(text) => setEmail(text)}
+          value={email}
+          underlineColorAndroid="transparent"
+          autoCapitalize="none"
+        />
+        <TextInput
+          placeholder={user.firstName}
+          onChangeText={(text) => setName(text)}
+          value={name}
+          underlineColorAndroid="transparent"
+          autoCapitalize="none"
+        />
+        <TextInput
+          placeholder={user.mobile ? user.mobile : 'No mobile #'}
+          onChangeText={(text) => setMobile(text)}
+          value={mobile}
+          underlineColorAndroid="transparent"
+          autoCapitalize="none"
+        />
+        <TextInput
+          placeholder="Password"
+          onChangeText={(text) => setPassword(text)}
+          value={password}
+          underlineColorAndroid="transparent"
+          autoCapitalize="none"
+        />
         <Button onPress={onSubmit}>
           <ButtonText>Submit</ButtonText>
         </Button>

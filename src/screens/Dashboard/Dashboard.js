@@ -29,7 +29,7 @@ export default function Dashboard(props) {
       <DashContainer>
         <Title>{title()}</Title>
         <Grid>
-          <DashButton onPress={() => props.navigation.navigate('Account')}>
+          <DashButton onPress={() => props.navigation.navigate('Edit Account')}>
             <DashText>Account</DashText>
             <Icon source={require('../../../assets/icons/account.png')} />
           </DashButton>
