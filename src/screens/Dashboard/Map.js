@@ -14,7 +14,7 @@ import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplet
 import MapViewDirections from "react-native-maps-directions"; //to connect the two markers to get directions (origin and destination)
 import { useRef } from "react"; //allows to access DOM element
 import { useEffect, useState } from "react";
-import { getDistance } from 'geolib';
+import { getDistance } from 'geolib'; //calculates the distance
 
 //used hooks useState and useEffect
 //useState: allows you to add state to functional components. Using the useState hook inside a function component, you can create a piece of state without switching to class components
@@ -59,7 +59,7 @@ const Map = (props) => {
   }, []);
 
   //------------------------------
-  //Watch Position: Triggers Location.watchPositionAsync once button is confirmed to start tracking
+  //Watch Position: Triggers Location.watchPositionAsync once On My Way button is clicked
   
   const watch = () => {
       console.log('PRESSED WATCH')
@@ -81,32 +81,19 @@ const Map = (props) => {
           longitude: searchedPlace.longitude
         }
         )
-        console.log('this is distance', distance) 
+        console.log('DISTANCE IS...', distance) 
         //if distance is less than this ...alert
       }
       )
     }
-
   //--------------------------------------
-
 
   return (
     <View >
       <Container >
         <Header {...props} />
-        
-        {/* <ToggleSwitch
-            isOn={false}
-            onColor="green"
-            offColor="white"
-            label="Example label"
-            labelStyle={{ color: "black", fontWeight: "900" }}
-            size="large"
-            onToggle={isOn => console.log("changed to : ", isOn)}
-          /> */}
        
         <GooglePlacesAutocomplete
-        
           style={{ position: "absolute" }}
           placeholder="Where to?"
           query={{
@@ -158,8 +145,6 @@ const Map = (props) => {
           }} // this in only required for use on the web. See https://git.io/JflFv more for details.
         />
         
-        
-
         {location ? (
           <MapView
             ref={mapRef}
