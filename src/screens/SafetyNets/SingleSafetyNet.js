@@ -15,7 +15,7 @@ import {
 
 export default function SingleSafetyNet(props) {
   const { safetyNet } = props.route.params;
-  const contacts  = safetyNet.contacts;
+  const contacts = safetyNet.users;
 
   return (
     <>
@@ -26,13 +26,13 @@ export default function SingleSafetyNet(props) {
         </Title>
         <CircularImage source={require('../../../assets/icons/friends.png')}/>
         <Grid>
-          {contacts.map(contact => {
+          {contacts.map((contact, index)=> {
             return (
               <FlexColumnButton 
-                key={contact.id} 
+                key={index} 
               >
                 <DashText>
-                  {contact.name}
+                  {contact.fullName}
                 </DashText>
               </FlexColumnButton>
             )
