@@ -1,6 +1,6 @@
 import React from 'react';
-import { Linking } from 'react-native';
 import Header from '../../nav/Header';
+import Footer from '../../nav/Footer';
 import {
   Container,
   DashText,
@@ -18,31 +18,34 @@ export default function SingleSafetyNet(props) {
   const contacts  = safetyNet.contacts;
 
   return (
-    <Container>
-      <Header {...props}/>
-      <Title>
-        {safetyNet.name}
-      </Title>
-      <CircularImage source={require('../../../assets/icons/friends.png')}/>
-      <Grid>
-        {contacts.map(contact => {
-          return (
-            <FlexColumnButton 
-              key={contact.id} 
-            >
-              <DashText>
-                {contact.name}
-              </DashText>
-            </FlexColumnButton>
-          )
-        })}
-        <SmallAddButton>
-          <SmallIcon source={require('../../../assets/icons/plus.png')}/> 
-          <DashText>
-            Add Contact
-          </DashText>
-        </SmallAddButton>
-      </Grid>
-    </Container>
+    <>
+      <Container>
+        <Header {...props}/>
+        <Title>
+          {safetyNet.name}
+        </Title>
+        <CircularImage source={require('../../../assets/icons/friends.png')}/>
+        <Grid>
+          {contacts.map(contact => {
+            return (
+              <FlexColumnButton 
+                key={contact.id} 
+              >
+                <DashText>
+                  {contact.name}
+                </DashText>
+              </FlexColumnButton>
+            )
+          })}
+          <SmallAddButton>
+            <SmallIcon source={require('../../../assets/icons/plus.png')}/> 
+            <DashText>
+              Add Contact
+            </DashText>
+          </SmallAddButton>
+        </Grid>
+      </Container>
+      <Footer {...props} />
+    </>
   )
 }

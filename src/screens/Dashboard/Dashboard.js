@@ -38,7 +38,7 @@ export default function Dashboard(props) {
             <DashText>Map</DashText>
             <Icon source={require("../../../assets/icons/map.png")} />
           </DashButton>
-          <DashButton onPress={() => props.navigation.navigate("Safety Nets")}>
+          <DashButton onPress={() => props.navigation.navigate("Safety Nets", {user})}>
             <DashText>Safety Net</DashText>
             <Icon source={require("../../../assets/icons/friends.png")} />
           </DashButton>
