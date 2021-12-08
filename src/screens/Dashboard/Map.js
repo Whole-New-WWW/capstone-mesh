@@ -3,7 +3,7 @@ import * as Location from "expo-location"; //using expo to get the location of u
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import { Marker } from "react-native-maps";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Dimensions, TouchableOpacity, Button, Text, View } from "react-native";
+import { StyleSheet, Dimensions, Picker, TouchableOpacity, Button, Text, View } from "react-native";
 import { Container } from "../../../styles";
 import Header from "../../nav/Header";
 import Footer from "../../nav/Footer";
@@ -58,10 +58,17 @@ const Map = (props) => {
  
 
   return (
-    <View>
+    <View >
       
-      <Container>
+      <Container >
         <Header {...props} />
+        
+          {/* <TouchableOpacity style={[styles.localCrimes, styles.center]} onPress={()=>console.log("pressed local crimes")}>
+            <Text style={[styles.text]}>
+              Local Crimes View 
+            </Text>
+          </TouchableOpacity>  */}
+       
         <GooglePlacesAutocomplete
           style={{ position: "absolute" }}
           placeholder="Where to?"
@@ -113,6 +120,17 @@ const Map = (props) => {
             useOnPlatform: "web",
           }} // this in only required for use on the web. See https://git.io/JflFv more for details.
         />
+        {/* drop down  */}
+        {/* <View style={styles.container}>
+          <Picker
+            //selectedValue={selectedValue}
+            style={{ height: 50, width: 150 }}
+            //onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
+          >
+            <Picker.Item label="View NYPD Incidents" value="NYPD" />
+            <Picker.Item label="MESH Incidents" value="MESH" />
+          </Picker>
+        </View> */}
       
 
         {location ? (
@@ -146,16 +164,17 @@ const Map = (props) => {
         <View style={{flexDirection:"row"}} >
           <TouchableOpacity style={[styles.localCrimes, styles.center]} onPress={()=>console.log("pressed local crimes")}>
             <Text style={[styles.text]}>
-              Local Crimes View 
+              View NYPD Incidents
             </Text>
           </TouchableOpacity> 
 
           <TouchableOpacity style={[styles.confirmButton, styles.center]} onPress={()=>console.log("pressed on my way")}>
             <Text style={[styles.text]}>
-              On My Way!
+              On My Way
             </Text>  
           </TouchableOpacity>
         </View>
+
         {/* <Footer {...props} /> */}
       </Container>
     </View>
@@ -181,7 +200,7 @@ const styles = StyleSheet.create({
     width:195,
     height:45,
     borderRadius:50,
-    backgroundColor:"#14213D",
+    backgroundColor:"#D6D5EA",
   },
   confirmButton: {
     zIndex:-1,
