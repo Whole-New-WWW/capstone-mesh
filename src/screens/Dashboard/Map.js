@@ -143,11 +143,16 @@ const Map = (props) => {
           <Text>loading coords</Text>
         )}
 
-        <TouchableOpacity style={[styles.localCrimes]}>
-        
+        <TouchableOpacity style={[styles.localCrimes, styles.center]}>
+          <Text style={[styles.text]}>
+            Local Crimes 
+          </Text>
         </TouchableOpacity> 
-        <TouchableOpacity style={[styles.confirmButton]}>
-        
+
+        <TouchableOpacity style={[styles.confirmButton, styles.center]}>
+          <Text style={[styles.text]}>
+            Lets go!
+          </Text>  
         </TouchableOpacity>
 
         {/* <Footer {...props} /> */}
@@ -156,6 +161,7 @@ const Map = (props) => {
   );
 };
 export default Map;
+
 //styling below:
 const styles = StyleSheet.create({
   container: {
@@ -171,17 +177,27 @@ const styles = StyleSheet.create({
   },
   localCrimes: {
     zIndex:-1,
-    width:100,
+    width:165,
     height:50,
     borderRadius:50,
-    backgroundColor:"#14213D"
+    backgroundColor:"#14213D",
   },
   confirmButton: {
     zIndex:-1,
-    width:100,
+    width:165,
     height:50,
     borderRadius:50,
-    backgroundColor:"#14213D"
+    backgroundColor:"#14213D",
+    
+  },
+  text: {
+    fontSize: 20,
+    color:"#FFFFFF",
+    // fontFamily:"Manrope"
+  },
+  center: {
+    justifyContent:"center",
+    alignItems:"center",
   }
 });
 

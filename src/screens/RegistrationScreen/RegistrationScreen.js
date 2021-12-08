@@ -48,10 +48,10 @@ export default function RegistrationScreen({ navigation }) {
           .doc(uid)
           .set(data)
           .then(() => {
-            props.navigation.navigate("Dashboard", { data });
+            navigation.navigate("Dashboard", { data });
           })
           .catch((error) => {
-            alert("Error!");
+            alert("Error!", error);
           });
       })
       .catch((error) => {
