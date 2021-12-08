@@ -48,8 +48,7 @@ export default function SafetyNets(props) {
   const [modalDisplayed, setModalDisplayed] = useState(false);
   
   useEffect(() => {
-    setUser()
-    
+    setUser() 
   }, [user])
   
   async function onSubmit() {
