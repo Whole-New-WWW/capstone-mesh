@@ -1,19 +1,9 @@
 import React from "react";
 import { NavButton, TopBar, HeaderTitle, NavIcon } from "../../styles";
-import { firebase } from "../firebase/config";
-
-const auth = firebase.auth();
+import { useNavigation } from '@react-navigation/native';
 
 export default function Header(props) {
-  const logOut = async () => {
-    try {
-      await auth.signOut();
-      props.navigation.navigate("Login");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+  console.log('HEADER >>>', props)
   return (
     <TopBar style={{ height: 200 }}>
       <NavButton
@@ -23,15 +13,10 @@ export default function Header(props) {
         <NavIcon source={require("../../assets/icons/previous.png")} />
       </NavButton>
       <HeaderTitle>{props.route.name}</HeaderTitle>
-      {/* <NavButton
+      <NavButton
         style={{ backgroundColor: "transparent" }}
-        onPress={() => props.navigation.navigate("Dashboard")}
+        onPress={() => props.navigation.navigate("Account")}
       >
-        <NavIcon source={require("../../assets/icons/account.png")} />
-      </NavButton> */}
-
-      {/* temporary logout  */}
-      <NavButton style={{ backgroundColor: "transparent" }} onPress={logOut}>
         <NavIcon source={require("../../assets/icons/account.png")} />
       </NavButton>
     </TopBar>

@@ -5,14 +5,13 @@ var axios = require("axios").default;
 export function getManhattanCrimeData() {
   var options = {
     method: 'GET',
-    url: 'https://data.cityofnewyork.us/resource/qb7u-rbmr.json',
+    url: 'https://data.cityofnewyork.us/resource/5uac-w243.json',
     params: { $$app_token: 'r3yihvpeNvCu8FsyP7J2qs00l' }, //GET request always pass params
   }
 
   return axios
     .request(options)
     .then(function (response) {
-      console.log('HERE IS THE RESPONSE DATA', response.data)
       return response.data;
     })
     .catch(function (error) {

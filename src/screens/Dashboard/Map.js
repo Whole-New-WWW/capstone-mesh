@@ -3,7 +3,9 @@ import * as Location from "expo-location"; //using expo to get the location of u
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import { Marker } from "react-native-maps";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Dimensions, Text, View } from "react-native";
+// import NotificationPopup from 'react-native-push-notification-popup'; //push notifications
+import { StyleSheet, Dimensions, Picker, TouchableOpacity, Button, Text, View } from "react-native";
+import ToggleSwitch from 'toggle-switch-react-native'
 import { Container } from "../../../styles";
 import Header from "../../nav/Header";
 import Footer from "../../nav/Footer";
@@ -11,21 +13,30 @@ import { Alert } from "react-native";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete"; //to get search bar to autopopulate
 import MapViewDirections from "react-native-maps-directions"; //to connect the two markers to get directions (origin and destination)
 import { useRef } from "react"; //allows to access DOM element
+import { useEffect, useState } from "react";
+import { getDistance } from 'geolib'; //calculates the distance
 import CrimeData from "./CrimeData";
-import CrimeHeatMap from '../Dashboard/CrimeHeatMap';
+import CrimeHeatMap from "./CrimeHeatMap";
+
 //used hooks useState and useEffect
 //useState: allows you to add state to functional components. Using the useState hook inside a function component, you can create a piece of state without switching to class components
 //useEffect: you tell React that your component needs to do something after render. React remembers the function passed as (useEffect)
 //will change the placement of the api key when closer to deployment
 const API_KEY = "AIzaSyDpSBACR8eeqYjsNMAjD04yTeEoxMVKU38";
+
+//Distance check for notifications
+const ARRIVED = 20;
+
+
 const Map = (props) => {
-  const mapRef = useRef(null); //allows us to access a DOM element imperatively (document object Model = DOM)
+  const mapRef = useRef(null); //allows us to access a document object Model (DOM) element imperatively
+
   //state variables
   const [location, setLocation] = React.useState(null);
   const [initialRegion, setInitialRegion] = React.useState(null);
-  //created another state variable to store the search coordinates
   const [searchedPlace, setSearchedPlace] = React.useState(null);
   const [error, setError] = React.useState(null);
+
   //fetches user location latitude and longitude and then pass to coordinate prop of Marker component
   React.useEffect(() => {
     //async function used to get request permission of users location while getting their current position
@@ -51,10 +62,50 @@ const Map = (props) => {
       console.log("in locate", locate.coords);
     })();
   }, []);
+
+  //------------------------------
+  //Watch Position: Triggers Location.watchPositionAsync once On My Way button is clicked
+
+  const watch = () => {
+      console.log('PRESSED WATCH')
+      Location.watchPositionAsync({
+        accuracy: 5,
+        distanceInterval: 3, //meters
+        // timeInterval: 10000 //milliseconds
+      }, (current) => {
+        console.log(current)
+        console.log('IN WATCH')
+
+       //calculating the users distance from the searched place
+       const distance = getDistance(
+          {
+          latitude: current.coords.latitude,
+          longitude: current.coords.longitude
+        },
+        {
+          latitude: searchedPlace.latitude,
+          longitude: searchedPlace.longitude
+        }
+        )
+        console.log('CALCULATED DISTANCE IS...', distance)
+
+        //if distance is less than...send notification
+          if (distance <= ARRIVED) //in meters
+          {
+            console.log("User has ARRIVED to destination") // send push notification to safety net and user to confirm
+          } else {
+            console.log('User is still on the way to destination')
+          }
+        }
+      )
+  }
+  //--------------------------------------
+
   return (
-    <View>
-      <Container>
+    <View >
+      <Container >
         <Header {...props} />
+
         <GooglePlacesAutocomplete
           style={{ position: "absolute" }}
           placeholder="Where to?"
@@ -83,6 +134,7 @@ const Map = (props) => {
             };
             setSearchedPlace(searchLocation);
             console.log("AFTER setSearch", searchLocation);
+
             //map styling for both markers to appear
             const padding_value = 80;
             mapRef.current.fitToCoordinates([searchLocation, initialLocation], {
@@ -96,6 +148,7 @@ const Map = (props) => {
             });
             console.log("Made it past fit to coordinates");
           }}
+
           //fetchDetails to true to get the geometry of the location
           fetchDetails={true}
           onFail={(error) => console.error(error)}
@@ -104,6 +157,7 @@ const Map = (props) => {
             useOnPlatform: "web",
           }} // this in only required for use on the web. See https://git.io/JflFv more for details.
         />
+
         {location ? (
           <MapView
             ref={mapRef}
@@ -112,33 +166,55 @@ const Map = (props) => {
             style={styles.map}
             zoomEnabled={true}
           >
-            <Marker coordinate={location} title="Current location"></Marker>
+            <Marker coordinate={location} title="Current Location"></Marker>
             {searchedPlace ? (
               <Marker
                 coordinate={searchedPlace}
                 title="Desired Location"
               ></Marker>
             ) : null}
-            <CrimeData />
+            {/* Change heat map/crime data display based on level of zoom */}
+              <CrimeHeatMap />
+              {/* <CrimeData /> */}
             {location && searchedPlace ? (
               <MapViewDirections
                 origin={location}
                 destination={searchedPlace}
                 apikey={API_KEY}
-                strokeWidth={2}
-                strokeColor="red"
+                strokeWidth={4}
+                strokeColor="purple"
               />
             ) : null}
           </MapView>
         ) : (
           <Text>loading coords</Text>
         )}
+
+
+        <View style={{flexDirection:"row"}} >
+          <TouchableOpacity
+          style={[styles.localCrimes, styles.center]}
+          onPress={()=>console.log("pressed to view NY data")}
+          >
+            <Text style={[styles.text]}>
+              View Incidents
+            </Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity style={[styles.confirmButton, styles.center]} onPress={watch} disabled={searchedPlace ? false : true}>
+            <Text style={[styles.text]}>
+              On My Way
+            </Text>
+          </TouchableOpacity>
+        </View>
+
         {/* <Footer {...props} /> */}
       </Container>
     </View>
   );
 };
 export default Map;
+
 //styling below:
 const styles = StyleSheet.create({
   container: {
@@ -149,7 +225,33 @@ const styles = StyleSheet.create({
   },
   map: {
     width: Dimensions.get("window").width,
-    height: Dimensions.get("window").height,
+    height: 630,
     zIndex: -1,
   },
+  localCrimes: {
+    zIndex:-1,
+    width:195,
+    height:45,
+    borderRadius:50,
+    backgroundColor:"#D6D5EA",
+  },
+  confirmButton: {
+    zIndex:-1,
+    width:195,
+    height:45,
+    borderRadius:50,
+    backgroundColor:"#FCA311",
+  },
+  text: {
+    fontSize: 16,
+    color:"#FFFFFF",
+    //fontFamily:"Manrope"
+  },
+  center: {
+    justifyContent:"center",
+    alignItems:"center",
+  }
 });
+
+
+
