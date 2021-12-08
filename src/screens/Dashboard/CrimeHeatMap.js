@@ -1,0 +1,58 @@
+import React, { useEffect, useState } from 'react';
+import { ActivityIndicator } from 'react-native';
+import MapView, { Heatmap, PROVIDER_GOOGLE } from 'react-native-maps';
+import { getManhattanCrimeData } from '../../../api';
+
+export default function CrimeHeatMap() {
+  const [loading, setLoading] = useState(true);
+  // initial render will have data = []
+  const [data, setData] = useState([]);
+  
+  // Performs side effect - Similar to component did mount 
+  useEffect(() => {
+    // await crime data from axios request in api file
+    // Consider implementing caching to avoid querying API frequently
+    function fetchCrimeData() {
+      getManhattanCrimeData().then(crimeStats => {
+        // set state for data
+        setData(crimeStats);
+        setLoading(false);
+      })
+    }
+    fetchCrimeData();
+  }, []);
+
+  // Heatmap component takes points prop
+  // Map over crime data to get lat and long in required format
+  let points = data.map(crime => {
+    return (
+      {
+        latitude: Number(crime.latitude), 
+        longitude: Number(crime.longitude),
+        // weight is optional prop
+        weight: .25
+      }
+    )
+  })
+  // Heatmap component takes gradient prop
+  let gradient = {
+    colors: ['purple', 'red', 'blue', 'gray'],
+    startPoints: [0.01, 0.04, 0.1, 0.45],
+    colorMapSize: 256
+  }
+  // Return Heatmap component with props passed in
+  return (
+    <>
+      {loading ? <ActivityIndicator /> : (
+        <Heatmap
+          points={points}
+          // These are optional props
+          radius={40}
+          opacity={0.7}
+          gradient={gradient}
+          heatmapMode={"POINTS_DENSITY"}
+        />
+      )}
+    </>
+  )
+}
