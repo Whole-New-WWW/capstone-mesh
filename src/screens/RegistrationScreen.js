@@ -51,7 +51,7 @@ export default function RegistrationScreen({ navigation }) {
             navigation.navigate("Dashboard", { data });
           })
           .catch((error) => {
-            alert("Error!");
+            alert("Error!", error);
           });
       })
       .catch((error) => {

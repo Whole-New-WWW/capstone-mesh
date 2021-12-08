@@ -14,6 +14,7 @@ import { firebase } from '../../firebase/config'
 export default function Edit(props) {
   let [user] = useState(AuthContext)
   user = user._currentValue.user
+
   const [name, setName] = useState(user.name)
   const [email, setEmail] = useState(user.email)
   const [password, setPassword] = useState(user.password)

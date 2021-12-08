@@ -37,6 +37,7 @@
     "expo-status-bar": "^1.1.0",
     "expo-updates": "~0.10.9",
     "firebase": "8.2.3",
+    "geolib": "^3.3.3",
     "global": "^4.4.0",
     "moment": "^2.24.0",
     "prop-types": "^15.7.2",
@@ -61,7 +62,8 @@
     "react-native-web": "0.17.1",
     "react-redux": "^7.1.1",
     "redux": "^4.0.4",
-    "redux-logger": "^3.0.6"
+    "redux-logger": "^3.0.6",
+    "toggle-switch-react-native": "^3.3.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
