@@ -8,6 +8,7 @@ import {
   FormBox,
   LoginInput,
   ReportBar,
+  TextInput
 } from '../../../styles'
 import { View } from 'react-native'
 import Header from '../../nav/Header'
@@ -35,6 +36,7 @@ export const Form = (props) => {
   user = user._currentValue.user
 
   const [comments, setComments] = useState('')
+  const [location, setLocation] = useState('')
   const [date, setDate] = useState(new Date(1598051730000))
   const [mode, setMode] = useState('date')
   const [show, setShow] = useState(false)
@@ -99,7 +101,7 @@ export const Form = (props) => {
     <>
       <Container>
         <Header {...props} />
-        <Title>Date and Time of Incident</Title>
+        <Title>Date and Time</Title>
         <ReportBar>
           <Button onPress={showDatepicker}>
             <ButtonText>Choose Date</ButtonText>
@@ -145,6 +147,15 @@ export const Form = (props) => {
           searchInputStyle={{ color: navy }}
           submitButtonColor={navy}
           submitButtonText="Submit"
+        />
+
+        <Title>Location</Title>
+        <TextInput
+          placeholder="Location"
+          onChangeText={(text) => setLocation(text)}
+          value={location}
+          underlineColorAndroid="transparent"
+          autoCapitalize="none"
         />
 
         <Title>Additional Comments</Title>

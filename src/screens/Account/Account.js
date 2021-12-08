@@ -7,6 +7,7 @@ import {
   Text,
   Details,
   ReportBar,
+  DetailText
 } from '../../../styles'
 import { ScrollView } from 'react-native'
 import Header from '../../nav/Header'
@@ -20,9 +21,7 @@ export default function Account(props) {
   props.route.name = `Your Profile`
   let [user] = useState(AuthContext)
   user = user._currentValue.user
-  let sos = user.sos
-
-  console.log('SOS', sos)
+  const sos = user.sos;
 
   const onEdit = () => {
     try {
@@ -47,19 +46,19 @@ export default function Account(props) {
         <Header {...props} />
         <Title style={{ textTransform: 'uppercase' }}>{user.firstName}</Title>
         <Text>ID</Text>
-        <Details>{user.id}</Details>
+        <Details><DetailText>{user.id}</DetailText></Details>
         <Text>Email</Text>
-        <Details>{user.email}</Details>
+        <Details><DetailText>{user.email}</DetailText></Details>
         <Text>Mobile</Text>
-        <Details>{user.mobile ? user.mobile : 'No mobile #'}</Details>
+        <Details><DetailText>{user.mobile ? user.mobile : 'No mobile #'}</DetailText></Details>
         <Text>SOS History</Text>
         <ScrollView>{sos.map((entry) => (
           <Details>
-            <Text key={sos.id}>
+            <DetailText key={sos.id}>
               Date: {entry.date}
               {'\n'}
               Location: <Text>{entry.location}</Text>
-            </Text>
+            </DetailText>
           </Details>
         ))}
         </ScrollView>

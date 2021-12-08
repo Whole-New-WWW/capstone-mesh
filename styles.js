@@ -105,25 +105,15 @@ export const Title = styled.Text`
   top: 2%;
 `;
 
-export const Details = styled.Text`
-  font-size: 15px;
-  color: ${navy};
+export const Details = styled.View`
   margin: 10px 30px 10px 30px;
   background-color: ${light};
   border: 1px solid ${lavender};
-  padding: 10px;
-  border-radius: 10px;
+  border-radius: 5px;
 `;
 
-// The Form Fields
-export const TextInput = styled.TextInput`
-  display: flex;
-  align-items: center;
-  background-color: ${light};
-  border: 1px solid ${lavender};
-  margin: 10px 30px 10px 30px;
-  padding: 15px;
-  color: ${navy};
+export const DetailText = styled.Text`
+  padding: 10px;
 `;
 
 // The Log In Fields
@@ -135,6 +125,18 @@ export const LoginInput = styled.TextInput`
   margin: 10px 30px 10px 30px;
   padding-left: 16px;
   color: ${navy};
+`;
+
+// The Form Fields
+export const TextInput = styled.TextInput`
+  display: flex;
+  align-items: center;
+  background-color: ${light};
+  border: 1px solid ${lavender};
+  margin: 10px 30px 10px 30px;
+  padding: 15px;
+  color: ${navy};
+  border-radius: 5px;
 `;
 
 // A Container holding form fields (specifically for Reports)
