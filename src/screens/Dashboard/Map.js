@@ -17,6 +17,7 @@ import { useEffect, useState } from "react";
 import { getDistance } from 'geolib'; //calculates the distance
 import CrimeData from "./CrimeData";
 import CrimeHeatMap from "./CrimeHeatMap";
+import mapSMS from "./MapNotifications";
 //used hooks useState and useEffect
 //useState: allows you to add state to functional components. Using the useState hook inside a function component, you can create a piece of state without switching to class components
 //useEffect: you tell React that your component needs to do something after render. React remembers the function passed as (useEffect)
@@ -90,8 +91,8 @@ const Map = (props) => {
 
         //if distance is less than...send notification
           if (distance <= ARRIVED) //in meters
-          {
-            console.log("User has ARRIVED to destination") // send push notification to safety net and user to confirm
+          { mapSMS()
+            //console.log("User has ARRIVED to destination") // send push notification to safety net and user to confirm
           } else {
             console.log('User is still on the way to destination')
           }
