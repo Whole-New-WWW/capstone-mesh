@@ -11,6 +11,9 @@ import {
 import Footer from '../../nav/Footer'
 import SOSButton from './SOS'
 import { AuthContext } from '../../nav/Auth'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+const Tab = createBottomTabNavigator();
 
 export default function Dashboard(props) {
   const [loading, setLoading] = useState(true) // maybe add this to mediate the second-long wait time

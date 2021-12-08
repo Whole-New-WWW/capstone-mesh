@@ -8,11 +8,14 @@ import {
   Colors,
   FormBox,
   LoginInput,
-  TextInput
+  ReportBar,
+  FooterLink
 } from '../../../styles'
+import { View } from 'react-native'
 import Header from '../../nav/Header'
 import Footer from '../../nav/Footer'
 import { firebase } from '../../firebase/config'
+import DateTimePicker from '@react-native-community/datetimepicker'
 
 // Color imports
 const { light, lavender, navy } = Colors
@@ -21,16 +24,38 @@ export const Comments = (props) => {
   props.route.name = `Incident Report`
   // const [user] = useState(AuthContext)
   const [comments, setComments] = useState('')
-  const [time, setTime] = useState('')
-  const [date, setDate] = useState('')
+  const [date, setDate] = useState(new Date(1598051730000))
+  const [mode, setMode] = useState('date')
+  const [show, setShow] = useState(false)
 
-  console.log('COMMENTS >>>', comments)
+  console.log('COMMENTS >>>', comments, date)
+
+  const onChange = (event, selectedDate) => {
+    const currentDate = selectedDate || date
+    setShow(Platform.OS === 'ios')
+    setDate(currentDate)
+  }
+
+  const showMode = (currentMode) => {
+    if (date) {
+      setShow(false)
+    }
+    setShow(true)
+    setMode(currentMode)
+  }
+
+  const showDatepicker = () => {
+    showMode('date')
+  }
+
+  const showTimepicker = () => {
+    showMode('time')
+  }
 
   const onSubmit = () => {
     try {
       const incidentsRef = firebase.firestore().collection('incidents')
       incidentsRef.add({
-        time,
         date,
         comments,
       })
@@ -44,32 +69,29 @@ export const Comments = (props) => {
     <>
       <Container>
         <Header {...props} />
-        <Title>Date & Time</Title>
-        <Text>Time</Text>
-        <TextInput
-          style={{
-            height: 50,
-            width: '85%',
-          }}
-          placeholder="Time"
-          onChangeText={(text) => setTime(text)}
-          value={time}
-          underlineColorAndroid="transparent"
-          autoCapitalize="none"
-        />
-        <Text>Date</Text>
-        <TextInput
-          style={{
-            height: 50,
-            width: '85%',
-          }}
-          placeholder="Date"
-          onChangeText={(text) => setDate(text)}
-          value={date}
-          underlineColorAndroid="transparent"
-          autoCapitalize="none"
-        />
-        <Text>Type your comments below:</Text>
+        <Title>Date and Time of Incident</Title>
+        <ReportBar>
+          <Button onPress={showDatepicker}>
+            <ButtonText>Choose Date</ButtonText>
+          </Button>
+          <Button onPress={showTimepicker}>
+            <ButtonText>Choose Time</ButtonText>
+          </Button>
+        </ReportBar>
+        {show && (
+          <>
+            <DateTimePicker
+              testID="dateTimePicker"
+              value={date}
+              mode={mode}
+              is24Hour={true}
+              display="spinner"
+              onChange={onChange}
+            />
+            <FooterLink onPress={() => setShow(false)}>Done</FooterLink>
+          </>
+        )}
+        <Title>Additional Comments</Title>
         <FormBox>
           <LoginInput
             style={{
@@ -77,6 +99,7 @@ export const Comments = (props) => {
               width: '90%',
               backgroundColor: 'transparent',
             }}
+            blurOnSubmit={true}
             multiline={true}
             placeholder="Additional Comments"
             onChangeText={(text) => setComments(text)}

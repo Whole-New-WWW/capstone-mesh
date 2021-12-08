@@ -14,7 +14,7 @@ import { Comments } from '../screens/Reports/Comments'
 
 const Stack = createStackNavigator()
 
-export function User(props) {
+export function User() {
   console.log('IN THE USER STACK')
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>

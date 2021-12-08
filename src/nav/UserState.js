@@ -39,7 +39,7 @@ export default function UserState() {
         setLoading(false)
       }
     })
-    return () => console.log('unmounting'); // cleanup useEffect memory leak
+    return () => console.log('unmounting'); // cleanup useEffect
   }, [])
 
   if (loading) {

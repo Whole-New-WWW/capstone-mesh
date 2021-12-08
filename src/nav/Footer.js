@@ -1,22 +1,26 @@
 import React from "react";
 import { BottomBar, NavIcon, FooterIcon, NavButton } from "../../styles";
 import SOSButton from '../screens/Dashboard/SOS'
+import { useNavigation } from '@react-navigation/native';
 
 export default function Footer(props) {
+  const navigation = useNavigation();
+  // console.log('FOOTER', navigation)
+
   return (
     <BottomBar>
       <NavButton
         style={{ backgroundColor: "transparent" }}
-        onPress={() => props.navigation.navigate("Dashboard")}
+        onPress={() => navigation.navigate("Dashboard")}
       >
         <NavIcon source={require("../../assets/icons/home.png")} />
       </NavButton>
-      <FooterIcon onPress={() => props.navigation.navigate("SOS")}>
+      <FooterIcon onPress={() => navigation.navigate("SOS")}>
         <NavIcon source={require("../../assets/icons/alert.png")} />
       </FooterIcon>
       <NavButton
         style={{ backgroundColor: "transparent" }}
-        onPress={() => props.navigation.navigate("Map")}
+        onPress={() => navigation.navigate("Map")}
       >
         <NavIcon source={require("../../assets/icons/map.png")} />
       </NavButton>

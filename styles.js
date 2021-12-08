@@ -175,6 +175,7 @@ export const Text = styled.Text`
 export const FooterLink = styled.Text`
   font-size: 14px;
   font-weight: bold;
+  text-align: center;
 `;
 
 // Dashboard Screen
