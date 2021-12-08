@@ -19,7 +19,8 @@ import { getDistance } from 'geolib'; //calculates the distance
 
 //will change the placement of the api key when closer to deployment
 const API_KEY = "AIzaSyDpSBACR8eeqYjsNMAjD04yTeEoxMVKU38";
-const CLOSE = 50;
+
+//Distance check for notifications
 const ARRIVED = 20;
 
 
@@ -69,7 +70,7 @@ const Map = (props) => {
         // timeInterval: 10000 //milliseconds
       }, (current) => {
         console.log(current)
-        console.log('IN the WATCH')
+        console.log('IN WATCH')
 
        //calculating the users distance from the searched place 
        const distance = getDistance(
@@ -82,16 +83,14 @@ const Map = (props) => {
           longitude: searchedPlace.longitude
         }
         )
-        console.log('DISTANCE IS...', distance) 
+        console.log('CALCULATED DISTANCE IS...', distance) 
 
-        //if distance is less than this ...notification
-          if (distance <= CLOSE) //in meters
+        //if distance is less than...send notification
+          if (distance <= ARRIVED) //in meters
           {
-            console.log("user is CLOSE to destination") // send push notification to safety net
-          } else if (distance <= ARRIVED) {
-            console.log("user has ARRIVED to destination") // send push notification to safety net and user to confirm
+            console.log("User has ARRIVED to destination") // send push notification to safety net and user to confirm
           } else {
-            console.log('user is still on the way to destination') 
+            console.log('User is still on the way to destination') 
           }
         }
       )
