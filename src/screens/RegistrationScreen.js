@@ -18,7 +18,7 @@ import {
 const auth = firebase.auth();
 
 export default function RegistrationScreen({ navigation }) {
-  const [fullName, setfullName] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -40,7 +40,7 @@ export default function RegistrationScreen({ navigation }) {
         const data = {
           id: uid,
           email,
-          fullName,
+          name,
           password,
         };
         const usersRef = firebase.firestore().collection("users");
@@ -69,8 +69,8 @@ export default function RegistrationScreen({ navigation }) {
         <Logo source={require("../../assets/globe-logo.png")} />
         <LoginInput
           placeholder="First Name"
-          onChangeText={(text) => setfullName(text)}
-          value={fullName}
+          onChangeText={(text) => setName(text)}
+          value={name}
           autoCapitalize="none"
         />
         <LoginInput

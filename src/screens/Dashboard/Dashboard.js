@@ -18,7 +18,7 @@ export default function Dashboard(props) {
   user = user._currentValue.user
 
   const title = () => {
-    if (user) return `Welcome home, ${user.firstName}`
+    if (user) return `Welcome home, ${user.name}`
     else return `Welcome home`
   }
 

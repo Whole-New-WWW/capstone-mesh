@@ -44,7 +44,7 @@ export default function Account(props) {
     <>
       <Container>
         <Header {...props} />
-        <Title style={{ textTransform: 'uppercase' }}>{user.firstName}</Title>
+        <Title style={{ textTransform: 'uppercase' }}>{user.name}</Title>
         <Text>ID</Text>
         <Details><DetailText>{user.id}</DetailText></Details>
         <Text>Email</Text>

@@ -90,7 +90,7 @@ export const Form = (props) => {
           type: selectedItems,
         }),
       })
-
+      alert(`Thank you for sharing. We're with you.`)
       props.navigation.navigate('Dashboard')
     } catch (e) {
       alert(e)
