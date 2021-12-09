@@ -15,18 +15,21 @@ import {
 } from "../../../styles";
 
 export default function SingleSafetyNet(props) {
-  const { safetyNet } = props.route.params;
-  const contacts = safetyNet.users;
+  const { net } = props.route.params;
+  console.log('HERE ARE PROPS IN SINGLE', props)
+  const users = net.users;
+  
 
   return (
     <>
+      {console.log('HERE IS THE NET AGAIN', net)}
       <Container>
         <Header {...props}/>
         <Title>
-          {safetyNet.name}
+          {net.name}
         </Title>
         <CircularImage source={require('../../../assets/icons/friends.png')}/>
-        {!contacts && !contacts.length ? (
+        {!users && !users.length ? (
           <Container>
             <Title>
               There's no one in your safety net! Add your crew below!
@@ -35,13 +38,13 @@ export default function SingleSafetyNet(props) {
         ) : (
           <>
             <Grid>
-              {contacts.map((contact, index)=> {
+              {users.map((user, index)=> {
                 return (
                   <FlexColumnButton 
                     key={index} 
                   >
                     <DashText>
-                      {contact.fullName}
+                      {user.fullName}
                     </DashText>
                   </FlexColumnButton>
                 )

@@ -112,11 +112,13 @@ export default function SafetyNets(props) {
             </Modal>
             <ButtonListContainer>
               {safetyNets.map((net, index) => {
+                
                 return (
                   <FlexRowButton 
                     key={index} 
                     onPress={() => props.navigation.navigate("Safety Net", {net})}
                   >
+                    {console.log('HERE IS THE NET USERS', net.users)}
                     <DashText>
                       {net.name}
                     </DashText>
