@@ -45,6 +45,10 @@ export default function Dashboard(props) {
             <DashText>Submit a Report</DashText>
             <Icon source={require('../../../assets/icons/addreport.png')} />
           </DashButton>
+          <DashButton onPress={() => props.navigation.navigate('Contact List')}>
+            <DashText>Contact List</DashText>
+            <Icon source={require('../../../assets/icons/addreport.png')} />
+          </DashButton>
           <SOSButton {...props} />
         </Grid>
       </DashContainer>

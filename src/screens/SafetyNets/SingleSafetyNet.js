@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Header from '../../nav/Header';
 import Footer from '../../nav/Footer';
 import ContactList from '../ContactList';
+import * as Contacts from 'expo-contacts';
 import {
   Container,
   DashText,
