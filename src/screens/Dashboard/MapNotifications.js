@@ -9,19 +9,20 @@ const db = firebase.firestore()
 //need to look into what AuthContext is
 //check immutable key has been frozen error
 //make sure we are pulling the user correctly from firebase
-const mapSMS = async () => {
-    let user = 'ajtLFqLgjwPDIiSNT1UaCjehrJu1';
-    //console.log('WHAt is AUTHCONTEXT', AuthContext)
+const mapSMS = async (userID) => {
+    //let user = AuthContext //'ajtLFqLgjwPDIiSNT1UaCjehrJu1';
+    console.log('USER ID INSIDE MAPSMS?????????????????', userID)
+    
     const getSafetyNetPhoneNums = async () => { // Does this need "async?"
-        const userRef = db.collection('users').doc(user); // gets a reference for the user's document //.doc(user.id)
-        console.log('ref', userRef)
+        const userRef = db.collection('users').doc(userID); // gets a reference for the user's document //.doc(user.id)
+        console.log('ref ######################', userRef)
         //test to see if loads the user data -- test on Thursday! Maybe we are getting a promise and not the object we want
         const userData = await userRef.get() // reads that user document from the db
-        console.log('userData', userData.data())
+        console.log('userData #################', userData.data())
         const userObj = await userData.data();
         //safety_net does not exist on the object!!!!
         const userSafetyNets = userObj.safety_nets // selects the safety nets array in the user doc
-        console.log('nets', userSafetyNets)
+        // console.log('nets', userSafetyNets)
         const phoneNums = []
         // itterate through each safety net
         userSafetyNets.forEach(net => {
