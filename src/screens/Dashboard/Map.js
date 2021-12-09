@@ -66,9 +66,9 @@ const Map = (props) => {
   //------------------------------
   //Watch Position: Triggers Location.watchPositionAsync once On My Way button is clicked
 
-  const watch = () => {
+  const watch = async () => {
       console.log('PRESSED WATCH')
-      Location.watchPositionAsync({
+      const locSub = await Location.watchPositionAsync({
         accuracy: 5,
         distanceInterval: 3, //meters
         // timeInterval: 10000 //milliseconds
@@ -90,8 +90,9 @@ const Map = (props) => {
         console.log('CALCULATED DISTANCE IS...', distance)
 
         //if distance is less than...send notification
-          if (distance <= ARRIVED) //in meters
-          { mapSMS()
+          if (distance <= ARRIVED) { 
+            mapSMS();
+            locSub.remove();
             //console.log("User has ARRIVED to destination") // send push notification to safety net and user to confirm
           } else {
             console.log('User is still on the way to destination')
