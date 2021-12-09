@@ -91,21 +91,6 @@ export default function SafetyNets(props) {
           ) : (
             <>
               <Modal
-                style={{
-                  margin: 20,
-                  backgroundColor: "white",
-                  borderRadius: 20,
-                  padding: 35,
-                  alignItems: "center",
-                  shadowColor: "#000",
-                  shadowOffset: {
-                    width: 0,
-                    height: 2
-                  },
-                  shadowOpacity: 0.25,
-                  shadowRadius: 4,
-                  elevation: 5
-                }}
                 animationType={"slide"}
                 transparent={false}
                 visible={modalDisplayed}
@@ -148,7 +133,7 @@ export default function SafetyNets(props) {
                       key={index} 
                       onPress={() => props.navigation.navigate("Safety Net", {net})}
                     >
-                      {console.log('HERE IS THE NET USERS', net.users)}
+                      {console.log('HERE ARE THE NET USERS', net.users)}
                       <DashText>
                         {net.name}
                       </DashText>

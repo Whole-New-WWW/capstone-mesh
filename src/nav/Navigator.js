@@ -9,6 +9,7 @@ import RegistrationScreen from '../screens/RegistrationScreen'
 import SafetyNets from '../screens/SafetyNets/SafetyNets'
 import SingleSafetyNet from '../screens/SafetyNets/SingleSafetyNet'
 import { Form } from '../screens/Reports/Form'
+import ContactList from '../screens/ContactList'
 
 const Stack = createStackNavigator()
 
@@ -51,6 +52,12 @@ export function User() {
       <Stack.Screen
         name="Safety Net"
         component={SingleSafetyNet}
+      />
+
+      {/* Contact List */}
+      <Stack.Screen
+        name="Contact List"
+        component={ContactList}
       />
 
       {/* Login + SignUp */}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Header from '../../nav/Header';
 import Footer from '../../nav/Footer';
+import ContactList from '../ContactList';
 import {
   Container,
   DashText,
@@ -57,7 +58,9 @@ export default function SingleSafetyNet(props) {
                   </FlexColumnButton>
                 )
               })}
-              <SmallAddButton>
+              <SmallAddButton 
+                onPress={() => props.navigation.navigate('Contact List')}
+              >
                 <SmallIcon source={require('../../../assets/icons/plus.png')}/> 
                 <DashText>
                   Add Contact
