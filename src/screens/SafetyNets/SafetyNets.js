@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Header from '../../nav/Header';
 import Footer from '../../nav/Footer';
-import { Alert, Modal} from "react-native";
+import { Alert, Modal, ScrollView} from "react-native";
 import { firebase } from '../../firebase/config';
 import { Auth, AuthContext } from '../../nav/Auth';
 import {
@@ -74,71 +74,76 @@ export default function SafetyNets(props) {
 
   return (
     <>
-      <Container>
-        {/* {console.log('HERE ARE THE PROPS', props.route.params)} */}
-        <Header {...props}/>
-        <CircularImage source={require('../../../assets/icons/friends.png')}/>
-        {!safetyNets && !safetyNets.length ? (
-          <Container>
-            <Title>
-              You have no Safety Nets! Add some below!
-            </Title>
-          </Container>
-        ) : (
-          <>
-            <Modal
-              animationType={"slide"}
-              transparent={false}
-              visible={modalDisplayed}
-              onRequestClose={() => {
-                Alert.alert('Your safety net has been saved');
-                setModalDisplayed(!modalDisplayed);
-              }}
-            >
-              <Container>
-                <TextInput
-                  onChangeText={(text) => {setSafetyNet(text)}}
-                  placeholder="Safety Net Name"
-                  value={safetyNet}
-                  keyboardType='default'
-                >
-                </TextInput>
-              </Container>
-              <Button
-                onPress={() => onclick()}
+      <ScrollView>
+        <Container>
+          <Header {...props}
+            style={{position: 'fixed'}}
+          />
+          {/* {console.log('HERE ARE THE PROPS', props.route.params)} */}
+          
+          <CircularImage source={require('../../../assets/icons/friends.png')}/>
+          {!safetyNets && !safetyNets.length ? (
+            <Container>
+              <Title>
+                You have no Safety Nets! Add some below!
+              </Title>
+            </Container>
+          ) : (
+            <>
+              <Modal
+                animationType={"slide"}
+                transparent={false}
+                visible={modalDisplayed}
+                onRequestClose={() => {
+                  Alert.alert('Your safety net has been saved');
+                  setModalDisplayed(!modalDisplayed);
+                }}
               >
-                <ButtonText>
-                  Save Safety Net
-                </ButtonText>
-              </Button>
-            </Modal>
-            <ButtonListContainer>
-              {safetyNets.map((net, index) => {
-                
-                return (
-                  <FlexRowButton 
-                    key={index} 
-                    onPress={() => props.navigation.navigate("Safety Net", {net})}
+                <Container>
+                  <TextInput
+                    onChangeText={(text) => {setSafetyNet(text)}}
+                    placeholder="Safety Net Name"
+                    value={safetyNet}
+                    keyboardType='default'
                   >
-                    {console.log('HERE IS THE NET USERS', net.users)}
-                    <DashText>
-                      {net.name}
-                    </DashText>
-                  </FlexRowButton>
-                )
-              })}
-              <AddButton 
-                onPress={() => setModalDisplayed(true)}
-              >
-                <SmallIcon source={require('../../../assets/icons/plus.png')}/>
-                <DashText>
-                  Add New Safety Net
-                </DashText>
-              </AddButton>
-            </ButtonListContainer>
-          </>
-        )}
-      </Container>
+                  </TextInput>
+                </Container>
+                <Button
+                  onPress={() => onclick()}
+                >
+                  <ButtonText>
+                    Save Safety Net
+                  </ButtonText>
+                </Button>
+              </Modal>
+              <ButtonListContainer>
+                {safetyNets.map((net, index) => {
+                  
+                  return (
+                    <FlexRowButton 
+                      key={index} 
+                      onPress={() => props.navigation.navigate("Safety Net", {net})}
+                    >
+                      {console.log('HERE IS THE NET USERS', net.users)}
+                      <DashText>
+                        {net.name}
+                      </DashText>
+                    </FlexRowButton>
+                  )
+                })}
+                <AddButton 
+                  onPress={() => setModalDisplayed(true)}
+                >
+                  <SmallIcon source={require('../../../assets/icons/plus.png')}/>
+                  <DashText>
+                    Add New Safety Net
+                  </DashText>
+                </AddButton>
+              </ButtonListContainer>
+            </>
+          )}
+        </Container>
+      </ScrollView>
       <Footer {...props} />
     </>
   )

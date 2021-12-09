@@ -32,7 +32,7 @@ export default function SingleSafetyNet(props) {
           <>
           <Container>
             <Title>
-              Add your crew below!
+              Add your crew here!
             </Title>
             <SmallAddButton
               style={{alignSelf: 'center'}}
