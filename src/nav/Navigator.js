@@ -9,7 +9,7 @@ import RegistrationScreen from '../screens/RegistrationScreen'
 import SafetyNets from '../screens/SafetyNets/SafetyNets'
 import SingleSafetyNet from '../screens/SafetyNets/SingleSafetyNet'
 import { Form } from '../screens/Reports/Form'
-import ContactList from '../screens/ContactList'
+import ContactList from '../screens/ContactList/ContactList'
 
 const Stack = createStackNavigator()
 

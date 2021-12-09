@@ -50,7 +50,7 @@ export default function SafetyNets(props) {
   const [modalDisplayed, setModalDisplayed] = useState(false);
   
   // Should we consider making a query to our database here to access user data for this component?
-
+  
   async function onSubmit() {
     try {
       const updateSafetyNetRef = await firebase.firestore().collection('users').doc(user.id);
