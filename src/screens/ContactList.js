@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import * as Contacts from 'expo-contacts';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import {
   Container,
   DashText,
@@ -31,17 +31,17 @@ export default function ContactList() {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <Container>
       <Text>Contacts Module Example</Text>
-    </View>
+    </Container>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: '#fff',
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//   },
+// });

@@ -11,6 +11,7 @@ import {
   DashText,
   CircularImage,
   AddButton,
+  SmallAddButton,
   Title,
   SmallIcon,
   FormBox,
@@ -77,7 +78,6 @@ export default function SafetyNets(props) {
       <ScrollView>
         <Container>
           <Header {...props}
-            style={{position: 'fixed'}}
           />
           {/* {console.log('HERE ARE THE PROPS', props.route.params)} */}
           
@@ -99,10 +99,14 @@ export default function SafetyNets(props) {
                   setModalDisplayed(!modalDisplayed);
                 }}
               >
-                {/* <Container
-                  style={{height: 20}}
-                > */}
+                <Container
+                  style={{
+                    // height: 20,
+                    justifyContent: 'center'
+                  }}
+                >
                   <TextInput
+                    style={{height: 60}}
                     onChangeText={(text) => {setSafetyNet(text)}}
                     placeholder="Safety Net Name"
                     value={safetyNet}
@@ -110,20 +114,25 @@ export default function SafetyNets(props) {
                   >
                   </TextInput>
                   <Button
+                    style={{
+                      height: 50,
+                      justifyContent: 'center'
+                    }}
                     onPress={() => onclick()}
                   >
                     <ButtonText>
                       Save Safety Net
                     </ButtonText>
                   </Button>
-                  <AddButton
+                  <SmallAddButton
+                    style={{alignSelf: 'center'}}
                     onPress={() => setModalDisplayed(!modalDisplayed)}
                   >
-                    <ButtonText>
+                    <DashText>
                       Cancel
-                    </ButtonText>
-                  </AddButton>
-                {/* </Container> */}
+                    </DashText>
+                  </SmallAddButton>
+                </Container>
               </Modal>
               <ButtonListContainer>
                 {safetyNets.map((net, index) => {
