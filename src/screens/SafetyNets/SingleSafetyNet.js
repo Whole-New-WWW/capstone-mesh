@@ -19,7 +19,6 @@ export default function SingleSafetyNet(props) {
   console.log('HERE ARE PROPS IN SINGLE', props)
   const users = net.users;
   
-
   return (
     <>
       {console.log('HERE IS THE NET AGAIN', net)}
@@ -29,12 +28,22 @@ export default function SingleSafetyNet(props) {
           {net.name}
         </Title>
         <CircularImage source={require('../../../assets/icons/friends.png')}/>
-        {!users && !users.length ? (
+        {!users ? (
+          <>
           <Container>
             <Title>
-              There's no one in your safety net! Add your crew below!
+              Add your crew below!
             </Title>
+            <SmallAddButton
+              style={{alignSelf: 'center'}}
+            >
+              <SmallIcon source={require('../../../assets/icons/plus.png')}/> 
+              <DashText>
+                Add Contact
+              </DashText>
+            </SmallAddButton>
           </Container>
+          </>
         ) : (
           <>
             <Grid>
