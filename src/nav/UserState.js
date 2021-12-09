@@ -4,8 +4,8 @@ import { firebase } from '../firebase/config'
 import { NavigationContainer } from '@react-navigation/native'
 import { AuthContext } from './Auth'
 import { decode, encode } from 'base-64'
-import { User, Guest } from './Navigator'
-import MyTabs from './Footer';
+import LoginNavigator from '../routes/Stacks'
+import TabNavigator from '../routes/Tabs'
 
 if (!global.btoa) {
   global.btoa = encode
@@ -19,11 +19,12 @@ const auth = firebase.auth()
 
 export default function UserState() {
   const [loading, setLoading] = useState(true)
+  const [loggedIn, setLoggedIn] = useState(null)
   const { user, setUser } = useContext(AuthContext)
 
   useEffect(() => {
     const usersRef = firebase.firestore().collection('users')
-    auth.onAuthStateChanged((user) => { // rerender the screen when the auth changes
+    firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         usersRef
           .doc(user.uid)
@@ -32,27 +33,26 @@ export default function UserState() {
             const userData = document.data()
             setLoading(false)
             setUser(userData)
-            return () => console.log('unmounting')
+            setLoggedIn(true)
           })
           .catch((error) => {
             setLoading(false)
           })
       } else {
         setLoading(false)
+        setLoggedIn(false)
       }
     })
-    return () => console.log('unmounting'); // cleanup useEffect
+    return () => console.log('unmounting...')
   }, [])
 
   if (loading) {
-    return <></> // add a spinner
+    return <></>
   }
+
   return (
     <NavigationContainer>
-      {/* StackNavigators */}
-      {user ? <User /> : <Guest />}
-      {/* TabNavigator */}
-      {/* <MyTabs /> */}
+      {loggedIn ? <TabNavigator /> : <LoginNavigator />}
     </NavigationContainer>
   )
 }

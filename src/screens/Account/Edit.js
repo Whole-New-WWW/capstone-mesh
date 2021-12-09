@@ -6,8 +6,6 @@ import {
   ButtonText,
   TextInput,
 } from '../../../styles'
-import Header from '../../nav/Header'
-import Footer from '../../nav/Footer'
 import { AuthContext } from '../../nav/Auth'
 import { firebase } from '../../firebase/config'
 
@@ -25,9 +23,17 @@ export default function Edit(props) {
   const onSubmit = () => {
     try {
       const usersRef = firebase.firestore().collection('users').doc(user.id)
-      usersRef.update({ email: email, name: name, mobile: mobile })
+      usersRef.update({ email: email, name: name, mobile: mobile, password: password })
       alert('Successfully saved!')
-      // props.navigation.navigate('Account', { name, email, mobile })
+      props.navigation.navigate('Account', { email: email, name: name, mobile: mobile })
+    } catch (e) {
+      alert(e)
+    }
+  }
+
+  const onBack = () => {
+    try {
+      props.navigation.navigate('Account')
     } catch (e) {
       alert(e)
     }
@@ -36,7 +42,6 @@ export default function Edit(props) {
   return (
     <>
       <Container>
-        <Header {...props} />
         <Title>Edit Your Information</Title>
         <TextInput
           placeholder={user.email}
@@ -66,11 +71,10 @@ export default function Edit(props) {
           underlineColorAndroid="transparent"
           autoCapitalize="none"
         />
-        <Button onPress={onSubmit}>
-          <ButtonText>Submit</ButtonText>
-        </Button>
+          <Button onPress={onSubmit}>
+            <ButtonText>Submit</ButtonText>
+          </Button>
       </Container>
-      <Footer {...props} />
     </>
   )
 }

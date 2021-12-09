@@ -20,7 +20,7 @@ const { lavender, yellow, navy, light, teal } = Colors;
 export const Container = styled.SafeAreaView`
   flex: 1;
   background-color: #fff;
-  padding: 15px;
+  padding: 15px 30px 15px 30px;
 `;
 
 // The navy button
@@ -173,11 +173,11 @@ export const FormBox = styled.View`
 // Login + Sign Up
 
 export const Logo = styled.Image`
-  flex: 1;
-  height: 120px;
-  width: 120px;
-  align-self: center;
+  max-height: 120px;
+  max-width: 120px;
   margin: 30px;
+  flex: 1;
+  align-self: center;
 `;
 
 // Footer for the Login & Sign Up Screens (the Have an Account?)

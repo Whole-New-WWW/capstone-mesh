@@ -23,8 +23,6 @@ export default function SOSButton(props) {
   const MM = new Date().getMinutes()
   const date = `${M}/${D}/${Y} at ${H}:${MM}`
 
-  console.log('LOCATION', location)
-
   useEffect(() => {
     ;(async () => {
       let { status } = await requestForegroundPermissionsAsync() //Asks the user to grant permissions for location
@@ -48,7 +46,6 @@ export default function SOSButton(props) {
       if (status === 'granted') {
         Brightness.setSystemBrightnessAsync(0.1)
       }
-      console.log('COORDS >> ', location)
 
       // saves your coordinates and date of SOS trigger
       const usersRef = firebase.firestore().collection('users').doc(user.id)
@@ -73,7 +70,6 @@ export default function SOSButton(props) {
       alert(e)
     }
   }
-  // maybe we need to use a firebase.get() for the safety nets to find the mobile numbers and input them as the mobile numbers in sendSMSAsync()? reads will be higher but not a big jump
 
   return (
     <>

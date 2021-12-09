@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
-import {
-  Title,
-  Grid,
-  Icon,
-  DashButton,
-  DashContainer,
-  DashText,
-  SOS,
-} from '../../../styles'
-import MyTabs from '../../nav/Footer'
+import { DashContainer, Logo, Title, Text, Grid } from '../../../styles'
 import SOSButton from './SOS'
 import { AuthContext } from '../../nav/Auth'
+import { createStackNavigator } from '@react-navigation/stack'
+const Stack = createStackNavigator()
+
+import {
+  HomeNavigator,
+  ProfileNavigator,
+  MapNavigator,
+  SafetyNetsNavigator,
+  ReportNavigator,
+} from '../../routes/Stacks'
 
 export default function Dashboard(props) {
   const [loading, setLoading] = useState(true) // maybe add this to mediate the second-long wait time
@@ -22,33 +23,29 @@ export default function Dashboard(props) {
     else return `Welcome home`
   }
 
-  console.log('DASHBOARD >>>', props)
 
   return (
-    <>
-      <DashContainer>
-        <Title>{title()}</Title>
-        <Grid>
-          <DashButton onPress={() => props.navigation.navigate('Account')}>
-            <DashText>Account</DashText>
-            <Icon source={require('../../../assets/icons/account.png')} />
-          </DashButton>
-          <DashButton onPress={() => props.navigation.navigate('Map')}>
-            <DashText>Map</DashText>
-            <Icon source={require('../../../assets/icons/map.png')} />
-          </DashButton>
-          <DashButton onPress={() => props.navigation.navigate('Safety Nets')}>
-            <DashText>Safety Net</DashText>
-            <Icon source={require('../../../assets/icons/friends.png')} />
-          </DashButton>
-          <DashButton onPress={() => props.navigation.navigate('Form')}>
-            <DashText>Submit a Report</DashText>
-            <Icon source={require('../../../assets/icons/addreport.png')} />
-          </DashButton>
-          <SOSButton {...props} />
-        </Grid>
-      </DashContainer>
-      <MyTabs />
-    </>
+    <DashContainer>
+      <Title>{title()}</Title>
+      <Logo
+        source={require('../../../assets/globe-logo.png')}
+        style={{ height: 150, width: 150 }}
+      />
+      <Grid>
+        <Title>Welcome to mesh</Title>
+        <Text style={{ textAlign: 'center' }}>
+          Your community safety network
+        </Text>
+        <Text style={{ textAlign: 'center' }}>
+          To get started, click on the menu bars in the bottom or on the side.
+          {'\n'}
+        </Text>
+        <Text style={{ textAlign: 'center' }}>
+          If you are in danger, press the SOS button below to alert your safety
+          nets.{'\n'}
+        </Text>
+        <SOSButton />
+      </Grid>
+    </DashContainer>
   )
 }

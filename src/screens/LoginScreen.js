@@ -39,7 +39,7 @@ export default function LoginScreen({ navigation }) {
               alert('User does not exist anymore.')
               return
             }
-            navigation.navigate("Dashboard");
+            // navigation.navigate("Dashboard");
           })
           .catch((error) => {
             alert(error)

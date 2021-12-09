@@ -16,52 +16,23 @@ export function User() {
   console.log('IN THE USER STACK')
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen
-        name="Dashboard"
-        component={Dashboard}
-      />
+      <Stack.Screen name="Dashboard" component={Dashboard} />
 
-      <Stack.Screen
-        name="Map"
-        component={Map}
-      />
+      <Stack.Screen name="Map" component={Map} />
 
       {/* Account Screens */}
 
-      <Stack.Screen
-        name="Account"
-        component={Account}
-      />
-
-      <Stack.Screen
-        name="Edit Account"
-        component={Edit}
-      />
-
-      <Stack.Screen
-        name="Form"
-        component={Form}
-      />
+      <Stack.Screen name="Account" component={Account} />
+      <Stack.Screen name="Edit" component={Edit} />
+      <Stack.Screen name="Reports" component={Form} />
 
       {/* Safety Nets */}
-      <Stack.Screen
-        name="Safety Nets"
-        component={SafetyNets}
-      />
-      <Stack.Screen
-        name="Safety Net"
-        component={SingleSafetyNet}
-      />
+      <Stack.Screen name="Safety Nets" component={SafetyNets} />
+      <Stack.Screen name="Safety Net" component={SingleSafetyNet} />
 
       {/* Login + SignUp */}
-      <Stack.Screen
-        name="Login"
-        component={LoginScreen}
-      />
-      <Stack.Screen
-        name="Registration"
-        component={RegistrationScreen}
-      />
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Registration" component={RegistrationScreen} />
     </Stack.Navigator>
   )
 }
@@ -70,14 +41,8 @@ export function Guest() {
   console.log('IN THE GUEST STACK')
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen
-        name="Login"
-        component={LoginScreen}
-      />
-      <Stack.Screen
-        name="Registration"
-        component={RegistrationScreen}
-      />
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="Registration" component={RegistrationScreen} />
     </Stack.Navigator>
   )
 }

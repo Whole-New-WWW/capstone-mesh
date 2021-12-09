@@ -97,12 +97,8 @@ export const Form = (props) => {
     }
   }
 
-  console.log('FORM.JS>>>', props)
-
   return (
-    <>
       <Container>
-        <Header {...props} />
         <FormTitle>Date and Time</FormTitle>
         <ReportBar>
           <Button onPress={showDatepicker}>
@@ -181,7 +177,5 @@ export const Form = (props) => {
           <ButtonText>Submit</ButtonText>
         </Button>
       </Container>
-      <Footer {...props} />
-    </>
   )
 }
