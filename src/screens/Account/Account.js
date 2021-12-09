@@ -11,7 +11,7 @@ import {
   NavIcon,
 } from '../../../styles'
 import { TouchableOpacity } from 'react-native'
-import { AuthContext } from '../../nav/Auth'
+import { AuthContext } from '../../auth/Auth'
 import { firebase } from '../../firebase/config'
 
 const auth = firebase.auth()
@@ -19,7 +19,6 @@ const auth = firebase.auth()
 export default function Account({ navigation }) {
   let [user] = useState(AuthContext)
   user = user._currentValue.user
-  const sos = user.sos
 
   const logOut = () => {
     try {

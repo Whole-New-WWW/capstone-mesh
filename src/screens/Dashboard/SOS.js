@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Icon, DashText, SOS } from '../../../styles'
-import { AuthContext } from '../../nav/Auth'
+import { AuthContext } from '../../auth/Auth'
 import { firebase } from '../../firebase/config'
 
 import {
@@ -11,9 +11,10 @@ import * as Brightness from 'expo-brightness'
 import * as SMS from 'expo-sms'
 
 export default function SOSButton(props) {
-  let [user] = useState(AuthContext)
-  user = user._currentValue.user
+  const { user, setUser } = useContext(AuthContext)
   const [location, setLocation] = useState(null)
+
+  console.log('SOS', user.sos)
 
   // date formatting
   const D = new Date().getDate()
@@ -52,14 +53,23 @@ export default function SOSButton(props) {
       usersRef.update({
         sos: firebase.firestore.FieldValue.arrayUnion({
           location: `${location.latitude},${location.longitude}`,
-          date
+          date,
         }),
       })
 
+      setUser({
+        ...user,
+        sos: [
+          ...sos,
+          { location: `${location.latitude},${location.longitude}`, date },
+        ],
+      })
+
       // texts your safety net
+
       const isAvailable = await SMS.isAvailableAsync()
       if (isAvailable) {
-        const { result } = await SMS.sendSMSAsync(
+        await SMS.sendSMSAsync(
           ['3472637146'],
           `SOS button triggered. Here is my location: http://maps.google.com/?q=${location.latitude},${location.longitude}`,
         )

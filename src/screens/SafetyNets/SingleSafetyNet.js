@@ -1,6 +1,4 @@
 import React from 'react';
-import { Linking } from 'react-native';
-import Header from '../../nav/Header';
 import {
   Container,
   DashText,
@@ -19,7 +17,6 @@ export default function SingleSafetyNet(props) {
 
   return (
     <Container>
-      <Header {...props}/>
       <Title>
         {safetyNet.name}
       </Title>
@@ -27,8 +24,8 @@ export default function SingleSafetyNet(props) {
       <Grid>
         {contacts.map(contact => {
           return (
-            <FlexColumnButton 
-              key={contact.id} 
+            <FlexColumnButton
+              key={contact.id}
             >
               <DashText>
                 {contact.name}
@@ -37,7 +34,7 @@ export default function SingleSafetyNet(props) {
           )
         })}
         <SmallAddButton>
-          <SmallIcon source={require('../../../assets/icons/plus.png')}/> 
+          <SmallIcon source={require('../../../assets/icons/plus.png')}/>
           <DashText>
             Add Contact
           </DashText>

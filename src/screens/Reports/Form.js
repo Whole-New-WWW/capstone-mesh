@@ -13,12 +13,10 @@ import {
   ModalBox
 } from '../../../styles'
 import { View } from 'react-native'
-import Header from '../../nav/Header'
-import Footer from '../../nav/Footer'
 import { firebase } from '../../firebase/config'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import MultiSelect from 'react-native-multiple-select'
-import { AuthContext } from '../../nav/Auth'
+import { AuthContext } from '../../auth/Auth'
 
 // Color imports
 const { navy } = Colors

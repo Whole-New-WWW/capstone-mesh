@@ -1,17 +1,8 @@
 import React, { useState } from 'react'
 import { DashContainer, Logo, Title, Text, Grid } from '../../../styles'
 import SOSButton from './SOS'
-import { AuthContext } from '../../nav/Auth'
+import { AuthContext } from '../../auth/Auth'
 import { createStackNavigator } from '@react-navigation/stack'
-const Stack = createStackNavigator()
-
-import {
-  HomeNavigator,
-  ProfileNavigator,
-  MapNavigator,
-  SafetyNetsNavigator,
-  ReportNavigator,
-} from '../../routes/Stacks'
 
 export default function Dashboard(props) {
   const [loading, setLoading] = useState(true) // maybe add this to mediate the second-long wait time

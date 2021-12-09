@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import {
   Container,
   Title,
@@ -6,34 +6,37 @@ import {
   ButtonText,
   TextInput,
 } from '../../../styles'
-import { AuthContext } from '../../nav/Auth'
+import { AuthContext } from '../../auth/Auth'
 import { firebase } from '../../firebase/config'
 
-export default function Edit(props) {
-  let [user] = useState(AuthContext)
-  user = user._currentValue.user
-
+export default function Edit({ navigation }) {
+  const { user, setUser } = useContext(AuthContext)
   const [name, setName] = useState(user.name)
   const [email, setEmail] = useState(user.email)
   const [password, setPassword] = useState(user.password)
   const [mobile, setMobile] = useState(user.mobile)
 
-  props.route.name = `Account Settings`
-
-  const onSubmit = () => {
+  async function onSubmit() {
     try {
-      const usersRef = firebase.firestore().collection('users').doc(user.id)
-      usersRef.update({ email: email, name: name, mobile: mobile, password: password })
+      const usersRef = await firebase
+        .firestore()
+        .collection('users')
+        .doc(user.id)
+      usersRef.update({
+        email: email,
+        name: name,
+        mobile: mobile,
+        password: password,
+      })
+      setUser({
+        ...user,
+        email: email,
+        name: name,
+        mobile: mobile,
+        password: password,
+      })
       alert('Successfully saved!')
-      props.navigation.navigate('Account', { email: email, name: name, mobile: mobile })
-    } catch (e) {
-      alert(e)
-    }
-  }
-
-  const onBack = () => {
-    try {
-      props.navigation.navigate('Account')
+      navigation.navigate('Account')
     } catch (e) {
       alert(e)
     }
@@ -71,9 +74,9 @@ export default function Edit(props) {
           underlineColorAndroid="transparent"
           autoCapitalize="none"
         />
-          <Button onPress={onSubmit}>
-            <ButtonText>Submit</ButtonText>
-          </Button>
+        <Button onPress={onSubmit}>
+          <ButtonText>Submit</ButtonText>
+        </Button>
       </Container>
     </>
   )

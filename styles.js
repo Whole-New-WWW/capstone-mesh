@@ -39,34 +39,10 @@ export const ButtonText = styled.Text`
   font-weight: bold;
 `;
 
-// The flex container in the Header
-export const TopBar = styled.View`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  background-color: ${light};
-  padding: 15px;
-  max-height: 80px;
-`;
-
 // The tiny icons in the Header and Footer
 export const NavIcon = styled.Image`
   width: 20px;
   height: 20px;
-`;
-
-// The container in Footer
-export const BottomBar = styled.View`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  background-color: #fff;
-  border: 1px solid ${lavender};
-  padding: 15px 25px 25px 25px;
 `;
 
 // The container holding Next and Back buttons
@@ -111,6 +87,22 @@ export const Details = styled.View`
   background-color: ${light};
   border: 1px solid ${lavender};
   border-radius: 5px;
+`;
+
+// For SOS History
+export const HistoryBox = styled.View`
+  margin: 10px 30px 10px 5px;
+  background-color: ${light};
+  border: 1px solid ${lavender};
+  border-radius: 5px;
+  width: 75%;
+`;
+
+export const SOSBar = styled.View`
+  flex: 1;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-top: 15px;
 `;
 
 // Titles for the Forms
@@ -226,18 +218,6 @@ export const Icon = styled.Image`
   width: 40px;
   height: 40px;
   margin: 15px;
-`;
-
-export const DashButton = styled.TouchableOpacity`
-  padding: 10px;
-  align-items: center;
-  background-color: #fff;
-  border-radius: 25px;
-  width: 150px;
-  height: 150px;
-  margin: 10px;
-  justify-content: center;
-  box-shadow: 1px 1px 2px ${lavender};
 `;
 
 // Special Dashboard button for SOS

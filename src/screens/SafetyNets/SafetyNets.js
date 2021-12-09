@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from '../../nav/Header';
 import {
   Container,
   ButtonListContainer,
@@ -32,7 +31,6 @@ const safetyNets = [
 export default function SafetyNets(props) {
   return (
     <Container>
-      <Header {...props}/>
       <CircularImage source={require('../../../assets/icons/friends.png')} />
       {!safetyNets && !safetyNets.length ? (
         <Container>
