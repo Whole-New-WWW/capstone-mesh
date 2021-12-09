@@ -65,7 +65,9 @@ export default function SafetyNets(props) {
 
   function onclick() {
     setModalDisplayed(!modalDisplayed);
-    onSubmit();
+    if (safetyNet !== '') {
+      onSubmit();
+    }
   }
 
   console.log('HERE ARE THE PROPS', props);
