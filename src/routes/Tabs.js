@@ -1,9 +1,6 @@
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import Dashboard from '../screens/Dashboard/Dashboard'
-import Map from '../screens/Dashboard/Map'
-import Account from '../screens/Account/Account'
-import Report from '../screens/Reports/Form'
 import {
   ProfileNavigator,
   MapNavigator,
@@ -13,7 +10,7 @@ import {
 import { NavIcon, Colors } from '../../styles'
 
 // Color imports
-const { navy, lavender, light } = Colors
+const { navy, lavender, light, yellow } = Colors
 
 const Tab = createBottomTabNavigator()
 
@@ -27,35 +24,30 @@ export default function MyTabs(props) {
               return (
                 <NavIcon
                   source={require('../../assets/icons/home.png')}
-                  color={focused ? navy : lavender}
                 />
               )
             case 'Account':
               return (
                 <NavIcon
                   source={require('../../assets/icons/account.png')}
-                  color={focused ? navy : lavender}
                 />
               )
             case 'Map':
               return (
                 <NavIcon
                   source={require('../../assets/icons/map.png')}
-                  color={focused ? navy : lavender}
                 />
               )
             case 'Reports':
               return (
                 <NavIcon
                   source={require('../../assets/icons/addreport.png')}
-                  color={focused ? navy : lavender}
                 />
               )
             case 'Safety Nets':
               return (
                 <NavIcon
                   source={require('../../assets/icons/friends.png')}
-                  color={focused ? navy : lavender}
                 />
               )
             default:
@@ -64,8 +56,18 @@ export default function MyTabs(props) {
         },
       })}
       tabBarOptions={{
-        activeTintColor: lavender,
-        inactiveTintColor: light,
+        style: {
+          height: 100,
+          paddingLeft: 10,
+          paddingRight: 10,
+        },
+        activeTintColor: navy,
+        inactiveTintColor: lavender,
+      }}
+      tabBarIcon={{
+        style: {
+          borderRadius: 50
+        }
       }}
       initialRouteName="Home"
       swipeEnabled={false}

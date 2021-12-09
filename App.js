@@ -3,7 +3,8 @@ import "react-native-gesture-handler";
 import { decode, encode } from "base-64";
 import { Auth } from "./src/auth/Auth";
 import UserState from "./src/auth/UserState";
-
+import { LogBox } from 'react-native';
+LogBox.ignoreAllLogs();
 
 if (!global.btoa) {
   global.btoa = encode;

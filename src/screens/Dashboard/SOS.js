@@ -14,8 +14,6 @@ export default function SOSButton(props) {
   const { user, setUser } = useContext(AuthContext)
   const [location, setLocation] = useState(null)
 
-  console.log('SOS', user.sos)
-
   // date formatting
   const D = new Date().getDate()
   const M = new Date().getMonth()
@@ -48,31 +46,27 @@ export default function SOSButton(props) {
         Brightness.setSystemBrightnessAsync(0.1)
       }
 
-      // saves your coordinates and date of SOS trigger
-      const usersRef = firebase.firestore().collection('users').doc(user.id)
-      usersRef.update({
-        sos: firebase.firestore.FieldValue.arrayUnion({
-          location: `${location.latitude},${location.longitude}`,
-          date,
-        }),
-      })
-
-      setUser({
-        ...user,
-        sos: [
-          ...sos,
-          { location: `${location.latitude},${location.longitude}`, date },
-        ],
-      })
-
       // texts your safety net
 
       const isAvailable = await SMS.isAvailableAsync()
       if (isAvailable) {
-        await SMS.sendSMSAsync(
+        const { result } = await SMS.sendSMSAsync(
           ['3472637146'],
           `SOS button triggered. Here is my location: http://maps.google.com/?q=${location.latitude},${location.longitude}`,
         )
+
+        // saves your coordinates and date of SOS trigger
+        if (result !== 'sent') {
+          alert(`SOS triggered is ${result}`)
+        } else {
+          const usersRef = firebase.firestore().collection('users').doc(user.id)
+          usersRef.update({
+            sos: firebase.firestore.FieldValue.arrayUnion({
+              location: `${location.latitude},${location.longitude}`,
+              date
+            })
+          })
+        }
       } else {
         alert('Error in sending.')
       }
