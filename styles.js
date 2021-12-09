@@ -248,7 +248,7 @@ export const CircularImage = styled.View`
   height: 150px;
   border-radius: 100px;
   border: 4px ${yellow};
-  margin: 60px 0 20px 0;
+  margin: 50px 0 0 0;
   justify-content: center;
   align-self: center;
 `;

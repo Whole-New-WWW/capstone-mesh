@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   Container,
   Button,
@@ -9,16 +9,35 @@ import {
   ReportBar,
   DetailText,
   NavIcon,
+  CircularImage,
 } from '../../../styles'
-import { TouchableOpacity } from 'react-native'
+import { TouchableOpacity, Image } from 'react-native'
 import { AuthContext } from '../../auth/Auth'
 import { firebase } from '../../firebase/config'
+import one from '../../../assets/profiles/profile1.jpg'
+import two from '../../../assets/profiles/profile2.jpg'
+import three from '../../../assets/profiles/profile3.jpg'
+import four from '../../../assets/profiles/profile4.jpg'
 
 const auth = firebase.auth()
 
 export default function Account({ navigation }) {
   let [user] = useState(AuthContext)
   user = user._currentValue.user
+
+  const profilePhotos = [one, two, three, four]
+  const [image, setImage] = useState(null)
+
+  // random profile photo
+
+  function changePic(array) {
+    const randomNumber = Math.floor(Math.random() * array.length)
+    setImage(array[randomNumber])
+  }
+
+  useEffect(() => {
+    changePic(profilePhotos)
+  })
 
   const logOut = () => {
     try {
@@ -31,9 +50,23 @@ export default function Account({ navigation }) {
   return (
     <>
       <Container>
-        <ReportBar style={{paddingLeft: 5, paddingRight: 20}}>
+        <CircularImage>
+          <Image
+            source={image}
+            style={{
+              borderRadius: 100,
+              width: 145,
+              height: 145,
+              alignSelf: 'center',
+            }}
+          />
+        </CircularImage>
+        <ReportBar style={{ paddingLeft: 5, paddingRight: 20 }}>
           <Title style={{ textTransform: 'uppercase' }}>{user.name}</Title>
-          <TouchableOpacity onPress={() => navigation.navigate('Edit')} style={{padding: 10, alignSelf: 'center'}}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Edit')}
+            style={{ padding: 10, alignSelf: 'center' }}
+          >
             <NavIcon source={require('../../../assets/icons/edit.png')} />
           </TouchableOpacity>
         </ReportBar>
