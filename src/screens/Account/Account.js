@@ -25,7 +25,7 @@ export default function Account(props) {
 
   const onEdit = () => {
     try {
-      props.navigation.navigate('Edit Account', { user })
+      props.navigation.navigate('Edit Account', { screen: 'Edit Account'})
     } catch (e) {
       alert(e)
     }

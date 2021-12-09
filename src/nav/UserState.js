@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { AuthContext } from './Auth'
 import { decode, encode } from 'base-64'
 import { User, Guest } from './Navigator'
+import MyTabs from './Footer';
 
 if (!global.btoa) {
   global.btoa = encode
@@ -48,7 +49,10 @@ export default function UserState() {
   }
   return (
     <NavigationContainer>
+      {/* StackNavigators */}
       {user ? <User /> : <Guest />}
+      {/* TabNavigator */}
+      {/* <MyTabs /> */}
     </NavigationContainer>
   )
 }

@@ -8,7 +8,7 @@ import {
   DashText,
   SOS,
 } from '../../../styles'
-import Footer from '../../nav/Footer'
+import MyTabs from '../../nav/Footer'
 import SOSButton from './SOS'
 import { AuthContext } from '../../nav/Auth'
 
@@ -29,7 +29,7 @@ export default function Dashboard(props) {
       <DashContainer>
         <Title>{title()}</Title>
         <Grid>
-          <DashButton onPress={() => props.navigation.navigate('Edit Account')}>
+          <DashButton onPress={() => props.navigation.navigate('Account')}>
             <DashText>Account</DashText>
             <Icon source={require('../../../assets/icons/account.png')} />
           </DashButton>
@@ -48,7 +48,7 @@ export default function Dashboard(props) {
           <SOSButton {...props} />
         </Grid>
       </DashContainer>
-      <Footer {...props} />
+      <MyTabs />
     </>
   )
 }
