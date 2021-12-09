@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import Header from '../../nav/Header';
 import Footer from '../../nav/Footer';
 import { Alert, Modal} from "react-native";
 import { firebase } from '../../firebase/config';
-import { useEffect } from 'react';
+import { Auth, AuthContext } from '../../nav/Auth';
 import {
   Container,
   ButtonListContainer,
@@ -40,24 +40,24 @@ import {
 // ];
 
 export default function SafetyNets(props) {
+  const { user, setUser } = useContext(AuthContext);
   // const { user } = props.route.params;
-  // const safetyNets = user.safety_nets;
-  const [user, setUser] = useState({});
-  const [safetyNet, setSafetyNet] = useState({});
-  const [safetyNets, setSafetyNets] = useState([])
+  const safetyNetList = user.safety_nets;
+  // const [user, setUser] = useState({});
+  const [safetyNet, setSafetyNet] = useState('');
+  const [safetyNets, setSafetyNets] = useState(user.safety_nets)
   const [modalDisplayed, setModalDisplayed] = useState(false);
   
-  useEffect(() => {
-    setUser() 
-  }, [user])
-  
+  // Should we consider making an api call here to access user data for this component?
+
   async function onSubmit() {
     try {
       const updateSafetyNetRef = await firebase.firestore().collection('users').doc(user.id);
       updateSafetyNetRef.update({
         safety_nets: firebase.firestore.FieldValue.arrayUnion({name: safetyNet})
       });
-      setSafetyNets(user.safety_nets)
+      setUser({...user, safety_nets:[...safetyNets, {name: safetyNet}]})
+      setSafetyNets([...safetyNets, {name: safetyNet}])
     }catch(error) {
     console.log('Problem accessing safety net!', error)
     }
@@ -84,7 +84,7 @@ export default function SafetyNets(props) {
           </Container>
         ) : (
           <>
-            <Modal 
+            <Modal
               animationType={"slide"}
               transparent={false}
               visible={modalDisplayed}
@@ -93,20 +93,15 @@ export default function SafetyNets(props) {
                 setModalDisplayed(!modalDisplayed);
               }}
             >
-              <FormBox>
+              <Container>
                 <TextInput
-                  style={{
-                    height: 20,
-                    width: "90%",
-                    // backgroundColor: "transparent",
-                  }}
                   onChangeText={(text) => {setSafetyNet(text)}}
                   placeholder="Safety Net Name"
                   value={safetyNet}
                   keyboardType='default'
                 >
                 </TextInput>
-              </FormBox>
+              </Container>
               <Button
                 onPress={() => onclick()}
               >
@@ -116,14 +111,14 @@ export default function SafetyNets(props) {
               </Button>
             </Modal>
             <ButtonListContainer>
-              {safetyNets.map((safetyNet, index) => {
+              {safetyNets.map((net, index) => {
                 return (
                   <FlexRowButton 
                     key={index} 
-                    onPress={() => props.navigation.navigate("Safety Net", {safetyNet})}
+                    onPress={() => props.navigation.navigate("Safety Net", {net})}
                   >
                     <DashText>
-                      {safetyNet.name}
+                      {net.name}
                     </DashText>
                   </FlexRowButton>
                 )
