@@ -30,12 +30,12 @@ const items = [
   { id: 5, name: 'Sexual Assault' },
 ]
 
-export const Form = (props) => {
-  props.route.name = `Incident Report`
+export default function Comments({navigation}) {
   let [user] = useState(AuthContext)
   user = user._currentValue.user
 
   const [comments, setComments] = useState('')
+
   const [location, setLocation] = useState('')
   const [date, setDate] = useState(new Date(1598051730000))
   const [mode, setMode] = useState('date')
@@ -89,7 +89,7 @@ export const Form = (props) => {
         }),
       })
       alert(`Thank you for sharing. We're with you.`)
-      props.navigation.navigate('Dashboard')
+      navigation.navigate('Dashboard')
     } catch (e) {
       alert(e)
     }

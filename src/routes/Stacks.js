@@ -1,6 +1,5 @@
 import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
-import Dashboard from '../screens/Dashboard/Dashboard'
 import Map from '../screens/Dashboard/Map'
 import Account from '../screens/Account/Account'
 import Edit from '../screens/Account/Edit'
@@ -9,7 +8,7 @@ import LoginScreen from '../screens/LoginScreen'
 import RegistrationScreen from '../screens/RegistrationScreen'
 import SafetyNets from '../screens/SafetyNets/SafetyNets'
 import SingleSafetyNet from '../screens/SafetyNets/SingleSafetyNet'
-import { Form } from '../screens/Reports/Form'
+import Comments from '../screens/Reports/Comments'
 
 import { Colors } from '../../styles'
 
@@ -19,12 +18,12 @@ const { navy, lavender, light } = Colors
 const Stack = createStackNavigator()
 
 export function MapNavigator() {
-  console.log('SWAPPED TO MAP NAV')
   return (
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
           backgroundColor: `${light}`,
+          height: 125,
         },
         headerTintColor: `${navy}`,
         headerTitleStyle: {
@@ -38,12 +37,12 @@ export function MapNavigator() {
 }
 
 export function ProfileNavigator() {
-  console.log('SWAPPED TO PROFILE NAV')
   return (
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
           backgroundColor: `${light}`,
+          height: 125,
         },
         headerTintColor: `${navy}`,
         headerTitleStyle: {
@@ -51,20 +50,32 @@ export function ProfileNavigator() {
         },
       }}
     >
-      <Stack.Screen name="Account" component={Account} options={{ title: 'Profile' }} />
-      <Stack.Screen name="Edit" component={Edit} options={{ title: 'Edit Profile' }} />
-      <Stack.Screen name="History" component={History} options={{ title: 'SOS History' }} />
+      <Stack.Screen
+        name="Account"
+        component={Account}
+        options={{ title: 'Profile' }}
+      />
+      <Stack.Screen
+        name="Edit"
+        component={Edit}
+        options={{ title: 'Edit Profile' }}
+      />
+      <Stack.Screen
+        name="History"
+        component={History}
+        options={{ title: 'SOS History' }}
+      />
     </Stack.Navigator>
   )
 }
 
 export function SafetyNetsNavigator() {
-  console.log('SWAPPED TO SAFETY NET NAV')
   return (
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
           backgroundColor: `${light}`,
+          height: 125,
         },
         headerTintColor: `${navy}`,
         headerTitleStyle: {
@@ -79,12 +90,12 @@ export function SafetyNetsNavigator() {
 }
 
 export function ReportNavigator() {
-  console.log('SWAPPED TO REPORT STACK')
   return (
     <Stack.Navigator
       screenOptions={{
         headerStyle: {
           backgroundColor: `${light}`,
+          height: 125,
         },
         headerTintColor: `${navy}`,
         headerTitleStyle: {
@@ -92,13 +103,16 @@ export function ReportNavigator() {
         },
       }}
     >
-      <Stack.Screen name="Reports" component={Form} />
+      <Stack.Screen
+        name="Comments"
+        component={Comments}
+        options={{ title: 'Submit a Report' }}
+      />
     </Stack.Navigator>
   )
 }
 
 export default function LoginNavigator() {
-  console.log('IN THE GUEST STACK')
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Login" component={LoginScreen} />

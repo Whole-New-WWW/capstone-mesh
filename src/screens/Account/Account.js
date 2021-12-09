@@ -31,7 +31,7 @@ export default function Account({ navigation }) {
   return (
     <>
       <Container>
-        <ReportBar>
+        <ReportBar style={{paddingLeft: 5, paddingRight: 20}}>
           <Title style={{ textTransform: 'uppercase' }}>{user.name}</Title>
           <TouchableOpacity onPress={() => navigation.navigate('Edit')} style={{padding: 10, alignSelf: 'center'}}>
             <NavIcon source={require('../../../assets/icons/edit.png')} />

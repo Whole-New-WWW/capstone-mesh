@@ -91,10 +91,11 @@ export const Details = styled.View`
 
 // For SOS History
 export const HistoryBox = styled.View`
-  margin: 10px 30px 10px 5px;
+  margin: 5px;
   background-color: ${light};
   border: 1px solid ${lavender};
   border-radius: 5px;
+  padding: 15px 0 15px 0;
   width: 75%;
 `;
 
@@ -107,7 +108,7 @@ export const SOSBar = styled.View`
 
 // Titles for the Forms
 export const FormTitle = styled.Text`
-  padding: 10px 30px 10px 30px;
+  padding: 15px 30px 0px 30px;
   font-weight: bold;
   color: ${navy}
 `;
@@ -242,12 +243,13 @@ export const DashText = styled.Text`
 `;
 
 // Circular image in safety nets components
-export const CircularImage = styled.Image`
+export const CircularImage = styled.View`
   width: 150px;
   height: 150px;
   border-radius: 100px;
   border: 4px ${yellow};
   margin: 60px 0 20px 0;
+  justify-content: center;
   align-self: center;
 `;
 
