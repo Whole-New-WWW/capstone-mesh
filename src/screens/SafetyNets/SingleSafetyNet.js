@@ -26,25 +26,35 @@ export default function SingleSafetyNet(props) {
           {safetyNet.name}
         </Title>
         <CircularImage source={require('../../../assets/icons/friends.png')}/>
-        <Grid>
-          {contacts.map((contact, index)=> {
-            return (
-              <FlexColumnButton 
-                key={index} 
-              >
+        {!contacts && !contacts.length ? (
+          <Container>
+            <Title>
+              There's no one in your safety net! Add your crew below!
+            </Title>
+          </Container>
+        ) : (
+          <>
+            <Grid>
+              {contacts.map((contact, index)=> {
+                return (
+                  <FlexColumnButton 
+                    key={index} 
+                  >
+                    <DashText>
+                      {contact.fullName}
+                    </DashText>
+                  </FlexColumnButton>
+                )
+              })}
+              <SmallAddButton>
+                <SmallIcon source={require('../../../assets/icons/plus.png')}/> 
                 <DashText>
-                  {contact.fullName}
+                  Add Contact
                 </DashText>
-              </FlexColumnButton>
-            )
-          })}
-          <SmallAddButton>
-            <SmallIcon source={require('../../../assets/icons/plus.png')}/> 
-            <DashText>
-              Add Contact
-            </DashText>
-          </SmallAddButton>
-        </Grid>
+              </SmallAddButton>
+            </Grid>
+          </>
+        )}
       </Container>
       <Footer {...props} />
     </>

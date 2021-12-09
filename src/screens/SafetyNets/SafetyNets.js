@@ -42,13 +42,13 @@ import {
 export default function SafetyNets(props) {
   const { user, setUser } = useContext(AuthContext);
   // const { user } = props.route.params;
-  const safetyNetList = user.safety_nets;
+  // const safetyNetList = user.safety_nets;
   // const [user, setUser] = useState({});
   const [safetyNet, setSafetyNet] = useState('');
   const [safetyNets, setSafetyNets] = useState(user.safety_nets)
   const [modalDisplayed, setModalDisplayed] = useState(false);
   
-  // Should we consider making an api call here to access user data for this component?
+  // Should we consider making a query to our database here to access user data for this component?
 
   async function onSubmit() {
     try {
