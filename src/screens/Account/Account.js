@@ -10,6 +10,7 @@ import {
   DetailText,
   NavIcon,
   CircularImage,
+  InvertButton
 } from '../../../styles'
 import { TouchableOpacity, Image } from 'react-native'
 import { AuthContext } from '../../auth/Auth'
@@ -82,14 +83,12 @@ export default function Account({ navigation }) {
         <Details>
           <DetailText>{user.mobile ? user.mobile : 'No mobile #'}</DetailText>
         </Details>
-        <ReportBar>
-          <Button onPress={() => logOut()}>
-            <ButtonText>Log Out</ButtonText>
-          </Button>
-          <Button onPress={() => navigation.navigate('History')}>
-            <ButtonText>SOS History</ButtonText>
-          </Button>
-        </ReportBar>
+        <Button onPress={() => navigation.navigate('History')}>
+          <ButtonText>SOS History</ButtonText>
+        </Button>
+        <InvertButton onPress={() => logOut()}>
+          <Text>Log Out</Text>
+        </InvertButton>
       </Container>
     </>
   )

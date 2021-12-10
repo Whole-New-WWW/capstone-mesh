@@ -25,11 +25,11 @@ import CrimeData from "./CrimeData";
 import CrimeHeatMap from "./CrimeHeatMap";
 import mapSMS from "./MapNotifications";
 import { AuthContext } from '../../auth/Auth'
+import {API_KEY} from '../../../secrets'; // import your unique Google Maps API key in secrets.js file
 //used hooks useState and useEffect
 //useState: allows you to add state to functional components. Using the useState hook inside a function component, you can create a piece of state without switching to class components
 //useEffect: you tell React that your component needs to do something after render. React remembers the function passed as (useEffect)
 //will change the placement of the api key when closer to deployment
-const API_KEY = 'AIzaSyDpSBACR8eeqYjsNMAjD04yTeEoxMVKU38'
 
 //Distance check for notifications
 const ARRIVED = 20
@@ -44,7 +44,6 @@ const Map = (props) => {
   const [error, setError] = React.useState(null);
   const {user} = React.useContext(AuthContext);
   const userID = user.id
-  console.log('USER ID!!!!!!!!!!!!', userID)
   //fetches user location latitude and longitude and then pass to coordinate prop of Marker component
   React.useEffect(() => {
     //async function used to get request permission of users location while getting their current position
@@ -67,7 +66,6 @@ const Map = (props) => {
         latitude: locate.coords.latitude,
         longitude: locate.coords.longitude,
       });
-      //console.log("in locate", locate.coords);
     })();
   }, []);
 
@@ -75,16 +73,12 @@ const Map = (props) => {
   //Watch Position: Triggers Location.watchPositionAsync once On My Way button is clicked
 
   const watch = async () => {
-      console.log('PRESSED WATCH')
       const locSub = await Location.watchPositionAsync({
         accuracy: 5,
         distanceInterval: 3, //meters
         // timeInterval: 10000 //milliseconds
       },
       (current) => {
-        console.log(current)
-        console.log('IN WATCH')
-
         //calculating the users distance from the searched place
         const distance = getDistance(
           {
@@ -96,11 +90,9 @@ const Map = (props) => {
             longitude: searchedPlace.longitude,
           },
         )
-        console.log('CALCULATED DISTANCE IS...', distance)
 
         //if distance is less than...send notification
           if (distance <= ARRIVED) {
-            console.log('USER_ID RIGHT BEFORE CALLING MAP_SMS:', userID)
             mapSMS(userID);
             locSub.remove();
             //console.log("User has ARRIVED to destination") // send push notification to safety net and user to confirm
@@ -124,8 +116,6 @@ const Map = (props) => {
           }}
           //Use details to get the coordinates of places using place_id
           onPress={(data, details) => {
-            //console.log(data)
-            console.log('DETAILS to get place_ID', details)
             //this gets the coordinates of the searched location
             console.log(
               'SEARCHED geometry coordinates using fetchDetails',

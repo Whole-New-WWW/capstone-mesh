@@ -26,7 +26,18 @@ export const Button = styled.TouchableOpacity`
   border-radius: 25px;
   color: #fff;
   align-items: center;
-  margin: 5px 30px 15px 30px;
+  margin: 5px 30px 5px 30px;
+`;
+
+// The navy button
+export const InvertButton = styled.TouchableOpacity`
+  padding: 10px 15px 10px 15px;
+  border: 1px solid ${navy};
+  background-color: transparent;
+  border-radius: 25px;
+  color: ${navy};
+  align-items: center;
+  margin: 5px 30px 5px 30px;
 `;
 
 // The white text inside Button
@@ -47,7 +58,6 @@ export const ReportBar = styled.View`
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin-top: 15px;
 `;
 
 // The purple circle background for SOS

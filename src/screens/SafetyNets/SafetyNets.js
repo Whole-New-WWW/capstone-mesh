@@ -12,10 +12,10 @@ import {
   SmallAddButton,
   Title,
   SmallIcon,
-  FormBox,
   TextInput,
   Button,
   ButtonText,
+  InvertButton,
 } from '../../../styles'
 import { Image } from 'react-native'
 
@@ -139,20 +139,17 @@ export default function SafetyNets(props) {
                   keyboardType="default"
                 ></TextInput>
                 <Button
-                  style={{
-                    height: 50,
-                    justifyContent: 'center',
-                  }}
+                  style={{ alignSelf: 'center', width: `85%` }}
                   onPress={() => onclick()}
                 >
                   <ButtonText>Save Safety Net</ButtonText>
                 </Button>
-                <SmallAddButton
-                  style={{ alignSelf: 'center' }}
+                <InvertButton
+                  style={{ alignSelf: 'center', width: `85%` }}
                   onPress={() => setModalDisplayed(!modalDisplayed)}
                 >
                   <DashText>Cancel</DashText>
-                </SmallAddButton>
+                </InvertButton>
               </Container>
             </Modal>
             <ButtonListContainer>
@@ -164,7 +161,6 @@ export default function SafetyNets(props) {
                       props.navigation.navigate('Safety Net', { net })
                     }
                   >
-                    {console.log('HERE ARE THE NET USERS', net.users)}
                     <DashText>{net.name}</DashText>
                   </FlexRowButton>
                 )

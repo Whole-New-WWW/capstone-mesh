@@ -9,9 +9,6 @@ const db = firebase.firestore()
 //check immutable key has been frozen error
 //make sure we are pulling the user correctly from firebase
 const mapSMS = async (userID) => {
-    //let user = AuthContext //'ajtLFqLgjwPDIiSNT1UaCjehrJu1';
-    console.log('USER ID INSIDE MAPSMS?????????????????', userID)
-
     const getSafetyNetPhoneNums = async () => { // Does this need "async?"
         const userRef = db.collection('users').doc(userID); // gets a reference for the user's document //.doc(user.id)
         console.log('ref ######################', userRef)
