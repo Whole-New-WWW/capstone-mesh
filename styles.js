@@ -16,7 +16,7 @@ const { lavender, yellow, navy, light, teal } = Colors;
 export const Container = styled.SafeAreaView`
   flex: 1;
   background-color: #fff;
-  padding: 15px 30px 15px 30px;
+  padding: 10px 30px 15px 30px;
 `;
 
 // The navy button

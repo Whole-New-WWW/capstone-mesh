@@ -9,8 +9,7 @@ import {
   LoginInput,
   ReportBar,
   TextInput,
-  FormTitle,
-  ModalBox
+  ModalBox,
 } from '../../../styles'
 import { View } from 'react-native'
 import { firebase } from '../../firebase/config'
@@ -30,7 +29,7 @@ const items = [
   { id: 5, name: 'Sexual Assault' },
 ]
 
-export default function Comments({navigation}) {
+export default function Comments({ navigation }) {
   let [user] = useState(AuthContext)
   user = user._currentValue.user
 
@@ -96,39 +95,43 @@ export default function Comments({navigation}) {
   }
 
   return (
-      <Container>
-        <FormTitle>Date and Time</FormTitle>
-        <ReportBar>
-          <Button onPress={showDatepicker}>
-            <ButtonText>Choose Date</ButtonText>
-          </Button>
-          <Button onPress={showTimepicker}>
-            <ButtonText>Choose Time</ButtonText>
-          </Button>
-        </ReportBar>
-        {show && (
-          <ModalBox>
-            <DateTimePicker
-              testID="dateTimePicker"
-              value={date}
-              mode={mode}
-              is24Hour={true}
-              display="spinner"
-              onChange={onChange}
-            />
-            <View style={{ padding: 10, backgroundColor: `${navy}` }}>
-              <ButtonText
-                style={{ textAlign: 'center' }}
-                onPress={() => setShow(false)}
-              >
-                Done
-              </ButtonText>
-            </View>
-          </ModalBox>
-        )}
+    <Container>
+      <Text>
+        {'\n'}
+        {'\n'}Date and Time
+      </Text>
+      <ReportBar>
+        <Button onPress={showDatepicker}>
+          <ButtonText>Choose Date</ButtonText>
+        </Button>
+        <Button onPress={showTimepicker}>
+          <ButtonText>Choose Time</ButtonText>
+        </Button>
+      </ReportBar>
+      {show && (
+        <ModalBox>
+          <DateTimePicker
+            testID="dateTimePicker"
+            value={date}
+            mode={mode}
+            is24Hour={true}
+            display="spinner"
+            onChange={onChange}
+          />
+          <View style={{ padding: 10, backgroundColor: `${navy}` }}>
+            <ButtonText
+              style={{ textAlign: 'center' }}
+              onPress={() => setShow(false)}
+            >
+              Done
+            </ButtonText>
+          </View>
+        </ModalBox>
+      )}
 
-        <FormTitle>Type of Incident</FormTitle>
-        <ModalBox style={{backgroundColor: 'white'}}><MultiSelect
+      <Text>Type of Incident</Text>
+      <ModalBox style={{ backgroundColor: 'white' }}>
+        <MultiSelect
           hideTags
           items={items}
           uniqueKey="name"
@@ -143,37 +146,38 @@ export default function Comments({navigation}) {
           searchInputStyle={{ color: navy }}
           submitButtonColor={navy}
           submitButtonText="Submit"
-        /></ModalBox>
+        />
+      </ModalBox>
 
-        <FormTitle>Location</FormTitle>
-        <TextInput
-          placeholder="Forgot? Check your SOS history in Account"
-          onChangeText={(text) => setLocation(text)}
-          value={location}
+      <Text>Location</Text>
+      <TextInput
+        placeholder="Forgot? Check your SOS history in Account"
+        onChangeText={(text) => setLocation(text)}
+        value={location}
+        underlineColorAndroid="transparent"
+        autoCapitalize="none"
+      />
+
+      <Text>Additional Comments</Text>
+      <FormBox>
+        <LoginInput
+          style={{
+            height: 100,
+            width: '90%',
+            backgroundColor: 'transparent',
+          }}
+          blurOnSubmit={true}
+          multiline={true}
+          placeholder="Additional Comments"
+          onChangeText={(text) => setComments(text)}
+          value={comments}
           underlineColorAndroid="transparent"
           autoCapitalize="none"
         />
-
-        <FormTitle>Additional Comments</FormTitle>
-        <FormBox>
-          <LoginInput
-            style={{
-              height: 100,
-              width: '90%',
-              backgroundColor: 'transparent',
-            }}
-            blurOnSubmit={true}
-            multiline={true}
-            placeholder="Additional Comments"
-            onChangeText={(text) => setComments(text)}
-            value={comments}
-            underlineColorAndroid="transparent"
-            autoCapitalize="none"
-          />
-        </FormBox>
-        <Button onPress={onSubmit}>
-          <ButtonText>Submit</ButtonText>
-        </Button>
-      </Container>
+      </FormBox>
+      <Button onPress={onSubmit}>
+        <ButtonText>Submit</ButtonText>
+      </Button>
+    </Container>
   )
 }

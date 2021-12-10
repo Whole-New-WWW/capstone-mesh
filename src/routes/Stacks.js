@@ -28,6 +28,7 @@ export function MapNavigator() {
         headerTintColor: `${navy}`,
         headerTitleStyle: {
           fontWeight: 'bold',
+          fontFamily: 'Nanum',
         },
       }}
     >
@@ -47,6 +48,7 @@ export function ProfileNavigator() {
         headerTintColor: `${navy}`,
         headerTitleStyle: {
           fontWeight: 'bold',
+          fontFamily: 'Nanum',
         },
       }}
     >
@@ -80,6 +82,7 @@ export function SafetyNetsNavigator() {
         headerTintColor: `${navy}`,
         headerTitleStyle: {
           fontWeight: 'bold',
+          fontFamily: 'Nanum',
         },
       }}
     >
@@ -100,6 +103,7 @@ export function ReportNavigator() {
         headerTintColor: `${navy}`,
         headerTitleStyle: {
           fontWeight: 'bold',
+          fontFamily: 'Nanum',
         },
       }}
     >
