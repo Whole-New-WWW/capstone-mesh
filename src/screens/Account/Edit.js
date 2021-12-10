@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import {
   Container,
   Title,
@@ -6,28 +6,37 @@ import {
   ButtonText,
   TextInput,
 } from '../../../styles'
-import Header from '../../nav/Header'
-import Footer from '../../nav/Footer'
-import { AuthContext } from '../../nav/Auth'
+import { AuthContext } from '../../auth/Auth'
 import { firebase } from '../../firebase/config'
 
-export default function Edit(props) {
-  let [user] = useState(AuthContext)
-  user = user._currentValue.user
-
+export default function Edit({ navigation }) {
+  const { user, setUser } = useContext(AuthContext)
   const [name, setName] = useState(user.name)
   const [email, setEmail] = useState(user.email)
   const [password, setPassword] = useState(user.password)
   const [mobile, setMobile] = useState(user.mobile)
 
-  props.route.name = `Account Settings`
-
-  const onSubmit = () => {
+  async function onSubmit() {
     try {
-      const usersRef = firebase.firestore().collection('users').doc(user.id)
-      usersRef.update({ email: email, name: name, mobile: mobile })
+      const usersRef = await firebase
+        .firestore()
+        .collection('users')
+        .doc(user.id)
+      usersRef.update({
+        email: email,
+        name: name,
+        mobile: mobile,
+        password: password,
+      })
+      setUser({
+        ...user,
+        email: email,
+        name: name,
+        mobile: mobile,
+        password: password,
+      })
       alert('Successfully saved!')
-      // props.navigation.navigate('Account', { name, email, mobile })
+      navigation.navigate('Account')
     } catch (e) {
       alert(e)
     }
@@ -36,7 +45,6 @@ export default function Edit(props) {
   return (
     <>
       <Container>
-        <Header {...props} />
         <Title>Edit Your Information</Title>
         <TextInput
           placeholder={user.email}
@@ -70,7 +78,6 @@ export default function Edit(props) {
           <ButtonText>Submit</ButtonText>
         </Button>
       </Container>
-      <Footer {...props} />
     </>
   )
 }
