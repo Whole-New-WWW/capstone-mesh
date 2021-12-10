@@ -18,9 +18,9 @@ if (!global.atob) {
 const auth = firebase.auth()
 
 export default function UserState() {
-  const [loading, setLoading] = useState(true)
-  const [loggedIn, setLoggedIn] = useState(null)
-  const { user, setUser } = useContext(AuthContext)
+  const [loading, setLoading] = useState(true);
+  const { user, setUser } = useContext(AuthContext);
+  const [loggedIn, setLoggedIn] = useState(null);
 
   useEffect(() => {
     const usersRef = firebase.firestore().collection('users')
