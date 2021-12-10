@@ -1,7 +1,7 @@
 /// SOS CODE AS REFERENCE FOR TEXT MESSAGES
 import * as SMS from 'expo-sms'
 import firebase from 'firebase'
-import { AuthContext } from '../../nav/Auth'
+
 
 const db = firebase.firestore()
 

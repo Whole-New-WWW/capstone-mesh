@@ -6,8 +6,6 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Dimensions, Picker, TouchableOpacity, Button, Text, View } from "react-native";
 import ToggleSwitch from 'toggle-switch-react-native'
 import { Container } from "../../../styles";
-import Header from "../../nav/Header";
-import Footer from "../../nav/Footer";
 import { Alert } from "react-native";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete"; //to get search bar to autopopulate
 import MapViewDirections from "react-native-maps-directions"; //to connect the two markers to get directions (origin and destination)
