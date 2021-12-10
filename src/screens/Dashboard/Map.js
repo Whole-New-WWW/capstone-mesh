@@ -138,7 +138,7 @@ const Map = (props) => {
               longitude: initialRegion.longitude,
             };
             setSearchedPlace(searchLocation);
-            console.log("AFTER setSearch", searchLocation);
+            //console.log("AFTER setSearch", searchLocation);
 
             //map styling for both markers to appear
             const padding_value = 80;
@@ -151,7 +151,7 @@ const Map = (props) => {
               },
               animated: true,
             });
-            console.log("Made it past fit to coordinates");
+            //console.log("Made it past fit to coordinates");
           }}
 
           //fetchDetails to true to get the geometry of the location
@@ -199,7 +199,7 @@ const Map = (props) => {
         <View style={{flexDirection:"row"}} >
           <TouchableOpacity
           style={[styles.localCrimes, styles.center]}
-          onPress={()=>console.log("pressed to view NY data")}
+          onPress={()=>console.log("pressed to view incident data")}
           >
             <Text style={[styles.text]}>
               View Incidents
