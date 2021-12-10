@@ -7,7 +7,8 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 export default function ContactList(props) {
   const [contacts, setContacts] = useState([]);
   const [cachedContacts, setCachedContacts] = useState([]);
-  const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true);
+  const [selectedContact, setSelectedContact] = useState({});
 
   useEffect(() => {
     async function fetchContacts() {
@@ -15,17 +16,17 @@ export default function ContactList(props) {
       if (status !== 'granted') {
         alert('Sorry, not granted')
       }
-        const { data } = await Contacts.getContactsAsync({
-          fields: [Contacts.Fields.PhoneNumbers],
-        });
-        setContacts(data);
-        setCachedContacts(data);
-        setLoading(false);
-      // }
-      // setLoading(false)
+      const { data } = await Contacts.getContactsAsync({
+        fields: [Contacts.Fields.PhoneNumbers],
+      });
+      setContacts(data);
+      setCachedContacts(data);
+      setLoading(false);
     }
     fetchContacts();
   }, []);
+
+  // async function addContact = 
 
   function searchContacts(value) {
     const filteredContacts = cachedContacts.filter(contact => {
@@ -65,16 +66,31 @@ export default function ContactList(props) {
       let currentName = `${person.firstName} ${person.lastName}`;
       sectionObjArr.forEach(obj => {
         if (currentName[0] === obj.title.toLowerCase() || currentName[0] === obj.title) {
-          obj.data.push(currentName)
+          obj.data.push(obj)
         }
       })
     })
     return sectionObjArr;
   }
 
-  function selectedContact() {
-    
+  async function onSubmit() {
+    try {
+      const updateSafetyNetContact = await firebase.firestore().collection('users').doc(user.id);
+      updateSafetyNetRef.update({
+        safety_nets: firebase.firestore.FieldValue.arrayUnion({name: safetyNet})
+      });
+      setUser({...user, safety_nets:[...safetyNets, {name: safetyNet}]})
+      setSafetyNets([...safetyNets, {name: safetyNet}])
+    }catch(error) {
+    console.log('Problem accessing safety net!', error)
+    }
   }
+
+  // function addContact() {
+  //   selected = {}
+  //   contacts.filter(contact => contact.fullName === )
+  //   onSubmit();
+  // }
 
   const finalSections = filteredNames(contacts, sectionList);
 
@@ -93,9 +109,11 @@ export default function ContactList(props) {
           />
         <SectionList
           sections={finalSections}
-          renderItem={({item}) => 
-            <TouchableOpacity>
-              <Text style={styles.item}>{item}</Text>
+          renderItem={(item) => 
+            <TouchableOpacity
+              onPress={() => addContact()}
+            >
+              <Text>{console.log('HERE IS THE obj', item)}</Text>
             </TouchableOpacity>
           }
           renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}

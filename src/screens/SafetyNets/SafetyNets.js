@@ -41,14 +41,9 @@ import { Image } from 'react-native'
 
 export default function SafetyNets(props) {
   const { user, setUser } = useContext(AuthContext);
-  // const { user } = props.route.params;
-  // const safetyNetList = user.safety_nets;
-  // const [user, setUser] = useState({});
   const [safetyNet, setSafetyNet] = useState('');
   const [safetyNets, setSafetyNets] = useState(user.safety_nets)
   const [modalDisplayed, setModalDisplayed] = useState(false);
-  
-  // Should we consider making a query to our database here to access user data for this component?
   
   async function onSubmit() {
     try {
@@ -56,12 +51,30 @@ export default function SafetyNets(props) {
       updateSafetyNetRef.update({
         safety_nets: firebase.firestore.FieldValue.arrayUnion({name: safetyNet})
       });
-      setUser({...user, safety_nets:[...safetyNets, {name: safetyNet}]})
-      setSafetyNets([...safetyNets, {name: safetyNet}])
+
+      const updatedUser = await firebase.firestore().collection('users').doc(user.id).get();
+      const updatedUserData = await updatedUser.data();
+
+      setUser(updatedUserData)
+      setSafetyNets(user.safety_nets)
     }catch(error) {
     console.log('Problem accessing safety net!', error)
     }
   }
+
+  useEffect(() => {
+    async function fetchUser() {
+      try {
+        const updatedUser = await firebase.firestore().collection('users').doc(user.id).get();
+        const updatedUserData = await updatedUser.data();
+        setUser(updatedUserData)
+        setSafetyNets(user.safety_nets)
+      }catch(error) {
+      console.log('Problem accessing user!', error)
+      }
+    }
+    fetchUser();
+  }, []);
 
   function onclick() {
     setModalDisplayed(!modalDisplayed);
@@ -83,11 +96,65 @@ export default function SafetyNets(props) {
           />
         </CircularImage>
         {!safetyNets ? (
-          <Container>
-            <Title>
-              You have no Safety Nets! Add some below!
-            </Title>
-          </Container>
+          <>
+            <Container>
+              <Title>
+                You have no Safety Nets! Add some below!
+              </Title>
+            </Container>
+            <AddButton 
+              onPress={() => setModalDisplayed(true)}
+            >
+              <SmallIcon source={require('../../../assets/icons/plus.png')}/>
+              <DashText>
+                Add New Safety Net
+              </DashText>
+            </AddButton>
+            <Modal
+              animationType={"slide"}
+              transparent={false}
+              visible={modalDisplayed}
+              onRequestClose={() => {
+                Alert.alert('Your safety net has been saved');
+                setModalDisplayed(!modalDisplayed);
+              }}
+            >
+              <Container
+                style={{
+                  // height: 20,
+                  justifyContent: 'center'
+                }}
+              >
+                <TextInput
+                  style={{height: 60}}
+                  onChangeText={(text) => {setSafetyNet(text)}}
+                  placeholder="Safety Net Name"
+                  value={safetyNet}
+                  keyboardType='default'
+                >
+                </TextInput>
+                <Button
+                  style={{
+                    height: 50,
+                    justifyContent: 'center'
+                  }}
+                  onPress={() => onclick()}
+                >
+                  <ButtonText>
+                    Save Safety Net
+                  </ButtonText>
+                </Button>
+                <SmallAddButton
+                  style={{alignSelf: 'center'}}
+                  onPress={() => setModalDisplayed(!modalDisplayed)}
+                >
+                  <DashText>
+                    Cancel
+                  </DashText>
+                </SmallAddButton>
+              </Container>
+            </Modal>
+          </>
         ) : (
           <>
             <Modal
