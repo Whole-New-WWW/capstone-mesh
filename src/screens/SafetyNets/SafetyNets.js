@@ -105,8 +105,6 @@ export default function SafetyNets(props) {
   return (
     <ScrollView>
       <Container>
-        <Header {...props}
-        />
         {/* {console.log('HERE ARE THE PROPS', props.route.params)} */}
         <CircularImage>
           <Image
