@@ -30,44 +30,14 @@ import { Image } from 'react-native'
 //   {
 //     id: 2,
 //     name: "Study Group",
-//     users: [{ id: 1, fullfullName: "Claudia" }, { id: 2, fullName: "Josephine" }, { id: 3, fullName: "Yilla" }],
+//     users: [{ id: 1, fullName: "Claudia" }, { id: 2, fullName: "Josephine" }, { id: 3, fullName: "Yilla" }],
 //   },
 //   {
 //     id: 3,
 //     name: "Roomies",
-//     users: [{ id: 1, fullfullName: "Jamie" }, { id: 2, fullName: "Julian" }, { id: 3, fullName: "Jackie" }],
+//     users: [{ id: 1, fullName: "Jamie" }, { id: 2, fullName: "Julian" }, { id: 3, fullName: "Jackie" }],
 //   },
 // ];
-
-const safetyNets = [
-  {
-    id: 1,
-    name: 'Dance Team',
-    contacts: [
-      { id: 1, name: 'Anita' },
-      { id: 2, name: 'Diane' },
-      { id: 3, name: 'Nick' },
-    ],
-  },
-  {
-    id: 2,
-    name: 'Study Group',
-    contacts: [
-      { id: 1, name: 'Claudia' },
-      { id: 2, name: 'Josephine' },
-      { id: 3, name: 'Yilla' },
-    ],
-  },
-  {
-    id: 3,
-    name: 'Roomies',
-    contacts: [
-      { id: 1, name: 'Jamie' },
-      { id: 2, name: 'Julian' },
-      { id: 3, name: 'Jackie' },
-    ],
-  },
-]
 
 export default function SafetyNets(props) {
   const { user, setUser } = useContext(AuthContext);
@@ -112,7 +82,7 @@ export default function SafetyNets(props) {
             style={{ width: 75, height: 75, alignSelf: 'center' }}
           />
         </CircularImage>
-        {!safetyNets && !safetyNets.length ? (
+        {!safetyNets ? (
           <Container>
             <Title>
               You have no Safety Nets! Add some below!
