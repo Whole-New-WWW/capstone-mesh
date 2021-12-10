@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
   },
   map: {
     width: Dimensions.get('window').width,
-    height: 630,
+    height: 573,
     zIndex: -1,
   },
   localCrimes: {
