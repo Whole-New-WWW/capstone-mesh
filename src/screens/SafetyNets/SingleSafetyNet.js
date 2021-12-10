@@ -3,16 +3,21 @@ import Header from '../../nav/Header';
 import Footer from '../../nav/Footer';
 import ContactList from '../ContactList/ContactList';
 import * as Contacts from 'expo-contacts';
+import { View } from 'react-native';
 import {
   Container,
   DashText,
   CircularImage,
   AddButton,
+  Button,
+  ButtonText,
   Title,
   SmallIcon,
   FlexColumnButton,
   SmallAddButton,
-  Grid
+  Grid,
+  NavButton,
+  NavIcon
 } from "../../../styles";
 
 export default function SingleSafetyNet(props) {
@@ -43,6 +48,19 @@ export default function SingleSafetyNet(props) {
                 Add Contact
               </DashText>
             </SmallAddButton>
+            <Button
+              style={{
+                height: 50,
+                width: 200,
+                alignSelf: 'center',
+                justifyContent: 'center'
+              }}
+              // onPress={() => onclick()} delete functionality
+            >
+              <ButtonText>
+                Delete Safety Net
+              </ButtonText>
+            </Button>
           </Container>
           </>
         ) : (
@@ -50,13 +68,24 @@ export default function SingleSafetyNet(props) {
             <Grid>
               {users.map((user, index)=> {
                 return (
-                  <FlexColumnButton 
-                    key={index} 
+                  <View
+                    style={{flexDirection:"row",
+                    }}
                   >
-                    <DashText>
-                      {user.fullName}
-                    </DashText>
-                  </FlexColumnButton>
+                    <FlexColumnButton 
+                      key={index}
+                    >
+                      <DashText>
+                        {user.fullName}
+                      </DashText>
+                      <NavButton
+                      style={{ backgroundColor: "transparent" }}
+                      // onPress={() => props.navigation.goBack()}
+                      >
+                        <NavIcon source={require("../../../assets/icons/remove.png")} />
+                      </NavButton>
+                    </FlexColumnButton>
+                  </View>
                 )
               })}
               <SmallAddButton 
@@ -68,6 +97,19 @@ export default function SingleSafetyNet(props) {
                 </DashText>
               </SmallAddButton>
             </Grid>
+            <Button
+              style={{
+                height: 50,
+                width: 200,
+                alignSelf: 'center',
+                justifyContent: 'center'
+              }}
+              // onPress={() => onclick()} delete functionality
+            >
+              <ButtonText>
+                Delete Safety Net
+              </ButtonText>
+            </Button>
           </>
         )}
       </Container>

@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { PureComponent, useState, useEffect, useMemo} from 'react';
 import * as Contacts from 'expo-contacts';
 import { View, Text, SectionList, TextInput, FlatList, ActivityIndicator, SafeAreaView} from 'react-native';
 import { styles } from './styles';
+import Header from '../../nav/Header';
+import Footer from '../../nav/Footer';
 
-export default function ContactList() {
+export default function ContactList(props) {
   const [contacts, setContacts] = useState([]);
   const [cachedContacts, setCachedContacts] = useState([]);
   // const [loading, setLoading] = useState(true); 
-  
+  // const finalSectionList = useMemo(() => {
+  //   return filteredNames(contacts, sectionList)
+  // }, [contacts])
+
   useEffect(() => {
     async function fetchContacts() {
       const { status } = await Contacts.requestPermissionsAsync();
@@ -17,7 +22,7 @@ export default function ContactList() {
       // if (cachedContacts) {
       //   setContacts(cachedContacts);
       // } 
-      // else {
+      // else {Idk though 
         const { data } = await Contacts.getContactsAsync({
           fields: [Contacts.Fields.PhoneNumbers],
         });
@@ -42,9 +47,24 @@ export default function ContactList() {
     setContacts(filteredContacts);
   }
   
-  let alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
-  let sectionList = alphabet.map(char => ({title: char, data:[]}));
-  
+  // let alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+  // let sectionList = alphabet.map(char => ({title: char, data:[]}));
+  let sectionList = [
+    { title: 'A', data: [] }, { title: 'B', data: [] },
+    { title: 'C', data: [] }, { title: 'D', data: [] },
+    { title: 'E', data: [] }, { title: 'F', data: [] },
+    { title: 'G', data: [] }, { title: 'H', data: [] },
+    { title: 'I', data: [] }, { title: 'J', data: [] },
+    { title: 'K', data: [] }, { title: 'L', data: [] },
+    { title: 'M', data: [] }, { title: 'N', data: [] },
+    { title: 'O', data: [] }, { title: 'P', data: [] },
+    { title: 'Q', data: [] }, { title: 'R', data: [] },
+    { title: 'S', data: [] }, { title: 'T', data: [] },
+    { title: 'U', data: [] }, { title: 'V', data: [] },
+    { title: 'W', data: [] }, { title: 'X', data: [] },
+    { title: 'Y', data: [] }, { title: 'Z', data: [] }
+  ];
+
   function filteredNames(contacts, sectionList) {
     let sectionObjArr = sectionList;
     let peopleList = contacts;
@@ -63,14 +83,13 @@ export default function ContactList() {
   }
 
   function selectedContact() {
-
   }
 
   const finalSections = filteredNames(contacts, sectionList);
 
   return (
-      
     <View style={styles.container}>
+      <Header {...props}/>
       {console.log('HERE IS FINAL SECTIONS', finalSections)}
       <SafeAreaView/>
         <TextInput
@@ -82,7 +101,9 @@ export default function ContactList() {
         renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
         renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
         keyExtractor={(item, index) => index}
+        // initialNumToRender={30}
       />
+      <Footer {...props}/>
     </View>
   );
 }
