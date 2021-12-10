@@ -14,16 +14,17 @@ export default function Dashboard(props) {
     else return `Welcome home`
   }
 
-
   return (
     <DashContainer>
-      <Title>{title()}</Title>
+      <Title>
+        <Text style={{ fontFamily: 'Nanum', fontSize: 45 }}>mesh</Text>
+      </Title>
       <Logo
         source={require('../../../assets/globe-logo.png')}
         style={{ height: 150, width: 150 }}
       />
       <Grid>
-        <Title>Welcome to mesh</Title>
+        <Title>{title()}</Title>
         <Text style={{ textAlign: 'center' }}>
           Your community safety network
         </Text>

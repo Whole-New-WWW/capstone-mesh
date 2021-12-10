@@ -1,9 +1,5 @@
 import styled, { css } from "@emotion/native";
 
-// Branded Fonts
-import Manrope from "./assets/fonts/Manrope-Regular.ttf";
-import Nanum from "./assets/fonts/NanumMyeongjo-Regular.ttf";
-
 // Branded Colors
 export const Colors = {
   lavender: "#D6D5EA",
@@ -79,6 +75,7 @@ export const Title = styled.Text`
   text-align: center;
   margin: 25px;
   top: 2%;
+  font-family: 'Nanum'
 `;
 
 // The Form Boxes in Account + Reports
@@ -214,7 +211,7 @@ export const Grid = styled.View`
   justify-content: center;
 `;
 
-// Dashboard Button Icons
+// SOS
 export const Icon = styled.Image`
   width: 40px;
   height: 40px;
@@ -223,12 +220,11 @@ export const Icon = styled.Image`
 
 // Special Dashboard button for SOS
 export const SOS = styled.TouchableOpacity`
-  padding: 10px;
   align-items: center;
   background-color: ${yellow};
-  border-radius: 25px;
-  width: 150px;
-  height: 150px;
+  border-radius: 100px;
+  width: 125px;
+  height: 125px;
   margin: 10px;
   justify-content: center;
   box-shadow: 1px 1px 2px ${lavender};
@@ -239,7 +235,6 @@ export const SOS = styled.TouchableOpacity`
 export const DashText = styled.Text`
   font-size: 14px;
   text-align: center;
-  margin: 5px;
 `;
 
 // Circular image in safety nets components
