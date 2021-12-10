@@ -69,6 +69,7 @@ const Map = (props) => {
   //Watch Position: Triggers Location.watchPositionAsync once On My Way button is clicked
 
   const watch = async () => {
+    alert('Your Safety Net will be notified when you arrive safely. 🙌')
     const locSub = await Location.watchPositionAsync(
       {
         accuracy: 5,
@@ -312,6 +313,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 360,
     right: 10,
+    fontFamily: 'Manrope'
   },
   text: {
     fontSize: 15,

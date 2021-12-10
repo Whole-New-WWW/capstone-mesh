@@ -19,43 +19,13 @@ import {
 } from '../../../styles'
 import { Image } from 'react-native'
 
-// use this data until we have database seeded
-
-const safetyNets = [
-  {
-    id: 1,
-    name: 'Dance Team',
-    users: [
-      { id: 1, fullName: 'Anita' },
-      { id: 2, fullName: 'Diane' },
-      { id: 3, fullName: 'Nick' },
-    ],
-  },
-  {
-    id: 2,
-    name: 'Study Group',
-    users: [
-      { id: 1, fullName: 'Claudia' },
-      { id: 2, fullName: 'Josephine' },
-      { id: 3, fullName: 'Yilla' },
-    ],
-  },
-  {
-    id: 3,
-    name: 'Roomies',
-    users: [
-      { id: 1, fullName: 'Jamie' },
-      { id: 2, fullName: 'Julian' },
-      { id: 3, fullName: 'Jackie' },
-    ],
-  },
-]
-
 export default function SafetyNets(props) {
   const { user, setUser } = useContext(AuthContext)
   const [safetyNet, setSafetyNet] = useState('')
   const [safetyNets, setSafetyNets] = useState(user.safety_nets)
   const [modalDisplayed, setModalDisplayed] = useState(false)
+
+  console.log('SAFETY NET>>>', props)
 
   // Should we consider making a query to our database here to access user data for this component?
 
