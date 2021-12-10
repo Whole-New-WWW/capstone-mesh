@@ -2,7 +2,7 @@
 /// SOS CODE AS REFERENCE FOR TEXT MESSAGES
 import * as SMS from 'expo-sms'
 import firebase from 'firebase'
-import { AuthContext } from '../../nav/Auth'
+import { AuthContext } from '../../auth/Auth'
 
 const db = firebase.firestore()
 //some objects cannot be changed once they have been set - hence cannot update an immutable object

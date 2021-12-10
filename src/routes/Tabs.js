@@ -6,6 +6,7 @@ import {
   MapNavigator,
   SafetyNetsNavigator,
   ReportNavigator,
+  ContactListNavigator
 } from './Stacks'
 import { NavIcon, Colors } from '../../styles'
 
@@ -50,6 +51,12 @@ export default function MyTabs(props) {
                   source={require('../../assets/icons/friends.png')}
                 />
               )
+            case 'Contact List':
+              return (
+                <NavIcon
+                  source={require('../../assets/icons/addreport.png')}
+                />
+              )
             default:
               return <></>
           }
@@ -81,6 +88,7 @@ export default function MyTabs(props) {
       <Tab.Screen name="Map" component={MapNavigator} />
       <Tab.Screen name="Reports" component={ReportNavigator} />
       <Tab.Screen name="Safety Nets" component={SafetyNetsNavigator} />
+      <Tab.Screen name="Contact List" component={ContactListNavigator} />
     </Tab.Navigator>
   )
 }

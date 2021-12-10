@@ -9,6 +9,7 @@ import RegistrationScreen from '../screens/RegistrationScreen'
 import SafetyNets from '../screens/SafetyNets/SafetyNets'
 import SingleSafetyNet from '../screens/SafetyNets/SingleSafetyNet'
 import Comments from '../screens/Reports/Comments'
+import ContactList from '../screens/ContactList/ContactList'
 
 import { Colors } from '../../styles'
 
@@ -117,6 +118,14 @@ export default function LoginNavigator() {
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Registration" component={RegistrationScreen} />
+    </Stack.Navigator>
+  )
+}
+
+export function ContactListNavigator() {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Contact List" component={ContactList} />
     </Stack.Navigator>
   )
 }
