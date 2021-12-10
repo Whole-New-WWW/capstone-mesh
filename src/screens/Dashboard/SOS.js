@@ -58,6 +58,7 @@ export default function SOSButton(props) {
         // saves your coordinates and date of SOS trigger
         if (result !== 'sent') {
           alert(`SOS triggered is ${result}`)
+          Brightness.setSystemBrightnessAsync(0.7)
         } else {
           const usersRef = firebase.firestore().collection('users').doc(user.id)
           usersRef.update({
