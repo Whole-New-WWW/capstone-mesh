@@ -20,32 +20,77 @@ import {
   SafetyNetButton,
   SafetyNetIcon
 } from "../../../styles";
-//import { AuthContext } from '../../nav/Auth'
+import { AuthContext } from '../../nav/Auth'
 
 const db = firebase.firestore()
 
 export default function SingleSafetyNet(props) {
-  const { net } = props.route.params;
+  const { net } = props.route.params; //getting from firebase
   console.log('HERE ARE PROPS IN SINGLE', props)
   const users = net.users;
   //const {user} = React.useContext(AuthContext);
 
-//delete single user
-  const deleteSingleSafetyUser = (userId) => {
-    console.log('USERID!!!!>>>', userId)//gets the user id
-    db //firebase.firestore
-    .collection('users')
-    .doc(userId)
-    .delete()
-    .then(() => {
-      Alert.alert(
-        'Contact has been deleted!',
-        'Updates to your safety net have been saved successfully!'
-      )
-    }
-    )
-    .catch(e => console.log('Error deleting contact', e))
+  //react hooks defining state:
+  const {user} = React.useContext(AuthContext);
+  const userID = user.id //the user themself not the contact user
+
+  //get the current user document from firestore
+  //map throught that users safety nets 
+  //find the safety net that we want to change
+  //
+
+  //deletes single safety net on click of the delete button
+  const deleteSafetyNet = async (userId) => {
+    //create reference to current user
+    const currentUserRef = db.collection('users').doc(userId); 
+    
+    //get current user as user object
+    const currentUserSnapshot = await currentUserRef.get()
+    const currentUserObj = await currentUserSnapshot.data()
+    console.log('THIS IS THE CURRENT USER OBJ>>', currentUserObj)
+    //modify user object:
+    const newSafetyNets = currentUserObj.safety_nets
+    .filter((safetyNet) => safetyNet.name !== net.name)
+    console.log('THIS IS THE NEW SAFETYNETS!!!!', newSafetyNets)
+    console.log('THIS IS NET.NAME!!!!!!!!!!!!!', net.name)
+        //filter safety nets by name excluding the name we want to delete
+        //save as new safety nets array
+    //in firestore replace the old safety net with new safety net obj
+    const response = await currentUserRef.update({safety_nets: newSafetyNets})
+    console.log('THIS IS THE RESPONSE>>>>>', response)
   }
+
+  //this will call the function that updates the db and will navigate to the all safety nets
+  function onclickDelete(userId) {
+    deleteSafetyNet(userId);
+    props.navigation.navigate('Safety Nets', {})
+  }
+
+
+//delete single user
+  // const deleteSingleSafetyUser = (userId, contactPhoneNumber) => {
+  //   console.log('USERID!!!!>>>', userId)//gets the user id
+  //   const userRef = db 
+  //   .collection('users')
+  //   .doc(userId);
+  //   const respond = await userRef.update({
+  //     safety_nets: {
+  //               [0]:{
+
+  //     }} 
+  //   })
+  //   ////add logic going into safety net 
+  //   //grab the friend phoneNumber that i'm trying to delete
+  //   .delete()
+  //   .then(() => {
+  //     Alert.alert(
+  //       'Safety net has been deleted!',
+  //       'Updates to your safety net have been saved successfully!'
+  //     )
+  //   }
+  //   )
+  //   .catch(e => console.log('Error deleting contact', e))
+  // }
 
 
   return (
@@ -101,13 +146,13 @@ export default function SingleSafetyNet(props) {
                       <DashText>
                         {user.fullName}
                       </DashText>
-                      <SafetyNetButton
+                      {/* <SafetyNetButton
                       style={{ backgroundColor: "transparent" }}
-                      onPress={
-                      () =>  {deleteSingleSafetyUser(user.id)}}
+                      // onPress={
+                      // () =>  {deleteSingleSafetyUser(userID, user.phoneNumber)}} //userID and contact phone number
                       >
                         <SafetyNetIcon style={{flexDirection:"row"}} source={require("../../../assets/icons/remove.png")} />
-                      </SafetyNetButton>
+                      </SafetyNetButton> */}
                     </FlexColumnButton>
                   </View>
                 )
@@ -128,7 +173,7 @@ export default function SingleSafetyNet(props) {
                 alignSelf: 'center',
                 justifyContent: 'center'
               }}
-              // onPress={() => onclick()} delete functionality
+              onPress={() => onclickDelete(userID)} 
             >
               <ButtonText>
                 Delete Safety Net
