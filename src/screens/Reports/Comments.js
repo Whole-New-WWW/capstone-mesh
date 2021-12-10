@@ -80,7 +80,7 @@ export default function Comments({ navigation }) {
   // send info to firestore
   const onSubmit = () => {
     try {
-      const coords = parseLocation(location);
+      const coords = parseLocation(location)
       const incidentsRef = firebase.firestore().collection('incidents')
       incidentsRef.add({
         date,
@@ -161,7 +161,9 @@ export default function Comments({ navigation }) {
       </ModalBox>
 
       <Text>{'\n'}Location</Text>
-      <Text style={{fontStyle: 'italic', fontSize: 12}}>Forgot? Check your SOS history in Account</Text>
+      <Text style={{ fontStyle: 'italic', fontSize: 12 }}>
+        Forgot? Check your SOS history in Account
+      </Text>
       <TextInput
         placeholder="Please enter coordinates: [latitude],[longitude]"
         onChangeText={(text) => setLocation(text)}
