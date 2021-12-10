@@ -26,8 +26,6 @@ export default function ContactList(props) {
     fetchContacts();
   }, []);
 
-  // async function addContact = 
-
   function searchContacts(value) {
     const filteredContacts = cachedContacts.filter(contact => {
       let contactLowercase = (
@@ -66,25 +64,29 @@ export default function ContactList(props) {
       let currentName = `${person.firstName} ${person.lastName}`;
       sectionObjArr.forEach(obj => {
         if (currentName[0] === obj.title.toLowerCase() || currentName[0] === obj.title) {
-          obj.data.push(obj)
+          obj.data.push(currentName)
         }
       })
     })
     return sectionObjArr;
   }
 
-  async function onSubmit() {
-    try {
-      const updateSafetyNetContact = await firebase.firestore().collection('users').doc(user.id);
-      updateSafetyNetRef.update({
-        safety_nets: firebase.firestore.FieldValue.arrayUnion({name: safetyNet})
-      });
-      setUser({...user, safety_nets:[...safetyNets, {name: safetyNet}]})
-      setSafetyNets([...safetyNets, {name: safetyNet}])
-    }catch(error) {
-    console.log('Problem accessing safety net!', error)
-    }
-  }
+  // async function addContact() {
+  //   try {
+  //     const updateSafetyNetRef = await firebase.firestore().collection('users').doc(user.id);
+  //     updateSafetyNetRef.update({
+  //       safety_nets: firebase.firestore.FieldValue.arrayUnion({name: safetyNet})
+  //     });
+
+  //     const updatedUser = await firebase.firestore().collection('users').doc(user.id).get();
+  //     const updatedUserData = await updatedUser.data();
+
+  //     setUser(updatedUserData)
+  //     setSafetyNets(user.safety_nets)
+  //   }catch(error) {
+  //   console.log('Problem accessing safety net!', error)
+  //   }
+  // }
 
   // function addContact() {
   //   selected = {}
@@ -109,11 +111,11 @@ export default function ContactList(props) {
           />
         <SectionList
           sections={finalSections}
-          renderItem={(item) => 
+          renderItem={({item}) => 
             <TouchableOpacity
-              onPress={() => addContact()}
+              // onPress={() => addContact()}
             >
-              <Text>{console.log('HERE IS THE obj', item)}</Text>
+              <Text style={styles.item}>{item}</Text>
             </TouchableOpacity>
           }
           renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}

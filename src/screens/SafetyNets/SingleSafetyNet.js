@@ -42,6 +42,7 @@ export default function SingleSafetyNet(props) {
           </Title>
           <SmallAddButton
             style={{alignSelf: 'center'}}
+            onPress={() => props.navigation.navigate('Contact List')}
           >
             <SmallIcon source={require('../../../assets/icons/plus.png')}/> 
             <DashText>

@@ -86,6 +86,7 @@ export function SafetyNetsNavigator() {
     >
       <Stack.Screen name="Safety Nets" component={SafetyNets} />
       <Stack.Screen name="Safety Net" component={SingleSafetyNet} />
+      <Stack.Screen name="Contact List" component={ContactList} />
     </Stack.Navigator>
   )
 }
@@ -122,10 +123,4 @@ export default function LoginNavigator() {
   )
 }
 
-export function ContactListNavigator() {
-  return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="Contact List" component={ContactList} />
-    </Stack.Navigator>
-  )
-}
+
