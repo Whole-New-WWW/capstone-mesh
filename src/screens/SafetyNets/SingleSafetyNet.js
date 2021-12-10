@@ -16,8 +16,8 @@ import {
   FlexColumnButton,
   SmallAddButton,
   Grid,
-  NavButton,
-  NavIcon
+  SafetyNetButton,
+  SafetyNetIcon
 } from "../../../styles";
 
 export default function SingleSafetyNet(props) {
@@ -78,12 +78,12 @@ export default function SingleSafetyNet(props) {
                       <DashText>
                         {user.fullName}
                       </DashText>
-                      <NavButton
+                      <SafetyNetButton
                       style={{ backgroundColor: "transparent" }}
                       // onPress={() => props.navigation.goBack()}
                       >
-                        <NavIcon source={require("../../../assets/icons/remove.png")} />
-                      </NavButton>
+                        <SafetyNetIcon source={require("../../../assets/icons/remove.png")} />
+                      </SafetyNetButton>
                     </FlexColumnButton>
                   </View>
                 )

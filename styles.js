@@ -334,3 +334,18 @@ export const SmallAddButton = styled.TouchableOpacity`
   border-width: 1px;
   box-shadow: 0.5px 0.5px;
 `;
+
+// SingleSafetyNet view member buttons
+export const SafetyNetButton = styled.TouchableOpacity`
+  padding: 10px 15px 10px 15px;
+  background-color: ${navy};
+  border-radius: 25px;
+  color: #fff;
+  align-items: center;
+`;
+
+// Icons for single safety net member buttons
+export const SafetyNetIcon = styled.Image`
+  width: 20px;
+  height: 20px;
+`;

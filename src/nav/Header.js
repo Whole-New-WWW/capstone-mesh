@@ -6,12 +6,12 @@ export default function Header(props) {
   console.log('HEADER >>>', props)
   return (
     <TopBar style={{ height: 200 }}>
-      {/* <NavButton
+      <NavButton
         style={{ backgroundColor: "transparent" }}
         onPress={() => props.navigation.goBack()}
       >
         <NavIcon source={require("../../assets/icons/previous.png")} />
-      </NavButton> */}
+      </NavButton>
       <HeaderTitle>{props.route.name}</HeaderTitle>
       <NavButton
         style={{ backgroundColor: "transparent" }}

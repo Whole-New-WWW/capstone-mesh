@@ -86,7 +86,7 @@ export default function ContactList(props) {
   }
 
   const finalSections = filteredNames(contacts, sectionList);
-
+  
   return (
     <View style={styles.container}>
       <Header {...props}/>
