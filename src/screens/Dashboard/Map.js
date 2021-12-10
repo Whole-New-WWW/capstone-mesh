@@ -17,13 +17,15 @@ import { useEffect, useState } from "react";
 import { getDistance } from 'geolib'; //calculates the distance
 import CrimeData from "./CrimeData";
 import CrimeHeatMap from "./CrimeHeatMap";
-//used hooks useState and useEffect
-//useState: allows you to add state to functional components. Using the useState hook inside a function component, you can create a piece of state without switching to class components
-//useEffect: you tell React that your component needs to do something after render. React remembers the function passed as (useEffect)
+import mapSMS from "./MapNotifications";
+import { AuthContext } from '../../nav/Auth'
+
+
+
 //will change the placement of the api key when closer to deployment
 const API_KEY = "AIzaSyDpSBACR8eeqYjsNMAjD04yTeEoxMVKU38";
 
-//Distance check for notifications
+//Distance check for notifications in meters
 const ARRIVED = 20;
 
 
@@ -35,7 +37,9 @@ const Map = (props) => {
   const [initialRegion, setInitialRegion] = React.useState(null);
   const [searchedPlace, setSearchedPlace] = React.useState(null);
   const [error, setError] = React.useState(null);
-
+  const {user} = React.useContext(AuthContext);
+  const userID = user.id
+  console.log('USER ID!!!!!!!!!!!!', userID)
   //fetches user location latitude and longitude and then pass to coordinate prop of Marker component
   React.useEffect(() => {
     //async function used to get request permission of users location while getting their current position
@@ -65,9 +69,9 @@ const Map = (props) => {
   //------------------------------
   //Watch Position: Triggers Location.watchPositionAsync once On My Way button is clicked
 
-  const watch = () => {
+  const watch = async () => {
       console.log('PRESSED WATCH')
-      Location.watchPositionAsync({
+      const locSub = await Location.watchPositionAsync({
         accuracy: 5,
         distanceInterval: 3, //meters
         // timeInterval: 10000 //milliseconds
@@ -88,10 +92,12 @@ const Map = (props) => {
         )
         console.log('CALCULATED DISTANCE IS...', distance)
 
-        //if distance is less than...send notification
-          if (distance <= ARRIVED) //in meters
-          {
-            console.log("User has ARRIVED to destination") // send push notification to safety net and user to confirm
+          //if distance is less than...send notification
+          if (distance <= ARRIVED) {
+            console.log('USER_ID RIGHT BEFORE CALLING MAP_SMS:', userID) 
+            mapSMS(userID);
+            locSub.remove();
+            //console.log("User has ARRIVED to destination") // send push notification to safety net and user to confirm
           } else {
             console.log('User is still on the way to destination')
           }
