@@ -3,7 +3,6 @@ import * as Location from "expo-location"; //using expo to get the location of u
 import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
 import { Marker } from "react-native-maps";
 import { StatusBar } from "expo-status-bar";
-// import NotificationPopup from 'react-native-push-notification-popup'; //push notifications
 import { StyleSheet, Dimensions, Picker, TouchableOpacity, Button, Text, View } from "react-native";
 import ToggleSwitch from 'toggle-switch-react-native'
 import { Container } from "../../../styles";
@@ -21,8 +20,7 @@ import mapSMS from "./MapNotifications";
 import { AuthContext } from '../../nav/Auth'
 
 
-
-//will change the placement of the api key when closer to deployment
+//MOVE THIS to SECRETS 
 const API_KEY = "AIzaSyDpSBACR8eeqYjsNMAjD04yTeEoxMVKU38";
 
 //Distance check for notifications in meters
@@ -77,7 +75,7 @@ const Map = (props) => {
         // timeInterval: 10000 //milliseconds
       }, (current) => {
         console.log(current)
-        console.log('IN WATCH')
+        //console.log('IN WATCH')
 
        //calculating the users distance from the searched place
        const distance = getDistance(
