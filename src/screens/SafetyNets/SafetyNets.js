@@ -135,6 +135,7 @@ export default function SafetyNets(props) {
                 </Container>
               </Modal>
               <ButtonListContainer>
+              <SmallIcon source={require('../../../assets/icons/plus.png')}/> 
                 {safetyNets.map((net, index) => {
                   
                   return (

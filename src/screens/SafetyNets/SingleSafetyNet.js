@@ -3,7 +3,8 @@ import Header from '../../nav/Header';
 import Footer from '../../nav/Footer';
 import ContactList from '../ContactList/ContactList';
 import * as Contacts from 'expo-contacts';
-import { View } from 'react-native';
+import { View, Alert } from 'react-native';
+import firebase from 'firebase'
 import {
   Container,
   DashText,
@@ -19,12 +20,34 @@ import {
   SafetyNetButton,
   SafetyNetIcon
 } from "../../../styles";
+import { AuthContext } from '../../nav/Auth'
+
+const db = firebase.firestore()
 
 export default function SingleSafetyNet(props) {
   const { net } = props.route.params;
   console.log('HERE ARE PROPS IN SINGLE', props)
   const users = net.users;
-  
+  //const {user} = React.useContext(AuthContext);
+
+//delete single user
+  const deleteSingleSafetyUser = (userId) => {
+    console.log('USERID!!!!>>>', userId)
+    db
+    .collection('users')
+    .doc(userId)
+    .delete()
+    .then(() => {
+      Alert.alert(
+        'Contact has been deleted!',
+        'Updates to your safety net have been saved successfully!'
+      )
+    }
+    )
+    .catch(e => console.log('Error deleting contact', e))
+  }
+
+
   return (
     <>
       {console.log('HERE IS THE NET AGAIN', net)}
@@ -55,7 +78,7 @@ export default function SingleSafetyNet(props) {
                 alignSelf: 'center',
                 justifyContent: 'center'
               }}
-              // onPress={() => onclick()} delete functionality
+              //onPress={() =>//delete functionality
             >
               <ButtonText>
                 Delete Safety Net
@@ -80,9 +103,10 @@ export default function SingleSafetyNet(props) {
                       </DashText>
                       <SafetyNetButton
                       style={{ backgroundColor: "transparent" }}
-                      // onPress={() => props.navigation.goBack()}
+                      onPress={
+                      () =>  {deleteSingleSafetyUser(user.id)}}
                       >
-                        <SafetyNetIcon source={require("../../../assets/icons/remove.png")} />
+                        <SafetyNetIcon style={{flexDirection:"row"}} source={require("../../../assets/icons/remove.png")} />
                       </SafetyNetButton>
                     </FlexColumnButton>
                   </View>
