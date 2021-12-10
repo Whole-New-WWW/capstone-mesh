@@ -4,13 +4,10 @@ import firebase from 'firebase'
 import { AuthContext } from '../../nav/Auth'
 
 const db = firebase.firestore()
-//some objects cannot be changed once they have been set - hence cannot update an immutable object
-//need to look into what AuthContext is
-//check immutable key has been frozen error
-//make sure we are pulling the user correctly from firebase
+
 const mapSMS = async (userID) => {
     //let user = AuthContext //'ajtLFqLgjwPDIiSNT1UaCjehrJu1';
-    console.log('USER ID INSIDE MAPSMS?????????????????', userID)
+    console.log('USER ID INSIDE MAPs?????????????????', userID)
     
     const getSafetyNetPhoneNums = async () => { // Does this need "async?"
         const userRef = db.collection('users').doc(userID); // gets a reference for the user's document //.doc(user.id)
@@ -19,7 +16,7 @@ const mapSMS = async (userID) => {
         const userData = await userRef.get() // reads that user document from the db
         console.log('userData #################', userData.data())
         const userObj = await userData.data();
-        //safety_net does not exist on the object!!!!
+        
         const userSafetyNets = userObj.safety_nets // selects the safety nets array in the user doc
         // console.log('nets', userSafetyNets)
         const phoneNums = []
@@ -52,40 +49,3 @@ const mapSMS = async (userID) => {
     }
 }
 export default mapSMS
-
-
-//${user.name}
-
-// users.doc(user.id) <-- get safety_nets
-// filter for the selected safety_nets
-// use map to create an array of the phone #s called phoneNums
-// message: user name has arrived at their destination!
-
-
-// async function yourFunction() {
-//     try {
-//       const updateSafetyNetRef = await firebase.firestore().collection('users').doc(user.id);
-//       updateSafetyNetRef.update({
-//         safety_nets: firebase.firestore.FieldValue.arrayUnion({name: safetyNet})
-//       });
-//     }catch(error) {
-//     console.log('Problem accessing safety net!', error)
-//     }
-// }
-
-// import * as SMS from 'expo-sms'  
-// const onSOS = async () => {
-//     try {
-//       const isAvailable = await SMS.isAvailableAsync()
-//       if (isAvailable) {
-//         const { result } = await SMS.sendSMSAsync(
-//           ['3472637146'],
-//           `SOS button triggered. Here is my location: http://maps.google.com/?q=${location.latitude},${location.longitude}`
-//         )
-//       } else {
-//         alert('Error in sending.')
-//       }
-//     } catch (e) {
-//       alert(e)
-//     }
-//   }
