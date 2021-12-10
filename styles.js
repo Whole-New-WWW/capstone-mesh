@@ -134,6 +134,15 @@ export const DetailText = styled.Text`
   padding: 10px;
 `;
 
+export const MapInstruction = styled.View`
+  background-color: #fff;
+  border: 1px solid ${lavender};
+  padding: 15px;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 5px;
+`
 
 // The Log In Fields
 export const LoginInput = styled.TextInput`

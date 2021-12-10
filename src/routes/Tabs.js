@@ -10,7 +10,7 @@ import {
 import { NavIcon, Colors } from '../../styles'
 
 // Color imports
-const { navy, lavender, light, yellow } = Colors
+const { navy, lavender } = Colors
 
 const Tab = createBottomTabNavigator()
 
