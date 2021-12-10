@@ -75,7 +75,7 @@ export default function MyTabs(props) {
       <Tab.Screen
         name="Dashboard"
         component={Dashboard}
-        options={{ headerShown: false }}
+        options={{ Shown: false }}
       />
       <Tab.Screen name="Account" component={ProfileNavigator} />
       <Tab.Screen name="Map" component={MapNavigator} />

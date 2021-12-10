@@ -87,7 +87,6 @@ export default function ContactList(props) {
 
   return (
     <View style={styles.container}>
-      <Header {...props}/>
       {console.log('HERE IS FINAL SECTIONS', finalSections)}
       <SafeAreaView/>
         <TextInput
