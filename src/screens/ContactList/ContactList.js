@@ -93,7 +93,11 @@ export default function ContactList(props) {
           />
         <SectionList
           sections={finalSections}
-          renderItem={({item}) => <TouchableOpacity><Text style={styles.item}>{item}</Text></TouchableOpacity>}
+          renderItem={({item}) => 
+            <TouchableOpacity>
+              <Text style={styles.item}>{item}</Text>
+            </TouchableOpacity>
+          }
           renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
           keyExtractor={(item, index) => index}
         />
