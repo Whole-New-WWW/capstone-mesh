@@ -2,8 +2,6 @@ import React, { PureComponent, useState, useEffect, useMemo} from 'react';
 import * as Contacts from 'expo-contacts';
 import { View, Text, SectionList, TextInput, FlatList, ActivityIndicator, SafeAreaView, StatusBar} from 'react-native';
 import { styles } from './styles';
-import Header from '../../nav/Header';
-import Footer from '../../nav/Footer';
 
 export default function ContactList(props) {
   const [contacts, setContacts] = useState([]);
@@ -11,7 +9,7 @@ export default function ContactList(props) {
   const [loading, setLoading] = useState(true); 
   // const finalSectionList = useMemo(() => {
   //   return filteredNames(contacts, sectionList)
-  // }, [contacts, sectionList])
+  // }, [contacts, ectionList])
 
   useEffect(() => {
     async function fetchContacts() {
