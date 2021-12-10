@@ -36,7 +36,6 @@ export default function SingleSafetyNet(props) {
         />
       </CircularImage>
       {!users ? (
-        <>
         <Container>
           <Title>
             Add your crew here!
@@ -63,7 +62,6 @@ export default function SingleSafetyNet(props) {
             </ButtonText>
           </Button>
         </Container>
-        </>
       ) : (
         <>
           <Grid>
