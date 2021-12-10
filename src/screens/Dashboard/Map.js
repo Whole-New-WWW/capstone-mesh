@@ -15,8 +15,6 @@ import {
 } from 'react-native'
 import ToggleSwitch from 'toggle-switch-react-native'
 import { Container } from "../../../styles";
-import Header from "../../nav/Header";
-import Footer from "../../nav/Footer";
 import { Alert } from "react-native";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete"; //to get search bar to autopopulate
 import MapViewDirections from "react-native-maps-directions"; //to connect the two markers to get directions (origin and destination)
@@ -102,7 +100,7 @@ const Map = (props) => {
 
         //if distance is less than...send notification
           if (distance <= ARRIVED) {
-            console.log('USER_ID RIGHT BEFORE CALLING MAP_SMS:', userID) 
+            console.log('USER_ID RIGHT BEFORE CALLING MAP_SMS:', userID)
             mapSMS(userID);
             locSub.remove();
             //console.log("User has ARRIVED to destination") // send push notification to safety net and user to confirm
