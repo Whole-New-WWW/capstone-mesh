@@ -41,7 +41,6 @@ export default function SOSButton(props) {
   }, [])
 
   // gets safety net mobiles
-  console.log('SOS >>>', user)
   const getSafetyNetPhoneNums = async () => {
     const userRef = db.collection('users').doc(user.id)
     const userData = await userRef.get()
@@ -52,19 +51,20 @@ export default function SOSButton(props) {
     // iterate through each safety net
     if (!userSafetyNets) {
       alert('No safety nets! Add one now in Safety Nets 🤗')
-    } else {
-      userSafetyNets.forEach((net) => {
-        let users = net.users
-        if (!users) {
-          alert('No contacts in your default Safety Net! Add one now in Safety Nets🤝')
-        } else {
-          for (let i = 0; i < users.length; i++) {
-            phoneNums.push(users[i].phoneNumber)
-            return phoneNums
-          }
-        }
-      })
     }
+    userSafetyNets.forEach((net) => {
+      let users = net.users
+      if (!users) {
+        alert(
+          'No contacts in your default Safety Net! Add one now in Safety Nets🤝',
+        )
+      } else {
+        for (let i = 0; i < users.length; i++) {
+          phoneNums.push(users[i].phoneNumber)
+          return phoneNums
+        }
+      }
+    })
   }
 
   // onPress handler to save location, send message to safety nets and store in SOS history

@@ -34,7 +34,6 @@ export default function Comments({ navigation }) {
   user = user._currentValue.user
 
   const [comments, setComments] = useState('')
-
   const [location, setLocation] = useState('')
   const [date, setDate] = useState(new Date(1598051730000))
   const [mode, setMode] = useState('date')
@@ -70,24 +69,36 @@ export default function Comments({ navigation }) {
     setSelectedItems(selectedItems)
   }
 
+  // splits string of coordinates to object for incidents
+  const parseLocation = (location) => {
+    const coords = location.split(',')
+    const latitude = coords[0]
+    const longitude = coords[1]
+    return { lat: latitude, long: longitude }
+  }
+
   // send info to firestore
   const onSubmit = () => {
     try {
+      const coords = parseLocation(location);
       const incidentsRef = firebase.firestore().collection('incidents')
       incidentsRef.add({
         date,
         comments,
         type: selectedItems,
+        location: coords,
       })
+
       const usersRef = firebase.firestore().collection('users').doc(user.id)
       usersRef.update({
         incidents: firebase.firestore.FieldValue.arrayUnion({
           date,
           comments,
           type: selectedItems,
+          location: coords,
         }),
       })
-      alert(`Thank you for sharing. We're with you.`)
+      alert(`Thank you for sharing your report. We're with you ❤️`)
       navigation.navigate('Dashboard')
     } catch (e) {
       alert(e)
@@ -129,7 +140,7 @@ export default function Comments({ navigation }) {
         </ModalBox>
       )}
 
-      <Text>Type of Incident</Text>
+      <Text>{'\n'}Type of Incident</Text>
       <ModalBox style={{ backgroundColor: 'white' }}>
         <MultiSelect
           hideTags
@@ -149,16 +160,17 @@ export default function Comments({ navigation }) {
         />
       </ModalBox>
 
-      <Text>Location</Text>
+      <Text>{'\n'}Location</Text>
+      <Text style={{fontStyle: 'italic', fontSize: 12}}>Forgot? Check your SOS history in Account</Text>
       <TextInput
-        placeholder="Forgot? Check your SOS history in Account"
+        placeholder="Please enter coordinates: [latitude],[longitude]"
         onChangeText={(text) => setLocation(text)}
         value={location}
         underlineColorAndroid="transparent"
         autoCapitalize="none"
       />
 
-      <Text>Additional Comments</Text>
+      <Text>{'\n'}Additional Comments</Text>
       <FormBox>
         <LoginInput
           style={{
