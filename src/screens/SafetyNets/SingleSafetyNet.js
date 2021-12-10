@@ -20,7 +20,7 @@ import {
   SafetyNetButton,
   SafetyNetIcon
 } from "../../../styles";
-import { AuthContext } from '../../nav/Auth'
+//import { AuthContext } from '../../nav/Auth'
 
 const db = firebase.firestore()
 
@@ -32,8 +32,8 @@ export default function SingleSafetyNet(props) {
 
 //delete single user
   const deleteSingleSafetyUser = (userId) => {
-    console.log('USERID!!!!>>>', userId)
-    db
+    console.log('USERID!!!!>>>', userId)//gets the user id
+    db //firebase.firestore
     .collection('users')
     .doc(userId)
     .delete()
