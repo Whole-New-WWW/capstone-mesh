@@ -1,9 +1,5 @@
 import styled, { css } from "@emotion/native";
 
-// Branded Fonts
-import Manrope from "./assets/fonts/Manrope-Regular.ttf";
-import Nanum from "./assets/fonts/NanumMyeongjo-Regular.ttf";
-
 // Branded Colors
 export const Colors = {
   lavender: "#D6D5EA",
@@ -20,7 +16,7 @@ const { lavender, yellow, navy, light, teal } = Colors;
 export const Container = styled.SafeAreaView`
   flex: 1;
   background-color: #fff;
-  padding: 15px;
+  padding: 15px 30px 15px 30px;
 `;
 
 // The navy button
@@ -39,34 +35,10 @@ export const ButtonText = styled.Text`
   font-weight: bold;
 `;
 
-// The flex container in the Header
-export const TopBar = styled.View`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  background-color: ${light};
-  padding: 15px;
-  max-height: 80px;
-`;
-
 // The tiny icons in the Header and Footer
 export const NavIcon = styled.Image`
   width: 20px;
   height: 20px;
-`;
-
-// The container in Footer
-export const BottomBar = styled.View`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: center;
-  background-color: #fff;
-  border: 1px solid ${lavender};
-  padding: 15px 25px 25px 25px;
 `;
 
 // The container holding Next and Back buttons
@@ -103,6 +75,7 @@ export const Title = styled.Text`
   text-align: center;
   margin: 25px;
   top: 2%;
+  font-family: 'Nanum'
 `;
 
 // The Form Boxes in Account + Reports
@@ -113,9 +86,26 @@ export const Details = styled.View`
   border-radius: 5px;
 `;
 
+// For SOS History
+export const HistoryBox = styled.View`
+  margin: 5px;
+  background-color: ${light};
+  border: 1px solid ${lavender};
+  border-radius: 5px;
+  padding: 15px 0 15px 0;
+  width: 75%;
+`;
+
+export const SOSBar = styled.View`
+  flex: 1;
+  flex-direction: row;
+  justify-content: flex-start;
+  margin-top: 15px;
+`;
+
 // Titles for the Forms
 export const FormTitle = styled.Text`
-  padding: 10px 30px 10px 30px;
+  padding: 15px 30px 0px 30px;
   font-weight: bold;
   color: ${navy}
 `;
@@ -173,11 +163,11 @@ export const FormBox = styled.View`
 // Login + Sign Up
 
 export const Logo = styled.Image`
-  flex: 1;
-  height: 120px;
-  width: 120px;
-  align-self: center;
+  max-height: 120px;
+  max-width: 120px;
   margin: 30px;
+  flex: 1;
+  align-self: center;
 `;
 
 // Footer for the Login & Sign Up Screens (the Have an Account?)
@@ -221,33 +211,20 @@ export const Grid = styled.View`
   justify-content: center;
 `;
 
-// Dashboard Button Icons
+// SOS
 export const Icon = styled.Image`
   width: 40px;
   height: 40px;
   margin: 15px;
 `;
 
-export const DashButton = styled.TouchableOpacity`
-  padding: 10px;
-  align-items: center;
-  background-color: #fff;
-  border-radius: 25px;
-  width: 150px;
-  height: 150px;
-  margin: 10px;
-  justify-content: center;
-  box-shadow: 1px 1px 2px ${lavender};
-`;
-
 // Special Dashboard button for SOS
 export const SOS = styled.TouchableOpacity`
-  padding: 10px;
   align-items: center;
   background-color: ${yellow};
-  border-radius: 25px;
-  width: 150px;
-  height: 150px;
+  border-radius: 100px;
+  width: 125px;
+  height: 125px;
   margin: 10px;
   justify-content: center;
   box-shadow: 1px 1px 2px ${lavender};
@@ -258,16 +235,16 @@ export const SOS = styled.TouchableOpacity`
 export const DashText = styled.Text`
   font-size: 14px;
   text-align: center;
-  margin: 5px;
 `;
 
 // Circular image in safety nets components
-export const CircularImage = styled.Image`
+export const CircularImage = styled.View`
   width: 150px;
   height: 150px;
   border-radius: 100px;
   border: 4px ${yellow};
-  margin: 60px 0 20px 0;
+  margin: 50px 0 0 0;
+  justify-content: center;
   align-self: center;
 `;
 

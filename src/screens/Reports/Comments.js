@@ -13,12 +13,10 @@ import {
   ModalBox
 } from '../../../styles'
 import { View } from 'react-native'
-import Header from '../../nav/Header'
-import Footer from '../../nav/Footer'
 import { firebase } from '../../firebase/config'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import MultiSelect from 'react-native-multiple-select'
-import { AuthContext } from '../../nav/Auth'
+import { AuthContext } from '../../auth/Auth'
 
 // Color imports
 const { navy } = Colors
@@ -32,12 +30,12 @@ const items = [
   { id: 5, name: 'Sexual Assault' },
 ]
 
-export const Form = (props) => {
-  props.route.name = `Incident Report`
+export default function Comments({navigation}) {
   let [user] = useState(AuthContext)
   user = user._currentValue.user
 
   const [comments, setComments] = useState('')
+
   const [location, setLocation] = useState('')
   const [date, setDate] = useState(new Date(1598051730000))
   const [mode, setMode] = useState('date')
@@ -91,18 +89,14 @@ export const Form = (props) => {
         }),
       })
       alert(`Thank you for sharing. We're with you.`)
-      props.navigation.navigate('Dashboard')
+      navigation.navigate('Dashboard')
     } catch (e) {
       alert(e)
     }
   }
 
-  console.log('FORM.JS>>>', props)
-
   return (
-    <>
       <Container>
-        <Header {...props} />
         <FormTitle>Date and Time</FormTitle>
         <ReportBar>
           <Button onPress={showDatepicker}>
@@ -181,7 +175,5 @@ export const Form = (props) => {
           <ButtonText>Submit</ButtonText>
         </Button>
       </Container>
-      <Footer {...props} />
-    </>
   )
 }
