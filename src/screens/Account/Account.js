@@ -10,8 +10,9 @@ import {
   DetailText,
   NavIcon,
   CircularImage,
+  InvertButton,
 } from '../../../styles'
-import { TouchableOpacity, Image } from 'react-native'
+import { TouchableOpacity, Image, ScrollView } from 'react-native'
 import { AuthContext } from '../../auth/Auth'
 import { firebase } from '../../firebase/config'
 import one from '../../../assets/profiles/profile1.jpg'
@@ -70,26 +71,26 @@ export default function Account({ navigation }) {
             <NavIcon source={require('../../../assets/icons/edit.png')} />
           </TouchableOpacity>
         </ReportBar>
-        <Text>ID</Text>
-        <Details>
-          <DetailText>{user.id}</DetailText>
-        </Details>
-        <Text>Email</Text>
-        <Details>
-          <DetailText>{user.email}</DetailText>
-        </Details>
-        <Text>Mobile</Text>
-        <Details>
-          <DetailText>{user.mobile ? user.mobile : 'No mobile #'}</DetailText>
-        </Details>
-        <ReportBar>
-          <Button onPress={() => logOut()}>
-            <ButtonText>Log Out</ButtonText>
-          </Button>
-          <Button onPress={() => navigation.navigate('History')}>
-            <ButtonText>SOS History</ButtonText>
-          </Button>
-        </ReportBar>
+        <ScrollView>
+          <Text>Account</Text>
+          <Details>
+            <DetailText>{user.id}</DetailText>
+          </Details>
+          <Text>Email</Text>
+          <Details>
+            <DetailText>{user.email}</DetailText>
+          </Details>
+          <Text>Mobile</Text>
+          <Details>
+            <DetailText>{user.mobile ? user.mobile : 'No mobile #'}</DetailText>
+          </Details>
+        </ScrollView>
+        <Button onPress={() => navigation.navigate('History')}>
+          <ButtonText>SOS History</ButtonText>
+        </Button>
+        <InvertButton onPress={() => logOut()}>
+          <Text>Log Out</Text>
+        </InvertButton>
       </Container>
     </>
   )

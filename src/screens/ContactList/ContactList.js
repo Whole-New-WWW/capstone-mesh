@@ -104,7 +104,9 @@ export default function ContactList(props) {
       <>
         <SafeAreaView/>
           <TextInput
-            style={{height: 30,
+            style={{
+              height: 30,
+              fontSize: 18,
             marginLeft: 10}}
             placeholder="Search"
             onChangeText={value => searchContacts(value)}
