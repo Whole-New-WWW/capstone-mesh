@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { firebase } from '../../firebase/config'
 import {
   Container,
   Title,
@@ -34,20 +35,20 @@ export default function Account({ navigation }) {
                 <Title>{index + 1}</Title>
                 <View style={{ width: `100%` }}>
                   <HistoryBox>
-                    <Text style={{ fontWeight: 'bold' }}>Date: </Text>
+                    <Text>Date: </Text>
                     <Text selectable={true}>{entry.date}</Text>
                   </HistoryBox>
                   <HistoryBox>
-                    <Text style={{ fontWeight: 'bold' }}>Location: </Text>
+                    <Text>Location: </Text>
                     <Text selectable={true}>{entry.location}</Text>
                   </HistoryBox>
                 </View>
               </SOSBar>
             ))
         ) : (
-          <HistoryBox>
-            <DetailText>No SOS history so far. 🎉</DetailText>
-          </HistoryBox>
+          <DetailText style={{ textAlign: 'center' }}>
+            No SOS history so far. 🎉
+          </DetailText>
         )}
       </ScrollView>
     </Container>

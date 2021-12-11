@@ -2,13 +2,9 @@
 import * as SMS from 'expo-sms'
 import firebase from 'firebase'
 
-
 const db = firebase.firestore()
 
 const mapSMS = async (userID) => {
-    //let user = AuthContext //'ajtLFqLgjwPDIiSNT1UaCjehrJu1';
-    console.log('USER ID INSIDE MAPs?????????????????', userID)
-    
     const getSafetyNetPhoneNums = async () => { // Does this need "async?"
         const userRef = db.collection('users').doc(userID); // gets a reference for the user's document //.doc(user.id)
         console.log('ref ######################', userRef)
@@ -16,7 +12,7 @@ const mapSMS = async (userID) => {
         const userData = await userRef.get() // reads that user document from the db
         console.log('userData #################', userData.data())
         const userObj = await userData.data();
-        
+        //safety_net does not exist on the object!!!!
         const userSafetyNets = userObj.safety_nets // selects the safety nets array in the user doc
         // console.log('nets', userSafetyNets)
         const phoneNums = []
@@ -48,4 +44,4 @@ const mapSMS = async (userID) => {
       alert(e)
     }
 }
-export default mapSMS
+export default mapSMS;

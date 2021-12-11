@@ -9,6 +9,7 @@ import RegistrationScreen from '../screens/RegistrationScreen'
 import SafetyNets from '../screens/SafetyNets/SafetyNets'
 import SingleSafetyNet from '../screens/SafetyNets/SingleSafetyNet'
 import Comments from '../screens/Reports/Comments'
+import ContactList from '../screens/ContactList/ContactList'
 
 import { Colors } from '../../styles'
 
@@ -27,7 +28,7 @@ export function MapNavigator() {
         },
         headerTintColor: `${navy}`,
         headerTitleStyle: {
-          fontWeight: 'bold',
+          fontFamily: 'Manrope',
         },
       }}
     >
@@ -46,7 +47,7 @@ export function ProfileNavigator() {
         },
         headerTintColor: `${navy}`,
         headerTitleStyle: {
-          fontWeight: 'bold',
+          fontFamily: 'Manrope',
         },
       }}
     >
@@ -79,12 +80,13 @@ export function SafetyNetsNavigator() {
         },
         headerTintColor: `${navy}`,
         headerTitleStyle: {
-          fontWeight: 'bold',
+          fontFamily: 'Manrope',
         },
       }}
     >
       <Stack.Screen name="Safety Nets" component={SafetyNets} />
       <Stack.Screen name="Safety Net" component={SingleSafetyNet} />
+      <Stack.Screen name="Contact List" component={ContactList} />
     </Stack.Navigator>
   )
 }
@@ -99,7 +101,7 @@ export function ReportNavigator() {
         },
         headerTintColor: `${navy}`,
         headerTitleStyle: {
-          fontWeight: 'bold',
+          fontFamily: 'Manrope',
         },
       }}
     >

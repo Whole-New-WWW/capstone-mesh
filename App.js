@@ -17,6 +17,7 @@ if (!global.atob) {
 export default function App() {
   const [loaded] = useFonts({
     Nanum: require('./assets/fonts/NanumMyeongjo-Regular.ttf'),
+    Manrope: require('./assets/fonts/Manrope-Regular.ttf')
   })
 
   return (

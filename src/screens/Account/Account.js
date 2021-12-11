@@ -10,8 +10,9 @@ import {
   DetailText,
   NavIcon,
   CircularImage,
+  InvertButton,
 } from '../../../styles'
-import { TouchableOpacity, Image } from 'react-native'
+import { TouchableOpacity, Image, ScrollView } from 'react-native'
 import { AuthContext } from '../../auth/Auth'
 import { firebase } from '../../firebase/config'
 import one from '../../../assets/profiles/profile1.jpg'
@@ -48,29 +49,29 @@ export default function Account({ navigation }) {
   }
 
   return (
-    <>
-      <Container>
-        <CircularImage>
-          <Image
-            source={image}
-            style={{
-              borderRadius: 100,
-              width: 145,
-              height: 145,
-              alignSelf: 'center',
-            }}
-          />
-        </CircularImage>
-        <ReportBar style={{ paddingLeft: 5, paddingRight: 20 }}>
-          <Title style={{ textTransform: 'uppercase' }}>{user.name}</Title>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('Edit')}
-            style={{ padding: 10, alignSelf: 'center' }}
-          >
-            <NavIcon source={require('../../../assets/icons/edit.png')} />
-          </TouchableOpacity>
-        </ReportBar>
-        <Text>ID</Text>
+    <Container>
+      <CircularImage>
+        <Image
+          source={image}
+          style={{
+            borderRadius: 100,
+            width: 145,
+            height: 145,
+            alignSelf: 'center',
+          }}
+        />
+      </CircularImage>
+      <ReportBar style={{ paddingLeft: 5, paddingRight: 20 }}>
+        <Title style={{ textTransform: 'uppercase' }}>{user.name}</Title>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Edit')}
+          style={{ padding: 10, alignSelf: 'center' }}
+        >
+          <NavIcon source={require('../../../assets/icons/edit.png')} />
+        </TouchableOpacity>
+      </ReportBar>
+      <ScrollView>
+        <Text>Account ID</Text>
         <Details>
           <DetailText>{user.id}</DetailText>
         </Details>
@@ -82,15 +83,13 @@ export default function Account({ navigation }) {
         <Details>
           <DetailText>{user.mobile ? user.mobile : 'No mobile #'}</DetailText>
         </Details>
-        <ReportBar>
-          <Button onPress={() => logOut()}>
-            <ButtonText>Log Out</ButtonText>
-          </Button>
-          <Button onPress={() => navigation.navigate('History')}>
-            <ButtonText>SOS History</ButtonText>
-          </Button>
-        </ReportBar>
-      </Container>
-    </>
+      </ScrollView>
+      <Button onPress={() => navigation.navigate('History')}>
+        <ButtonText>SOS History</ButtonText>
+      </Button>
+      <InvertButton onPress={() => logOut()}>
+        <Text>Log Out</Text>
+      </InvertButton>
+    </Container>
   )
 }
