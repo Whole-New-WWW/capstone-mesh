@@ -23,7 +23,7 @@ export default function SingleSafetyNet(props) {
   const { net } = props.route.params;
   console.log('HERE ARE PROPS IN SINGLE', props)
   const users = net.users;
-  
+
   return (
     <Container>
       <Title>
@@ -44,7 +44,7 @@ export default function SingleSafetyNet(props) {
           <SmallAddButton
             style={{alignSelf: 'center'}}
           >
-            <SmallIcon source={require('../../../assets/icons/plus.png')}/> 
+            <SmallIcon source={require('../../../assets/icons/plus.png')}/>
             <DashText>
               Add Contact
             </DashText>
@@ -73,7 +73,7 @@ export default function SingleSafetyNet(props) {
                   style={{flexDirection:"row",
                   }}
                 >
-                  <FlexColumnButton 
+                  <FlexColumnButton
                     key={index}
                   >
                     <DashText>
@@ -89,10 +89,10 @@ export default function SingleSafetyNet(props) {
                 </View>
               )
             })}
-            <SmallAddButton 
+            <SmallAddButton
               onPress={() => props.navigation.navigate('Contact List')}
             >
-              <SmallIcon source={require('../../../assets/icons/plus.png')}/> 
+              <SmallIcon source={require('../../../assets/icons/plus.png')}/>
               <DashText>
                 Add Contact
               </DashText>
