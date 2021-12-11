@@ -46,9 +46,9 @@ export default function Account({ navigation }) {
               </SOSBar>
             ))
         ) : (
-          <HistoryBox>
-            <DetailText>No SOS history so far. 🎉</DetailText>
-          </HistoryBox>
+          <DetailText style={{ textAlign: 'center' }}>
+            No SOS history so far. 🎉
+          </DetailText>
         )}
       </ScrollView>
     </Container>

@@ -26,12 +26,12 @@ export default function Dashboard(props) {
             style={{ height: 150, width: 150 }}
           />
         </View>
-        <View>
+        <View style={{width: `93%`}}>
           <Title>{title()}</Title>
-          <Text style={{ textAlign: 'center' }}>
-            Plan and track your journies with ease of mind.
+          <Text style={{ textAlign: 'center'}}>
+            Plan and track your journeys with ease of mind.
             {'\n'}{'\n'}
-            The SOS below is your emergency button to immediately contact your Safety Net with your exact location, so they can assist you.
+            The SOS below is your emergency button to contact your Safety Net with your exact location for immediate assistance.
           </Text>
         </View>
         <SOSButton />
