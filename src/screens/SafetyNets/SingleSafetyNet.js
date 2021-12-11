@@ -17,9 +17,10 @@ import {
   SmallAddButton,
   Grid,
   SafetyNetButton,
-  SafetyNetIcon
+  SafetyNetIcon,
+  Contact
 } from "../../../styles";
-import { AuthContext } from '../../nav/Auth'
+import { AuthContext } from '../../auth/Auth'
 
 const db = firebase.firestore()
 
@@ -111,7 +112,7 @@ export default function SingleSafetyNet(props) {
                   style={{flexDirection:"row",
                   }}
                 >
-                  <FlexColumnButton
+                  <Contact
                     key={index}
                   >
                     <DashText>
@@ -123,7 +124,7 @@ export default function SingleSafetyNet(props) {
                     >
                       <SafetyNetIcon source={require("../../../assets/icons/remove.png")} />
                     </SafetyNetButton>
-                  </FlexColumnButton>
+                  </Contact>
                 </View>
               )
             })}

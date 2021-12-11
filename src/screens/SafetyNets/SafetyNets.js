@@ -15,7 +15,8 @@ import {
   FormBox,
   TextInput,
   Button,
-  ButtonText
+  ButtonText,
+  InvertButton
 } from "../../../styles";
 import { Image } from 'react-native'
 
@@ -77,9 +78,9 @@ export default function SafetyNets(props) {
   const [safetyNet, setSafetyNet] = useState('');
   const [safetyNets, setSafetyNets] = useState(user.safety_nets)
   const [modalDisplayed, setModalDisplayed] = useState(false);
-  
+
   // Should we consider making a query to our database here to access user data for this component?
-  
+
   async function onSubmit() {
     try {
       const updateSafetyNetRef = await firebase.firestore().collection('users').doc(user.id);
@@ -99,8 +100,6 @@ export default function SafetyNets(props) {
       onSubmit();
     }
   }
-
-  console.log('HERE ARE THE PROPS', props);
 
   return (
     <ScrollView>
@@ -159,20 +158,19 @@ export default function SafetyNets(props) {
             </Modal>
             <ButtonListContainer>
               {safetyNets.map((net, index) => {
-                
+
                 return (
-                  <FlexRowButton 
-                    key={index} 
+                  <FlexRowButton
+                    key={index}
                     onPress={() => props.navigation.navigate("Safety Net", {net})}
                   >
-                    {console.log('HERE ARE THE NET USERS', net.users)}
                     <DashText>
                       {net.name}
                     </DashText>
                   </FlexRowButton>
                 )
               })}
-              <AddButton 
+              <AddButton
                 onPress={() => setModalDisplayed(true)}
               >
                 <SmallIcon source={require('../../../assets/icons/plus.png')}/>
