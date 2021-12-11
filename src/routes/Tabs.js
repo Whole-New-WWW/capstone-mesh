@@ -5,7 +5,7 @@ import {
   ProfileNavigator,
   MapNavigator,
   SafetyNetsNavigator,
-  ReportNavigator,
+  ReportNavigator
 } from './Stacks'
 import { NavIcon, Colors } from '../../styles'
 

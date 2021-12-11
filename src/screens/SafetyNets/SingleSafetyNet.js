@@ -19,13 +19,12 @@ import {
   SafetyNetButton,
   SafetyNetIcon
 } from "../../../styles";
-import { AuthContext } from '../../nav/Auth'
+import { AuthContext } from '../../auth/Auth'
 
 const db = firebase.firestore()
 
 export default function SingleSafetyNet(props) {
-  const { net } = props.route.params; //getting from firebase
-  console.log('HERE ARE PROPS IN SINGLE', props)
+  const { net } = props.route.params;
   const users = net.users;
   //const {user} = React.useContext(AuthContext);
 
@@ -61,7 +60,6 @@ export default function SingleSafetyNet(props) {
     props.navigation.navigate('Safety Nets', {})
   }
 
-
   return (
     <Container>
       <Title>
@@ -74,13 +72,13 @@ export default function SingleSafetyNet(props) {
         />
       </CircularImage>
       {!users ? (
-        <>
         <Container>
           <Title>
             Add your crew here!
           </Title>
           <SmallAddButton
             style={{alignSelf: 'center'}}
+            onPress={() => props.navigation.navigate('Contact List')}
           >
             <SmallIcon source={require('../../../assets/icons/plus.png')}/> 
             <DashText>
@@ -94,14 +92,12 @@ export default function SingleSafetyNet(props) {
               alignSelf: 'center',
               justifyContent: 'center'
             }}
-            // onPress={() => onclick()} delete functionality
           >
             <ButtonText>
               Delete Safety Net
             </ButtonText>
           </Button>
         </Container>
-        </>
       ) : (
         <>
           <Grid>
@@ -113,6 +109,10 @@ export default function SingleSafetyNet(props) {
                 >
                   <FlexColumnButton 
                     key={index}
+                      style={{
+                        paddingTop: 10,
+                        paddingBotton: 10
+                      }}
                   >
                     <DashText>
                       {user.fullName}
@@ -143,7 +143,6 @@ export default function SingleSafetyNet(props) {
               alignSelf: 'center',
               justifyContent: 'center'
             }}
-            // onPress={() => onclick()} delete functionality
           >
             <ButtonText>
               Delete Safety Net
