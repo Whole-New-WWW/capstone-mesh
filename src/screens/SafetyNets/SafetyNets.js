@@ -144,24 +144,17 @@ export default function SafetyNets(props) {
                 >
                 </TextInput>
                 <Button
-                  style={{
-                    height: 50,
-                    justifyContent: 'center'
-                  }}
+                  style={{ alignSelf: 'center', width: `85%` }}
                   onPress={() => onclick()}
                 >
-                  <ButtonText>
-                    Save Safety Net
-                  </ButtonText>
+                  <ButtonText>Save Safety Net</ButtonText>
                 </Button>
-                <SmallAddButton
-                  style={{alignSelf: 'center'}}
+                <InvertButton
+                  style={{ alignSelf: 'center', width: `85%` }}
                   onPress={() => setModalDisplayed(!modalDisplayed)}
                 >
-                  <DashText>
-                    Cancel
-                  </DashText>
-                </SmallAddButton>
+                  <DashText>Cancel</DashText>
+                </InvertButton>
               </Container>
             </Modal>
             <ButtonListContainer>
