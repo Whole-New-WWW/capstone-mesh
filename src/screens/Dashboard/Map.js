@@ -5,9 +5,7 @@ import { Marker } from 'react-native-maps'
 import {
   StyleSheet,
   Dimensions,
-  Picker,
   TouchableOpacity,
-  Button,
   Text,
   View,
 } from 'react-native'
@@ -16,14 +14,13 @@ import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplet
 import MapViewDirections from 'react-native-maps-directions' //to connect the two markers to get directions (origin and destination)
 import { useRef } from 'react' //allows to access DOM element
 import { getDistance } from 'geolib' //calculates the distance
-import CrimeData from './CrimeData'
 import CrimeHeatMap from './CrimeHeatMap'
 import mapSMS from './MapNotifications'
 import { AuthContext } from '../../auth/Auth'
 import { API_KEY } from '../../../secrets' // import your unique Google Maps API key in secrets.js file
 
 // Color imports
-const { navy, lavender, light, yellow } = Colors
+const { navy, lavender, yellow } = Colors
 
 //Distance check for notifications
 const ARRIVED = 20
@@ -168,101 +165,108 @@ const Map = (props) => {
       />
 
       {location ? (
-        <MapView
-          ref={mapRef}
-          initialRegion={initialRegion}
-          provider={PROVIDER_GOOGLE}
-          style={styles.map}
-          zoomEnabled={true}
-        >
-          <Marker coordinate={location} title="Current Location"></Marker>
-          {searchedPlace ? (
-            <Marker
-              coordinate={searchedPlace}
-              title="Desired Location"
-            ></Marker>
-          ) : null}
-          {/* Change heat map/crime data display based on level of zoom */}
-          {showHeatmap ? (
-            <CrimeHeatMap />
-          ) : (
-            <></>
-          )}
-          {/* <CrimeData /> */}
-          {location && searchedPlace ? (
-            <MapViewDirections
-              origin={location}
-              destination={searchedPlace}
-              apikey={API_KEY}
-              strokeWidth={5}
-              strokeColor="purple"
-            />
-          ) : null}
-        </MapView>
+        <>
+          <MapView
+            ref={mapRef}
+            initialRegion={initialRegion}
+            provider={PROVIDER_GOOGLE}
+            style={styles.map}
+            zoomEnabled={true}
+          >
+            <Marker coordinate={location} title="Current Location"></Marker>
+            {searchedPlace ? (
+              <Marker
+                coordinate={searchedPlace}
+                title="Desired Location"
+              ></Marker>
+            ) : null}
+            {/* Change heat map/crime data display based on level of zoom */}
+            {showHeatmap ? <CrimeHeatMap /> : <></>}
+            {location && searchedPlace ? (
+              <MapViewDirections
+                origin={location}
+                destination={searchedPlace}
+                apikey={API_KEY}
+                strokeWidth={5}
+                strokeColor="purple"
+              />
+            ) : null}
+          </MapView>
+
+          {/* All the Map Buttons */}
+          <View>
+            {/* Heatmap Button */}
+            {!showHeatmap ? (
+              <TouchableOpacity
+                style={[styles.localCrimes, styles.center]}
+                onPress={() => {
+                  setHeatmap(true)
+                }}
+              >
+                <Text style={[styles.text]}>View Heatmap</Text>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                style={[styles.localCrimes, styles.center]}
+                onPress={() => {
+                  setHeatmap(false)
+                }}
+              >
+                <Text style={[styles.text]}>Hide Heatmap</Text>
+              </TouchableOpacity>
+            )}
+
+            {/* On my Way Button */}
+            {!searchedPlace ? (
+              <TouchableOpacity
+                style={[styles.confirmButton, styles.center]}
+                onPress={() => alert('Please enter a location first! 🏁')}
+              >
+                <Text style={[styles.text]}>On My Way</Text>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                style={[styles.confirmButton, styles.center]}
+                onPress={watch}
+              >
+                <Text style={[styles.text]}>On My Way</Text>
+              </TouchableOpacity>
+            )}
+
+            {/* View Instructions Button */}
+            {!showInstruction ? (
+              <TouchableOpacity
+                style={[styles.instruction, styles.center]}
+                onPress={() => {
+                  setInstruction(true)
+                }}
+              >
+                <Text style={[styles.text]}>How-To</Text>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                style={[styles.instruction, styles.center]}
+                onPress={() => {
+                  setInstruction(false)
+                }}
+              >
+                <Text style={[styles.text]}>Hide How-To</Text>
+              </TouchableOpacity>
+            )}
+          </View>
+        </>
       ) : (
-        <Text>Loading coordinates</Text>
+        <Text
+          style={{
+            fontSize: 20,
+            position: 'absolute',
+            top: `20%`,
+            left: `25%`,
+          }}
+        >
+          Loading Map View... ⏳
+        </Text>
       )}
-
-      <View>
-        {/* Heatmap Button */}
-        {!showHeatmap ? (
-          <TouchableOpacity
-            style={[styles.localCrimes, styles.center]}
-            onPress={() => {
-              setHeatmap(true)
-            }}
-          >
-            <Text style={[styles.text]}>View Heatmap</Text>
-          </TouchableOpacity>
-        ) : (
-          <TouchableOpacity
-            style={[styles.localCrimes, styles.center]}
-            onPress={() => {
-              setHeatmap(false)
-            }}
-          >
-            <Text style={[styles.text]}>Hide Heatmap</Text>
-          </TouchableOpacity>
-        )}
-
-        {/* On my Way Button */}
-        {!searchedPlace ? (
-          <TouchableOpacity
-            style={[styles.confirmButton, styles.center]}
-            onPress={() => alert('Please enter a location first! 🏁')}
-          >
-            <Text style={[styles.text]}>On My Way</Text>
-          </TouchableOpacity>
-        ) : (
-          <TouchableOpacity
-            style={[styles.confirmButton, styles.center]}
-            onPress={watch}
-          >
-            <Text style={[styles.text]}>On My Way</Text>
-          </TouchableOpacity>
-        )}
-
-        {/* View Instructions Button */}
-        {!showInstruction ? (
-          <TouchableOpacity
-            style={[styles.instruction, styles.center]}
-            onPress={() => {
-              setInstruction(true)
-            }}
-          >
-            <Text style={[styles.text]}>How-To</Text>
-          </TouchableOpacity>
-        ) : (
-          <TouchableOpacity
-            style={[styles.instruction, styles.center]}
-            onPress={() => {
-              setInstruction(false)
-            }}
-          >
-            <Text style={[styles.text]}>Hide How-To</Text>
-          </TouchableOpacity>
-        )}
-      </View>
     </Container>
   )
 }
@@ -313,7 +317,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 360,
     right: 10,
-    fontFamily: 'Manrope'
+    fontFamily: 'Manrope',
   },
   text: {
     fontSize: 15,
@@ -324,6 +328,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   showMap: {
-    display: 'none'
-  }
+    display: 'none',
+  },
 })
