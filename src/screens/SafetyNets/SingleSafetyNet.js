@@ -35,10 +35,6 @@ export default function SingleSafetyNet(props) {
   const {user} = React.useContext(AuthContext);
   const userID = user.id //the user themself not the contact user
 
-  //get the current user document from firestore
-  //map throught that users safety nets 
-  //find the safety net that we want to change
-  //
 
   //deletes single safety net on click of the delete button
   const deleteSafetyNet = async (userId) => {
@@ -66,32 +62,6 @@ export default function SingleSafetyNet(props) {
     deleteSafetyNet(userId);
     props.navigation.navigate('Safety Nets', {})
   }
-
-
-//delete single user
-  // const deleteSingleSafetyUser = (userId, contactPhoneNumber) => {
-  //   console.log('USERID!!!!>>>', userId)//gets the user id
-  //   const userRef = db 
-  //   .collection('users')
-  //   .doc(userId);
-  //   const respond = await userRef.update({
-  //     safety_nets: {
-  //               [0]:{
-
-  //     }} 
-  //   })
-  //   ////add logic going into safety net 
-  //   //grab the friend phoneNumber that i'm trying to delete
-  //   .delete()
-  //   .then(() => {
-  //     Alert.alert(
-  //       'Safety net has been deleted!',
-  //       'Updates to your safety net have been saved successfully!'
-  //     )
-  //   }
-  //   )
-  //   .catch(e => console.log('Error deleting contact', e))
-  // }
 
 
   return (
