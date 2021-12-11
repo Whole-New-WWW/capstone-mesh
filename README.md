@@ -12,10 +12,16 @@ yarn install
 expo start
 ```
 
-## Crime API:
+## Objective
+
+## API's:
+
+<a href= >Google Maps & Places</a>
 
 <a href="https://data.cityofnewyork.us/Public-Safety/NYC-crime/qb7u-rbmr">NYC Crime Database</a>
 
 <a href="https://data.cityofnewyork.us/Public-Safety/NYC-crime/qb7u-rbmr/data">NYC Crime Database Reports</a>
 
 Free icons from <a href="https://www.flaticon.com/">Flaticon</a>.
+
+## Team:
