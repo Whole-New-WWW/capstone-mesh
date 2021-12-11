@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import Header from '../../nav/Header';
-import Footer from '../../nav/Footer';
 import ContactList from '../ContactList/ContactList';
 import * as Contacts from 'expo-contacts';
+<<<<<<< HEAD
 import { View, Alert } from 'react-native';
 import firebase from 'firebase'
 import { useEffect } from "react";
+=======
+import { View } from 'react-native';
+import { Image } from 'react-native'
+>>>>>>> main
 import {
   Container,
   DashText,
@@ -65,28 +68,79 @@ export default function SingleSafetyNet(props) {
 
 
   return (
-    <>
-      {console.log('HERE IS THE NET AGAIN', net)}
-      <Container>
-        <Header {...props}/>
-        <Title>
-          {net.name}
-        </Title>
-        <CircularImage source={require('../../../assets/icons/friends.png')}/>
-        {!users ? (
-          <>
-          <Container>
-            <Title>
-              Add your crew here!
-            </Title>
-            <SmallAddButton
-              style={{alignSelf: 'center'}}
+    <Container>
+      <Title>
+        {net.name}
+      </Title>
+      <CircularImage>
+        <Image
+          source={require('../../../assets/icons/friends.png')}
+          style={{ width: 75, height: 75, alignSelf: 'center' }}
+        />
+      </CircularImage>
+      {!users ? (
+        <>
+        <Container>
+          <Title>
+            Add your crew here!
+          </Title>
+          <SmallAddButton
+            style={{alignSelf: 'center'}}
+          >
+            <SmallIcon source={require('../../../assets/icons/plus.png')}/> 
+            <DashText>
+              Add Contact
+            </DashText>
+          </SmallAddButton>
+          <Button
+            style={{
+              height: 50,
+              width: 200,
+              alignSelf: 'center',
+              justifyContent: 'center'
+            }}
+            // onPress={() => onclick()} delete functionality
+          >
+            <ButtonText>
+              Delete Safety Net
+            </ButtonText>
+          </Button>
+        </Container>
+        </>
+      ) : (
+        <>
+          <Grid>
+            {users.map((user, index)=> {
+              return (
+                <View
+                  style={{flexDirection:"row",
+                  }}
+                >
+                  <FlexColumnButton 
+                    key={index}
+                  >
+                    <DashText>
+                      {user.fullName}
+                    </DashText>
+                    <SafetyNetButton
+                    style={{ backgroundColor: "transparent" }}
+                    // onPress={() => props.navigation.goBack()}
+                    >
+                      <SafetyNetIcon source={require("../../../assets/icons/remove.png")} />
+                    </SafetyNetButton>
+                  </FlexColumnButton>
+                </View>
+              )
+            })}
+            <SmallAddButton 
+              onPress={() => props.navigation.navigate('Contact List')}
             >
               <SmallIcon source={require('../../../assets/icons/plus.png')}/> 
               <DashText>
                 Add Contact
               </DashText>
             </SmallAddButton>
+<<<<<<< HEAD
             <Button
               style={{
                 height: 50,
@@ -155,5 +209,24 @@ export default function SingleSafetyNet(props) {
       </Container>
       <Footer {...props} />
     </>
+=======
+          </Grid>
+          <Button
+            style={{
+              height: 50,
+              width: 200,
+              alignSelf: 'center',
+              justifyContent: 'center'
+            }}
+            // onPress={() => onclick()} delete functionality
+          >
+            <ButtonText>
+              Delete Safety Net
+            </ButtonText>
+          </Button>
+        </>
+      )}
+    </Container>
+>>>>>>> main
   )
 }

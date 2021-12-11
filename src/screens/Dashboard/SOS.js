@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Icon, DashText, SOS } from '../../../styles'
-import { AuthContext } from '../../nav/Auth'
+import { AuthContext } from '../../auth/Auth'
 import { firebase } from '../../firebase/config'
 
 import {
@@ -11,8 +11,7 @@ import * as Brightness from 'expo-brightness'
 import * as SMS from 'expo-sms'
 
 export default function SOSButton(props) {
-  let [user] = useState(AuthContext)
-  user = user._currentValue.user
+  const { user, setUser } = useContext(AuthContext)
   const [location, setLocation] = useState(null)
 
   // date formatting
@@ -22,8 +21,6 @@ export default function SOSButton(props) {
   const H = new Date().getHours()
   const MM = new Date().getMinutes()
   const date = `${M}/${D}/${Y} at ${H}:${MM}`
-
-  console.log('LOCATION', location)
 
   useEffect(() => {
     ;(async () => {
@@ -48,24 +45,29 @@ export default function SOSButton(props) {
       if (status === 'granted') {
         Brightness.setSystemBrightnessAsync(0.1)
       }
-      console.log('COORDS >> ', location)
-
-      // saves your coordinates and date of SOS trigger
-      const usersRef = firebase.firestore().collection('users').doc(user.id)
-      usersRef.update({
-        sos: firebase.firestore.FieldValue.arrayUnion({
-          location: `${location.latitude},${location.longitude}`,
-          date
-        }),
-      })
 
       // texts your safety net
+
       const isAvailable = await SMS.isAvailableAsync()
       if (isAvailable) {
         const { result } = await SMS.sendSMSAsync(
           ['3472637146'],
           `SOS button triggered. Here is my location: http://maps.google.com/?q=${location.latitude},${location.longitude}`,
         )
+
+        // saves your coordinates and date of SOS trigger
+        if (result !== 'sent') {
+          alert(`SOS triggered is ${result}`)
+          Brightness.setSystemBrightnessAsync(0.7)
+        } else {
+          const usersRef = firebase.firestore().collection('users').doc(user.id)
+          usersRef.update({
+            sos: firebase.firestore.FieldValue.arrayUnion({
+              location: `${location.latitude},${location.longitude}`,
+              date
+            })
+          })
+        }
       } else {
         alert('Error in sending.')
       }
@@ -73,7 +75,6 @@ export default function SOSButton(props) {
       alert(e)
     }
   }
-  // maybe we need to use a firebase.get() for the safety nets to find the mobile numbers and input them as the mobile numbers in sendSMSAsync()? reads will be higher but not a big jump
 
   return (
     <>

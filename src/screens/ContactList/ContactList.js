@@ -1,17 +1,15 @@
 import React, { PureComponent, useState, useEffect, useMemo} from 'react';
 import * as Contacts from 'expo-contacts';
-import { View, Text, SectionList, TextInput, FlatList, ActivityIndicator, SafeAreaView} from 'react-native';
+import { View, Text, SectionList, TextInput, FlatList, ActivityIndicator, SafeAreaView, StatusBar} from 'react-native';
 import { styles } from './styles';
-import Header from '../../nav/Header';
-import Footer from '../../nav/Footer';
 
 export default function ContactList(props) {
   const [contacts, setContacts] = useState([]);
   const [cachedContacts, setCachedContacts] = useState([]);
-  // const [loading, setLoading] = useState(true); 
+  const [loading, setLoading] = useState(true); 
   // const finalSectionList = useMemo(() => {
   //   return filteredNames(contacts, sectionList)
-  // }, [contacts])
+  // }, [contacts, ectionList])
 
   useEffect(() => {
     async function fetchContacts() {
@@ -22,7 +20,7 @@ export default function ContactList(props) {
       // if (cachedContacts) {
       //   setContacts(cachedContacts);
       // } 
-      // else {Idk though 
+      // else {
         const { data } = await Contacts.getContactsAsync({
           fields: [Contacts.Fields.PhoneNumbers],
         });
@@ -86,7 +84,7 @@ export default function ContactList(props) {
   }
 
   const finalSections = filteredNames(contacts, sectionList);
-  
+
   return (
     <View style={styles.container}>
       <Header {...props}/>
@@ -101,7 +99,7 @@ export default function ContactList(props) {
         renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
         renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
         keyExtractor={(item, index) => index}
-        // initialNumToRender={30}
+        initialNumToRender={20}
       />
       <Footer {...props}/>
     </View>

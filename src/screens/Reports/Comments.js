@@ -9,16 +9,13 @@ import {
   LoginInput,
   ReportBar,
   TextInput,
-  FormTitle,
-  ModalBox
+  ModalBox,
 } from '../../../styles'
 import { View } from 'react-native'
-import Header from '../../nav/Header'
-import Footer from '../../nav/Footer'
 import { firebase } from '../../firebase/config'
 import DateTimePicker from '@react-native-community/datetimepicker'
 import MultiSelect from 'react-native-multiple-select'
-import { AuthContext } from '../../nav/Auth'
+import { AuthContext } from '../../auth/Auth'
 
 // Color imports
 const { navy } = Colors
@@ -32,8 +29,7 @@ const items = [
   { id: 5, name: 'Sexual Assault' },
 ]
 
-export const Form = (props) => {
-  props.route.name = `Incident Report`
+export default function Comments({ navigation }) {
   let [user] = useState(AuthContext)
   user = user._currentValue.user
 
@@ -73,68 +69,80 @@ export const Form = (props) => {
     setSelectedItems(selectedItems)
   }
 
+  // splits string of coordinates to object for incidents
+  const parseLocation = (location) => {
+    const coords = location.split(',')
+    const latitude = coords[0]
+    const longitude = coords[1]
+    return { lat: latitude, long: longitude }
+  }
+
   // send info to firestore
   const onSubmit = () => {
     try {
+      const coords = parseLocation(location)
       const incidentsRef = firebase.firestore().collection('incidents')
       incidentsRef.add({
         date,
         comments,
         type: selectedItems,
+        location: coords,
       })
+
       const usersRef = firebase.firestore().collection('users').doc(user.id)
       usersRef.update({
         incidents: firebase.firestore.FieldValue.arrayUnion({
           date,
           comments,
           type: selectedItems,
+          location: coords,
         }),
       })
-      alert(`Thank you for sharing. We're with you.`)
-      props.navigation.navigate('Dashboard')
+      alert(`Thank you for sharing your report. We're with you ❤️`)
+      navigation.navigate('Dashboard')
     } catch (e) {
       alert(e)
     }
   }
 
-  console.log('FORM.JS>>>', props)
-
   return (
-    <>
-      <Container>
-        <Header {...props} />
-        <FormTitle>Date and Time</FormTitle>
-        <ReportBar>
-          <Button onPress={showDatepicker}>
-            <ButtonText>Choose Date</ButtonText>
-          </Button>
-          <Button onPress={showTimepicker}>
-            <ButtonText>Choose Time</ButtonText>
-          </Button>
-        </ReportBar>
-        {show && (
-          <ModalBox>
-            <DateTimePicker
-              testID="dateTimePicker"
-              value={date}
-              mode={mode}
-              is24Hour={true}
-              display="spinner"
-              onChange={onChange}
-            />
-            <View style={{ padding: 10, backgroundColor: `${navy}` }}>
-              <ButtonText
-                style={{ textAlign: 'center' }}
-                onPress={() => setShow(false)}
-              >
-                Done
-              </ButtonText>
-            </View>
-          </ModalBox>
-        )}
+    <Container>
+      <Text>
+        {'\n'}
+        {'\n'}Date and Time
+      </Text>
+      <ReportBar>
+        <Button onPress={showDatepicker}>
+          <ButtonText>Choose Date</ButtonText>
+        </Button>
+        <Button onPress={showTimepicker}>
+          <ButtonText>Choose Time</ButtonText>
+        </Button>
+      </ReportBar>
+      {show && (
+        <ModalBox>
+          <DateTimePicker
+            testID="dateTimePicker"
+            value={date}
+            mode={mode}
+            is24Hour={true}
+            display="spinner"
+            onChange={onChange}
+          />
+          <View style={{ padding: 10, backgroundColor: `${navy}` }}>
+            <ButtonText
+              style={{ textAlign: 'center' }}
+              onPress={() => setShow(false)}
+            >
+              Done
+            </ButtonText>
+          </View>
+        </ModalBox>
+      )}
 
-        <FormTitle>Type of Incident</FormTitle>
-        <ModalBox style={{backgroundColor: 'white'}}><MultiSelect
+      <Text>{'\n'}Type of Incident</Text>
+      <ModalBox style={{ backgroundColor: 'white' }}>
+        <MultiSelect
           hideTags
           items={items}
           uniqueKey="name"
@@ -149,39 +157,41 @@ export const Form = (props) => {
           searchInputStyle={{ color: navy }}
           submitButtonColor={navy}
           submitButtonText="Submit"
-        /></ModalBox>
+        />
+      </ModalBox>
 
-        <FormTitle>Location</FormTitle>
-        <TextInput
-          placeholder="Forgot? Check your SOS history in Account"
-          onChangeText={(text) => setLocation(text)}
-          value={location}
+      <Text>{'\n'}Location</Text>
+      <Text style={{ fontStyle: 'italic', fontSize: 12 }}>
+        Forgot? Check your SOS history in Account
+      </Text>
+      <TextInput
+        placeholder="Please enter coordinates: [latitude],[longitude]"
+        onChangeText={(text) => setLocation(text)}
+        value={location}
+        underlineColorAndroid="transparent"
+        autoCapitalize="none"
+      />
+
+      <Text>{'\n'}Additional Comments</Text>
+      <FormBox>
+        <LoginInput
+          style={{
+            height: 100,
+            width: '90%',
+            backgroundColor: 'transparent',
+          }}
+          blurOnSubmit={true}
+          multiline={true}
+          placeholder="Additional Comments"
+          onChangeText={(text) => setComments(text)}
+          value={comments}
           underlineColorAndroid="transparent"
           autoCapitalize="none"
         />
-
-        <FormTitle>Additional Comments</FormTitle>
-        <FormBox>
-          <LoginInput
-            style={{
-              height: 100,
-              width: '90%',
-              backgroundColor: 'transparent',
-            }}
-            blurOnSubmit={true}
-            multiline={true}
-            placeholder="Additional Comments"
-            onChangeText={(text) => setComments(text)}
-            value={comments}
-            underlineColorAndroid="transparent"
-            autoCapitalize="none"
-          />
-        </FormBox>
-        <Button onPress={onSubmit}>
-          <ButtonText>Submit</ButtonText>
-        </Button>
-      </Container>
-      <Footer {...props} />
-    </>
+      </FormBox>
+      <Button onPress={onSubmit}>
+        <ButtonText>Submit</ButtonText>
+      </Button>
+    </Container>
   )
 }

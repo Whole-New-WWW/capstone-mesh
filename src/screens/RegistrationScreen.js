@@ -47,9 +47,9 @@ export default function RegistrationScreen({ navigation }) {
         usersRef
           .doc(uid)
           .set(data)
-          .then(() => {
-            navigation.navigate("Dashboard", { data });
-          })
+          // .then(() => {
+          //   navigation.navigate("Dashboard", { data });
+          // })
           .catch((error) => {
             alert("Error!", error);
           });
@@ -68,7 +68,7 @@ export default function RegistrationScreen({ navigation }) {
         <Title>Create an Account</Title>
         <Logo source={require("../../assets/globe-logo.png")} />
         <LoginInput
-          placeholder="First Name"
+          placeholder="Name"
           onChangeText={(text) => setName(text)}
           value={name}
           autoCapitalize="none"

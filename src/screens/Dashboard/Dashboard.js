@@ -1,19 +1,10 @@
 import React, { useState } from 'react'
-import {
-  Title,
-  Grid,
-  Icon,
-  DashButton,
-  DashContainer,
-  DashText,
-  SOS,
-} from '../../../styles'
-import Footer from '../../nav/Footer'
+import { DashContainer, Logo, Title, Text, Home } from '../../../styles'
+import { View } from 'react-native'
 import SOSButton from './SOS'
-import { AuthContext } from '../../nav/Auth'
+import { AuthContext } from '../../auth/Auth'
 
 export default function Dashboard(props) {
-  const [loading, setLoading] = useState(true) // maybe add this to mediate the second-long wait time
   let [user] = useState(AuthContext)
   user = user._currentValue.user
 
@@ -22,37 +13,29 @@ export default function Dashboard(props) {
     else return `Welcome home`
   }
 
-  console.log('DASHBOARD >>>', props)
-
   return (
-    <>
-      <DashContainer>
-        <Title>{title()}</Title>
-        <Grid>
-          <DashButton onPress={() => props.navigation.navigate('Edit Account')}>
-            <DashText>Account</DashText>
-            <Icon source={require('../../../assets/icons/account.png')} />
-          </DashButton>
-          <DashButton onPress={() => props.navigation.navigate('Map')}>
-            <DashText>Map</DashText>
-            <Icon source={require('../../../assets/icons/map.png')} />
-          </DashButton>
-          <DashButton onPress={() => props.navigation.navigate("Safety Nets", {user})}>
-            <DashText>Safety Net</DashText>
-            <Icon source={require('../../../assets/icons/friends.png')} />
-          </DashButton>
-          <DashButton onPress={() => props.navigation.navigate('Form')}>
-            <DashText>Submit a Report</DashText>
-            <Icon source={require('../../../assets/icons/addreport.png')} />
-          </DashButton>
-          <DashButton onPress={() => props.navigation.navigate('Contact List')}>
-            <DashText>Contact List</DashText>
-            <Icon source={require('../../../assets/icons/addreport.png')} />
-          </DashButton>
-          <SOSButton {...props} />
-        </Grid>
-      </DashContainer>
-      <Footer {...props} />
-    </>
+    <DashContainer>
+      <Home>
+        <View>
+          <Title>
+            <Text style={{ fontFamily: 'Nanum', fontSize: 45 }}>mesh</Text>
+          </Title>
+          <Text>Your community safety network</Text>
+          <Logo
+            source={require('../../../assets/globe-logo.png')}
+            style={{ height: 150, width: 150 }}
+          />
+        </View>
+        <View>
+          <Title>{title()}</Title>
+          <Text style={{ textAlign: 'center' }}>
+            Plan and track your journies with ease of mind.
+            {'\n'}{'\n'}
+            The SOS below is your emergency button to immediately contact your Safety Net with your exact location, so they can assist you.
+          </Text>
+        </View>
+        <SOSButton />
+      </Home>
+    </DashContainer>
   )
 }
