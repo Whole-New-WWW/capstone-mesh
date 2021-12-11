@@ -152,7 +152,7 @@ export const MapInstruction = styled.View`
   padding: 15px;
   text-align: center;
   position: absolute;
-  top: 50%;
+  top: 40%;
   left: 5px;
   font-family: 'Manrope';
 `
@@ -280,7 +280,7 @@ export const CircularImage = styled.View`
   height: 150px;
   border-radius: 100px;
   border: 4px ${yellow};
-  margin: 50px 0 0 0;
+  margin: 25px 0 15px 0;
   justify-content: center;
   align-self: center;
 `
@@ -323,7 +323,7 @@ export const SmallIcon = styled.Image`
   height: 20px;
 `
 
-// Button used to render safety net member names in single safety net view
+// Button used to render safety net member names
 export const FlexColumnButton = styled.TouchableOpacity`
   height: 60px;
   width: 150px;
@@ -331,6 +331,22 @@ export const FlexColumnButton = styled.TouchableOpacity`
   align-items: center;
   background-color: ${light};
   margin: 8px;
+  border-radius: 22px;
+  box-shadow: 0.5px 0.5px;
+`
+
+// Button used to render safety net member names in single safety net view
+export const Contact = styled.View`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 60px;
+  width: 150px;
+  justify-content: center;
+  align-items: center;
+  background-color: ${light};
+  margin: 8px;
+  padding-left: 10px;
   border-radius: 22px;
   box-shadow: 0.5px 0.5px;
 `

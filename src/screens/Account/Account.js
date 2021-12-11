@@ -49,49 +49,47 @@ export default function Account({ navigation }) {
   }
 
   return (
-    <>
-      <Container>
-        <CircularImage>
-          <Image
-            source={image}
-            style={{
-              borderRadius: 100,
-              width: 145,
-              height: 145,
-              alignSelf: 'center',
-            }}
-          />
-        </CircularImage>
-        <ReportBar style={{ paddingLeft: 5, paddingRight: 20 }}>
-          <Title style={{ textTransform: 'uppercase' }}>{user.name}</Title>
-          <TouchableOpacity
-            onPress={() => navigation.navigate('Edit')}
-            style={{ padding: 10, alignSelf: 'center' }}
-          >
-            <NavIcon source={require('../../../assets/icons/edit.png')} />
-          </TouchableOpacity>
-        </ReportBar>
-        <ScrollView>
-          <Text>Account</Text>
-          <Details>
-            <DetailText>{user.id}</DetailText>
-          </Details>
-          <Text>Email</Text>
-          <Details>
-            <DetailText>{user.email}</DetailText>
-          </Details>
-          <Text>Mobile</Text>
-          <Details>
-            <DetailText>{user.mobile ? user.mobile : 'No mobile #'}</DetailText>
-          </Details>
-        </ScrollView>
-        <Button onPress={() => navigation.navigate('History')}>
-          <ButtonText>SOS History</ButtonText>
-        </Button>
-        <InvertButton onPress={() => logOut()}>
-          <Text>Log Out</Text>
-        </InvertButton>
-      </Container>
-    </>
+    <Container>
+      <CircularImage>
+        <Image
+          source={image}
+          style={{
+            borderRadius: 100,
+            width: 145,
+            height: 145,
+            alignSelf: 'center',
+          }}
+        />
+      </CircularImage>
+      <ReportBar style={{ paddingLeft: 5, paddingRight: 20 }}>
+        <Title style={{ textTransform: 'uppercase' }}>{user.name}</Title>
+        <TouchableOpacity
+          onPress={() => navigation.navigate('Edit')}
+          style={{ padding: 10, alignSelf: 'center' }}
+        >
+          <NavIcon source={require('../../../assets/icons/edit.png')} />
+        </TouchableOpacity>
+      </ReportBar>
+      <ScrollView>
+        <Text>Account ID</Text>
+        <Details>
+          <DetailText>{user.id}</DetailText>
+        </Details>
+        <Text>Email</Text>
+        <Details>
+          <DetailText>{user.email}</DetailText>
+        </Details>
+        <Text>Mobile</Text>
+        <Details>
+          <DetailText>{user.mobile ? user.mobile : 'No mobile #'}</DetailText>
+        </Details>
+      </ScrollView>
+      <Button onPress={() => navigation.navigate('History')}>
+        <ButtonText>SOS History</ButtonText>
+      </Button>
+      <InvertButton onPress={() => logOut()}>
+        <Text>Log Out</Text>
+      </InvertButton>
+    </Container>
   )
 }
