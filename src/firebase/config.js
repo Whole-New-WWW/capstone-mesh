@@ -1,7 +1,7 @@
 import * as firebase from 'firebase';
 import '@firebase/auth';
 import '@firebase/firestore';
-import config from '../../secrets';
+import {config} from '../../secrets';
 
 const firebaseConfig = {
   apiKey: config.FIREBASE_API_KEY,

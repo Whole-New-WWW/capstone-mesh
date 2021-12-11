@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { firebase } from '../../firebase/config'
 import {
   Container,
   Title,
