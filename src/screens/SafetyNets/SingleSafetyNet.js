@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import ContactList from '../ContactList/ContactList';
 import * as Contacts from 'expo-contacts';
-import { View } from 'react-native';
+import { View, Alert } from 'react-native';
+import firebase from 'firebase'
 import { Image } from 'react-native'
 import {
   Container,
@@ -18,11 +19,48 @@ import {
   SafetyNetButton,
   SafetyNetIcon
 } from "../../../styles";
+import { AuthContext } from '../../nav/Auth'
+
+const db = firebase.firestore()
 
 export default function SingleSafetyNet(props) {
-  const { net } = props.route.params;
+  const { net } = props.route.params; //getting from firebase
   console.log('HERE ARE PROPS IN SINGLE', props)
   const users = net.users;
+  //const {user} = React.useContext(AuthContext);
+
+  //react hooks defining state:
+  const {user} = React.useContext(AuthContext);
+  const userID = user.id //the user themself not the contact user
+
+
+  //deletes single safety net on click of the delete button
+  const deleteSafetyNet = async (userId) => {
+    //create reference to current user
+    const currentUserRef = db.collection('users').doc(userId);
+
+    //get current user as user object
+    const currentUserSnapshot = await currentUserRef.get()
+    const currentUserObj = await currentUserSnapshot.data()
+    console.log('THIS IS THE CURRENT USER OBJ>>', currentUserObj)
+    //modify user object:
+    const newSafetyNets = currentUserObj.safety_nets
+    .filter((safetyNet) => safetyNet.name !== net.name)
+    console.log('THIS IS THE NEW SAFETYNETS!!!!', newSafetyNets)
+    console.log('THIS IS NET.NAME!!!!!!!!!!!!!', net.name)
+        //filter safety nets by name excluding the name we want to delete
+        //save as new safety nets array
+    //in firestore replace the old safety net with new safety net obj
+    const response = await currentUserRef.update({safety_nets: newSafetyNets})
+    console.log('THIS IS THE RESPONSE>>>>>', response)
+  }
+
+  //this will call the function that updates the db and will navigate to the all safety nets
+  function onclickDelete(userId) {
+    deleteSafetyNet(userId);
+    props.navigation.navigate('Safety Nets', {})
+  }
+
 
   return (
     <Container>
