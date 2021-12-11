@@ -3,12 +3,10 @@
 ## Mesh: Commmunity Safety Network
 
 <div style="display: flex;">
-<img src="https://github.com/Whole-New-WWW/capstone-mesh/blob/main/assets/readme/login.gif" width="150">
-<img src="https://github.com/Whole-New-WWW/capstone-mesh/blob/main/assets/readme/map.gif" width="150">
-<img src="https://github.com/Whole-New-WWW/capstone-mesh/blob/main/assets/readme/safetynet.gif" width="150">
+<img src="https://github.com/Whole-New-WWW/capstone-mesh/blob/main/assets/readme/login.gif" width="300">
+<img src="https://github.com/Whole-New-WWW/capstone-mesh/blob/main/assets/readme/map.gif" width="300">
+<img src="https://github.com/Whole-New-WWW/capstone-mesh/blob/main/assets/readme/safetynet.gif" width="300">
 </div>
-
-Capstone by Claudia, Josephine, Maxiel and Yilla
 
 ## About
 Mesh is a personal safety app that helps you find the safest path to your destination , and automatically alerts your friends if anything unexpected happens during your trip.
