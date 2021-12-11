@@ -5,6 +5,7 @@ import ContactList from '../ContactList/ContactList';
 import * as Contacts from 'expo-contacts';
 import { View, Alert } from 'react-native';
 import firebase from 'firebase'
+import { useEffect } from "react";
 import {
   Container,
   DashText,

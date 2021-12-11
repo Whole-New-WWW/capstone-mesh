@@ -64,6 +64,20 @@ export default function SafetyNets(props) {
     }
   }
 
+  useEffect(() => {
+    async function fetchUser() {
+      try {
+        const updatedUser = await firebase.firestore().collection('users').doc(user.id).get();
+        const updatedUserData = await updatedUser.data();
+        setUser(updatedUserData)
+        setSafetyNets(user.safety_nets)
+      }catch(error) {
+      console.log('Problem accessing user!', error)
+      }
+    }
+    fetchUser();
+  }, []);
+
   function onclick() {
     setModalDisplayed(!modalDisplayed);
     if (safetyNet !== '') {
