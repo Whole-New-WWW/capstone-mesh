@@ -109,17 +109,12 @@ export default function SingleSafetyNet(props) {
                 >
                   <FlexColumnButton 
                     key={index}
-                      style={{
-                        paddingTop: 10,
-                        paddingBotton: 10
-                      }}
                   >
                     <DashText>
                       {user.fullName}
                     </DashText>
                     <SafetyNetButton
                     style={{ backgroundColor: "transparent" }}
-                    // onPress={() => props.navigation.goBack()}
                     >
                       <SafetyNetIcon source={require("../../../assets/icons/remove.png")} />
                     </SafetyNetButton>
