@@ -41,21 +41,6 @@ export default function ContactList(props) {
   
   let alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
   let sectionList = alphabet.map(char => ({title: char, data:[]}));
-  // let sectionList = [
-  //   { title: 'A', data: [] }, { title: 'B', data: [] },
-  //   { title: 'C', data: [] }, { title: 'D', data: [] },
-  //   { title: 'E', data: [] }, { title: 'F', data: [] },
-  //   { title: 'G', data: [] }, { title: 'H', data: [] },
-  //   { title: 'I', data: [] }, { title: 'J', data: [] },
-  //   { title: 'K', data: [] }, { title: 'L', data: [] },
-  //   { title: 'M', data: [] }, { title: 'N', data: [] },
-  //   { title: 'O', data: [] }, { title: 'P', data: [] },
-  //   { title: 'Q', data: [] }, { title: 'R', data: [] },
-  //   { title: 'S', data: [] }, { title: 'T', data: [] },
-  //   { title: 'U', data: [] }, { title: 'V', data: [] },
-  //   { title: 'W', data: [] }, { title: 'X', data: [] },
-  //   { title: 'Y', data: [] }, { title: 'Z', data: [] }
-  // ];
 
   function filteredNames(contacts, sectionList) {
     let sectionObjArr = sectionList;
@@ -70,7 +55,7 @@ export default function ContactList(props) {
     })
     return sectionObjArr;
   }
-
+  // WIP
   // async function addContact() {
   //   try {
   //     const updateSafetyNetRef = await firebase.firestore().collection('users').doc(user.id);

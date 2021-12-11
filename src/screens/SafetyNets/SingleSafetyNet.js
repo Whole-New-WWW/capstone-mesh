@@ -21,7 +21,6 @@ import {
 
 export default function SingleSafetyNet(props) {
   const { net } = props.route.params;
-  console.log('HERE ARE PROPS IN SINGLE', props)
   const users = net.users;
   
   return (
