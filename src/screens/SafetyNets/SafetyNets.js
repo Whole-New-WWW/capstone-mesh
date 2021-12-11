@@ -81,7 +81,6 @@ export default function SafetyNets(props) {
 
   return (
     <Container>
-      {/* {console.log('HERE ARE THE PROPS', props.route.params)} */}
       <CircularImage>
         <Image
           source={require('../../../assets/icons/friends.png')}
@@ -93,7 +92,7 @@ export default function SafetyNets(props) {
           <Container>
             <Title>You have no Safety Nets! Add some below!</Title>
           </Container>
-          <AddButton onPress={() => setModalDisplayed(true)}>
+          <AddButton onPress={() => setModalDisplayed(true)} style={{alignSelf: 'center'}}>
             <SmallIcon source={require('../../../assets/icons/plus.png')} />
             <DashText>Add New Safety Net</DashText>
           </AddButton>
