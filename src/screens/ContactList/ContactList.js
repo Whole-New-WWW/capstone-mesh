@@ -1,6 +1,6 @@
-import React, { PureComponent, useState, useEffect, useMemo} from 'react';
+import React, {useState, useEffect} from 'react';
 import * as Contacts from 'expo-contacts';
-import { View, Text, SectionList, TextInput, FlatList, ActivityIndicator, SafeAreaView, StatusBar} from 'react-native';
+import { View, Text, SectionList, TextInput, ActivityIndicator, SafeAreaView, StatusBar} from 'react-native';
 import { styles } from './styles';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
