@@ -9,6 +9,7 @@ export default function ContactList(props) {
   const [cachedContacts, setCachedContacts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedContact, setSelectedContact] = useState({});
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     async function fetchContacts() {
@@ -28,6 +29,7 @@ export default function ContactList(props) {
 
   function searchContacts(value) {
     const filteredContacts = cachedContacts.filter(contact => {
+      // console.log('HERE IS YOUR CONTACT', contact);
       let contactLowercase = (
         contact.firstName +
         ' ' +
@@ -49,12 +51,17 @@ export default function ContactList(props) {
       let currentName = `${person.firstName} ${person.lastName}`;
       sectionObjArr.forEach(obj => {
         if (currentName[0] === obj.title.toLowerCase() || currentName[0] === obj.title) {
+          console.log('HERE IS THE CURRENT NAME', currentName);
           obj.data.push(currentName)
+
         }
       })
     })
     return sectionObjArr;
   }
+
+  const finalSections = filteredNames(contacts, sectionList);
+
   // WIP
   // async function addContact() {
   //   try {
@@ -78,8 +85,6 @@ export default function ContactList(props) {
   //   contacts.filter(contact => contact.fullName === )
   //   onSubmit();
   // }
-
-  const finalSections = filteredNames(contacts, sectionList);
 
   return (
     <View style={styles.container}>
