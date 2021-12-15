@@ -67,7 +67,6 @@ export default function ContactList(props) {
 
   const finalSections = filteredNames(contacts, sectionList);
 
-  // WIP
   // async function addContact() {
   //   try {
   //     const updateSafetyNetRef = await firebase.firestore().collection('users').doc(user.id);
@@ -86,7 +85,7 @@ export default function ContactList(props) {
   // }
 
   // function addContact() {
-  //   selected = {}
+  //   selectedContact = {}
   //   contacts.filter(contact => contact.fullName === )
   //   onSubmit();
   // }

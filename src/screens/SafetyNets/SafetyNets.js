@@ -35,6 +35,7 @@ export default function SafetyNets(props) {
       updateSafetyNetRef.update({
         safety_nets: firebase.firestore.FieldValue.arrayUnion({
           name: safetyNet,
+          selected: true
         }),
       })
       const updatedUser = await firebase

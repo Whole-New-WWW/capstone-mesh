@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import ContactList from '../ContactList/ContactList'
 import * as Contacts from 'expo-contacts'
 import firebase from 'firebase'
@@ -23,10 +23,13 @@ import { AuthContext } from '../../auth/Auth'
 const db = firebase.firestore()
 
 export default function SingleSafetyNet(props) {
-  const { net } = props.route.params //getting from firebase
+  const { user, setUser } = useContext(AuthContext);
+  const [net, setNet] = useState(props.route.params.net);
+  // const [safetyNets, setSafetyNets] = useState([]);
+  // const { net } = props.route.params //getting from firebase
   const users = net.users
   //react hooks defining state:
-  const { user } = React.useContext(AuthContext)
+  // const { user } = React.useContext(AuthContext)
   const userID = user.id //the user themself not the contact user
 
   //deletes single safety net on click of the delete button
@@ -46,6 +49,31 @@ export default function SingleSafetyNet(props) {
     //in firestore replace the old safety net with new safety net obj
     const response = await currentUserRef.update({ safety_nets: newSafetyNets })
   }
+
+  useEffect(() => {
+    async function fetchNet() {
+      try {
+        const updatedUser = await firebase
+          .firestore()
+          .collection('users')
+          .doc(user.id)
+          .get()
+        // const updatedUserData = await updatedUser.data()
+        const updatedSafetyNet = updatedUser.safety_nets.filter(
+          (safetyNet) => safetyNet.name === net.name,
+        )
+        // setUser(updatedUserData)
+        setNet(updatedSafetyNet)
+      } catch (error) {
+        console.log('Problem accessing user and safety net!', error)
+      }
+    }
+    fetchNet()
+  }, [net])
+
+  // useEffect(() => {
+  //   setNet(user.safety_net)
+  // }, [net])
 
   //this will call the function that updates the db and will navigate to the all safety nets
   function onclickDelete(userId) {
