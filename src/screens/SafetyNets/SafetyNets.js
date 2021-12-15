@@ -23,7 +23,7 @@ import { Image, View } from 'react-native'
 export default function SafetyNets(props) {
   const { user, setUser } = useContext(AuthContext);
   const [safetyNet, setSafetyNet] = useState('');
-  const [safetyNets, setSafetyNets] = useState(user.safety_nets);
+  const [safetyNets, setSafetyNets] = useState([]);
   const [modalDisplayed, setModalDisplayed] = useState(false);
 
   async function onSubmit() {
@@ -37,7 +37,6 @@ export default function SafetyNets(props) {
           name: safetyNet,
         }),
       })
-
       const updatedUser = await firebase
         .firestore()
         .collection('users')
@@ -68,7 +67,7 @@ export default function SafetyNets(props) {
       }
     }
     fetchUser()
-  }, [])
+  }, [user])
 
   function onclick() {
     setModalDisplayed(!modalDisplayed)
@@ -114,7 +113,6 @@ export default function SafetyNets(props) {
                   setSafetyNet(text)
                 }}
                 placeholder="Safety Net Name"
-                value={safetyNet}
                 keyboardType="default"
               ></TextInput>
               <Button
@@ -159,7 +157,6 @@ export default function SafetyNets(props) {
                   setSafetyNet(text)
                 }}
                 placeholder="Safety Net Name"
-                value={safetyNet}
                 keyboardType="default"
               ></TextInput>
               <Button
