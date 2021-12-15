@@ -21,12 +21,10 @@ import {
 import { Image, View } from 'react-native'
 
 export default function SafetyNets(props) {
-  const { user, setUser } = useContext(AuthContext)
-  const [safetyNet, setSafetyNet] = useState('')
-  const [safetyNets, setSafetyNets] = useState(user.safety_nets)
-  const [modalDisplayed, setModalDisplayed] = useState(false)
-
-  // Should we consider making a query to our database here to access user data for this component?
+  const { user, setUser } = useContext(AuthContext);
+  const [safetyNet, setSafetyNet] = useState('');
+  const [safetyNets, setSafetyNets] = useState(user.safety_nets);
+  const [modalDisplayed, setModalDisplayed] = useState(false);
 
   async function onSubmit() {
     try {

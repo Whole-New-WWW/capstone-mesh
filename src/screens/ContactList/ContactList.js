@@ -48,12 +48,17 @@ export default function ContactList(props) {
     let sectionObjArr = sectionList;
     let peopleList = contacts;
     peopleList.forEach((person, index) => {
-      let currentName = `${person.firstName} ${person.lastName}`;
+      let currentName = '';
+      if (person.lastName) {
+        currentName = `${person.firstName} ${person.lastName}`;
+      }
+      else {
+        currentName = `${person.firstName}`
+      } 
       sectionObjArr.forEach(obj => {
         if (currentName[0] === obj.title.toLowerCase() || currentName[0] === obj.title) {
           console.log('HERE IS THE CURRENT NAME', currentName);
           obj.data.push(currentName)
-
         }
       })
     })
