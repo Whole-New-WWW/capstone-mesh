@@ -29,7 +29,6 @@ export default function ContactList(props) {
 
   function searchContacts(value) {
     const filteredContacts = cachedContacts.filter(contact => {
-      // console.log('HERE IS YOUR CONTACT', contact);
       let contactLowercase = (
         contact.firstName +
         ' ' +
@@ -57,8 +56,7 @@ export default function ContactList(props) {
       } 
       sectionObjArr.forEach(obj => {
         if (currentName[0] === obj.title.toLowerCase() || currentName[0] === obj.title) {
-          console.log('HERE IS THE CURRENT NAME', currentName);
-          obj.data.push(currentName)
+          obj.data.push({fullName: currentName, details: person})
         }
       })
     })
@@ -66,6 +64,8 @@ export default function ContactList(props) {
   }
 
   const finalSections = filteredNames(contacts, sectionList);
+  console.log('HERE IS THE SECTION LIST', sectionList);
+  console.log('HERE ARE THE FINAL SECTIONS', finalSections);
 
   // async function addContact() {
   //   try {
@@ -84,11 +84,14 @@ export default function ContactList(props) {
   //   }
   // }
 
-  // function addContact() {
-  //   selectedContact = {}
-  //   contacts.filter(contact => contact.fullName === )
-  //   onSubmit();
-  // }
+  function onContactSelect(friend) {
+    console.log('HERE IS PASSED ITEM', friend)
+    const {id} = friend.details;
+    let selectedContact = contacts.filter(contact => contact.id === id)
+    console.log('HERE IS THE SELECTED PERSON', selectedContact)
+    addContact(selectedContact);
+    props.navigation.navigate('Safety Net');
+  }
 
   return (
     <View style={styles.container}>
@@ -109,9 +112,14 @@ export default function ContactList(props) {
           sections={finalSections}
           renderItem={({item}) => 
             <TouchableOpacity
-              // onPress={() => addContact()}
+              onPress={() => 
+                // {console.log('YOU WANTED AN ITEM', item);
+                onContactSelect(item)
+              }
+                
             >
-              <Text style={styles.item}>{item}</Text>
+              {/* {console.log('YOU WANTED ITEM DETAILS', item.details)} */}
+              <Text style={styles.item}>{item.fullName}</Text>
             </TouchableOpacity>
           }
           renderSectionHeader={({section}) => <Text style={styles.sectionHeader}>{section.title}</Text>}
