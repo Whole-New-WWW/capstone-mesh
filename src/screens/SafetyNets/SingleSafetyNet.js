@@ -1,6 +1,4 @@
 import React, {useState, useEffect, useContext} from 'react'
-import ContactList from '../ContactList/ContactList'
-import * as Contacts from 'expo-contacts'
 import firebase from 'firebase'
 import { Image } from 'react-native'
 import {
@@ -68,7 +66,7 @@ export default function SingleSafetyNet(props) {
         console.log('Problem accessing user and safety net!', error)
       }
     }
-    fetchNet()
+    fetchNet();
   }, [net])
 
   // useEffect(() => {
@@ -100,7 +98,7 @@ export default function SingleSafetyNet(props) {
             </Text>
             <SmallAddButton
               style={{ alignSelf: 'center' }}
-              onPress={() => props.navigation.navigate('Contact List')}
+              onPress={() => props.navigation.navigate('Contact List', {net})}
             >
               <SmallIcon source={require('../../../assets/icons/plus.png')} />
               <DashText>Add Contact</DashText>
@@ -129,7 +127,7 @@ export default function SingleSafetyNet(props) {
               )
             })}
             <SmallAddButton
-              onPress={() => props.navigation.navigate('Contact List')}
+              onPress={() => props.navigation.navigate('Contact List', {net})}
             >
               <SmallIcon source={require('../../../assets/icons/plus.png')} />
               <DashText>Add Contact</DashText>

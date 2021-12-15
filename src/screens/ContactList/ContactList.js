@@ -1,15 +1,20 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import * as Contacts from 'expo-contacts';
 import { View, Text, SectionList, TextInput, ActivityIndicator, SafeAreaView, StatusBar} from 'react-native';
 import { styles } from './styles';
+import firebase from 'firebase'
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { AuthContext } from '../../auth/Auth';
 
 export default function ContactList(props) {
+  const { user, setUser } = useContext(AuthContext);
+ 
+  const [net, setNet] = useState(props.route.params.net);
+  console.log("HERE ARE PROPS", props)
+  const userId = user.id;
   const [contacts, setContacts] = useState([]);
   const [cachedContacts, setCachedContacts] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedContact, setSelectedContact] = useState({});
-  const [user, setUser] = useState({});
 
   useEffect(() => {
     async function fetchContacts() {
@@ -64,31 +69,38 @@ export default function ContactList(props) {
   }
 
   const finalSections = filteredNames(contacts, sectionList);
-  console.log('HERE IS THE SECTION LIST', sectionList);
-  console.log('HERE ARE THE FINAL SECTIONS', finalSections);
 
-  // async function addContact() {
-  //   try {
-  //     const updateSafetyNetRef = await firebase.firestore().collection('users').doc(user.id);
-  //     updateSafetyNetRef.update({
-  //       safety_nets: firebase.firestore.FieldValue.arrayUnion({name: safetyNet})
-  //     });
+  async function addContact(selectedContact) {
+    try {
+      const currentUserRef = db.collection('users').doc(userId);
+      console.log('HERE IS USER ID', userId)
+      const updateSafetyNetRef = currentUserRef.safety_nets.filter(
+        (safetyNet) => safetyNet.name === net.name,
+      )
+      if (net.users) {
+        updateSafetyNetRef.update({
+          users: firebase.firestore.FieldValue.arrayUnion({selectedContact})
+        });
+      } else {
+        updateSafetyNetRef.update({
+          users: [{selectedContact}]
+        });
+      }
+      // const updatedUser = await firebase.firestore().collection('users').doc(user.id).get();
+      // const updatedUserData = await updatedUser.data();
 
-  //     const updatedUser = await firebase.firestore().collection('users').doc(user.id).get();
-  //     const updatedUserData = await updatedUser.data();
-
-  //     setUser(updatedUserData)
-  //     setSafetyNets(user.safety_nets)
-  //   }catch(error) {
-  //   console.log('Problem accessing safety net!', error)
-  //   }
-  // }
+      // setUser(updatedUserData)
+      // setSafetyNets(user.safety_nets)
+    }catch(error) {
+    console.log('Problem accessing safety net!', error)
+    }
+  }
 
   function onContactSelect(friend) {
-    console.log('HERE IS PASSED ITEM', friend)
+    // console.log('HERE IS PASSED ITEM', friend)
     const {id} = friend.details;
     let selectedContact = contacts.filter(contact => contact.id === id)
-    console.log('HERE IS THE SELECTED PERSON', selectedContact)
+    // console.log('HERE IS THE SELECTED PERSON', selectedContact)
     addContact(selectedContact);
     props.navigation.navigate('Safety Net');
   }
@@ -112,13 +124,8 @@ export default function ContactList(props) {
           sections={finalSections}
           renderItem={({item}) => 
             <TouchableOpacity
-              onPress={() => 
-                // {console.log('YOU WANTED AN ITEM', item);
-                onContactSelect(item)
-              }
-                
+              onPress={() => onContactSelect(item)}
             >
-              {/* {console.log('YOU WANTED ITEM DETAILS', item.details)} */}
               <Text style={styles.item}>{item.fullName}</Text>
             </TouchableOpacity>
           }
