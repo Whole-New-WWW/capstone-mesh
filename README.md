@@ -9,16 +9,16 @@
 </div>
 
 ## About
-Mesh is a personal safety app that helps you find the safest path to your destination , and automatically alerts your friends if anything unexpected happens during your trip.
+Mesh is a personal safety app that helps you find the safest path to your destination, plus automatically alerts your friends if anything unexpected happens during your trip.
 
 - Plan your safest routes around town with a crime-density heat map that uses over 300,000 reported incidents via the NYC public database.
-- Safety Nets: create trusted groups of contacts who receive your notifications and SOS signals.
+- Create trusted groups of contacts, called Safety Nets, who receive your notifications and SOS signals.
 - Send automatic messages to your Safety Nets when you get home, reach safe-points in your journey, or if something goes wrong.
 - Contribute to Mesh's safety data by filing your own incident reports.
 
 ## Getting Started
 
-Download our mobile app on your desktop. Please have <a href="https://apps.apple.com/us/app/xcode/id497799835?mt=12">Xcode</a> downloaded to see Android or iOS Simulators or use Expo Go on mobile.
+Download our mobile app on your desktop. Please have <a href="https://apps.apple.com/us/app/xcode/id497799835?mt=12">Xcode</a> downloaded to experience Mesh on an Android or iOS simulator or use Expo Go to view directly on mobile.
 
 ```
 git clone git@github.com:Whole-New-WWW/capstone-mesh.git
@@ -39,6 +39,7 @@ const config = {
   FIREBASE_MEASUREMENT_ID: "[FIREBASE INFO HERE]"
 };
 
+// Google Maps API key
 const API_KEY = '[API KEY HERE]'
 
 export { config, API_KEY };
