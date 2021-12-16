@@ -70,20 +70,20 @@ export default function ContactList(props) {
 
   const finalSections = filteredNames(contacts, sectionList);
 
-  async function addContact(selectedContact) {
+  async function addContact(selected) {
     try {
-      const currentUserRef = db.collection('users').doc(userId);
+      const currentUserRef = await db.collection('users').doc(userId);
       console.log('HERE IS USER ID', userId)
-      const updateSafetyNetRef = currentUserRef.safety_nets.filter(
+      const updateSafetyNetRef = await currentUserRef.safety_nets.filter(
         (safetyNet) => safetyNet.name === net.name,
       )
       if (net.users) {
         updateSafetyNetRef.update({
-          users: firebase.firestore.FieldValue.arrayUnion({selectedContact})
+          users: firebase.firestore.FieldValue.arrayUnion({selected})
         });
       } else {
-        updateSafetyNetRef.update({
-          users: [{selectedContact}]
+        updateSafetyNetRef.set({
+          users: [{selected}]
         });
       }
       // const updatedUser = await firebase.firestore().collection('users').doc(user.id).get();
