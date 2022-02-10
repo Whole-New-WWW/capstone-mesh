@@ -50,10 +50,10 @@ After creating this file, you can start editing or run ```expo start``` to view 
 ## Team
 <table style="text-align: center;">
 <tr>
-<td>Claudia</td>
-<td>Josephine</td>
-<td>Maxiel</td>
-<td>Yilla</td>
+<td>Claudia Flores</td>
+<td>Josephine Simple</td>
+<td>Maxiel Mrvaljevic</td>
+<td>Yilla Chen</td>
 </tr>
 <tr>
 <td><a href="https://github.com/cflores-1">GitHub</a></td>
