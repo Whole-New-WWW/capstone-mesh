@@ -54,6 +54,7 @@ export default function SafetyNets(props) {
 
   useEffect(() => {
     async function fetchUser() {
+      console.log('fetchuser useEffect running')
       try {
         const updatedUser = await firebase
           .firestore()
@@ -61,14 +62,12 @@ export default function SafetyNets(props) {
           .doc(user.id)
           .get()
         const updatedUserData = await updatedUser.data()
-        setUser(updatedUserData)
-        setSafetyNets(user.safety_nets)
+        setUser(updatedUserData);
       } catch (error) {
         console.log('Problem accessing user!', error)
       }
     }
-    fetchUser()
-  }, [user])
+  }, [user.safety_nets])
 
   function onclick() {
     setModalDisplayed(!modalDisplayed)
@@ -79,13 +78,14 @@ export default function SafetyNets(props) {
 
   return (
     <Container>
+      {console.log('rendering. Here is the user', user)}
       <CircularImage>
         <Image
           source={require('../../../assets/icons/friends.png')}
           style={{ width: 75, height: 75, alignSelf: 'center' }}
         />
       </CircularImage>
-      {!safetyNets ? (
+      {! user.safety_nets ? (
         <>
           <Container>
             <Title>You have no Safety Nets! Add some below!</Title>
@@ -176,7 +176,7 @@ export default function SafetyNets(props) {
           </Modal>
           <ScrollView>
             <ButtonListContainer>
-              {safetyNets.map((net, index) => {
+              {user.safety_nets.map((net, index) => {
                 return (
                   <FlexRowButton
                     key={index}

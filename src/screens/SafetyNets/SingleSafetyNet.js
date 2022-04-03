@@ -26,6 +26,7 @@ export default function SingleSafetyNet(props) {
   // const [safetyNets, setSafetyNets] = useState([]);
   // const { net } = props.route.params //getting from firebase
   const users = net.users
+  console.log('I thought I had users,', users);
   //react hooks defining state:
   // const { user } = React.useContext(AuthContext)
   const userID = user.id //the user themself not the contact user
@@ -37,7 +38,7 @@ export default function SingleSafetyNet(props) {
 
     //get current user as user object
     const currentUserSnapshot = await currentUserRef.get()
-    const currentUserObj = await currentUserSnapshot.data()
+    const currentUserObj = currentUserSnapshot.data()
     //modify user object:
     const newSafetyNets = currentUserObj.safety_nets.filter(
       (safetyNet) => safetyNet.name !== net.name,
@@ -45,33 +46,34 @@ export default function SingleSafetyNet(props) {
     //filter safety nets by name excluding the name we want to delete
     //save as new safety nets array
     //in firestore replace the old safety net with new safety net obj
-    const response = await currentUserRef.update({ safety_nets: newSafetyNets })
+    await currentUserRef.update({ safety_nets: newSafetyNets })
+    //get current user as user object
+    const updatedUserObj = (await db.collection('users').doc(userId).get()).data()
+    setUser(updatedUserObj);
   }
 
-  useEffect(() => {
-    async function fetchNet() {
-      try {
-        const updatedUser = await firebase
-          .firestore()
-          .collection('users')
-          .doc(user.id)
-          .get()
-        // const updatedUserData = await updatedUser.data()
-        const updatedSafetyNet = updatedUser.safety_nets.filter(
-          (safetyNet) => safetyNet.name === net.name,
-        )
-        // setUser(updatedUserData)
-        setNet(updatedSafetyNet)
-      } catch (error) {
-        console.log('Problem accessing user and safety net!', error)
-      }
-    }
-    fetchNet();
-  }, [net])
-
   // useEffect(() => {
-  //   setNet(user.safety_net)
-  // }, [net])
+  //   async function fetchNet() {
+  //     try {
+  //       const updatedUser = await firebase
+  //         .firestore()
+  //         .collection('users')
+  //         .doc(user.id)
+  //         .get()
+  //       const updatedUserData = updatedUser.data()
+  //       // console.log('updated user data you requested', updatedUserData)
+  //       // console.log('updated safety nets you requested', updatedUserData.safety_nets)
+  //       const updatedSafetyNet = updatedUser.safety_nets.filter(
+  //         (safetyNet) => safetyNet.name === net.name,
+  //       )
+  //       setUser(updatedUserData)
+  //       setNet(updatedSafetyNet)
+  //     } catch (error) {
+  //       console.log('Problem accessing user and safety net!', error)
+  //     }
+  //   }
+  //   fetchNet();
+  // }, [])
 
   //this will call the function that updates the db and will navigate to the all safety nets
   function onclickDelete(userId) {
@@ -81,6 +83,7 @@ export default function SingleSafetyNet(props) {
 
   return (
     <Container>
+      {console.log('rendering single net')}
       <CircularImage>
         <Image
           source={require('../../../assets/icons/friends.png')}

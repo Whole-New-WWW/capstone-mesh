@@ -2,7 +2,7 @@ import React, {useState, useEffect, useContext} from 'react';
 import * as Contacts from 'expo-contacts';
 import { View, Text, SectionList, TextInput, ActivityIndicator, SafeAreaView, StatusBar} from 'react-native';
 import { styles } from './styles';
-import firebase from 'firebase'
+import firebase from 'firebase';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { AuthContext } from '../../auth/Auth';
 
