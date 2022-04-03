@@ -25,8 +25,7 @@ export default function SingleSafetyNet(props) {
   const [net, setNet] = useState(props.route.params.net);
   // const [safetyNets, setSafetyNets] = useState([]);
   // const { net } = props.route.params //getting from firebase
-  const users = net.users
-  console.log('I thought I had users,', users);
+  const users = net.users;
   //react hooks defining state:
   // const { user } = React.useContext(AuthContext)
   const userID = user.id //the user themself not the contact user
@@ -49,6 +48,7 @@ export default function SingleSafetyNet(props) {
     await currentUserRef.update({ safety_nets: newSafetyNets })
     //get current user as user object
     const updatedUserObj = (await db.collection('users').doc(userId).get()).data()
+    // set updated user data
     setUser(updatedUserObj);
   }
 
@@ -83,7 +83,6 @@ export default function SingleSafetyNet(props) {
 
   return (
     <Container>
-      {console.log('rendering single net')}
       <CircularImage>
         <Image
           source={require('../../../assets/icons/friends.png')}

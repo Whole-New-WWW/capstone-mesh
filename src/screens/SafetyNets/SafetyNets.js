@@ -54,7 +54,6 @@ export default function SafetyNets(props) {
 
   useEffect(() => {
     async function fetchUser() {
-      console.log('fetchuser useEffect running')
       try {
         const updatedUser = await firebase
           .firestore()
@@ -78,7 +77,6 @@ export default function SafetyNets(props) {
 
   return (
     <Container>
-      {console.log('rendering. Here is the user', user)}
       <CircularImage>
         <Image
           source={require('../../../assets/icons/friends.png')}
