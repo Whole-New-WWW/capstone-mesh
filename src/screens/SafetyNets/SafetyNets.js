@@ -46,7 +46,6 @@ export default function SafetyNets(props) {
       const updatedUserData = await updatedUser.data()
 
       setUser(updatedUserData)
-      setSafetyNets(user.safety_nets)
     } catch (error) {
       console.log('Problem accessing safety net!', error)
     }
@@ -55,18 +54,20 @@ export default function SafetyNets(props) {
   useEffect(() => {
     async function fetchUser() {
       try {
+        console.log('fetchUser running!!')
         const updatedUser = await firebase
           .firestore()
           .collection('users')
           .doc(user.id)
           .get()
-        const updatedUserData = await updatedUser.data()
+        const updatedUserData = updatedUser.data()
         setUser(updatedUserData);
       } catch (error) {
         console.log('Problem accessing user!', error)
       }
     }
-  }, [user.safety_nets])
+    fetchUser();
+  }, [])
 
   function onclick() {
     setModalDisplayed(!modalDisplayed)

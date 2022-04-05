@@ -53,6 +53,23 @@ export default function SingleSafetyNet(props) {
   }
 
   // useEffect(() => {
+  //   async function fetchUser() {
+  //     try {
+  //       console.log('fetchUser running in single net!!')
+  //       const updatedUser = await db
+  //         .collection('users')
+  //         .doc(user.id)
+  //         .get()
+  //       const updatedUserData = updatedUser.data()
+  //       setUser(updatedUserData);
+  //     } catch (error) {
+  //       console.log('Problem accessing user!', error)
+  //     }
+  //   }
+  //   fetchUser();
+  // }, [net])
+
+  // useEffect(() => {
   //   async function fetchNet() {
   //     try {
   //       const updatedUser = await firebase
@@ -101,9 +118,10 @@ export default function SingleSafetyNet(props) {
             <SmallAddButton
               style={{ alignSelf: 'center' }}
               onPress={() => props.navigation.navigate('Contact List', {net})}
-            >
+            > 
               <SmallIcon source={require('../../../assets/icons/plus.png')} />
               <DashText>Add Contact</DashText>
+              {console.log('here is the net we are talking about', net)}
             </SmallAddButton>
           </Container>
           <Button
@@ -129,8 +147,9 @@ export default function SingleSafetyNet(props) {
               )
             })}
             <SmallAddButton
+            
               onPress={() => props.navigation.navigate('Contact List', {net})}
-            >
+            > 
               <SmallIcon source={require('../../../assets/icons/plus.png')} />
               <DashText>Add Contact</DashText>
             </SmallAddButton>

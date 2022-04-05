@@ -6,11 +6,13 @@ import firebase from 'firebase';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { AuthContext } from '../../auth/Auth';
 
+const db = firebase.firestore()
+
 export default function ContactList(props) {
   const { user, setUser } = useContext(AuthContext);
  
   const [net, setNet] = useState(props.route.params.net);
-  console.log("HERE ARE PROPS", props)
+  // console.log("HERE ARE PROPS IN CONTACT", props)
   const userId = user.id;
   const [contacts, setContacts] = useState([]);
   const [cachedContacts, setCachedContacts] = useState([]);
@@ -70,39 +72,62 @@ export default function ContactList(props) {
 
   const finalSections = filteredNames(contacts, sectionList);
 
-  async function addContact(selected) {
-    try {
-      const currentUserRef = await db.collection('users').doc(userId);
-      console.log('HERE IS USER ID', userId)
-      const updateSafetyNetRef = await currentUserRef.safety_nets.filter(
-        (safetyNet) => safetyNet.name === net.name,
-      )
-      if (net.users) {
-        updateSafetyNetRef.update({
-          users: firebase.firestore.FieldValue.arrayUnion({selected})
-        });
+  function updateNets(usersNets, netToUpdate, friendDetails) {
+    let updatedNets = [];
+    usersNets.forEach(currNet => {
+      if (currNet.name === netToUpdate) {
+        setNet(currNet);
+        if (currNet.users) {
+          currNet.users.push(friendDetails);
+          updatedNets.push(currNet);
+        } else {
+          currNet['users'] = [friendDetails];
+          updatedNets.push(currNet);
+        }
       } else {
-        updateSafetyNetRef.set({
-          users: [{selected}]
-        });
+        updatedNets.push(currNet);
       }
-      // const updatedUser = await firebase.firestore().collection('users').doc(user.id).get();
-      // const updatedUserData = await updatedUser.data();
+    })
+    return updatedNets;
+  }
 
-      // setUser(updatedUserData)
-      // setSafetyNets(user.safety_nets)
+  async function addContact(friendDetails) {
+    try {
+      const netToUpdate = net.name;
+      const currentUserRef = db.collection('users').doc(userId);
+      const currentUserSnapshot = await currentUserRef.get();
+      const currentUserObj = currentUserSnapshot.data();
+      const usersNets = currentUserObj.safety_nets;
+
+      const finalUpdatedNets = updateNets(usersNets, netToUpdate, friendDetails);
+      
+      await currentUserRef.set({
+        safety_nets: finalUpdatedNets
+      }, {merge: true})
+
+      const updatedUserRef = db.collection('users').doc(userId);
+      const updatedUserSnapshot = await currentUserRef.get();
+      const updatedUserObj = currentUserSnapshot.data();
+      setUser(updatedUserObj)
+      
+      props.navigation.navigate('Safety Net', {net});
+
     }catch(error) {
     console.log('Problem accessing safety net!', error)
     }
   }
 
   function onContactSelect(friend) {
-    // console.log('HERE IS PASSED ITEM', friend)
-    const {id} = friend.details;
-    let selectedContact = contacts.filter(contact => contact.id === id)
-    // console.log('HERE IS THE SELECTED PERSON', selectedContact)
-    addContact(selectedContact);
-    props.navigation.navigate('Safety Net');
+    // console.log('here is friend', friend);
+    const friendMobile = Number(friend.details.phoneNumbers[0].digits);
+    // console.log('here is friend number', friendMobile);
+    const friendName = friend.details.name;
+    let friendDetails = {
+      fullName: friendName,
+      phoneNumber: friendMobile,
+    };
+    addContact(friendDetails);
+    
   }
 
   return (
@@ -122,9 +147,11 @@ export default function ContactList(props) {
           />
         <SectionList
           sections={finalSections}
-          renderItem={({item}) => 
+          renderItem={({item}, net) => 
             <TouchableOpacity
-              onPress={() => onContactSelect(item)}
+              onPress={() => 
+                onContactSelect(item)
+              }
             >
               <Text style={styles.item}>{item.fullName}</Text>
             </TouchableOpacity>
