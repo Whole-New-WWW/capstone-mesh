@@ -6,13 +6,10 @@ import firebase from 'firebase';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { AuthContext } from '../../auth/Auth';
 
-const db = firebase.firestore()
-
 export default function ContactList(props) {
+  const db = firebase.firestore()
   const { user, setUser } = useContext(AuthContext);
- 
   const [net, setNet] = useState(props.route.params.net);
-  // console.log("HERE ARE PROPS IN CONTACT", props)
   const userId = user.id;
   const [contacts, setContacts] = useState([]);
   const [cachedContacts, setCachedContacts] = useState([]);
@@ -20,16 +17,20 @@ export default function ContactList(props) {
 
   useEffect(() => {
     async function fetchContacts() {
-      const { status } = await Contacts.requestPermissionsAsync();
-      if (status !== 'granted') {
-        alert('Sorry, not granted')
+      try {
+        const { status } = await Contacts.requestPermissionsAsync();
+        if (status !== 'granted') {
+          alert('Sorry, not granted')
+        }
+        const { data } = await Contacts.getContactsAsync({
+          fields: [Contacts.Fields.PhoneNumbers],
+        });
+        setContacts(data);
+        setCachedContacts(data);
+        setLoading(false);
+      } catch(error) {
+        console.log('error fetching user contacts!', error)
       }
-      const { data } = await Contacts.getContactsAsync({
-        fields: [Contacts.Fields.PhoneNumbers],
-      });
-      setContacts(data);
-      setCachedContacts(data);
-      setLoading(false);
     }
     fetchContacts();
   }, []);
@@ -76,13 +77,14 @@ export default function ContactList(props) {
     let updatedNets = [];
     usersNets.forEach(currNet => {
       if (currNet.name === netToUpdate) {
-        setNet(currNet);
         if (currNet.users) {
           currNet.users.push(friendDetails);
           updatedNets.push(currNet);
+          setNet(currNet);
         } else {
           currNet['users'] = [friendDetails];
           updatedNets.push(currNet);
+          setNet(currNet);
         }
       } else {
         updatedNets.push(currNet);
@@ -94,7 +96,9 @@ export default function ContactList(props) {
   async function addContact(friendDetails) {
     try {
       const netToUpdate = net.name;
-      const currentUserRef = db.collection('users').doc(userId);
+      const currentUserRef = db
+      .collection('users')
+      .doc(userId)
       const currentUserSnapshot = await currentUserRef.get();
       const currentUserObj = currentUserSnapshot.data();
       const usersNets = currentUserObj.safety_nets;
@@ -105,29 +109,28 @@ export default function ContactList(props) {
         safety_nets: finalUpdatedNets
       }, {merge: true})
 
-      const updatedUserRef = db.collection('users').doc(userId);
       const updatedUserSnapshot = await currentUserRef.get();
-      const updatedUserObj = currentUserSnapshot.data();
-      setUser(updatedUserObj)
+      const updatedUserObj = updatedUserSnapshot.data();
+      setUser(updatedUserObj);
       
-      props.navigation.navigate('Safety Net', {net});
-
-    }catch(error) {
-    console.log('Problem accessing safety net!', error)
+    } catch(error){
+      console.log('error accessing safety net!', error)
     }
   }
 
-  function onContactSelect(friend) {
-    // console.log('here is friend', friend);
+  async function onContactSelect(friend) {
+    try {
     const friendMobile = Number(friend.details.phoneNumbers[0].digits);
-    // console.log('here is friend number', friendMobile);
     const friendName = friend.details.name;
     let friendDetails = {
       fullName: friendName,
       phoneNumber: friendMobile,
     };
-    addContact(friendDetails);
-    
+    await addContact(friendDetails);
+    props.navigation.navigate('Safety Net', {net});
+    } catch(error){
+      console.log('error in onContactSelect function!', error)
+    }
   }
 
   return (

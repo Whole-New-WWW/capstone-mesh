@@ -28,46 +28,44 @@ export default function SafetyNets(props) {
 
   async function onSubmit() {
     try {
-      const updateSafetyNetRef = await firebase
+      const safetyNetRef = await firebase
         .firestore()
         .collection('users')
         .doc(user.id)
-      updateSafetyNetRef.update({
+      safetyNetRef.update({
         safety_nets: firebase.firestore.FieldValue.arrayUnion({
           name: safetyNet,
           selected: true
         }),
       })
-      const updatedUser = await firebase
+      const updatedUserRef = await firebase
         .firestore()
         .collection('users')
         .doc(user.id)
         .get()
-      const updatedUserData = await updatedUser.data()
-
+      const updatedUserData = await updatedUserRef.data()
       setUser(updatedUserData)
     } catch (error) {
-      console.log('Problem accessing safety net!', error)
+      console.log('error accessing safety nets!', error)
     }
   }
 
   useEffect(() => {
     async function fetchUser() {
       try {
-        console.log('fetchUser running!!')
-        const updatedUser = await firebase
+        const userRef = await firebase
           .firestore()
           .collection('users')
           .doc(user.id)
           .get()
-        const updatedUserData = updatedUser.data()
-        setUser(updatedUserData);
+        const userData = userRef.data()
+        setUser(userData);
       } catch (error) {
-        console.log('Problem accessing user!', error)
+        console.log('error accessing user data!', error)
       }
     }
     fetchUser();
-  }, [])
+  }, [props])
 
   function onclick() {
     setModalDisplayed(!modalDisplayed)
