@@ -1,7 +1,7 @@
 <img src="https://github.com/Whole-New-WWW/capstone-mesh/blob/main/assets/globe-logo.png" width="150" height="150" />
 
 ## Mesh: Commmunity Safety Network
-<a href="https://youtu.be/iIcVlc-Fi8o">Video Walk-through</a>
+<a href="https://vimeo.com/678746712">Video Walk-through</a>
 <div style="display: flex;">
 <img src="https://github.com/Whole-New-WWW/capstone-mesh/blob/main/assets/readme/login.gif" width="250">
 <img src="https://github.com/Whole-New-WWW/capstone-mesh/blob/main/assets/readme/map.gif" width="250">
