@@ -28,47 +28,44 @@ export default function SafetyNets(props) {
 
   async function onSubmit() {
     try {
-      const updateSafetyNetRef = await firebase
+      const safetyNetRef = await firebase
         .firestore()
         .collection('users')
         .doc(user.id)
-      updateSafetyNetRef.update({
+      safetyNetRef.update({
         safety_nets: firebase.firestore.FieldValue.arrayUnion({
           name: safetyNet,
           selected: true
         }),
       })
-      const updatedUser = await firebase
+      const updatedUserRef = await firebase
         .firestore()
         .collection('users')
         .doc(user.id)
         .get()
-      const updatedUserData = await updatedUser.data()
-
+      const updatedUserData = await updatedUserRef.data()
       setUser(updatedUserData)
-      setSafetyNets(user.safety_nets)
     } catch (error) {
-      console.log('Problem accessing safety net!', error)
+      console.log('error accessing safety nets!', error)
     }
   }
 
   useEffect(() => {
     async function fetchUser() {
       try {
-        const updatedUser = await firebase
+        const userRef = await firebase
           .firestore()
           .collection('users')
           .doc(user.id)
           .get()
-        const updatedUserData = await updatedUser.data()
-        setUser(updatedUserData)
-        setSafetyNets(user.safety_nets)
+        const userData = userRef.data()
+        setUser(userData);
       } catch (error) {
-        console.log('Problem accessing user!', error)
+        console.log('error accessing user data!', error)
       }
     }
-    fetchUser()
-  }, [user])
+    fetchUser();
+  }, [props])
 
   function onclick() {
     setModalDisplayed(!modalDisplayed)
@@ -85,7 +82,7 @@ export default function SafetyNets(props) {
           style={{ width: 75, height: 75, alignSelf: 'center' }}
         />
       </CircularImage>
-      {!safetyNets ? (
+      {! user.safety_nets ? (
         <>
           <Container>
             <Title>You have no Safety Nets! Add some below!</Title>
@@ -176,7 +173,7 @@ export default function SafetyNets(props) {
           </Modal>
           <ScrollView>
             <ButtonListContainer>
-              {safetyNets.map((net, index) => {
+              {user.safety_nets.map((net, index) => {
                 return (
                   <FlexRowButton
                     key={index}

@@ -18,65 +18,66 @@ import {
 } from '../../../styles'
 import { AuthContext } from '../../auth/Auth'
 
-const db = firebase.firestore()
-
 export default function SingleSafetyNet(props) {
+  const db = firebase.firestore()
+  //react hooks defining state:
   const { user, setUser } = useContext(AuthContext);
   const [net, setNet] = useState(props.route.params.net);
-  // const [safetyNets, setSafetyNets] = useState([]);
-  // const { net } = props.route.params //getting from firebase
-  const users = net.users
-  //react hooks defining state:
-  // const { user } = React.useContext(AuthContext)
+  const users = net.users;
   const userID = user.id //the user themself not the contact user
 
-  //deletes single safety net on click of the delete button
-  const deleteSafetyNet = async (userId) => {
-    //create reference to current user
-    const currentUserRef = db.collection('users').doc(userId)
-
-    //get current user as user object
-    const currentUserSnapshot = await currentUserRef.get()
-    const currentUserObj = await currentUserSnapshot.data()
-    //modify user object:
-    const newSafetyNets = currentUserObj.safety_nets.filter(
-      (safetyNet) => safetyNet.name !== net.name,
-    )
-    //filter safety nets by name excluding the name we want to delete
-    //save as new safety nets array
-    //in firestore replace the old safety net with new safety net obj
-    const response = await currentUserRef.update({ safety_nets: newSafetyNets })
-  }
-
   useEffect(() => {
-    async function fetchNet() {
+    async function fetchUserNet() {
       try {
-        const updatedUser = await firebase
-          .firestore()
+        const userRef = await db
           .collection('users')
           .doc(user.id)
           .get()
-        // const updatedUserData = await updatedUser.data()
-        const updatedSafetyNet = updatedUser.safety_nets.filter(
+        const userData = userRef.data();
+        const userSafetyNet = userData.safety_nets.filter(
           (safetyNet) => safetyNet.name === net.name,
         )
-        // setUser(updatedUserData)
-        setNet(updatedSafetyNet)
+        setNet(userSafetyNet[0]);
       } catch (error) {
-        console.log('Problem accessing user and safety net!', error)
+        console.log('error fetching user safety net!', error)
       }
     }
-    fetchNet();
-  }, [net])
+    fetchUserNet()
+  }, [props])
 
-  // useEffect(() => {
-  //   setNet(user.safety_net)
-  // }, [net])
+  //deletes single safety net on click of the delete button
+  const deleteSafetyNet = async (userId) => {
+    try {
+      //create reference to current user
+      const currentUserRef = db.collection('users').doc(userId)
+      //get current user as user object
+      const currentUserSnapshot = await currentUserRef.get()
+      const currentUserObj = currentUserSnapshot.data()
+      //modify user object:
+      const newSafetyNets = currentUserObj.safety_nets.filter(
+        (safetyNet) => safetyNet.name !== net.name,
+      )
+      //filter safety nets by name excluding the name we want to delete
+      //save as new safety nets array
+      //in firestore replace the old safety net with new safety net obj
+      await currentUserRef.update({ safety_nets: newSafetyNets })
+      //get current user as user object
+      const updatedUserObj = (await db.collection('users').doc(userId).get()).data()
+      // set updated user data
+      setUser(updatedUserObj);
+    } catch(error) {
+      console.log('error deleting safety net!', error)
+    }
+  }
 
   //this will call the function that updates the db and will navigate to the all safety nets
-  function onclickDelete(userId) {
-    deleteSafetyNet(userId)
+  async function onclickDelete(userId) {
+    try {
+    await deleteSafetyNet(userId)
     props.navigation.navigate('Safety Nets')
+    } catch(error) {
+      console.log('error in onClickDelete function!', error)
+    }
   }
 
   return (
@@ -99,7 +100,7 @@ export default function SingleSafetyNet(props) {
             <SmallAddButton
               style={{ alignSelf: 'center' }}
               onPress={() => props.navigation.navigate('Contact List', {net})}
-            >
+            > 
               <SmallIcon source={require('../../../assets/icons/plus.png')} />
               <DashText>Add Contact</DashText>
             </SmallAddButton>
@@ -127,8 +128,9 @@ export default function SingleSafetyNet(props) {
               )
             })}
             <SmallAddButton
+            
               onPress={() => props.navigation.navigate('Contact List', {net})}
-            >
+            > 
               <SmallIcon source={require('../../../assets/icons/plus.png')} />
               <DashText>Add Contact</DashText>
             </SmallAddButton>

@@ -2,15 +2,14 @@ import React, {useState, useEffect, useContext} from 'react';
 import * as Contacts from 'expo-contacts';
 import { View, Text, SectionList, TextInput, ActivityIndicator, SafeAreaView, StatusBar} from 'react-native';
 import { styles } from './styles';
-import firebase from 'firebase'
+import firebase from 'firebase';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { AuthContext } from '../../auth/Auth';
 
 export default function ContactList(props) {
+  const db = firebase.firestore()
   const { user, setUser } = useContext(AuthContext);
- 
   const [net, setNet] = useState(props.route.params.net);
-  console.log("HERE ARE PROPS", props)
   const userId = user.id;
   const [contacts, setContacts] = useState([]);
   const [cachedContacts, setCachedContacts] = useState([]);
@@ -18,16 +17,20 @@ export default function ContactList(props) {
 
   useEffect(() => {
     async function fetchContacts() {
-      const { status } = await Contacts.requestPermissionsAsync();
-      if (status !== 'granted') {
-        alert('Sorry, not granted')
+      try {
+        const { status } = await Contacts.requestPermissionsAsync();
+        if (status !== 'granted') {
+          alert('Sorry, not granted')
+        }
+        const { data } = await Contacts.getContactsAsync({
+          fields: [Contacts.Fields.PhoneNumbers],
+        });
+        setContacts(data);
+        setCachedContacts(data);
+        setLoading(false);
+      } catch(error) {
+        console.log('error fetching user contacts!', error)
       }
-      const { data } = await Contacts.getContactsAsync({
-        fields: [Contacts.Fields.PhoneNumbers],
-      });
-      setContacts(data);
-      setCachedContacts(data);
-      setLoading(false);
     }
     fetchContacts();
   }, []);
@@ -70,39 +73,64 @@ export default function ContactList(props) {
 
   const finalSections = filteredNames(contacts, sectionList);
 
-  async function addContact(selected) {
-    try {
-      const currentUserRef = await db.collection('users').doc(userId);
-      console.log('HERE IS USER ID', userId)
-      const updateSafetyNetRef = await currentUserRef.safety_nets.filter(
-        (safetyNet) => safetyNet.name === net.name,
-      )
-      if (net.users) {
-        updateSafetyNetRef.update({
-          users: firebase.firestore.FieldValue.arrayUnion({selected})
-        });
+  function updateNets(usersNets, netToUpdate, friendDetails) {
+    let updatedNets = [];
+    usersNets.forEach(currNet => {
+      if (currNet.name === netToUpdate) {
+        if (currNet.users) {
+          currNet.users.push(friendDetails);
+          updatedNets.push(currNet);
+          setNet(currNet);
+        } else {
+          currNet['users'] = [friendDetails];
+          updatedNets.push(currNet);
+          setNet(currNet);
+        }
       } else {
-        updateSafetyNetRef.set({
-          users: [{selected}]
-        });
+        updatedNets.push(currNet);
       }
-      // const updatedUser = await firebase.firestore().collection('users').doc(user.id).get();
-      // const updatedUserData = await updatedUser.data();
+    })
+    return updatedNets;
+  }
 
-      // setUser(updatedUserData)
-      // setSafetyNets(user.safety_nets)
-    }catch(error) {
-    console.log('Problem accessing safety net!', error)
+  async function addContact(friendDetails) {
+    try {
+      const netToUpdate = net.name;
+      const currentUserRef = db
+      .collection('users')
+      .doc(userId)
+      const currentUserSnapshot = await currentUserRef.get();
+      const currentUserObj = currentUserSnapshot.data();
+      const usersNets = currentUserObj.safety_nets;
+
+      const finalUpdatedNets = updateNets(usersNets, netToUpdate, friendDetails);
+      
+      await currentUserRef.set({
+        safety_nets: finalUpdatedNets
+      }, {merge: true})
+
+      const updatedUserSnapshot = await currentUserRef.get();
+      const updatedUserObj = updatedUserSnapshot.data();
+      setUser(updatedUserObj);
+      
+    } catch(error){
+      console.log('error accessing safety net!', error)
     }
   }
 
-  function onContactSelect(friend) {
-    // console.log('HERE IS PASSED ITEM', friend)
-    const {id} = friend.details;
-    let selectedContact = contacts.filter(contact => contact.id === id)
-    // console.log('HERE IS THE SELECTED PERSON', selectedContact)
-    addContact(selectedContact);
-    props.navigation.navigate('Safety Net');
+  async function onContactSelect(friend) {
+    try {
+    const friendMobile = Number(friend.details.phoneNumbers[0].digits);
+    const friendName = friend.details.name;
+    let friendDetails = {
+      fullName: friendName,
+      phoneNumber: friendMobile,
+    };
+    await addContact(friendDetails);
+    props.navigation.navigate('Safety Net', {net});
+    } catch(error){
+      console.log('error in onContactSelect function!', error)
+    }
   }
 
   return (
@@ -122,9 +150,11 @@ export default function ContactList(props) {
           />
         <SectionList
           sections={finalSections}
-          renderItem={({item}) => 
+          renderItem={({item}, net) => 
             <TouchableOpacity
-              onPress={() => onContactSelect(item)}
+              onPress={() => 
+                onContactSelect(item)
+              }
             >
               <Text style={styles.item}>{item.fullName}</Text>
             </TouchableOpacity>
